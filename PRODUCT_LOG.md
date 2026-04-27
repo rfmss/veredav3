@@ -534,3 +534,23 @@ Próximas etapas sugeridas:
 - Adicionar botão para ocultar/mostrar o painel consultivo.
 - Refinar os pesos dos medidores com exemplos reais.
 - Criar templates de matéria jornalística, romance resumido, poesia e ficha de personagem.
+
+## 2026-04-27 - Criação explícita de notas
+
+Decidimos tornar o início de escrita mais claro.
+
+Antes, o Vereda tinha botões de "Novo manuscrito" e "Novo caderno", mas a pessoa ainda precisava entender que nota, manuscrito e template eram caminhos próximos. Agora o botão principal passa a ser "Nova nota" e abre uma escolha simples.
+
+Opções atuais:
+
+- Nota rápida: página curta para ideia, cena solta ou lembrete.
+- Manuscrito em branco: documento livre para escrita longa.
+- A partir do template: cria um documento usando o template consultivo selecionado no editor.
+
+Por baixo, tudo continua como documento local do Vereda, compatível com persistência offline, `.vrda`, versões e exportações. A mudança é de clareza de fluxo, não de formato interno.
+
+Próximas etapas sugeridas:
+
+- Separar visualmente notas rápidas de manuscritos longos no Arquivo.
+- Adicionar busca/filtro por tipo de documento.
+- Criar atalho de teclado para abrir "Nova nota".

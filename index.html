@@ -91,9 +91,9 @@
             </button>
           </div>
 
-          <button class="primary-button" data-action="new-manuscript">
+          <button class="primary-button" data-action="open-create-note">
             <span class="material-symbols-outlined">add</span>
-            Novo manuscrito
+            Nova nota
           </button>
         </aside>
 
@@ -234,9 +234,9 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                     <span class="material-symbols-outlined">upload_file</span>
                     Importar
                   </button>
-                  <button class="primary-button" data-action="new-manuscript">
+                  <button class="primary-button" data-action="open-create-note">
                     <span class="material-symbols-outlined">add</span>
-                    Novo caderno
+                    Nova nota
                   </button>
                 </div>
               </div>
@@ -392,6 +392,37 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
       <div class="focus-counter" data-focus-count>0 palavras</div>
       <div class="focus-ruler" aria-hidden="true"></div>
+
+      <div class="create-note-overlay" data-create-note-overlay hidden>
+        <section class="create-note-panel" role="dialog" aria-modal="true" aria-labelledby="create-note-title">
+          <div class="create-note-heading">
+            <div>
+              <p class="eyebrow">Começar</p>
+              <h2 id="create-note-title">Nova nota</h2>
+            </div>
+            <button class="icon-button" data-action="close-create-note" aria-label="Fechar">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="create-note-options">
+            <button class="create-note-card" data-action="create-quick-note">
+              <span class="material-symbols-outlined">bolt</span>
+              <strong>Nota rápida</strong>
+              <small>Uma página curta para capturar ideia, cena ou lembrete.</small>
+            </button>
+            <button class="create-note-card" data-action="create-blank-manuscript">
+              <span class="material-symbols-outlined">description</span>
+              <strong>Manuscrito em branco</strong>
+              <small>Um caderno limpo para começar um texto longo.</small>
+            </button>
+            <button class="create-note-card" data-action="create-from-reference-template">
+              <span class="material-symbols-outlined">view_sidebar</span>
+              <strong>A partir do template</strong>
+              <small>Cria um documento usando o template consultivo selecionado.</small>
+            </button>
+          </div>
+        </section>
+      </div>
 
       <footer class="statusbar">
         <span>Vereda Editor - Prova de Humanidade Ativa</span>

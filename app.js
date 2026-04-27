@@ -69,6 +69,7 @@ const referenceTabs = document.querySelector("[data-reference-tabs]");
 const referenceBody = document.querySelector("[data-reference-body]");
 const precisionCard = document.querySelector("[data-precision-card]");
 const templateResizer = document.querySelector("[data-template-resizer]");
+const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
 
 let state = loadState();
 let saveTimer;
@@ -408,23 +409,54 @@ function queueSave() {
   saveTimer = window.setTimeout(() => persistState(), 450);
 }
 
-function createManuscript() {
-  const nextNumber = state.manuscripts.length + 1;
-  const manuscript = VeredaArchive.createManuscript({
-    id: `manuscrito-${Date.now()}`,
-    title: `Novo Manuscrito ${nextNumber}`,
-    text: "Comece aqui. A primeira frase abre uma vereda.",
-  });
+function openCreateNote() {
+  createNoteOverlay.hidden = false;
+}
 
+function closeCreateNote() {
+  createNoteOverlay.hidden = true;
+}
+
+function addManuscript(manuscript, status) {
   state.manuscripts.unshift(manuscript);
   state.activeId = manuscript.id;
   renderActiveManuscript();
   renderManuscriptNavigation();
   renderProjectGrid();
-  persistState("Novo manuscrito criado");
+  renderMetadataForm();
+  closeCreateNote();
+  persistState(status);
   setView("editor");
   titleInput.focus();
   titleInput.select();
+}
+
+function createQuickNote() {
+  const nextNumber = state.manuscripts.length + 1;
+  const manuscript = VeredaArchive.createManuscript({
+    id: `nota-${Date.now()}`,
+    title: `Nota rápida ${nextNumber}`,
+    text: "",
+    kind: "Nota rápida",
+    chapter: "Captura",
+    description: "Ideia solta, cena breve ou lembrete de escrita.",
+  });
+
+  addManuscript(manuscript, "Nota rápida criada");
+}
+
+function createBlankManuscript() {
+  const nextNumber = state.manuscripts.length + 1;
+  const manuscript = VeredaArchive.createManuscript({
+    id: `manuscrito-${Date.now()}`,
+    title: `Novo Manuscrito ${nextNumber}`,
+    text: "Comece aqui. A primeira frase abre uma vereda.",
+    kind: "Manuscrito em branco",
+    chapter: "Primeira página",
+    description: "Documento livre para escrita longa.",
+  });
+
+  addManuscript(manuscript, "Manuscrito em branco criado");
 }
 
 function createManuscriptFromTemplate(templateId) {
@@ -433,16 +465,11 @@ function createManuscriptFromTemplate(templateId) {
   });
   const manuscript = VeredaArchive.createManuscript(templateManuscript);
 
-  state.manuscripts.unshift(manuscript);
-  state.activeId = manuscript.id;
-  renderActiveManuscript();
-  renderManuscriptNavigation();
-  renderProjectGrid();
-  renderMetadataForm();
-  persistState("Template aplicado");
-  setView("editor");
-  titleInput.focus();
-  titleInput.select();
+  addManuscript(manuscript, "Template aplicado");
+}
+
+function createFromReferenceTemplate() {
+  createManuscriptFromTemplate(state.template.selectedId);
 }
 
 function ensureInitialVersion(manuscript) {
@@ -1060,12 +1087,28 @@ document.addEventListener("click", (event) => {
     toggleTemplateSide();
   }
 
+  if (actionTarget.dataset.action === "open-create-note") {
+    openCreateNote();
+  }
+
+  if (actionTarget.dataset.action === "close-create-note") {
+    closeCreateNote();
+  }
+
   if (actionTarget.dataset.action === "toggle-nav") {
     nav.classList.toggle("is-open");
   }
 
-  if (actionTarget.dataset.action === "new-manuscript") {
-    createManuscript();
+  if (actionTarget.dataset.action === "create-quick-note") {
+    createQuickNote();
+  }
+
+  if (actionTarget.dataset.action === "create-blank-manuscript") {
+    createBlankManuscript();
+  }
+
+  if (actionTarget.dataset.action === "create-from-reference-template") {
+    createFromReferenceTemplate();
   }
 
   if (actionTarget.dataset.action === "install-app") {
@@ -1105,6 +1148,16 @@ document.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && shell.classList.contains("is-focus")) {
     exitFocusMode();
+  }
+
+  if (event.key === "Escape" && !createNoteOverlay.hidden) {
+    closeCreateNote();
+  }
+});
+
+createNoteOverlay.addEventListener("click", (event) => {
+  if (event.target === createNoteOverlay) {
+    closeCreateNote();
   }
 });
 

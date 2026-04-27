@@ -286,6 +286,91 @@ a {
   margin-top: auto;
 }
 
+.create-note-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: rgba(26, 26, 26, 0.24);
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.create-note-overlay[hidden] {
+  display: none;
+}
+
+.create-note-panel {
+  width: min(720px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 28px 80px rgba(26, 26, 26, 0.18);
+  padding: 22px;
+  animation: surface-in var(--motion-calm);
+}
+
+.create-note-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.create-note-heading h2 {
+  margin: 3px 0 0;
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.create-note-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.create-note-card {
+  min-height: 178px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+  color: var(--soft-ink);
+  cursor: pointer;
+  padding: 18px;
+  text-align: left;
+  transition: transform var(--motion-quick), border-color var(--motion-quick), background var(--motion-quick);
+}
+
+.create-note-card:hover {
+  border-color: var(--primary);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.create-note-card > .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 30px;
+}
+
+.create-note-card strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.create-note-card small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .content-stage {
   min-width: 0;
   flex: 1 1 auto;
@@ -1682,6 +1767,7 @@ mark {
   .resource-grid,
   .archive-layout,
   .archive-layout .project-grid,
+  .create-note-options,
   .template-studio {
     grid-template-columns: 1fr;
     grid-auto-rows: minmax(210px, auto);
