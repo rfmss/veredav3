@@ -502,3 +502,35 @@ Próximas etapas sugeridas:
 - Refinar o score de Flash Fiction com critérios mais literários e calibrados.
 - Permitir ocultar/mostrar o painel consultivo com um botão.
 - Criar medidores próprios para crônica, conto curto, ensaio e roteiro.
+
+## 2026-04-27 - Biblioteca consultiva ampliada
+
+Decidimos expandir a primeira biblioteca de templates consultivos antes de refinar visualmente a experiência.
+
+Entraram três novos formatos:
+
+- Crônica.
+- Conto curto.
+- Ensaio.
+
+Cada formato ganhou:
+
+- Metadados de orientação.
+- Estrutura lateral consultiva.
+- Lembretes de escrita.
+- Texto-base para criação de manuscrito, ainda compatível com o fluxo antigo de templates.
+- Medidor próprio em `precision-engine.js`, com critérios fechados e offline.
+
+Critérios iniciais:
+
+- Crônica: cena cotidiana, olhar autoral, tom perceptível, fecho com eco e respiração em blocos.
+- Conto curto: personagem em cena, conflito ativo, ação concreta, virada, voz em cena e progressão narrativa.
+- Ensaio: tese, conectores, contraponto, exemplos/evidências e organização em blocos.
+
+Essa etapa reforça a ideia de que o Vereda não oferece um único jeito de escrever. Cada forma literária passa a ter uma régua própria, consultiva e ajustável.
+
+Próximas etapas sugeridas:
+
+- Adicionar botão para ocultar/mostrar o painel consultivo.
+- Refinar os pesos dos medidores com exemplos reais.
+- Criar templates de matéria jornalística, romance resumido, poesia e ficha de personagem.

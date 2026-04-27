@@ -185,6 +185,167 @@ Meta: até [500] palavras
 
 [Uma última imagem. Não explique demais.]`,
     },
+    {
+      id: "cronica",
+      label: "Crônica",
+      icon: "article",
+      title: "Crônica",
+      kind: "Crônica",
+      chapter: "Cena cotidiana",
+      description: "Template consultivo para transformar uma observação do cotidiano em texto breve com olhar autoral.",
+      guidance: {
+        meta: ["Cotidiano", "Olhar autoral", "Leveza", "Fecho reflexivo"],
+        sections: [
+          ["Cena cotidiana", "Um recorte pequeno: fila, ônibus, cozinha, praça, conversa."],
+          ["Olhar", "O que só você percebeu nessa cena?"],
+          ["Desvio", "A crônica ganha vida quando o comum aponta para outra coisa."],
+          ["Tom", "Pode ser lírico, irônico, afetivo, seco ou melancólico."],
+          ["Fecho", "Uma frase que abre ressonância sem fechar demais."],
+        ],
+        reminders: [
+          "A crônica nasce pequena e aponta para algo maior.",
+          "Evite explicar a moral do texto.",
+          "Deixe uma fresta para o leitor entrar.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Cena mínima",
+          title: "Uma crônica começa quando o comum pisca.",
+          body: "Pegue uma cena de todos os dias e olhe de novo. O texto nasce desse segundo olhar.",
+          primary: "Criar crônica",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Crônica
+
+## Cena cotidiana
+
+[Qual cena pequena acendeu o texto?]
+
+## Olhar
+
+[O que existe nessa cena que quase ninguém percebeu?]
+
+## Desvio
+
+[Para onde essa cena leva: memória, humor, crítica, espanto?]
+
+## Fecho
+
+[Uma última frase que deixa eco.]`,
+    },
+    {
+      id: "conto-curto",
+      label: "Conto curto",
+      icon: "auto_stories",
+      title: "Conto curto",
+      kind: "Conto curto",
+      chapter: "Conflito central",
+      description: "Template consultivo para narrativa curta com personagem, conflito, cena e consequência.",
+      guidance: {
+        meta: ["Personagem", "Conflito", "Cena", "Consequência"],
+        sections: [
+          ["Personagem em situação", "Quem está em cena e o que essa pessoa quer?"],
+          ["Conflito", "O que impede, ameaça ou transforma esse desejo?"],
+          ["Cena progressiva", "Cada bloco precisa alterar a pressão do conto."],
+          ["Ponto de virada", "Algo muda de estado: informação, relação, escolha."],
+          ["Consequência", "O fim mostra o preço da travessia."],
+        ],
+        reminders: [
+          "Conto não é resumo de enredo: é acontecimento em cena.",
+          "O conflito precisa cobrar alguma coisa.",
+          "O final deve parecer inevitável depois que chega.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Conflito central",
+          title: "Um conto curto precisa de pressão.",
+          body: "Comece por alguém querendo algo diante de uma resistência concreta.",
+          primary: "Criar conto",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Conto curto
+
+## Personagem
+
+[Quem atravessa este conto?]
+
+## Desejo
+
+[O que essa pessoa quer, mesmo que não diga?]
+
+## Conflito
+
+[O que impede ou cobra uma escolha?]
+
+## Cena
+
+[O acontecimento principal em cena.]
+
+## Consequência
+
+[O que mudou depois disso?]`,
+    },
+    {
+      id: "ensaio",
+      label: "Ensaio",
+      icon: "subject",
+      title: "Ensaio",
+      kind: "Ensaio",
+      chapter: "Tese provisória",
+      description: "Template consultivo para defender uma ideia com percurso, tensão argumentativa e voz própria.",
+      guidance: {
+        meta: ["Tese", "Argumento", "Contraponto", "Conclusão aberta"],
+        sections: [
+          ["Tese provisória", "O que você quer investigar ou sustentar?"],
+          ["Contexto", "Por que essa questão importa agora?"],
+          ["Argumento", "Ideias organizadas em progressão, não em acúmulo."],
+          ["Contraponto", "O texto ganha confiança quando reconhece tensão."],
+          ["Fecho", "Conclusão que entrega caminho, não só resumo."],
+        ],
+        reminders: [
+          "Ensaio pode pensar em voz alta, mas precisa de direção.",
+          "Evite parágrafos que só repetem a tese.",
+          "Um bom contraponto fortalece a ideia central.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Ideia em movimento",
+          title: "Um ensaio pensa com o leitor.",
+          body: "Comece por uma tese provisória e deixe o texto provar, ajustar ou tensionar essa ideia.",
+          primary: "Criar ensaio",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Ensaio
+
+## Tese provisória
+
+[Qual ideia este texto quer investigar?]
+
+## Contexto
+
+[Por que isso importa?]
+
+## Argumento
+
+[Desenvolva a ideia em progressão.]
+
+## Contraponto
+
+[Que objeção ou nuance precisa entrar?]
+
+## Fecho
+
+[O que o leitor leva depois da travessia?]`,
+    },
   ];
 
   function listTemplates() {
