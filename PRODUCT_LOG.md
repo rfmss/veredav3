@@ -153,3 +153,57 @@ Próximas etapas sugeridas:
 - Exportação simples do manuscrito em `.txt` e `.md`.
 - Melhorias na Prova de Escrita por sessão/data.
 - Expansão da Biblioteca Gramatical com léxico local separado.
+
+## 2026-04-27 - Estado do produto e milestones
+
+Estimamos que o Vereda esteja com cerca de 22% do produto-base pronto.
+
+Essa estimativa não mede apenas quantidade de telas. Ela considera o quanto já existe de comportamento real, arquitetura modular, funcionamento offline, persistência local e caminhos de soberania do autor. O produto já passou da fase de mock visual: ele salva localmente, tem módulos separados, funciona como PWA inicial, registra prova de escrita, guarda versões e permite backup do acervo.
+
+Estado por camada:
+
+- Fundação visual e navegação: 55%.
+- Editor offline básico: 45%.
+- Arquivo do Escritor: 35%.
+- Modo foco: 35%.
+- Biblioteca Gramatical local: 20%.
+- PoHW / Prova de Escrita: 25%.
+- Histórico de versões: 25%.
+- Backup e importação: 45%.
+- PWA/offline instalável: 35%.
+- Exportação editorial: 0%.
+- Configurações reais: 5%.
+- Mobile, notas rápidas e sincronização: 0% a 5%.
+
+Milestones sugeridas:
+
+- M1 - Protótipo funcional offline: editor, arquivo, foco, backup, versões e PoHW inicial. Estado atual: em andamento, cerca de 70% dentro deste milestone.
+- M2 - Editor utilizável no dia a dia: exportação `.txt`/`.md`, configurações reais, histórico mais claro, revisão de UX e tratamento de erros.
+- M3 - Diferencial Vereda: PoHW por sessões, Biblioteca Gramatical expandida, léxico local separado e métricas textuais mais confiáveis.
+- M4 - Produto instalável polido: PWA com atualização de cache, UX mobile, testes em navegador, acessibilidade e fluxo de instalação mais claro.
+- M5 - Beta privado: documentação, página de apresentação, dados de exemplo, checklist de qualidade e roteiro de feedback.
+
+Estimativa de trabalho nesse ritmo:
+
+- MVP local realmente testável: 18 a 28 horas.
+- Beta privado com polimento decente: 45 a 70 horas.
+- Produto mais robusto para uso contínuo por autores: 90 a 140 horas.
+
+A estimativa assume desenvolvimento incremental, sem backend, sem IA em runtime e mantendo o app estático/offline-first. Se entrarmos em migração para framework, empacotamento, sincronização entre dispositivos ou exportações complexas como EPUB/PDF profissional, esse número cresce.
+
+Benefícios esperados:
+
+- O projeto passa a ter uma régua de progresso compartilhada.
+- As próximas decisões deixam de depender da memória da conversa.
+- O log vira material para comunicação pública e gestão interna.
+- Milestones ajudam a separar protótipo, MVP, beta e produto contínuo.
+
+Formulação curta para comunicação:
+
+> O Vereda já tem uma espinha dorsal local. Agora a jornada é transformar essa base em rotina confiável de escrita: exportar, revisar, provar autoria e voltar ao texto sem medo.
+
+Próximas etapas sugeridas:
+
+- Implementar exportação simples do manuscrito em `.txt` e `.md`.
+- Melhorar a Prova de Escrita com sessões nomeadas por data.
+- Separar e expandir o léxico local da Biblioteca Gramatical.
