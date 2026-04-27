@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Autoria &amp; Registro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c1c8c4",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3130",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "background-paper": "#FDFCFB",
+                        "on-surface-variant": "#414845",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "on-surface": "#1a1c1b",
+                        "surface-container": "#eeeeec",
+                        "ink-black": "#1A1A1A",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "primary-fixed": "#c7eadc",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#623e39",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "secondary-container": "#ffd4c4",
+                        "surface-container-high": "#e8e8e6",
+                        "background": "#faf9f7",
+                        "outline": "#727975",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#45655a",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-tertiary-container": "#dbaaa3",
+                        "on-secondary-fixed": "#2c160c",
+                        "primary-fixed-dim": "#accec1",
+                        "surface-bright": "#faf9f7",
+                        "primary-container": "#2e4d43",
+                        "primary": "#17362d",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "on-secondary-container": "#7a594d",
+                        "accent-ochre": "#D4A373",
+                        "secondary-fixed": "#ffdbce",
+                        "on-background": "#1a1c1b",
+                        "surface-variant": "#e3e2e0",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f1f1ef",
+                        "secondary-fixed-dim": "#e7beae",
+                        "surface-container-low": "#f4f4f1",
+                        "surface": "#faf9f7",
+                        "ui-border": "#E5E1DE",
+                        "accent-sage": "#A3B18A",
+                        "surface-dim": "#dadad8",
+                        "on-primary-fixed": "#002018",
+                        "tertiary": "#482824",
+                        "secondary": "#77574b",
+                        "inverse-primary": "#accec1",
+                        "accent-sienna": "#A0522D",
+                        "on-primary-container": "#9bbdb0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter-ui": "24px",
+                        "focus-width": "720px",
+                        "sidebar-width": "280px",
+                        "margin-page": "12vw"
+                    },
+                    "fontFamily": {
+                        "body-reading": ["Noto Serif"],
+                        "headline-md": ["Inter"],
+                        "body-ui": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "caption": ["Inter"],
+                        "display-lg": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background-paper text-ink-black min-h-screen antialiased flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-[280px] border-r border-ui-border bg-background-paper flat no shadows">
+<div class="p-6 pb-2 border-b border-ui-border mb-6">
+<h1 class="font-headline-md text-headline-md tracking-tighter text-primary-container">Vereda</h1>
+<p class="font-caption text-caption text-outline mt-1">Autoria &amp; Registro</p>
+</div>
+<div class="px-4 space-y-1 flex-1">
+<a class="flex items-center px-4 py-3 rounded-DEFAULT font-body-ui text-body-ui text-outline hover:bg-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]" style="font-variation-settings: 'FILL' 0;">edit_note</span>
+                Escrita
+            </a>
+<a class="flex items-center px-4 py-3 rounded-DEFAULT font-body-ui text-body-ui text-primary-container font-semibold border-l-4 border-primary-container bg-surface-variant/50 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                Certificados
+            </a>
+<a class="flex items-center px-4 py-3 rounded-DEFAULT font-body-ui text-body-ui text-outline hover:bg-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]" style="font-variation-settings: 'FILL' 0;">fingerprint</span>
+                Logs de Hash
+            </a>
+<a class="flex items-center px-4 py-3 rounded-DEFAULT font-body-ui text-body-ui text-outline hover:bg-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]" style="font-variation-settings: 'FILL' 0;">settings</span>
+                Configurações
+            </a>
+</div>
+<div class="p-6 mt-auto border-t border-ui-border">
+<button class="w-full py-3 px-4 bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase rounded-DEFAULT hover:opacity-90 transition-opacity">
+                Novo Registro
+            </button>
+</div>
+</nav>
+<!-- TopAppBar (Mobile & Global Actions) -->
+<header class="fixed top-0 right-0 md:ml-[280px] w-full md:w-[calc(100%-280px)] h-16 px-8 flex justify-between items-center bg-background-paper/90 backdrop-blur-sm border-b border-ui-border z-10">
+<div class="md:hidden flex items-center">
+<span class="material-symbols-outlined text-primary-container mr-3 cursor-pointer">menu</span>
+<h1 class="font-headline-md text-headline-md tracking-tighter text-primary-container text-lg">Vereda</h1>
+</div>
+<div class="hidden md:flex flex-1"></div>
+<div class="flex items-center gap-4 text-primary-container">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity" style="font-variation-settings: 'FILL' 0;">history_edu</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full md:ml-[280px] pt-24 pb-20 px-6 md:px-margin-page flex justify-center">
+<div class="w-full max-w-focus-width space-y-12">
+<!-- Page Header -->
+<header class="space-y-4 mb-16 border-b border-ui-border pb-8">
+<div class="flex items-center gap-2 text-accent-sienna font-label-caps text-label-caps uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span>Segurança Literária</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-ink-black tracking-tight leading-tight">Certificados &amp; Integridade</h2>
+<p class="font-body-ui text-body-ui text-outline max-w-2xl">
+                    Registro imutável e prova de autoria orgânica. Um santuário digital que garante a soberania da sua obra literária.
+                </p>
+</header>
+<!-- 1. Certificado de Autoria -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">workspace_premium</span>
+                    Certificado de Autoria
+                </h3>
+<div class="relative bg-surface-container-lowest border border-ui-border p-12 overflow-hidden">
+<!-- Decorative Elements -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-surface-container opacity-50 rounded-bl-full pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 border-t border-r border-ui-border opacity-20 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row gap-12 items-start">
+<div class="flex-1 space-y-8">
+<div class="space-y-2">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Obra Registrada</span>
+<h4 class="font-display-lg text-[32px] font-bold text-ink-black italic">O Som da Terra Seca</h4>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-1">
+<span class="font-label-caps text-label-caps text-outline uppercase">Autor</span>
+<p class="font-body-reading text-body-reading text-ink-black">Mariana V. Coutinho</p>
+</div>
+<div class="space-y-1">
+<span class="font-label-caps text-label-caps text-outline uppercase">Data do Gênese</span>
+<p class="font-body-ui text-body-ui text-ink-black">12 de Outubro, 2023</p>
+</div>
+<div class="space-y-1 col-span-2">
+<span class="font-label-caps text-label-caps text-outline uppercase">Identificador Único (UUID)</span>
+<p class="font-body-ui text-caption font-mono text-outline-variant bg-surface px-2 py-1 rounded-sm inline-block">8f92a1b3-4c5d-6e7f-8a9b-0c1d2e3f4a5b</p>
+</div>
+</div>
+<div class="pt-6 border-t border-ui-border flex gap-4">
+<button class="flex items-center gap-2 px-6 py-2 bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase rounded-DEFAULT hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+                                    Exportar PDF
+                                </button>
+<button class="flex items-center gap-2 px-6 py-2 border border-ui-border text-primary-container font-label-caps text-label-caps uppercase rounded-DEFAULT hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">link</span>
+                                    Verificar em Blockchain
+                                </button>
+</div>
+</div>
+<!-- Seal -->
+<div class="flex flex-col items-center justify-center space-y-4 pt-4 md:pt-0">
+<div class="w-28 h-28 rounded-full border-4 border-accent-sage flex items-center justify-center relative bg-surface-container-lowest">
+<span class="material-symbols-outlined text-accent-sage text-[48px] absolute" style="font-variation-settings: 'FILL' 1;">verified</span>
+<svg class="w-full h-full animate-[spin_30s_linear_infinite] absolute opacity-30" viewbox="0 0 100 100">
+<defs>
+<path d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" id="circlePath"></path>
+</defs>
+<text fill="#2E4D43" font-family="Inter" font-size="8" font-weight="600" letter-spacing="2">
+<textpath href="#circlePath">AUTENTICIDADE VERIFICADA • REGISTRO VEREDA • </textpath>
+</text>
+</svg>
+</div>
+<span class="font-caption text-caption text-accent-sage font-medium text-center">Status: Íntegro</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Prova de Autoria Humana (PoHW) -->
+<section class="space-y-6">
+<div class="flex items-end justify-between border-b border-ui-border pb-2">
+<h3 class="font-headline-md text-headline-md text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">psychology</span>
+                        Prova de Autoria Humana (PoHW)
+                    </h3>
+<span class="font-caption text-caption text-outline bg-surface px-2 py-1 rounded-sm">Confiança: 99.8%</span>
+</div>
+<p class="font-body-ui text-body-ui text-outline">
+                    Análise biométrica de digitação comprovando a cadência orgânica da escrita. Intervalos irregulares (30ms a 2000ms) atestam que o texto não foi gerado por inteligência artificial.
+                </p>
+<div class="bg-surface border border-ui-border p-6 h-64 relative flex items-end gap-1">
+<!-- Simulated Scatter/Bar Chart representing typing latency -->
+<div class="absolute top-4 left-6 right-6 flex justify-between border-b border-ui-border pb-1 font-label-caps text-[10px] text-outline-variant">
+<span>Lento (2000ms)</span>
+<span>Rápido (30ms)</span>
+</div>
+<!-- Y-axis grid lines -->
+<div class="absolute top-1/4 left-6 right-6 border-t border-ui-border/30 w-full z-0"></div>
+<div class="absolute top-2/4 left-6 right-6 border-t border-ui-border/30 w-full z-0"></div>
+<div class="absolute top-3/4 left-6 right-6 border-t border-ui-border/30 w-full z-0"></div>
+<!-- Bars -->
+<div class="w-full flex justify-between items-end h-48 z-10 px-2">
+<div class="w-[2%] bg-accent-sienna/60 h-[40%] rounded-t-sm hover:bg-accent-sienna transition-colors"></div>
+<div class="w-[2%] bg-primary-container/40 h-[15%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/80 h-[85%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/50 h-[30%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/30 h-[10%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-accent-sienna/50 h-[60%] rounded-t-sm hover:bg-accent-sienna transition-colors"></div>
+<div class="w-[2%] bg-primary-container/70 h-[45%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/90 h-[20%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/40 h-[12%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/60 h-[35%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-accent-ochre/70 h-[95%] rounded-t-sm hover:bg-accent-ochre transition-colors"></div>
+<div class="w-[2%] bg-primary-container/50 h-[25%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/30 h-[15%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/80 h-[50%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+<div class="w-[2%] bg-primary-container/40 h-[18%] rounded-t-sm hover:bg-primary-container transition-colors"></div>
+</div>
+</div>
+<div class="flex justify-between items-center text-caption font-body-ui text-outline px-2">
+<span>Sessão: 14 Nov, 14:30 - 16:45</span>
+<div class="flex gap-4">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container opacity-60"></span> Fluxo Constante</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-accent-sienna opacity-60"></span> Pausas Reflexivas</span>
+</div>
+</div>
+</section>
+<!-- 3. Tabela de Registros de Hash (SHA-256) -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">fingerprint</span>
+                    Histórico de Integridade (SHA-256)
+                </h3>
+<div class="border border-ui-border bg-surface-container-lowest overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-ui-border bg-surface font-label-caps text-label-caps text-outline uppercase tracking-wider">
+<th class="p-4 font-semibold">Timestamp</th>
+<th class="p-4 font-semibold">Versão</th>
+<th class="p-4 font-semibold">Hash do Arquivo (Impressão Digital)</th>
+<th class="p-4 font-semibold text-center">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-ui text-caption text-ink-black">
+<tr class="border-b border-ui-border hover:bg-surface-variant/30 transition-colors">
+<td class="p-4 text-outline font-mono">2023-11-14T16:45:00Z</td>
+<td class="p-4">v. 1.4.2</td>
+<td class="p-4 font-mono text-xs text-outline-variant truncate max-w-[200px]">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-accent-sage text-[18px]">check_circle</span>
+</td>
+</tr>
+<tr class="border-b border-ui-border hover:bg-surface-variant/30 transition-colors">
+<td class="p-4 text-outline font-mono">2023-11-12T09:12:33Z</td>
+<td class="p-4">v. 1.4.1</td>
+<td class="p-4 font-mono text-xs text-outline-variant truncate max-w-[200px]">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-accent-sage text-[18px]">check_circle</span>
+</td>
+</tr>
+<tr class="border-b border-ui-border hover:bg-surface-variant/30 transition-colors">
+<td class="p-4 text-outline font-mono">2023-11-05T21:00:15Z</td>
+<td class="p-4">v. 1.3.0</td>
+<td class="p-4 font-mono text-xs text-outline-variant truncate max-w-[200px]">ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-accent-sage text-[18px]">check_circle</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="p-4 text-outline font-mono">2023-10-12T14:20:00Z</td>
+<td class="p-4">Gênese</td>
+<td class="p-4 font-mono text-xs text-outline-variant truncate max-w-[200px]">01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-accent-sage text-[18px]">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex justify-end">
+<button class="font-label-caps text-label-caps text-primary-container hover:underline uppercase tracking-wider flex items-center gap-1">
+                        Ver histórico completo
+                        <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+</button>
+</div>
+</section>
+<footer class="pt-12 pb-6 border-t border-ui-border text-center">
+<p class="font-caption text-caption text-outline-variant">Timestamps universais sincronizados. Padrão de segurança literária Vereda.</p>
+</footer>
+</div>
+</main>
+</body></html>

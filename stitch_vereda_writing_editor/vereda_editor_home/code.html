@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda Editor - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#414845",
+                        "on-tertiary-container": "#dbaaa3",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-dim": "#dadad8",
+                        "primary-container": "#2e4d43",
+                        "on-secondary-container": "#7a594d",
+                        "primary-fixed": "#c7eadc",
+                        "inverse-primary": "#accec1",
+                        "on-secondary-fixed": "#2c160c",
+                        "inverse-surface": "#2f3130",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c1c8c4",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-surface": "#1a1c1b",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "secondary": "#77574b",
+                        "background": "#faf9f7",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeeeec",
+                        "primary": "#17362d",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "on-background": "#1a1c1b",
+                        "accent-ochre": "#D4A373",
+                        "primary-fixed-dim": "#accec1",
+                        "ink-black": "#1A1A1A",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "surface-container-high": "#e8e8e6",
+                        "secondary-container": "#ffd4c4",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#002018",
+                        "surface-tint": "#45655a",
+                        "surface": "#faf9f7",
+                        "on-primary-container": "#9bbdb0",
+                        "ui-border": "#E5E1DE",
+                        "surface-container-low": "#f4f4f1",
+                        "secondary-fixed-dim": "#e7beae",
+                        "tertiary-fixed": "#ffdad5",
+                        "background-paper": "#FDFCFB",
+                        "inverse-on-surface": "#f1f1ef",
+                        "accent-sienna": "#A0522D",
+                        "outline": "#727975",
+                        "tertiary": "#482824",
+                        "accent-sage": "#A3B18A",
+                        "surface-variant": "#e3e2e0",
+                        "tertiary-container": "#623e39",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "surface-bright": "#faf9f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sidebar-width": "280px",
+                        "focus-width": "720px",
+                        "gutter-ui": "24px",
+                        "margin-page": "12vw"
+                    },
+                    "fontFamily": {
+                        "caption": ["inter"],
+                        "label-caps": ["inter"],
+                        "body-reading": ["notoSerif"],
+                        "body-ui": ["inter"],
+                        "display-lg": ["notoSerif"],
+                        "headline-md": ["inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-paper text-on-background font-body-ui text-body-ui h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-[#FDFCFB] dark:bg-[#121212] flex justify-between items-center w-full px-8 h-14 border-b border-[#E5E1DE] dark:border-[#2A2A2A] docked full-width top-0 z-50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#2E4D43] dark:text-[#FDFCFB] font-['Inter']">Vereda</span>
+<div class="hidden md:flex gap-6 h-full items-end">
+<a class="text-[#2E4D43] dark:text-[#FDFCFB] border-b-2 border-[#2E4D43] dark:border-[#A8C69F] pb-1 font-['Inter'] text-sm tracking-tight hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors active:opacity-70 transition-opacity" href="#">Manuscrito</a>
+<a class="text-[#8C857E] dark:text-[#5C5752] pb-1 font-['Inter'] text-sm tracking-tight hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors active:opacity-70 transition-opacity" href="#">Biblioteca</a>
+<a class="text-[#8C857E] dark:text-[#5C5752] pb-1 font-['Inter'] text-sm tracking-tight hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors active:opacity-70 transition-opacity" href="#">Academia</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[#2E4D43] dark:text-[#A8C69F]">
+<button class="hover:bg-surface-container p-2 rounded-DEFAULT transition-colors"><span class="material-symbols-outlined text-[20px]">format_size</span></button>
+<button class="hover:bg-surface-container p-2 rounded-DEFAULT transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="hover:bg-surface-container p-2 rounded-DEFAULT transition-colors"><span class="material-symbols-outlined text-[20px]">auto_stories</span></button>
+<button class="hover:bg-surface-container p-2 rounded-DEFAULT transition-colors"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden relative">
+<!-- SideNavBar -->
+<aside class="bg-[#F5F2EE] dark:bg-[#161616] docked h-full w-64 border-r border-[#E5E1DE] dark:border-[#2A2A2A] flex flex-col p-4 space-y-6 shrink-0 z-40 relative">
+<div class="mb-2">
+<div class="text-caption font-caption text-on-surface-variant uppercase tracking-widest mb-4">Hierarquia</div>
+<div class="space-y-1">
+<!-- Tree Item 1 -->
+<div>
+<div class="flex items-center gap-2 p-2 hover:bg-[#E5E1DE]/50 dark:hover:bg-[#2A2A2A]/50 rounded-sm cursor-pointer text-[#8C857E] dark:text-[#5C5752]">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+<span class="material-symbols-outlined text-[18px]">folder</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Romances</span>
+</div>
+<div class="pl-8 space-y-1 mt-1">
+<div class="flex items-center gap-2 p-2 bg-[#E5E1DE] dark:bg-[#2A2A2A] text-[#2E4D43] dark:text-[#FDFCFB] rounded-sm cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">O Som da Terra Seca</span>
+</div>
+<div class="flex items-center gap-2 p-2 hover:bg-[#E5E1DE]/50 dark:hover:bg-[#2A2A2A]/50 text-[#8C857E] dark:text-[#5C5752] rounded-sm cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Coronel de Pedra</span>
+</div>
+</div>
+</div>
+<!-- Tree Item 2 -->
+<div>
+<div class="flex items-center gap-2 p-2 hover:bg-[#E5E1DE]/50 dark:hover:bg-[#2A2A2A]/50 rounded-sm cursor-pointer text-[#8C857E] dark:text-[#5C5752]">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+<span class="material-symbols-outlined text-[18px]">folder</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Contos</span>
+</div>
+</div>
+<!-- Tree Item 3 -->
+<div>
+<div class="flex items-center gap-2 p-2 hover:bg-[#E5E1DE]/50 dark:hover:bg-[#2A2A2A]/50 rounded-sm cursor-pointer text-[#8C857E] dark:text-[#5C5752]">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+<span class="material-symbols-outlined text-[18px]">folder</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Poesia</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-ui-border">
+<button class="w-full bg-primary-container text-on-primary text-label-caps font-label-caps py-3 rounded-DEFAULT hover:opacity-90 transition-opacity">Novo Manuscrito</button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto relative flex flex-col items-center pb-24">
+<div class="w-full max-w-[720px] mx-auto px-12 pt-24 pb-12 relative flex-1 flex flex-col">
+<!-- Title Area -->
+<div class="mb-12">
+<h1 class="font-display-lg text-display-lg text-ink-black outline-none" contenteditable="true">O Som da Terra Seca</h1>
+<div class="h-px w-24 bg-ui-border mt-8"></div>
+</div>
+<!-- Writing Area -->
+<article class="font-body-reading text-body-reading text-on-surface-variant flex-1 outline-none whitespace-pre-wrap" contenteditable="true">
+O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
+
+— Hoje não chove — murmurou, mais por hábito do que por esperança.
+
+O velho Tião pigarreou lá dentro, o som oco batendo nas paredes de taipa. Ele tossia terra desde a seca de oitenta e dois. O rádio de pilha chiava uma moda de viola distante, engolida pela estática e pelo silêncio opressivo que se seguia. 
+
+Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. A água da moringa já amargava, gosto de barro e espera. Era o quinto mês sem uma gota. O gado, o pouco que restava, pastava miragens na imensidão amarela.
+
+Maria fechou os olhos. Na memória, o cheiro de chuva batendo na terra quente ainda existia, um fantasma perfumado que a assombrava nas noites indormidas. Tateou o bolso do avental puído, os dedos encontrando a pequena medalha de lata. Uma oração silenciosa escorregou pelos lábios rachados, não pedindo água, mas força para suportar a ausência dela.
+                </article>
+<!-- Floating Counter -->
+<div class="absolute bottom-8 right-12 bg-surface-container-lowest border border-ui-border rounded-full px-4 py-1 flex items-center gap-4 shadow-sm opacity-60 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">format_align_left</span>
+<span>186 palavras</span>
+</div>
+<div class="w-px h-3 bg-ui-border"></div>
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">segment</span>
+<span>5 parágrafos</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Sidebar - Linguistic Analysis -->
+<aside class="w-[320px] bg-surface-container-lowest border-l border-ui-border h-full flex flex-col p-6 overflow-y-auto shrink-0 z-40">
+<h2 class="font-headline-md text-headline-md text-primary-container mb-8">Análise Linguística</h2>
+<!-- Real-time Stats -->
+<div class="mb-8">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+                    Estatísticas em Tempo Real
+                </h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-4xl font-bold text-primary-container font-['Inter'] tracking-tight">65</span>
+<span class="text-caption font-caption text-on-surface-variant">WPM</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-DEFAULT border border-ui-border">
+<div class="text-caption font-caption text-on-surface-variant mb-2">Termos Frequentes</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-primary-container font-medium text-[14px]">terra (4)</span>
+<span class="text-on-surface-variant text-[13px]">água (3)</span>
+<span class="text-on-surface-variant text-[13px]">sol (2)</span>
+<span class="text-on-surface-variant text-[12px]">seca (2)</span>
+<span class="text-on-surface-variant text-[12px]">barro (2)</span>
+</div>
+</div>
+</div>
+<!-- Grammar Distribution -->
+<div class="mb-8">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">category</span>
+                    Distribuição Gramatical
+                </h3>
+<div class="h-3 w-full flex rounded-full overflow-hidden mb-4">
+<div class="bg-primary-container w-[30%]"></div>
+<div class="bg-accent-ochre w-[20%]"></div>
+<div class="bg-accent-sienna w-[15%]"></div>
+<div class="bg-accent-sage w-[15%]"></div>
+<div class="bg-tertiary-container w-[10%]"></div>
+<div class="bg-surface-tint w-[10%]"></div>
+</div>
+<div class="space-y-2 text-caption font-caption">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary-container"></div><span class="text-on-surface-variant">Substantivo</span></div>
+<span class="text-outline">30%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent-ochre"></div><span class="text-on-surface-variant">Verbo</span></div>
+<span class="text-outline">20%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent-sienna"></div><span class="text-on-surface-variant">Adjetivo</span></div>
+<span class="text-outline">15%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent-sage"></div><span class="text-on-surface-variant">Pronome</span></div>
+<span class="text-outline">15%</span>
+</div>
+</div>
+</div>
+<!-- Readability -->
+<div class="mt-auto">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">school</span>
+                    Legibilidade Flesch-BR
+                </h3>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-accent-sage flex items-center justify-center text-accent-sage font-bold font-['Inter']">
+                        82
+                    </div>
+<div>
+<div class="text-primary-container font-medium text-body-ui">Fácil</div>
+<div class="text-caption font-caption text-outline">Vocabulário acessível</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer -->
+<footer class="bg-[#FDFCFB] dark:bg-[#121212] flex justify-between items-center w-full px-8 py-2 h-10 border-t border-[#E5E1DE] dark:border-[#2A2A2A] docked full-width bottom-0 z-50">
+<span class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-[#B0ABA5] dark:text-[#4A4A4A]">Vereda Editor © 2024 - Prova de Humanidade Ativa</span>
+<div class="flex gap-6">
+<span class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-[#B0ABA5] dark:text-[#4A4A4A] cursor-default">Hash: 7f8e...c4d2 | Autenticado às 14:32</span>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-[#B0ABA5] dark:text-[#4A4A4A] hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors" href="#">Termos de Uso</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-[#B0ABA5] dark:text-[#4A4A4A] hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors" href="#">Privacidade</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-[#B0ABA5] dark:text-[#4A4A4A] hover:text-[#2E4D43] dark:hover:text-[#FDFCFB] transition-colors" href="#">Exportar Backup</a>
+</div>
+</footer>
+</body></html>

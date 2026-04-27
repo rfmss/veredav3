@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Sincronização Mobile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#e7beae",
+                        "error": "#ba1a1a",
+                        "accent-sienna": "#A0522D",
+                        "inverse-surface": "#2f3130",
+                        "on-primary-container": "#9bbdb0",
+                        "tertiary-container": "#623e39",
+                        "surface-bright": "#faf9f7",
+                        "inverse-primary": "#accec1",
+                        "primary-fixed": "#c7eadc",
+                        "on-secondary-container": "#7a594d",
+                        "surface-container": "#eeeeec",
+                        "ink-black": "#1A1A1A",
+                        "ui-border": "#E5E1DE",
+                        "on-primary-fixed": "#002018",
+                        "surface": "#faf9f7",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2e4d43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#2c160c",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdbce",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "on-surface-variant": "#414845",
+                        "background": "#faf9f7",
+                        "surface-container-low": "#f4f4f1",
+                        "accent-sage": "#A3B18A",
+                        "on-error": "#ffffff",
+                        "tertiary": "#482824",
+                        "secondary": "#77574b",
+                        "surface-tint": "#45655a",
+                        "outline-variant": "#c1c8c4",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "outline": "#727975",
+                        "surface-container-high": "#e8e8e6",
+                        "secondary-container": "#ffd4c4",
+                        "surface-container-highest": "#e3e2e0",
+                        "background-paper": "#FDFCFB",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "accent-ochre": "#D4A373",
+                        "surface-dim": "#dadad8",
+                        "primary": "#17362d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-surface": "#1a1c1b",
+                        "on-background": "#1a1c1b",
+                        "surface-variant": "#e3e2e0",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "primary-fixed-dim": "#accec1",
+                        "on-tertiary-container": "#dbaaa3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sidebar-width": "280px",
+                        "margin-page": "12vw",
+                        "gutter-ui": "24px",
+                        "focus-width": "720px"
+                    },
+                    "fontFamily": {
+                        "body-ui": ["inter"],
+                        "label-caps": ["inter"],
+                        "caption": ["inter"],
+                        "body-reading": ["notoSerif"],
+                        "headline-md": ["inter"],
+                        "display-lg": ["notoSerif"]
+                    },
+                    "fontSize": {
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-ui min-h-screen flex flex-col pt-16 pb-20">
+<!-- TopAppBar -->
+<header class="bg-[#FDFCFB] dark:bg-stone-950 text-[#2E4D43] dark:text-stone-200 font-inter tracking-tight font-medium docked full-width top-0 border-b border-[#E5E1DE] dark:border-stone-800 flat no shadows flex justify-between items-center px-6 h-16 w-full fixed top-0 z-50">
+<button aria-label="Menu" class="text-stone-400 dark:text-stone-600 hover:bg-stone-100 dark:hover:bg-stone-900 active:opacity-70 transition-all p-2 rounded-full">
+<span class="material-symbols-outlined">menu_book</span>
+</button>
+<h1 class="text-lg font-bold tracking-widest text-[#2E4D43] dark:text-stone-100">Vereda</h1>
+<button aria-label="More" class="text-stone-400 dark:text-stone-600 hover:bg-stone-100 dark:hover:bg-stone-900 active:opacity-70 transition-all p-2 rounded-full">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-gutter-ui py-8 flex flex-col gap-8 max-w-focus-width mx-auto w-full">
+<!-- Sincronização Ativa Section -->
+<section class="flex flex-col gap-6">
+<div class="bg-surface-container-lowest border border-ui-border rounded-lg p-6 flex flex-col items-center justify-center text-center gap-4">
+<span class="material-symbols-outlined text-display-lg text-primary-container" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Pronto para Sincronizar</h2>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Capture o QR Code no seu editor desktop para transferir notas e rascunhos.</p>
+</div>
+<button class="mt-2 w-full max-w-[240px] bg-primary-container text-on-primary font-body-ui text-body-ui font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">camera_alt</span>
+                    Escanear QR Code
+                </button>
+</div>
+</section>
+<!-- Notas Recentes Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Notas Recentes</h3>
+<span class="font-caption text-caption text-on-surface-variant">Sincronizadas há 2h</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Note Card 1 -->
+<div class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<span class="bg-accent-sienna/10 text-accent-sienna font-caption text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">Fragmentos</span>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</div>
+<p class="font-body-reading text-body-reading text-on-surface italic line-clamp-3">"A luz do fim de tarde batia na poeira suspensa, dourando o silêncio da sala vazia. Ele sabia que não haveria volta."</p>
+<span class="font-caption text-caption text-outline-variant mt-1">Capítulo 4 • Rascunhos</span>
+</div>
+<!-- Note Card 2 -->
+<div class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<span class="bg-accent-sage/20 text-primary-container font-caption text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">Personagens</span>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</div>
+<p class="font-body-reading text-body-reading text-on-surface line-clamp-3">Manoel: mãos calejadas, sempre limpas. Olha mais para o chão do que para os olhos de quem fala. Tem um tique de coçar a orelha esquerda quando mente.</p>
+<span class="font-caption text-caption text-outline-variant mt-1">Desenvolvimento • Perfis</span>
+</div>
+<!-- Note Card 3 -->
+<div class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<span class="bg-accent-ochre/20 text-[#8C6036] font-caption text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">Cenários</span>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</div>
+<p class="font-body-reading text-body-reading text-on-surface line-clamp-3">A estação ferroviária abandonada. Trilhos cobertos de mato alto. O telhado de zinco range com o vento norte.</p>
+<span class="font-caption text-caption text-outline-variant mt-1">Ambientes • Norte</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-[#FDFCFB] dark:bg-stone-950 font-inter text-[11px] font-semibold uppercase tracking-tighter docked full-width bottom-0 border-t border-[#E5E1DE] dark:border-stone-800 flat no shadows fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe md:hidden">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-3 py-1 hover:text-[#2E4D43] dark:hover:text-stone-200 scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">edit_note</span>
+<span>Escrita</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2E4D43] dark:text-[#A8C3B8] hover:text-[#2E4D43] dark:hover:text-stone-200 scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">description</span>
+<span>Notas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-3 py-1 hover:text-[#2E4D43] dark:hover:text-stone-200 scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">library_books</span>
+<span>Acervo</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2E4D43] dark:text-stone-100 bg-[#E5E1DE]/30 dark:bg-stone-800/50 rounded-lg px-3 py-1 hover:text-[#2E4D43] dark:hover:text-stone-200 scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span>Sync</span>
+</a>
+</nav>
+</body></html>

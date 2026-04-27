@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#dbaaa3",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-primary-fixed": "#002018",
+                        "accent-ochre": "#D4A373",
+                        "surface-container-high": "#e8e8e6",
+                        "accent-sienna": "#A0522D",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "secondary-container": "#ffd4c4",
+                        "tertiary": "#482824",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e7beae",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f7",
+                        "on-surface-variant": "#414845",
+                        "primary-fixed-dim": "#accec1",
+                        "inverse-primary": "#accec1",
+                        "inverse-surface": "#2f3130",
+                        "surface-bright": "#faf9f7",
+                        "outline-variant": "#c1c8c4",
+                        "surface": "#faf9f7",
+                        "background-paper": "#FDFCFB",
+                        "ui-border": "#E5E1DE",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2e4d43",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#c7eadc",
+                        "secondary": "#77574b",
+                        "surface-variant": "#e3e2e0",
+                        "on-error-container": "#93000a",
+                        "outline": "#727975",
+                        "on-surface": "#1a1c1b",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "surface-container-low": "#f4f4f1",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "on-primary-container": "#9bbdb0",
+                        "surface-container": "#eeeeec",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "accent-sage": "#A3B18A",
+                        "ink-black": "#1A1A1A",
+                        "on-secondary-container": "#7a594d",
+                        "on-background": "#1a1c1b",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "surface-dim": "#dadad8",
+                        "tertiary-fixed": "#ffdad5",
+                        "primary": "#17362d",
+                        "on-secondary-fixed": "#2c160c",
+                        "inverse-on-surface": "#f1f1ef",
+                        "tertiary-container": "#623e39",
+                        "surface-tint": "#45655a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-page": "12vw",
+                        "sidebar-width": "280px",
+                        "focus-width": "720px",
+                        "gutter-ui": "24px"
+                    },
+                    "fontFamily": {
+                        "body-reading": [
+                            "notoSerif"
+                        ],
+                        "caption": [
+                            "inter"
+                        ],
+                        "headline-md": [
+                            "inter"
+                        ],
+                        "display-lg": [
+                            "notoSerif"
+                        ],
+                        "body-ui": [
+                            "inter"
+                        ],
+                        "label-caps": [
+                            "inter"
+                        ]
+                    },
+                    "fontSize": {
+                        "body-reading": [
+                            "19px",
+                            {
+                                "lineHeight": "1.7",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "caption": [
+                            "13px",
+                            {
+                                "lineHeight": "1.4",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-md": [
+                            "24px",
+                            {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "display-lg": [
+                            "48px",
+                            {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                            }
+                        ],
+                        "body-ui": [
+                            "15px",
+                            {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "label-caps": [
+                            "12px",
+                            {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-ui min-h-screen flex overflow-hidden">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 bg-surface-container-low border-r border-ui-border w-64">
+<div class="px-6 py-6 border-b border-ui-border">
+<h1 class="text-xl font-bold text-primary-container font-headline-md tracking-tight">Vereda</h1>
+<p class="text-sm font-medium text-on-surface-variant font-caption mt-1">Arquivos</p>
+<p class="text-xs text-outline font-caption">Papel e Tinta</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+<button class="w-full flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container hover:text-primary-container rounded transition-colors font-body-ui text-left">
+<span class="material-symbols-outlined mr-3 text-[20px]">history</span>
+                Versões
+            </button>
+<button class="w-full flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container hover:text-primary-container rounded transition-colors font-body-ui text-left">
+<span class="material-symbols-outlined mr-3 text-[20px]">cloud_done</span>
+                Backups
+            </button>
+<button class="w-full flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container hover:text-primary-container rounded transition-colors font-body-ui text-left">
+<span class="material-symbols-outlined mr-3 text-[20px]">sticky_note_2</span>
+                Notas
+            </button>
+<button class="w-full flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container hover:text-primary-container rounded transition-colors font-body-ui text-left">
+<span class="material-symbols-outlined mr-3 text-[20px]">search</span>
+                Pesquisa
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 relative bg-background-paper">
+<!-- TopAppBar (from JSON) -->
+<header class="flex justify-between items-center w-full px-6 py-3 max-w-screen-xl mx-auto border-b border-ui-border bg-background-paper sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<span class="text-on-surface-variant font-body-ui text-sm">Capítulo 4: O Encontro</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary-container hover:bg-surface-container p-2 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">center_focus_strong</span>
+</button>
+<button class="text-primary-container hover:bg-surface-container p-2 rounded transition-colors bg-surface-container-high border border-ui-border">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+<button class="text-primary-container hover:bg-surface-container p-2 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+</header>
+<!-- Editor Canvas -->
+<main class="flex-1 overflow-y-auto w-full max-w-focus-width mx-auto px-6 py-12 pb-32 relative">
+<h1 class="font-display-lg text-display-lg text-ink-black mb-8">O Vento no Cerrado</h1>
+<div class="font-body-reading text-body-reading text-on-surface space-y-6">
+<p>O sol já ameaçava se esconder por trás da chapada quando ele finalmente apeou do cavalo. A poeira vermelha cobria tudo: as botas, o chapéu de couro, e até mesmo a respiração parecia carregada daquela terra seca. Ele olhou para o horizonte, onde a linha tênue entre o céu e a terra começava a se misturar em tons de ocre e roxo.</p>
+<p>Não havia pressa. <span class="bg-primary-fixed-dim/30 selection:bg-primary-fixed-dim/50 relative">A carta em seu bolso pesava mais do que a espingarda em suas costas.</span> Sabia que o que estava escrito ali mudaria o curso de muitas vidas, mas, por ora, preferia apenas ouvir o zumbido incessante das cigarras.</p>
+<!-- Floating WYSIWYG Toolbar -->
+<div class="absolute -mt-16 left-1/2 -translate-x-1/2 bg-surface border border-ui-border rounded-lg shadow-sm flex items-center px-2 py-1 gap-1 z-50">
+<button class="p-1.5 text-on-surface-variant hover:text-primary-container hover:bg-surface-container rounded transition-colors" title="Negrito">
+<span class="material-symbols-outlined text-[18px]">format_bold</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary-container hover:bg-surface-container rounded transition-colors" title="Itálico">
+<span class="material-symbols-outlined text-[18px]">format_italic</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary-container hover:bg-surface-container rounded transition-colors" title="Sublinhado">
+<span class="material-symbols-outlined text-[18px]">format_underlined</span>
+</button>
+<div class="w-px h-4 bg-ui-border mx-1"></div>
+<button class="p-1.5 text-on-surface-variant hover:text-primary-container hover:bg-surface-container rounded transition-colors" title="Citação">
+<span class="material-symbols-outlined text-[18px]">format_quote</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary-container hover:bg-surface-container rounded transition-colors" title="Comentário">
+<span class="material-symbols-outlined text-[18px]">add_comment</span>
+</button>
+</div>
+<p>A água do cantil estava morna, com um leve gosto de alumínio. Ele deu um gole longo, molhando a garganta ressequida, e observou as formigas carregadeiras trilhando um caminho perfeito perto de suas botas. Uma organização meticulosa em meio ao caos selvagem.</p>
+<p>Quando a primeira estrela despontou, ele finalmente se moveu. Caminhou em direção à pequena luz que bruxuleava ao longe, na beira do caminho. Era ali. O ponto de encontro.</p>
+</div>
+</main>
+</div>
+<!-- Right Side Panel: Version History -->
+<aside class="hidden xl:flex flex-col w-sidebar-width border-l border-ui-border bg-surface-container-low h-screen sticky top-0 z-20">
+<div class="px-6 py-4 border-b border-ui-border flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface text-lg">Histórico de Versões</h2>
+<button class="text-on-surface-variant hover:text-primary-container">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Current Version -->
+<div class="p-3 border border-primary-container bg-surface rounded-lg relative">
+<div class="absolute -left-[5px] top-4 w-2 h-2 rounded-full bg-primary-container"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-body-ui text-body-ui font-medium text-primary-container">Versão Atual</p>
+<p class="font-caption text-caption text-on-surface-variant">Hoje, 18:45</p>
+</div>
+<span class="material-symbols-outlined text-[18px] text-primary-container">edit</span>
+</div>
+<p class="font-caption text-caption text-on-surface text-sm line-clamp-2">"A carta em seu bolso pesava mais do que a espingarda..."</p>
+</div>
+<!-- Previous Versions -->
+<div class="pl-3 border-l-2 border-ui-border space-y-6 mt-4 ml-1">
+<div class="relative">
+<div class="absolute -left-[19px] top-1.5 w-3 h-3 rounded-full bg-surface-container-highest border-2 border-surface-container-low"></div>
+<div class="bg-surface border border-ui-border rounded-lg p-3 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-body-ui text-body-ui font-medium text-on-surface">Auto-save</p>
+<p class="font-caption text-caption text-on-surface-variant">Hoje, 17:30</p>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface text-sm line-clamp-2 mb-3 opacity-70 group-hover:opacity-100 transition-opacity">"O documento em seu casaco pesava mais..."</p>
+<button class="w-full py-1.5 px-3 bg-surface-container hover:bg-primary-container hover:text-on-primary text-primary-container font-label-caps text-label-caps rounded transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">restore</span>
+                            RESTAURAR
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[19px] top-1.5 w-3 h-3 rounded-full bg-surface-container-highest border-2 border-surface-container-low"></div>
+<div class="bg-surface border border-ui-border rounded-lg p-3 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-body-ui text-body-ui font-medium text-on-surface">Auto-save</p>
+<p class="font-caption text-caption text-on-surface-variant">Ontem, 21:15</p>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface text-sm line-clamp-2 mb-3 opacity-70 group-hover:opacity-100 transition-opacity">"Ele apeou do cavalo quando o sol se punha..."</p>
+<button class="w-full py-1.5 px-3 bg-surface-container hover:bg-primary-container hover:text-on-primary text-primary-container font-label-caps text-label-caps rounded transition-colors flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[16px]">restore</span>
+                            RESTAURAR
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- BottomNavBar (from JSON) for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-background-paper border-t border-ui-border bg-opacity-95 backdrop-blur-sm">
+<button class="flex flex-col items-center justify-center text-primary-container font-bold scale-105">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-label-caps text-label-caps">Escrever</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[24px] mb-1">menu_book</span>
+<span class="font-label-caps text-label-caps">Obras</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[24px] mb-1">architecture</span>
+<span class="font-label-caps text-label-caps">Academia</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[24px] mb-1">person</span>
+<span class="font-label-caps text-label-caps">Perfil</span>
+</button>
+</nav>
+</body></html>

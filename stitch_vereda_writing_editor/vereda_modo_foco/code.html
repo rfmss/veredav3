@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="antialiased" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Focus Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#dbaaa3",
+                        "secondary-fixed": "#ffdbce",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-primary-fixed": "#002018",
+                        "accent-ochre": "#D4A373",
+                        "surface-container-high": "#e8e8e6",
+                        "accent-sienna": "#A0522D",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "secondary-container": "#ffd4c4",
+                        "tertiary": "#482824",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e7beae",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf9f7",
+                        "on-surface-variant": "#414845",
+                        "primary-fixed-dim": "#accec1",
+                        "inverse-primary": "#accec1",
+                        "inverse-surface": "#2f3130",
+                        "surface-bright": "#faf9f7",
+                        "outline-variant": "#c1c8c4",
+                        "surface": "#faf9f7",
+                        "background-paper": "#FDFCFB",
+                        "ui-border": "#E5E1DE",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2e4d43",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#c7eadc",
+                        "secondary": "#77574b",
+                        "surface-variant": "#e3e2e0",
+                        "on-error-container": "#93000a",
+                        "outline": "#727975",
+                        "on-surface": "#1a1c1b",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "surface-container-low": "#f4f4f1",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "on-primary-container": "#9bbdb0",
+                        "surface-container": "#eeeeec",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "accent-sage": "#A3B18A",
+                        "ink-black": "#1A1A1A",
+                        "on-secondary-container": "#7a594d",
+                        "on-background": "#1a1c1b",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "surface-dim": "#dadad8",
+                        "tertiary-fixed": "#ffdad5",
+                        "primary": "#17362d",
+                        "on-secondary-fixed": "#2c160c",
+                        "inverse-on-surface": "#f1f1ef",
+                        "tertiary-container": "#623e39",
+                        "surface-tint": "#45655a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-page": "12vw",
+                        "sidebar-width": "280px",
+                        "focus-width": "720px",
+                        "gutter-ui": "24px"
+                    },
+                    "fontFamily": {
+                        "body-reading": ["Noto Serif", "serif"],
+                        "caption": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "display-lg": ["Noto Serif", "serif"],
+                        "body-ui": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .editor-content p {
+            margin-bottom: 1.5em;
+            text-indent: 2em;
+        }
+        .editor-content p:first-child {
+            text-indent: 0;
+        }
+    </style>
+</head>
+<body class="bg-background-paper text-ink-black min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Action Bar (Minimal in Focus Mode) -->
+<header class="fixed top-0 w-full p-6 flex justify-between items-center z-10 opacity-30 hover:opacity-100 transition-opacity duration-300">
+<div class="flex items-center gap-4">
+<button aria-label="Exit Focus Mode" class="flex items-center justify-center text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">fullscreen_exit</span>
+</button>
+<div class="text-on-surface-variant font-caption text-caption flex items-center gap-2">
+<span>Capítulo 4</span>
+<span class="text-outline text-xs">•</span>
+<span class="italic">Salvando...</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Settings" class="flex items-center justify-center text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex justify-center items-start pt-32 pb-32 px-4 sm:px-8 md:px-margin-page">
+<article class="w-full max-w-focus-width relative">
+<!-- Document Title -->
+<h1 class="font-display-lg text-display-lg text-on-surface mb-12 outline-none" contenteditable="true">
+                O Silêncio das Araras
+            </h1>
+<!-- Editor Area -->
+<div class="editor-content font-body-reading text-body-reading text-on-surface outline-none min-h-[512px]" contenteditable="true">
+<p>
+                    A poeira levantava em espirais secas antes mesmo que os cascos tocassem o chão de fato. Era o sertão respirando, um fôlego quente que secava a garganta e embotava os olhos. Maria não olhou para trás. Sabia que a casa pequena, com suas paredes de taipa e o teto de palha ressecada, já não era um refúgio. O sol do meio-dia castigava a paisagem, transformando cada sombra num artigo de luxo escasso.
+                </p>
+<p>
+                    Ele havia prometido voltar antes das primeiras chuvas. Uma promessa frágil, feita sob a luz bruxuleante de uma lamparina a querosene, enquanto o vento assobiava frestas adentro. Mas as chuvas não vieram. O que veio foi a poeira, implacável, cobrindo tudo com seu manto ocre.
+                </p>
+<p>
+                    Ela ajustou a trouxa sobre os ombros, o tecido áspero esfregando a pele já curtida pelo tempo e pelo trabalho. Na trouxa, levava pouco: duas mudas de roupa, uma caneca de alumínio amassada e o retrato desbotado. O peso, no entanto, parecia insuportável, não pela matéria, mas pela memória que cada objeto carregava.
+                </p>
+<p>
+                    Ao longe, o canto seco de um acauã rasgou o silêncio denso. Era um aviso, diziam os mais velhos. Um presságio de que a jornada seria árdua e o destino, incerto. Maria apertou o passo, os pés descalços sentindo o calor brutal da terra. A cada passo, a velha vida ficava para trás, engolida pela vastidão árida do caminho.
+                </p>
+</div>
+</article>
+</main>
+<!-- Bottom Status Bar -->
+<footer class="fixed bottom-0 w-full p-6 flex justify-center items-center z-10 opacity-30 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+<div class="bg-surface border border-ui-border rounded-full px-4 py-2 shadow-sm pointer-events-auto">
+<span class="font-caption text-caption text-on-surface-variant">
+                1.248 palavras
+            </span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Impressão &amp; Exportação</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#9bbdb0",
+                        "on-surface-variant": "#414845",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#e7beae",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#77574b",
+                        "inverse-on-surface": "#f1f1ef",
+                        "ui-border": "#E5E1DE",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e2e0",
+                        "background": "#faf9f7",
+                        "surface-container-high": "#e8e8e6",
+                        "on-surface": "#1a1c1b",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "on-primary-fixed": "#002018",
+                        "on-tertiary-fixed": "#2f1310",
+                        "surface": "#faf9f7",
+                        "surface-variant": "#e3e2e0",
+                        "surface-tint": "#45655a",
+                        "surface-container": "#eeeeec",
+                        "surface-dim": "#dadad8",
+                        "primary-fixed-dim": "#accec1",
+                        "on-secondary-fixed": "#2c160c",
+                        "inverse-surface": "#2f3130",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffdbce",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "accent-sage": "#A3B18A",
+                        "inverse-primary": "#accec1",
+                        "primary": "#17362d",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#faf9f7",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#7a594d",
+                        "on-tertiary-container": "#dbaaa3",
+                        "accent-ochre": "#D4A373",
+                        "background-paper": "#FDFCFB",
+                        "surface-container-low": "#f4f4f1",
+                        "ink-black": "#1A1A1A",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#623e39",
+                        "outline": "#727975",
+                        "accent-sienna": "#A0522D",
+                        "outline-variant": "#c1c8c4",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdad5",
+                        "tertiary": "#482824",
+                        "secondary-container": "#ffd4c4",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "primary-fixed": "#c7eadc",
+                        "on-background": "#1a1c1b",
+                        "primary-container": "#2e4d43"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter-ui": "24px",
+                        "unit": "4px",
+                        "sidebar-width": "280px",
+                        "margin-page": "12vw",
+                        "focus-width": "720px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["inter"],
+                        "display-lg": ["notoSerif"],
+                        "label-caps": ["inter"],
+                        "caption": ["inter"],
+                        "body-ui": ["inter"],
+                        "body-reading": ["notoSerif"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background-paper text-on-surface flex min-h-screen selection:bg-primary-container selection:text-background-paper">
+<!-- Shared Component: SideNavBar -->
+<!-- Applying exact style string commands from JSON, resolving active state for "Exportar" -->
+<nav class="fixed left-0 top-0 h-full flex flex-col p-4 gap-2 bg-[#F5F2EE] dark:bg-[#1A1C1A] text-[#2E4D43] dark:text-[#A8C6B9] font-inter text-sm font-medium h-screen w-64 border-r border-[#E5E1DE] dark:border-[#2D2A28] border-r border-[#E5E1DE] dark:border-[#2D2A28] flat no shadows z-50">
+<!-- Header -->
+<div class="flex items-center gap-3 px-4 py-6 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center overflow-hidden border border-[#E5E1DE]">
+<span class="material-symbols-outlined text-[#2E4D43]" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="sr-only">Perfil do Autor</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold text-[#2E4D43]">Vereda</span>
+<span class="text-xs text-stone-500 opacity-80">Editor de Livros</span>
+</div>
+</div>
+<!-- Tab 0: Manuscrito (Inactive) -->
+<a class="flex items-center gap-3 text-stone-600 dark:text-stone-400 px-4 py-2 hover:text-[#2E4D43] dark:hover:text-[#A8C6B9] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span>Manuscrito</span>
+</a>
+<!-- Tab 1: Design (Inactive) -->
+<a class="flex items-center gap-3 text-stone-600 dark:text-stone-400 px-4 py-2 hover:text-[#2E4D43] dark:hover:text-[#A8C6B9] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span>Design</span>
+</a>
+<!-- Tab 2: Exportar (Active Match) -->
+<a class="flex items-center gap-3 bg-[#E5E1DE] dark:bg-[#2D2A28] text-[#2E4D43] dark:text-[#A8C6B9] rounded-md px-4 py-2 hover:text-[#2E4D43] dark:hover:text-[#A8C6B9] transition-all Active: scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share" style="font-variation-settings: 'FILL' 1;">ios_share</span>
+<span>Exportar</span>
+</a>
+<!-- Tab 3: Biblioteca (Inactive) -->
+<a class="flex items-center gap-3 text-stone-600 dark:text-stone-400 px-4 py-2 hover:text-[#2E4D43] dark:hover:text-[#A8C6B9] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="book_5">book_5</span>
+<span>Biblioteca</span>
+</a>
+</nav>
+<!-- Main Content Area -->
+<!-- ml-64 to offset the fixed sidebar -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen px-12 py-10 overflow-y-auto">
+<header class="mb-10">
+<h1 class="font-headline-md text-headline-md text-primary-container">Impressão &amp; Exportação</h1>
+<p class="font-body-ui text-body-ui text-on-surface-variant mt-2">Configure o formato final da sua obra e exporte para plataformas gráficas ou digitais.</p>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-12 flex-1">
+<!-- Left Canvas: Tour do Objeto Livro -->
+<section class="xl:col-span-7 flex flex-col">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-label-caps text-label-caps tracking-widest text-on-surface-variant uppercase">Tour do Objeto Livro</h2>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-ui-border flex items-center justify-center text-outline-variant hover:border-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full border border-ui-border flex items-center justify-center text-outline-variant hover:border-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Book Parallax Canvas -->
+<div class="flex-1 bg-surface-container-low rounded-xl border border-ui-border relative overflow-hidden flex items-center justify-center min-h-[600px] shadow-inner">
+<!-- Decorative subtle grid/texture behind -->
+<div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #1A1A1A 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- Layer 1: Cover (Blurred in background) -->
+<div class="absolute w-[340px] h-[480px] bg-background-paper border border-ui-border rounded-r-sm shadow-sm rotate-[-4deg] translate-x-[-15%] scale-90 opacity-40 blur-[1px] flex flex-col items-center justify-center p-8">
+<div class="font-display-lg text-display-lg text-primary-container text-center leading-tight mb-8">O Vazio<br/>das Horas</div>
+<div class="w-16 h-[1px] bg-outline-variant mb-8"></div>
+<div class="font-body-ui text-body-ui text-on-surface-variant uppercase tracking-widest">Autor Desconhecido</div>
+</div>
+<!-- Layer 2: Epigraph (Midground) -->
+<div class="absolute w-[360px] h-[500px] bg-background-paper border border-ui-border rounded-r-md shadow-md rotate-[-1deg] translate-x-[-5%] scale-95 opacity-80 flex items-center justify-center p-12">
+<div class="w-full text-right border-r border-ui-border pr-6 pb-6 pt-24">
+<p class="font-body-reading text-body-reading text-on-surface italic opacity-70">"A escrita é a forma mais profunda de escutar a si mesmo na vastidão do silêncio."</p>
+</div>
+</div>
+<!-- Layer 3: First Chapter (Foreground Active) -->
+<div class="absolute w-[380px] h-[520px] bg-background-paper border border-ui-border rounded-r-lg shadow-xl rotate-[1.5deg] translate-x-[5%] flex flex-col p-10 z-10 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-6 before:bg-gradient-to-r before:from-surface-variant/30 before:to-transparent">
+<div class="text-center mb-10 pt-8">
+<span class="font-label-caps text-label-caps text-outline-variant uppercase tracking-[0.2em]">Capítulo I</span>
+<h3 class="font-display-lg text-[32px] font-bold text-on-surface mt-2">A Gênese do Trovão</h3>
+</div>
+<div class="flex-1 flex flex-col gap-4 pl-4 border-l-2 border-primary-container/20">
+<!-- Simulated text lines -->
+<div class="flex gap-2">
+<span class="text-4xl font-display-lg font-bold text-primary-container leading-none float-left mr-2 mt-1">O</span>
+<div class="w-full h-4 bg-surface-variant/50 rounded mt-2"></div>
+</div>
+<div class="w-11/12 h-4 bg-surface-variant/40 rounded"></div>
+<div class="w-full h-4 bg-surface-variant/40 rounded"></div>
+<div class="w-5/6 h-4 bg-surface-variant/40 rounded mb-2"></div>
+<div class="w-full h-4 bg-surface-variant/40 rounded"></div>
+<div class="w-full h-4 bg-surface-variant/40 rounded"></div>
+<div class="w-4/5 h-4 bg-surface-variant/40 rounded"></div>
+</div>
+<div class="text-center font-caption text-caption text-outline-variant mt-auto">1</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Settings & Export Actions -->
+<section class="xl:col-span-5 flex flex-col gap-10">
+<!-- Group: Elementos Pré-textuais -->
+<div>
+<h2 class="font-label-caps text-label-caps tracking-widest text-on-surface-variant uppercase mb-5">Elementos Pré-textuais</h2>
+<div class="space-y-4">
+<div class="relative">
+<label class="block font-caption text-caption text-outline-variant mb-1 ml-1">Dedicatória</label>
+<input class="w-full bg-surface-container-low border border-ui-border rounded-lg px-4 py-3 font-body-reading text-[16px] text-on-surface focus:outline-none focus:border-primary-container focus:bg-background-paper transition-colors placeholder:text-outline-variant italic" type="text" value="Para aqueles que leem no escuro."/>
+</div>
+<div class="relative">
+<label class="block font-caption text-caption text-outline-variant mb-1 ml-1">Epígrafe</label>
+<textarea class="w-full bg-surface-container-low border border-ui-border rounded-lg px-4 py-3 font-body-reading text-[16px] text-on-surface focus:outline-none focus:border-primary-container focus:bg-background-paper transition-colors resize-none placeholder:text-outline-variant italic" rows="2">"A escrita é a forma mais profunda de escutar a si mesmo..."</textarea>
+</div>
+<label class="flex items-center justify-between p-4 border border-ui-border rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="format_list_numbered">format_list_numbered</span>
+<span class="font-body-ui text-body-ui text-on-surface">Gerar Sumário Automático</span>
+</div>
+<div class="relative inline-flex items-center">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Group: Configuração de Miolo -->
+<div>
+<h2 class="font-label-caps text-label-caps tracking-widest text-on-surface-variant uppercase mb-5">Configuração de Miolo</h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Option: ABNT -->
+<div class="border border-ui-border rounded-lg p-4 cursor-pointer hover:border-outline-variant transition-colors opacity-70 group">
+<div class="flex items-center justify-between mb-3">
+<span class="font-body-ui text-body-ui font-medium text-on-surface-variant group-hover:text-on-surface">Padrão ABNT</span>
+<div class="w-4 h-4 rounded-full border border-ui-border"></div>
+</div>
+<div class="font-body-ui text-[11px] text-outline leading-relaxed font-sans">
+                                Arial 12pt<br/>
+                                Espaçamento 1.5<br/>
+                                Margens 3cm/2cm
+                            </div>
+</div>
+<!-- Option: Literário Clássico (Active) -->
+<div class="border-2 border-primary-container bg-surface-container-low rounded-lg p-4 cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-8 h-8 bg-primary-container rounded-bl-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-background-paper text-[16px]" data-icon="check">check</span>
+</div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-body-reading text-[17px] font-bold text-primary-container">Estilo Clássico</span>
+</div>
+<div class="font-body-reading text-[13px] text-on-surface-variant leading-relaxed italic">
+                                Noto Serif 11pt<br/>
+                                Espaçamento 1.2<br/>
+                                Margem Áurea
+                            </div>
+</div>
+</div>
+</div>
+<!-- Group: Saída (Export Actions) -->
+<div class="mt-auto">
+<h2 class="font-label-caps text-label-caps tracking-widest text-on-surface-variant uppercase mb-5">Saída</h2>
+<div class="flex flex-col gap-3">
+<!-- PDF Gráfica -->
+<button class="w-full flex items-center p-4 border border-ui-border bg-background-paper rounded-lg hover:border-primary-container hover:shadow-sm transition-all group text-left">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center mr-4 group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container" data-icon="print">print</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-ui text-body-ui font-semibold text-on-surface">Exportar para PDF</h3>
+<p class="font-caption text-caption text-outline">Pronto para gráfica (Marcas de corte inclusas)</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- EPUB Digital -->
+<button class="w-full flex items-center p-4 border border-ui-border bg-background-paper rounded-lg hover:border-primary-container hover:shadow-sm transition-all group text-left">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center mr-4 group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container" data-icon="menu_book">menu_book</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-ui text-body-ui font-semibold text-on-surface">Exportar EPUB</h3>
+<p class="font-caption text-caption text-outline">Formato digital fluido (Amazon KDP, Apple Books)</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- DOCX Edição -->
+<button class="w-full flex items-center p-4 border border-ui-border bg-background-paper rounded-lg hover:border-primary-container hover:shadow-sm transition-all group text-left">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center mr-4 group-hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container" data-icon="description">description</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-ui text-body-ui font-semibold text-on-surface">Baixar .docx</h3>
+<p class="font-caption text-caption text-outline">Para revisão externa ou editoras tradicionais</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Minimalist Footer (Proof of Work) -->
+<footer class="mt-12 pt-6 border-t border-ui-border flex items-center justify-between text-outline-variant font-caption text-[11px] uppercase tracking-widest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span>
+<span>Proof of Human Work (PoHW)</span>
+</div>
+<div class="font-mono opacity-60">
+                SHA-256: 8f4e9a2b7c1d3e5f6g7h8i9j0k1l2m3n
+            </div>
+</footer>
+</main>
+</body></html>

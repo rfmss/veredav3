@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vereda - Notas Rápidas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f4f4f1",
+                        "inverse-surface": "#2f3130",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#2f1310",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#45655a",
+                        "ui-border": "#E5E1DE",
+                        "inverse-primary": "#accec1",
+                        "primary-container": "#2e4d43",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "on-primary-fixed": "#002018",
+                        "background": "#faf9f7",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "on-primary-container": "#9bbdb0",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeeeec",
+                        "secondary": "#77574b",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f1f1ef",
+                        "surface-variant": "#e3e2e0",
+                        "surface-container-high": "#e8e8e6",
+                        "surface-container-highest": "#e3e2e0",
+                        "primary-fixed-dim": "#accec1",
+                        "primary": "#17362d",
+                        "surface": "#faf9f7",
+                        "primary-fixed": "#c7eadc",
+                        "on-secondary-fixed": "#2c160c",
+                        "accent-sage": "#A3B18A",
+                        "tertiary": "#482824",
+                        "outline": "#727975",
+                        "outline-variant": "#c1c8c4",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdbce",
+                        "on-background": "#1a1c1b",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dadad8",
+                        "accent-ochre": "#D4A373",
+                        "background-paper": "#FDFCFB",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1a1c1b",
+                        "ink-black": "#1A1A1A",
+                        "on-surface-variant": "#414845",
+                        "on-secondary-container": "#7a594d",
+                        "accent-sienna": "#A0522D",
+                        "tertiary-container": "#623e39",
+                        "secondary-container": "#ffd4c4",
+                        "surface-bright": "#faf9f7",
+                        "on-tertiary-container": "#dbaaa3",
+                        "secondary-fixed-dim": "#e7beae",
+                        "tertiary-fixed-dim": "#edbbb3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "280px",
+                        "unit": "4px",
+                        "margin-page": "12vw",
+                        "focus-width": "720px",
+                        "gutter-ui": "24px"
+                    },
+                    "fontFamily": {
+                        "caption": ["inter"],
+                        "body-ui": ["inter"],
+                        "display-lg": ["notoSerif"],
+                        "label-caps": ["inter"],
+                        "headline-md": ["inter"],
+                        "body-reading": ["notoSerif"]
+                    },
+                    "fontSize": {
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-paper text-on-surface font-body-ui antialiased min-h-screen flex flex-col md:hidden">
+<!-- TopAppBar -->
+<header class="bg-[#FDFCFB] dark:bg-stone-950 font-sans tracking-tight antialiased flex justify-between items-center w-full px-6 h-16 border-b border-[#E5E1DE] dark:border-stone-800 flat no shadows sticky top-0 z-40">
+<button class="text-[#2E4D43] dark:text-emerald-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors p-2 -ml-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-xl font-semibold tracking-tighter text-[#2E4D43] dark:text-emerald-500 font-headline-md text-headline-md">Vereda</h1>
+<button class="text-[#2E4D43] dark:text-emerald-400 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors p-2 -mr-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto px-6 pt-6 pb-24 flex flex-col gap-8 max-w-[720px] mx-auto w-full relative">
+<!-- Sync Status Section -->
+<section class="flex items-center justify-between bg-surface-container-low border border-ui-border rounded-lg p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="sync_saved_locally">sync_saved_locally</span>
+<div>
+<h2 class="font-body-ui text-body-ui font-semibold text-on-surface">Sincronizado</h2>
+<p class="font-caption text-caption text-on-surface-variant">Última sync: Hoje, 14:32</p>
+</div>
+</div>
+<button class="font-label-caps text-label-caps text-primary-container border border-ui-border px-3 py-1.5 rounded hover:bg-surface-variant transition-colors">
+                Forçar Sync
+            </button>
+</section>
+<!-- Notas Recentes -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Notas Recentes</h2>
+<button class="text-primary-container p-1 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Note Card 1 -->
+<article class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-4">
+<p class="font-body-reading text-body-reading text-on-surface line-clamp-3">A ideia central do capítulo 4 precisa ser revista. O encontro na praça parece forçado. Tentar mover para o café.</p>
+<span class="material-symbols-outlined text-outline-variant shrink-0" data-icon="edit">edit</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center rounded bg-tertiary-container/10 px-2 py-0.5 font-label-caps text-label-caps text-tertiary-container border border-tertiary-container/20">O Livro do Desassossego</span>
+<span class="font-caption text-caption text-on-surface-variant ml-auto">10 min atrás</span>
+</div>
+</article>
+<!-- Note Card 2 -->
+<article class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-4">
+<p class="font-body-reading text-body-reading text-on-surface line-clamp-3">Lembrar de pesquisar sobre a flora típica do cerrado para a descrição da viagem de ônibus de Maria.</p>
+<span class="material-symbols-outlined text-outline-variant shrink-0" data-icon="edit">edit</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center rounded bg-accent-sage/20 px-2 py-0.5 font-label-caps text-label-caps text-primary border border-accent-sage/30">Pesquisa</span>
+<span class="font-caption text-caption text-on-surface-variant ml-auto">Ontem</span>
+</div>
+</article>
+<!-- Note Card 3 -->
+<article class="bg-surface-container-lowest border border-ui-border rounded-lg p-5 flex flex-col gap-3 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-4">
+<p class="font-body-reading text-body-reading text-on-surface line-clamp-3">"O silêncio na sala era tão denso que quase podia ser fatiado, servido em porções para os convidados inquietos."</p>
+<span class="material-symbols-outlined text-outline-variant shrink-0" data-icon="edit">edit</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center rounded bg-accent-sienna/10 px-2 py-0.5 font-label-caps text-label-caps text-accent-sienna border border-accent-sienna/20">Fragmentos</span>
+<span class="font-caption text-caption text-on-surface-variant ml-auto">22 Mai</span>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 bg-primary-container text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-primary-container/90 transition-transform active:scale-95 z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="bg-[#FDFCFB] dark:bg-stone-950 border-t border-[#E5E1DE] dark:border-stone-800 flat no shadows fixed bottom-0 left-0 w-full flex justify-around items-center bg-stone-50/80 backdrop-blur-md z-50">
+<!-- Escrita (Inactive) -->
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 pt-2 pb-3 hover:text-[#2E4D43] dark:hover:text-emerald-300 flex-1">
+<span class="material-symbols-outlined mb-1" data-icon="edit_note">edit_note</span>
+<span class="text-[11px] font-medium uppercase tracking-widest font-label-caps text-label-caps">Escrita</span>
+</button>
+<!-- Notas (Active) -->
+<button class="flex flex-col items-center justify-center text-[#2E4D43] dark:text-emerald-400 border-t-2 border-[#2E4D43] dark:border-emerald-500 pt-2 pb-3 flex-1 Active: scale-95 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="text-[11px] font-medium uppercase tracking-widest font-label-caps text-label-caps font-bold">Notas</span>
+</button>
+<!-- Acervo (Inactive) -->
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 pt-2 pb-3 hover:text-[#2E4D43] dark:hover:text-emerald-300 flex-1">
+<span class="material-symbols-outlined mb-1" data-icon="menu_book">menu_book</span>
+<span class="text-[11px] font-medium uppercase tracking-widest font-label-caps text-label-caps">Acervo</span>
+</button>
+<!-- Sync (Inactive) -->
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 pt-2 pb-3 hover:text-[#2E4D43] dark:hover:text-emerald-300 flex-1">
+<span class="material-symbols-outlined mb-1" data-icon="sync_alt">sync_alt</span>
+<span class="text-[11px] font-medium uppercase tracking-widest font-label-caps text-label-caps">Sync</span>
+</button>
+</nav>
+</body></html>

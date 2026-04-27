@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academia &amp; Estilo - Vereda</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f4f4f1",
+                        "secondary-fixed-dim": "#e7beae",
+                        "outline-variant": "#c1c8c4",
+                        "accent-sage": "#A3B18A",
+                        "ui-border": "#E5E1DE",
+                        "secondary": "#77574b",
+                        "primary-fixed-dim": "#accec1",
+                        "on-tertiary-container": "#dbaaa3",
+                        "on-secondary": "#ffffff",
+                        "surface": "#faf9f7",
+                        "inverse-primary": "#accec1",
+                        "accent-sienna": "#A0522D",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "surface-dim": "#dadad8",
+                        "tertiary": "#482824",
+                        "on-surface-variant": "#414845",
+                        "tertiary-fixed-dim": "#edbbb3",
+                        "surface-variant": "#e3e2e0",
+                        "surface-container-highest": "#e3e2e0",
+                        "primary": "#17362d",
+                        "tertiary-container": "#623e39",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#faf9f7",
+                        "on-primary-fixed": "#002018",
+                        "primary-container": "#2e4d43",
+                        "surface-container": "#eeeeec",
+                        "secondary-fixed": "#ffdbce",
+                        "accent-ochre": "#D4A373",
+                        "on-primary-fixed-variant": "#2e4d43",
+                        "secondary-container": "#ffd4c4",
+                        "on-secondary-fixed": "#2c160c",
+                        "surface-tint": "#45655a",
+                        "on-primary-container": "#9bbdb0",
+                        "inverse-surface": "#2f3130",
+                        "ink-black": "#1A1A1A",
+                        "surface-container-high": "#e8e8e6",
+                        "primary-fixed": "#c7eadc",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c1b",
+                        "inverse-on-surface": "#f1f1ef",
+                        "focus-mask": "rgba(253, 252, 251, 0.85)",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#faf9f7",
+                        "outline": "#727975",
+                        "on-secondary-container": "#7a594d",
+                        "on-tertiary-fixed": "#2f1310",
+                        "background-paper": "#FDFCFB",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-background": "#1a1c1b",
+                        "on-tertiary-fixed-variant": "#613d38",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "280px",
+                        "margin-page": "12vw",
+                        "gutter-ui": "24px",
+                        "focus-width": "720px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["inter"],
+                        "body-ui": ["inter"],
+                        "headline-md": ["inter"],
+                        "display-lg": ["notoSerif"],
+                        "body-reading": ["notoSerif"],
+                        "caption": ["inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-ui": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-reading": ["19px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background-paper text-on-background min-h-screen flex font-body-ui antialiased">
+<!-- SideNavBar -->
+<nav class="bg-[#FDFCFB] dark:bg-stone-950 h-full border-r border-[#E5E1DE] dark:border-stone-800 w-64 fixed inset-y-0 left-0 flex flex-col p-4 z-40 hidden md:flex">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<h1 class="text-2xl font-bold tracking-tighter text-[#2E4D43] dark:text-emerald-500">Vereda</h1>
+<p class="font-caption text-caption text-on-surface-variant">Papel e Tinta</p>
+</div>
+</div>
+<button class="mb-6 w-full py-2 px-4 bg-surface-container text-on-surface border border-ui-border rounded-DEFAULT font-label-caps text-label-caps hover:bg-stone-100 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Novo Manuscrito
+        </button>
+<ul class="space-y-1 flex-1 font-inter text-sm tracking-tight antialiased">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-[#2E4D43]/70 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 rounded-sm transition-colors" href="#">
+<span class="material-symbols-outlined">edit_note</span> Escrita
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 bg-[#2E4D43] text-[#FDFCFB] rounded-sm font-semibold transition-all" href="#">
+<span class="material-symbols-outlined">school</span> Academia
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-[#2E4D43]/70 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 rounded-sm transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span> Análise
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-[#2E4D43]/70 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 rounded-sm transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span> Mentoria
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-[#2E4D43]/70 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 rounded-sm transition-colors" href="#">
+<span class="material-symbols-outlined">local_library</span> Biblioteca
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-4 border-t border-[#E5E1DE]">
+<a class="flex items-center gap-3 px-4 py-2 text-[#2E4D43]/70 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 rounded-sm transition-colors font-inter text-sm tracking-tight antialiased" href="#">
+<span class="material-symbols-outlined">settings</span> Configurações
+            </a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-[#FDFCFB]/80 backdrop-blur-md dark:bg-stone-950/80 border-b border-[#E5E1DE] dark:border-stone-800 w-full top-0 left-0 fixed right-0 md:left-64 h-16 flex items-center justify-between px-8 z-30 hidden md:flex">
+<nav class="flex gap-6 font-inter text-sm font-medium uppercase tracking-widest">
+<a class="text-[#2E4D43] border-b-2 border-[#2E4D43] pb-1" href="#">Módulos</a>
+<a class="text-[#2E4D43]/60 dark:text-stone-500 hover:text-[#2E4D43] hover:opacity-80 transition-opacity" href="#">Metas</a>
+<a class="text-[#2E4D43]/60 dark:text-stone-500 hover:text-[#2E4D43] hover:opacity-80 transition-opacity" href="#">Progresso</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-[#2E4D43] dark:text-emerald-500">
+<button class="hover:opacity-80 transition-opacity click:scale-95 transition-transform"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:opacity-80 transition-opacity click:scale-95 transition-transform"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+<button class="bg-primary-container text-on-primary font-label-caps text-label-caps px-4 py-2 rounded-DEFAULT hover:opacity-90 transition-opacity">Publicar</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full md:pl-64 pt-16 md:pt-24 px-4 md:px-margin-page pb-24 overflow-y-auto">
+<div class="max-w-focus-width mx-auto">
+<!-- Header -->
+<header class="mb-12 border-b border-ui-border pb-6">
+<h1 class="font-display-lg text-display-lg text-ink-black mb-2">Academia &amp; Estilo</h1>
+<p class="font-body-reading text-body-reading text-on-surface-variant">Aprimore sua Voz Autoral.</p>
+</header>
+<!-- Academia Vereda Section -->
+<section class="mb-16">
+<h2 class="font-headline-md text-headline-md text-primary-container mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">school</span> Academia Vereda
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Course Card 1 -->
+<article class="border border-ui-border rounded-DEFAULT p-5 hover:bg-surface transition-colors cursor-pointer group">
+<div class="w-full h-32 bg-surface-container-low mb-4 flex items-center justify-center rounded-sm overflow-hidden">
+<img alt="Arquitetura do Suspense" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="close up of an old typewriter with a blank sheet of paper in a dimly lit study with warm light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD775DOYI2ipMrkPyqhHrheGEkuT18FuOdZDfY-SUD3mKld_VHKgChwDAbtdPux5KbFFlYmIPitl3oOyRlKHOPeJQFjXViyMetUbNzDxfJ0GnXl9_qclYPVSilHRZqTfMb6c2y-X2qLYt47EO5e97xISwxdqBwgoHrtxSdSVzLy8Fy8fvCrUzjWnlkYehksvni3DU39jMDMPXiH4lNM_nCXQoeIkgc5T2WdiKVz35NzSXzRKLh1U1KD01HgzJmxIDFgB5m7GFyVuG4"/>
+</div>
+<span class="inline-block px-2 py-1 bg-surface-container text-accent-sienna font-label-caps text-[10px] rounded-sm mb-2">Estrutura</span>
+<h3 class="font-body-ui text-body-ui font-semibold text-ink-black mb-1">Arquitetura do Suspense</h3>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">Construindo tensão através do ritmo narrativo e revelações controladas.</p>
+</article>
+<!-- Course Card 2 -->
+<article class="border border-ui-border rounded-DEFAULT p-5 hover:bg-surface transition-colors cursor-pointer group">
+<div class="w-full h-32 bg-surface-container-low mb-4 flex items-center justify-center rounded-sm overflow-hidden">
+<img alt="O Ritmo na Prosa" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="abstract close up of rippling water with soft light reflecting off the surface creating rhythmic patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD58EGSmb0pHVva4Kq7zLFfwCpP4XyDHbn35X1fhLXVv2_ljy0uPEWuipgo2iSLUpEpyJDWbHz374F_X1-dNR8T-zY7HXeTF6GsGYNzZysMixHWs905N9p76LEmoHlwpC4qitk1FO8cyMTt6RQ6ucJ6hqPIbM9lTLe10FAxzbk1FZvnZw38Xx5Eqm3nVxUFqnlwkr6ApyzibkByR4gFxVBXvkV22KN4HD-NUbE6IYmjlIFhesUbEz1IRYSyscJFbUN8a1vbK3uwWfA"/>
+</div>
+<span class="inline-block px-2 py-1 bg-surface-container text-accent-sage font-label-caps text-[10px] rounded-sm mb-2">Estilística</span>
+<h3 class="font-body-ui text-body-ui font-semibold text-ink-black mb-1">O Ritmo na Prosa Brasileira</h3>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">Análise da cadência e musicalidade na construção de parágrafos.</p>
+</article>
+<!-- Course Card 3 -->
+<article class="border border-ui-border rounded-DEFAULT p-5 hover:bg-surface transition-colors cursor-pointer group">
+<div class="w-full h-32 bg-surface-container-low mb-4 flex items-center justify-center rounded-sm overflow-hidden">
+<img alt="Diálogos Orgânicos" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="two people having a conversation sitting on a bench in a quiet park with soft autumn sunlight filtering through trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8mjSukoxxUy2LJ-KS-ceeKMeG-1rrsnnozHLOtl9C2tPlGX03yQS14yb23gKSqL84lUsvfQi2t-PX-kH7RZ3I6ufUzDFCi3zpd9LmoEO300ZwEHAdxVvogNoHfrfEcmYZS4uK_YMwqSSpkjWMhhJ7yyaWewICz9D6ZdxuHt8rgnxG-v4MPjNzrZh6YXrBbDf8S4PX9JT96nv2WZn53AyyykHBfi0hYCR9UO1IHMkOIqZSePtqoYLvbZwW0awL87Lye5IvjhCHyek"/>
+</div>
+<span class="inline-block px-2 py-1 bg-surface-container text-accent-ochre font-label-caps text-[10px] rounded-sm mb-2">Personagens</span>
+<h3 class="font-body-ui text-body-ui font-semibold text-ink-black mb-1">Diálogos Orgânicos</h3>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">Criando vozes distintas e interações que movem a trama naturalmente.</p>
+</article>
+</div>
+</section>
+<!-- Espelho Literário Section -->
+<section class="mb-16">
+<h2 class="font-headline-md text-headline-md text-primary-container mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">compare_arrows</span> Espelho Literário
+                </h2>
+<div class="border border-ui-border rounded-DEFAULT p-8 bg-surface-bright relative">
+<p class="font-body-reading text-body-reading text-on-surface mb-8">Análise comparativa: <span class="italic font-semibold">O Som da Terra Seca</span> vs. Mestres.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Chart Area -->
+<div class="flex flex-col items-center justify-center relative h-64 border border-surface-container-high rounded-sm p-4 bg-surface-container-lowest">
+<!-- Placeholder for a simple bar chart mimicking the requested metrics -->
+<div class="w-full h-full flex items-end justify-around gap-2 pb-6 px-4">
+<div class="w-8 bg-primary-container/80 h-3/4 rounded-t-sm" title="Densidade Adjetival"></div>
+<div class="w-8 bg-accent-sage/60 h-1/2 rounded-t-sm" title="Densidade Adjetival (Machado)"></div>
+<div class="w-8 bg-primary-container/80 h-1/2 rounded-t-sm ml-4" title="Complexidade de Frase"></div>
+<div class="w-8 bg-accent-sienna/60 h-full rounded-t-sm" title="Complexidade de Frase (Rosa)"></div>
+<div class="w-8 bg-primary-container/80 h-2/3 rounded-t-sm ml-4" title="Lirismo"></div>
+<div class="w-8 bg-accent-ochre/60 h-3/4 rounded-t-sm" title="Lirismo (Média Ouro)"></div>
+</div>
+<div class="absolute bottom-2 left-0 w-full flex justify-around font-label-caps text-[10px] text-outline">
+<span>Adjetivação</span>
+<span>Complexidade</span>
+<span>Lirismo</span>
+</div>
+</div>
+<!-- Metrics Details -->
+<div class="space-y-6">
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-2 border-b border-ui-border pb-1">Densidade Adjetival</h4>
+<p class="font-body-ui text-sm text-ink-black"><span class="font-semibold text-primary-container">Seu Manuscrito:</span> 12% (Moderado)</p>
+<p class="font-caption text-caption text-outline">Comparativo: Machado (8%), Rosa (15%)</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-2 border-b border-ui-border pb-1">Complexidade de Frase</h4>
+<p class="font-body-ui text-sm text-ink-black"><span class="font-semibold text-primary-container">Seu Manuscrito:</span> Média de 18 palavras/frase</p>
+<p class="font-caption text-caption text-outline">Comparativo: Machado (14 p/f), Rosa (22 p/f)</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-2 border-b border-ui-border pb-1">Lirismo (Metáforas/Pg)</h4>
+<p class="font-body-ui text-sm text-ink-black"><span class="font-semibold text-primary-container">Seu Manuscrito:</span> 3.2</p>
+<p class="font-caption text-caption text-outline">Comparativo: Machado (1.5), Rosa (5.8)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Mentor Vereda (Chat Beta) Floating Panel -->
+<aside class="fixed bottom-6 right-6 w-80 bg-background-paper border border-ui-border shadow-sm rounded-DEFAULT flex flex-col overflow-hidden z-50">
+<header class="bg-surface-container-low px-4 py-3 border-b border-ui-border flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">chat</span> Mentor Vereda <span class="bg-surface-variant text-[9px] px-1 rounded-sm ml-1">BETA</span>
+</h3>
+<button class="text-outline hover:text-ink-black transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</header>
+<div class="p-4 space-y-4 max-h-64 overflow-y-auto font-body-ui text-sm bg-surface-bright">
+<div class="flex gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-container/10 flex-shrink-0 flex items-center justify-center text-primary-container text-xs">V</div>
+<div class="bg-surface-container-lowest border border-ui-border p-3 rounded-DEFAULT rounded-tl-none">
+<p class="text-on-surface">Notei que o ritmo no Capítulo 3 está um pouco arrastado. As frases longas consecutivas diminuem a tensão da cena.</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-container/10 flex-shrink-0 flex items-center justify-center text-primary-container text-xs">V</div>
+<div class="bg-surface-container-lowest border border-ui-border p-3 rounded-DEFAULT rounded-tl-none">
+<p class="text-on-surface">Quer ajuda para reestruturar os parágrafos focando em variação de cadência?</p>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-ui-border bg-surface-container-low">
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container border border-ui-border text-on-surface font-caption text-xs py-2 rounded-sm hover:bg-surface-variant transition-colors">Sim, analisar</button>
+<button class="flex-1 bg-surface-container border border-ui-border text-on-surface font-caption text-xs py-2 rounded-sm hover:bg-surface-variant transition-colors">Agora não</button>
+</div>
+</div>
+</aside>
+</body></html>

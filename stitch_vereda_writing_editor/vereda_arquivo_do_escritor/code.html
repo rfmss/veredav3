@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arquivo do Escritor - Vereda</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#faf9f7",
+                      "tertiary": "#482824",
+                      "on-primary-fixed-variant": "#2e4d43",
+                      "surface-container-low": "#f4f4f1",
+                      "surface-container-high": "#e8e8e6",
+                      "primary-fixed": "#c7eadc",
+                      "background-paper": "#FDFCFB",
+                      "error": "#ba1a1a",
+                      "accent-sage": "#A3B18A",
+                      "on-secondary-fixed": "#2c160c",
+                      "on-primary": "#ffffff",
+                      "primary": "#17362d",
+                      "surface-tint": "#45655a",
+                      "primary-fixed-dim": "#accec1",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#7a594d",
+                      "on-background": "#1a1c1b",
+                      "ink-black": "#1A1A1A",
+                      "secondary-container": "#ffd4c4",
+                      "tertiary-container": "#623e39",
+                      "focus-mask": "rgba(253, 252, 251, 0.85)",
+                      "on-primary-container": "#9bbdb0",
+                      "inverse-primary": "#accec1",
+                      "secondary-fixed-dim": "#e7beae",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#5d4034",
+                      "tertiary-fixed-dim": "#edbbb3",
+                      "on-tertiary-fixed-variant": "#613d38",
+                      "surface": "#faf9f7",
+                      "on-surface": "#1a1c1b",
+                      "surface-container-highest": "#e3e2e0",
+                      "secondary-fixed": "#ffdbce",
+                      "on-surface-variant": "#414845",
+                      "on-error-container": "#93000a",
+                      "ui-border": "#E5E1DE",
+                      "accent-sienna": "#A0522D",
+                      "outline": "#727975",
+                      "surface-container": "#eeeeec",
+                      "on-tertiary-container": "#dbaaa3",
+                      "background": "#faf9f7",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#c1c8c4",
+                      "inverse-surface": "#2f3130",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#2f1310",
+                      "primary-container": "#2e4d43",
+                      "surface-variant": "#e3e2e0",
+                      "surface-dim": "#dadad8",
+                      "accent-ochre": "#D4A373",
+                      "secondary": "#77574b",
+                      "tertiary-fixed": "#ffdad5",
+                      "inverse-on-surface": "#f1f1ef",
+                      "on-primary-fixed": "#002018"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-page": "12vw",
+                      "focus-width": "720px",
+                      "unit": "4px",
+                      "sidebar-width": "280px",
+                      "gutter-ui": "24px"
+              },
+              "fontFamily": {
+                      "caption": ["Inter", "sans-serif"],
+                      "body-reading": ["Noto Serif", "serif"],
+                      "headline-md": ["Inter", "sans-serif"],
+                      "label-caps": ["Inter", "sans-serif"],
+                      "body-ui": ["Inter", "sans-serif"],
+                      "display-lg": ["Noto Serif", "serif"]
+              },
+              "fontSize": {
+                      "caption": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "body-reading": ["19px", {"lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-ui": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: #FDFCFB; }
+    </style>
+</head>
+<body class="font-body-ui text-on-background flex min-h-screen">
+<!-- SideNavBar Component -->
+<nav class="hidden md:flex flex-col h-screen left-0 border-r w-sidebar-width bg-surface-bright border-ui-border p-4 gap-2 shrink-0 sticky top-0">
+<div class="mb-8 px-4 mt-4">
+<h1 class="text-xl font-black text-primary-container italic font-display-lg">Vereda</h1>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Arquivo do Escritor</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-body-ui text-body-ui py-3 px-4 rounded-lg flex items-center justify-center gap-2 mb-6 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_document</span>
+            Escrever Agora
+        </button>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-surface-container-high text-primary-container font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                Projetos
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+                Personagens
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+                Cenários
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                Pesquisa
+            </a>
+</div>
+<div class="mt-auto border-t border-ui-border pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Configurações
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined">archive</span>
+                Arquivo
+            </a>
+<div class="flex items-center gap-3 px-4 py-3 mt-2">
+<img alt="Avatar do Autor" class="w-8 h-8 rounded-full border border-ui-border grayscale" data-alt="Portrait of a thoughtful male writer with glasses in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz5dRQfN3b8K4XWPWNIOvUXT0xl8a3M3ezUwiYPz7idn0zfCGSS_odyJhUCeCqnNs5zLjlqewmwiodmM-0Jmk60P1QJi01tdo8g7gn6OLelS8OBSk5ayFxNdB1dGAbwKYEecQwD7QH9scT2XvD26SsWN9G7nhOGy2SVvHATLCjzQaxkpus_xGhHMAa9_KqJa3x9Rl5Vroxr87ky5EgHvq5cetv6hGKfEZup7kK9yC5kmqDmr8hW4CZou_8ddtI-Obp4-PRpnhX0bY"/>
+<span class="font-caption text-caption text-on-surface-variant">Autor Vereda</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar (Mobile/Responsive fallback context) -->
+<header class="md:hidden flex justify-between items-center w-full px-6 py-4 border-b border-ui-border bg-background-paper sticky top-0 z-10">
+<h1 class="text-lg font-bold text-primary-container italic font-display-lg">Vereda</h1>
+<div class="flex items-center gap-4 text-primary-container">
+<span class="material-symbols-outlined cursor-pointer">notifications</span>
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+</div>
+</header>
+<!-- Page Content -->
+<div class="max-w-[1200px] mx-auto w-full px-6 lg:px-12 py-10">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-ink-black mb-2">Arquivo</h2>
+<p class="font-body-reading text-body-reading text-on-surface-variant max-w-2xl">Suas narrativas em progresso, organizadas como cadernos sobre a mesa.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-lg border border-ui-border shrink-0 h-fit">
+<button class="flex items-center gap-2 px-4 py-2 bg-background-paper rounded text-primary-container shadow-sm font-caption text-caption">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+                        Grade
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant rounded hover:text-primary-container font-caption text-caption transition-colors">
+<span class="material-symbols-outlined text-sm">account_tree</span>
+                        Árvore
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16 auto-rows-[240px]">
+<!-- Main Project Card (Large) -->
+<a class="col-span-1 md:col-span-2 lg:col-span-2 row-span-1 group relative overflow-hidden rounded-xl border border-ui-border bg-surface-bright hover:border-primary-container transition-all duration-300 p-6 flex flex-col justify-between" href="#">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-bright to-surface-container-low opacity-50 z-0"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-surface-container text-accent-sienna font-label-caps text-label-caps rounded-full">Romance em Andamento</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary-container transition-colors">more_horiz</span>
+</div>
+<h3 class="font-display-lg text-headline-md text-ink-black mb-2 group-hover:text-primary-container transition-colors">O Som da Terra Seca</h3>
+<p class="font-body-reading text-caption text-on-surface-variant line-clamp-2">A saga de uma família sertaneja enfrentando a maior seca do século, entrelaçada com misticismo local.</p>
+</div>
+<div class="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-ui-border">
+<div class="flex items-center gap-2 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+<span>Última edição há 2h</span>
+</div>
+<span class="text-primary-container font-caption text-caption font-medium">Capítulo 12</span>
+</div>
+</a>
+<!-- Collection Card -->
+<a class="col-span-1 row-span-1 group rounded-xl border border-ui-border bg-background-paper hover:bg-surface-bright hover:border-primary-container transition-all duration-300 p-6 flex flex-col justify-between relative overflow-hidden" href="#">
+<div class="absolute top-0 right-0 w-24 h-24 bg-accent-sage opacity-5 rounded-bl-full z-0"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-surface-container text-accent-sage font-label-caps text-label-caps rounded-full">Antologia</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary-container transition-colors">more_horiz</span>
+</div>
+<h3 class="font-display-lg text-headline-md text-ink-black mb-2 group-hover:text-primary-container transition-colors text-xl">Veredas de Ontem</h3>
+<p class="font-body-reading text-caption text-on-surface-variant">Coleção de 15 contos curtos.</p>
+</div>
+<div class="relative z-10 flex items-center gap-2 text-on-surface-variant font-caption text-caption mt-4">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>8/15 concluídos</span>
+</div>
+</a>
+<!-- Resource Card - Characters -->
+<a class="col-span-1 row-span-1 group rounded-xl border border-ui-border bg-[#F8F5F2] hover:border-accent-ochre transition-all duration-300 p-6 flex flex-col justify-center items-center text-center relative overflow-hidden" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-4 text-accent-ochre group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">group</span>
+</div>
+<h3 class="font-headline-md text-body-ui text-ink-black mb-1">Fichas de Personagem</h3>
+<p class="font-caption text-caption text-on-surface-variant">42 perfis detalhados</p>
+</a>
+<!-- Resource Card - Settings -->
+<a class="col-span-1 md:col-span-2 lg:col-span-1 row-span-1 group rounded-xl border border-ui-border bg-[#F4F6F5] hover:border-primary-fixed-dim transition-all duration-300 p-6 flex flex-col justify-center items-center text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-4 text-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">landscape</span>
+</div>
+<h3 class="font-headline-md text-body-ui text-ink-black mb-1">Cenários do Sertão</h3>
+<p class="font-caption text-caption text-on-surface-variant">Mapas e descrições geográficas</p>
+</a>
+<!-- Create New Action -->
+<button class="col-span-1 row-span-1 rounded-xl border border-dashed border-outline-variant bg-transparent hover:bg-surface-bright hover:border-primary-container transition-all duration-300 p-6 flex flex-col justify-center items-center text-center text-on-surface-variant hover:text-primary-container">
+<span class="material-symbols-outlined text-3xl mb-2">add_circle</span>
+<span class="font-headline-md text-body-ui">Novo Caderno</span>
+</button>
+</div>
+<!-- Templates Section -->
+<div class="mt-20">
+<div class="flex items-center gap-4 mb-8">
+<h3 class="font-display-lg text-headline-md text-ink-black">Ponto de Partida</h3>
+<div class="h-px bg-ui-border flex-1"></div>
+</div>
+<p class="font-body-reading text-body-ui text-on-surface-variant mb-6 max-w-2xl">Estruturas preparadas para guiar seu fluxo de pensamento, moldadas para diferentes formatos literários.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Template 1 -->
+<div class="p-6 rounded-xl border border-ui-border bg-background-paper hover:shadow-sm transition-shadow">
+<div class="flex items-center gap-3 mb-4 text-primary-container">
+<span class="material-symbols-outlined">auto_stories</span>
+<h4 class="font-headline-md text-body-ui text-ink-black">Romance Estruturado</h4>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mb-6">Modelo clássico com divisão em atos, fichas de arco de personagem integradas e linha do tempo cronológica.</p>
+<button class="text-primary-container font-caption text-caption font-medium hover:underline flex items-center gap-1">
+                            Usar modelo <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Template 2 -->
+<div class="p-6 rounded-xl border border-ui-border bg-background-paper hover:shadow-sm transition-shadow">
+<div class="flex items-center gap-3 mb-4 text-accent-sienna">
+<span class="material-symbols-outlined">short_text</span>
+<h4 class="font-headline-md text-body-ui text-ink-black">Conto Focado</h4>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mb-6">Ambiente minimalista focado em um único conflito, com ferramentas para lapidação de clímax e ritmo.</p>
+<button class="text-primary-container font-caption text-caption font-medium hover:underline flex items-center gap-1">
+                            Usar modelo <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Template 3 -->
+<div class="p-6 rounded-xl border border-ui-border bg-background-paper hover:shadow-sm transition-shadow">
+<div class="flex items-center gap-3 mb-4 text-accent-sage">
+<span class="material-symbols-outlined">format_quote</span>
+<h4 class="font-headline-md text-body-ui text-ink-black">Caderno de Poesia</h4>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mb-6">Páginas livres de interferência, com grade tipográfica flexível para experimentação visual e métrica.</p>
+<button class="text-primary-container font-caption text-caption font-medium hover:underline flex items-center gap-1">
+                            Usar modelo <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="antialiased" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lançamento &amp; Mercado - Vereda</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e3e2e0",
+                      "tertiary-fixed": "#ffdad5",
+                      "secondary-container": "#ffd4c4",
+                      "inverse-on-surface": "#f1f1ef",
+                      "surface-container-high": "#e8e8e6",
+                      "tertiary": "#482824",
+                      "inverse-surface": "#2f3130",
+                      "primary-fixed": "#c7eadc",
+                      "inverse-primary": "#accec1",
+                      "accent-sage": "#A3B18A",
+                      "tertiary-fixed-dim": "#edbbb3",
+                      "outline-variant": "#c1c8c4",
+                      "on-tertiary-container": "#dbaaa3",
+                      "error": "#ba1a1a",
+                      "accent-ochre": "#D4A373",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#002018",
+                      "background": "#faf9f7",
+                      "surface": "#faf9f7",
+                      "surface-container-highest": "#e3e2e0",
+                      "on-secondary-container": "#7a594d",
+                      "surface-dim": "#dadad8",
+                      "outline": "#727975",
+                      "on-tertiary-fixed": "#2f1310",
+                      "on-secondary-fixed": "#2c160c",
+                      "on-background": "#1a1c1b",
+                      "secondary": "#77574b",
+                      "background-paper": "#FDFCFB",
+                      "secondary-fixed": "#ffdbce",
+                      "on-secondary-fixed-variant": "#5d4034",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#2e4d43",
+                      "primary-fixed-dim": "#accec1",
+                      "tertiary-container": "#623e39",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#2e4d43",
+                      "on-error": "#ffffff",
+                      "surface-container": "#eeeeec",
+                      "focus-mask": "rgba(253, 252, 251, 0.85)",
+                      "on-surface": "#1a1c1b",
+                      "secondary-fixed-dim": "#e7beae",
+                      "primary": "#17362d",
+                      "ink-black": "#1A1A1A",
+                      "surface-bright": "#faf9f7",
+                      "on-surface-variant": "#414845",
+                      "on-primary-container": "#9bbdb0",
+                      "surface-tint": "#45655a",
+                      "surface-container-lowest": "#ffffff",
+                      "accent-sienna": "#A0522D",
+                      "ui-border": "#E5E1DE",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f4f4f1",
+                      "on-tertiary-fixed-variant": "#613d38"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter-ui": "24px",
+                      "sidebar-width": "280px",
+                      "margin-page": "12vw",
+                      "focus-width": "720px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "inter"
+                      ],
+                      "headline-md": [
+                              "inter"
+                      ],
+                      "caption": [
+                              "inter"
+                      ],
+                      "body-ui": [
+                              "inter"
+                      ],
+                      "display-lg": [
+                              "notoSerif"
+                      ],
+                      "body-reading": [
+                              "notoSerif"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-ui": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-reading": [
+                              "19px",
+                              {
+                                      "lineHeight": "1.7",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background-paper text-on-surface font-body-reading text-body-reading min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full z-50 flex flex-col p-4 bg-[#F9F7F2] dark:bg-stone-950 border-r border-stone-200 dark:border-stone-800 w-64">
+<div class="mb-8 px-4 mt-4">
+<h1 class="text-lg font-bold tracking-tighter text-[#2E4D43] dark:text-emerald-400 font-headline-md text-headline-md">Papel e Tinta</h1>
+<p class="text-on-surface-variant font-caption text-caption">Escritório do Autor</p>
+</div>
+<div class="flex-grow flex flex-col gap-unit">
+<a class="flex items-center gap-3 px-4 py-2 rounded text-stone-500 dark:text-stone-400 hover:text-[#2E4D43] dark:hover:text-emerald-300 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-200 scale-98 active:opacity-80 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+                Projetos
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-stone-500 dark:text-stone-400 hover:text-[#2E4D43] dark:hover:text-emerald-300 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-200 scale-98 active:opacity-80 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">local_library</span>
+                Biblioteca
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-stone-500 dark:text-stone-400 hover:text-[#2E4D43] dark:hover:text-emerald-300 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-200 scale-98 active:opacity-80 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+                Analítica
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-[#2E4D43] dark:text-emerald-400 font-semibold bg-stone-100 dark:bg-stone-900 border-r-4 border-[#2E4D43] dark:border-emerald-500 scale-98 active:opacity-80 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+                Mercado
+            </a>
+</div>
+<button class="w-full mt-4 bg-primary-container text-on-primary font-body-ui text-body-ui font-medium py-2 px-4 rounded hover:bg-opacity-90 transition-opacity">
+            Novo Manuscrito
+        </button>
+<div class="mt-8 flex flex-col gap-unit pt-4 border-t border-stone-200 dark:border-stone-800">
+<a class="flex items-center gap-3 px-4 py-2 rounded text-stone-500 dark:text-stone-400 hover:text-[#2E4D43] dark:hover:text-emerald-300 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-200 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Configurações
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-stone-500 dark:text-stone-400 hover:text-[#2E4D43] dark:hover:text-emerald-300 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-200 font-body-ui text-body-ui" href="#">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+                Suporte
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="ml-64 flex-grow flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-8 w-full h-16 sticky top-0 bg-[#F9F7F2]/80 backdrop-blur-md dark:bg-stone-950/80 border-b border-stone-200 dark:border-stone-800 z-40">
+<h2 class="text-xl font-black text-[#2E4D43] dark:text-emerald-400 font-headline-md text-headline-md">Marketing &amp; Estratégia</h2>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-stone-400 dark:text-stone-500">
+<span class="material-symbols-outlined hover:text-[#2E4D43] dark:hover:text-emerald-300 transition-colors cursor-pointer active:scale-95">notifications</span>
+<span class="material-symbols-outlined hover:text-[#2E4D43] dark:hover:text-emerald-300 transition-colors cursor-pointer active:scale-95">history_edu</span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center border border-ui-border">
+<img alt="Avatar do Escritor" class="w-full h-full object-cover" data-alt="close up portrait of young brazilian woman writer with glasses soft warm light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK1HkluEwifEgPJALrhgN3dvGPJgwhkI56mHectvfDYf58u-49mPSqz3KtAIe4MXLwZzPrJRq72dYjCMDrbC7_DYKxPzzHrRPls_HVYqEsZ4qPCFPj2C8FeN1s1j_J9--emQbPYQq7eYuOEYAm_vWNEdWOoMHPIrOE8X3CYgje9JwNgZbl94wrJ5714dXvqJAyazrw7twVG_AZqKTBp-AESLx0KGfYT7L0EQWL09DJupNnrKhGB-Z6BnKFv_0XYYN1w6Rd_9pvICw"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-grow p-12 max-w-[1200px] mx-auto w-full flex flex-col gap-12">
+<!-- Section 1: Análise de Corpus -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-surface p-8 border border-ui-border rounded-DEFAULT">
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">radar</span>
+                        Análise de Corpus: Voz Autoral
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-6">
+<div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mb-2">
+<span>DENSIDADE ADJETIVAL</span>
+<span>78%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[78%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mb-2">
+<span>COMPLEXIDADE SINTÁTICA</span>
+<span>62%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-accent-sage w-[62%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mb-2">
+<span>LIRISMO</span>
+<span>85%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-accent-sienna w-[85%]"></div>
+</div>
+</div>
+</div>
+<div class="border-l border-ui-border pl-8 flex flex-col justify-center">
+<p class="font-body-reading text-body-reading text-on-surface mb-4">
+                                Sua prosa recente apresenta uma inclinação forte ao descritivo poético, ideal para narrativas de ritmo cadenciado.
+                            </p>
+<button class="self-start text-primary-container font-label-caps text-label-caps border border-primary-container px-4 py-2 rounded hover:bg-primary-container hover:text-on-primary transition-colors">
+                                VER RELATÓRIO COMPLETO
+                            </button>
+</div>
+</div>
+</div>
+<!-- Section 2: Personas Leitoras -->
+<div class="flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-ochre">groups</span>
+                        Personas Leitoras
+                    </h3>
+<div class="bg-surface p-5 border border-ui-border border-l-4 border-l-accent-sienna rounded-DEFAULT">
+<h4 class="font-body-ui text-body-ui font-semibold text-primary mb-1">O Acadêmico Curioso</h4>
+<p class="font-caption text-caption text-on-surface-variant mb-3">Busca profundidade histórica e rigor estético.</p>
+<div class="flex gap-2">
+<span class="bg-surface-variant text-on-surface px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider">Ensaio</span>
+<span class="bg-surface-variant text-on-surface px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider">Histórico</span>
+</div>
+</div>
+<div class="bg-surface p-5 border border-ui-border border-l-4 border-l-accent-sage rounded-DEFAULT">
+<h4 class="font-body-ui text-body-ui font-semibold text-primary mb-1">O Jovem Explorador do Cerrado</h4>
+<p class="font-caption text-caption text-on-surface-variant mb-3">Valoriza narrativas de formação e realismo mágico regional.</p>
+<div class="flex gap-2">
+<span class="bg-surface-variant text-on-surface px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider">Ficção</span>
+<span class="bg-surface-variant text-on-surface px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider">Fantasia</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Neuromarketing & Redes -->
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">share</span>
+                    Neuromarketing &amp; Redes (Soberania Digital)
+                </h3>
+<div class="relative pl-6 border-l border-ui-border ml-4 flex flex-col gap-8">
+<!-- Timeline Item 1 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-1 w-4 h-4 bg-background-paper border-2 border-primary-container rounded-full z-10"></div>
+<h4 class="font-body-ui text-body-ui font-bold text-primary mb-1">Fase de Mistério (Pré-lançamento)</h4>
+<p class="font-body-reading text-[16px] leading-[1.6] text-on-surface-variant mb-3">
+                            Semeadura de citações anônimas no Mastodon e microblogs independentes. Evitar algoritmos de compressão de alcance.
+                        </p>
+<span class="inline-block bg-primary-container/10 text-primary-container font-label-caps text-[10px] px-2 py-1 rounded">EM ANDAMENTO</span>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-1 w-4 h-4 bg-surface-variant border-2 border-ui-border rounded-full z-10"></div>
+<h4 class="font-body-ui text-body-ui font-bold text-on-surface-variant mb-1">Revelação do Título &amp; Capa</h4>
+<p class="font-body-reading text-[16px] leading-[1.6] text-on-surface-variant/80">
+                            Envio da primeira newsletter 'Tinta Fresca' via infraestrutura própria. Foco em exclusividade para leitores fiéis.
+                        </p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-1 w-4 h-4 bg-surface-variant border-2 border-ui-border rounded-full z-10"></div>
+<h4 class="font-body-ui text-body-ui font-bold text-on-surface-variant mb-1">Engajamento com Leitores Beta</h4>
+<p class="font-body-reading text-[16px] leading-[1.6] text-on-surface-variant/80">
+                            Abertura de fórum privado hospedado no próprio servidor para discussão de capítulos preliminares.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Section 4: Trilha de Publicação -->
+<section class="mb-16">
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">route</span>
+                    Trilha de Publicação
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Caminho Tradicional -->
+<div class="border border-ui-border p-6 rounded-DEFAULT hover:border-primary-container/50 transition-colors cursor-pointer bg-surface/50">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant">account_balance</span>
+<span class="text-xs font-label-caps text-on-surface-variant">4-8 MESES</span>
+</div>
+<h4 class="font-body-ui text-body-ui font-bold text-primary mb-2">Caminho Tradicional</h4>
+<p class="font-caption text-caption text-on-surface-variant mb-4">
+                            Submissão para grandes editoras. Maior distribuição física, menor controle autoral e royalties reduzidos.
+                        </p>
+<div class="h-1 w-full bg-surface-variant mt-auto"></div>
+</div>
+<!-- Autopublicação Soberana -->
+<div class="border-2 border-primary-container p-6 rounded-DEFAULT bg-primary-container/5 cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary-container text-on-primary text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-bl">Recomendado</div>
+<div class="flex items-center justify-between mb-4 mt-2">
+<span class="material-symbols-outlined text-2xl text-primary-container">print</span>
+<span class="text-xs font-label-caps text-primary-container">IMEDIATO</span>
+</div>
+<h4 class="font-body-ui text-body-ui font-bold text-primary mb-2">Autopublicação Soberana</h4>
+<p class="font-caption text-caption text-on-surface-variant mb-4">
+                            Vendas diretas via site próprio, Print-on-Demand (PoD) regional e e-books sem DRM. 100% de autonomia e dados.
+                        </p>
+<div class="h-1 w-full bg-surface-variant mt-auto relative">
+<div class="absolute top-0 left-0 h-full bg-primary-container w-[45%]"></div>
+</div>
+<p class="font-caption text-[11px] text-on-surface-variant mt-2 text-right">Preparo estrutural: 45%</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>
