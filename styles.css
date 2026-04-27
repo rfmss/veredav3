@@ -607,6 +607,33 @@ mark {
   font-size: 27px;
 }
 
+.proof-session-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 16px;
+}
+
+.proof-session-bar div {
+  display: grid;
+  gap: 5px;
+}
+
+.proof-session-bar span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.proof-session-bar strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
 .proof-actions {
   display: flex;
   align-items: center;
@@ -1079,6 +1106,11 @@ mark {
   }
 
   .proof-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .proof-session-bar {
     align-items: flex-start;
     flex-direction: column;
   }

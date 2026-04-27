@@ -379,3 +379,36 @@ Próximas etapas sugeridas:
 - Melhorar a Prova de Escrita com sessões nomeadas por data e timestamp com segundos.
 - Criar `template-engine.js` com templates locais por gênero/ofício.
 - Separar e expandir o léxico local da Biblioteca Gramatical.
+
+## 2026-04-27 - Prova de Escrita com sessões
+
+Decidimos evoluir a Prova de Escrita Humana para trabalhar com sessões nomeadas.
+
+Antes, cada manuscrito tinha um registro contínuo de eventos. Agora, cada manuscrito passa a guardar um conjunto de sessões locais, com sessão ativa, nome legível, data, hora, minutos e segundos. O motor continua separado em `proof-engine.js`; o `app.js` apenas cria a sessão, registra eventos do editor, renderiza a tela e exporta o documento.
+
+Estrutura atual:
+
+- Cada manuscrito tem um registro de prova com `activeSessionId` e `sessions`.
+- Cada sessão tem `id`, `name`, `startedAt`, `updatedAt`, `lastEventAt` e `events`.
+- Sessões antigas são migradas automaticamente ao abrir o app.
+- O `.proof.json` exportado agora usa `format: "vereda.proof.v2"` e inclui o bloco `session`.
+- O nome do arquivo exportado inclui o título do manuscrito e a sessão.
+
+Essa decisão melhora a prova de processo porque separa momentos reais de escrita. Um escritor pode registrar uma sessão da manhã, outra da noite, uma revisão específica ou uma sessão antes de enviar o texto, sem misturar tudo num único histórico.
+
+Benefícios esperados:
+
+- Autoria fica mais legível para o escritor.
+- Exportações ficam mais fáceis de organizar.
+- O produto se aproxima de um diário verificável de criação.
+- A base fica pronta para relatórios por sessão no futuro.
+
+Formulação curta para comunicação:
+
+> Cada sessão guarda o ritmo daquela escrita, com hora marcada até os segundos.
+
+Próximas etapas sugeridas:
+
+- Mostrar uma lista resumida de sessões anteriores na aba Autoria.
+- Criar `template-engine.js` com templates locais por gênero/ofício.
+- Separar e expandir o léxico local da Biblioteca Gramatical.

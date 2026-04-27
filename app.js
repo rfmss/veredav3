@@ -53,6 +53,7 @@ const proofStatus = document.querySelector("[data-proof-status]");
 const proofOrganic = document.querySelector("[data-proof-organic]");
 const proofRejected = document.querySelector("[data-proof-rejected]");
 const proofCadence = document.querySelector("[data-proof-cadence]");
+const proofSessionName = document.querySelector("[data-proof-session-name]");
 const proofTimeline = document.querySelector("[data-proof-timeline]");
 const backupInput = document.querySelector("[data-backup-input]");
 const metadataForm = document.querySelector("[data-metadata-form]");
@@ -144,11 +145,15 @@ function updateActiveManuscript(nextManuscript) {
   );
 }
 
-function getActiveProofSession() {
+function getActiveProofRecord() {
   const manuscript = getActiveManuscript();
-  const session = VeredaProof.createSession(state.proofs[manuscript.id]);
-  state.proofs[manuscript.id] = session;
-  return session;
+  const record = VeredaProof.createRecord(state.proofs[manuscript.id]);
+  state.proofs[manuscript.id] = record;
+  return record;
+}
+
+function getActiveProofSession() {
+  return VeredaProof.getActiveSession(getActiveProofRecord());
 }
 
 function setView(viewName) {
@@ -443,7 +448,7 @@ function recordWritingProof(event) {
   }
 
   const manuscript = getActiveManuscript();
-  state.proofs[manuscript.id] = VeredaProof.recordKeyEvent(getActiveProofSession(), event);
+  state.proofs[manuscript.id] = VeredaProof.recordKeyEvent(getActiveProofRecord(), event);
   renderProofView();
   queueSave();
 }
@@ -522,6 +527,7 @@ function renderProofView() {
   const summary = VeredaProof.summarize(session);
   const recentEvents = session.events.slice(-4).reverse();
 
+  proofSessionName.textContent = session.name;
   proofIntegrity.textContent = `${summary.integrity}%`;
   proofStatus.textContent = summary.status;
   proofOrganic.textContent = summary.organicEvents;
@@ -535,13 +541,20 @@ function renderProofView() {
 
   proofTimeline.innerHTML = recentEvents
     .map((event) => {
-      const time = new Date(event.at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      const time = formatTimeWithSeconds(event.at);
       const status = event.organic ? "evento orgânico" : "evento descartado";
       const interval = event.interval === null ? "início da sessão" : `${event.interval}ms`;
 
       return `<div><span></span><p>${time} - ${status} (${event.keyType}, ${interval})</p></div>`;
     })
     .join("");
+}
+
+function startNewProofSession() {
+  const manuscript = getActiveManuscript();
+  state.proofs[manuscript.id] = VeredaProof.startSession(getActiveProofRecord());
+  renderProofView();
+  persistState("Nova sessão de autoria");
 }
 
 function renderVersionList() {
@@ -577,9 +590,9 @@ function renderVersionList() {
 
 async function exportProof() {
   const manuscript = getActiveManuscript();
-  const proofDocument = await VeredaProof.createProofDocument(getActiveProofSession(), manuscript);
+  const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
   const proofJson = JSON.stringify(proofDocument, null, 2);
-  downloadFile(proofJson, `${slugify(manuscript.title)}.proof.json`, "application/json");
+  downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.proof.json`, "application/json");
   saveStatus.textContent = "Prova de escrita exportada";
 }
 
@@ -700,6 +713,14 @@ function createDateTimeStamp() {
   return `${date}-${time}`;
 }
 
+function formatTimeWithSeconds(value) {
+  return new Date(value).toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+}
+
 function downloadFile(content, filename, mimeType) {
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
@@ -776,6 +797,10 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "export-proof") {
     exportProof();
+  }
+
+  if (actionTarget.dataset.action === "new-proof-session") {
+    startNewProofSession();
   }
 
   if (actionTarget.dataset.action === "export-backup") {

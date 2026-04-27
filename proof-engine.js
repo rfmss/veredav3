@@ -2,17 +2,83 @@
   const MIN_ORGANIC_INTERVAL = 30;
   const MAX_ORGANIC_INTERVAL = 2000;
   const MAX_EVENTS = 1200;
+  const MAX_SESSIONS = 24;
+
+  function createRecord(existingRecord) {
+    if (Array.isArray(existingRecord?.sessions)) {
+      const sessions = existingRecord.sessions.map(createSession).slice(0, MAX_SESSIONS);
+      const fallbackSession = sessions[0] || createSession();
+      const activeSessionId = sessions.some((session) => session.id === existingRecord.activeSessionId)
+        ? existingRecord.activeSessionId
+        : fallbackSession.id;
+
+      return {
+        activeSessionId,
+        sessions: sessions.length ? sessions : [fallbackSession],
+      };
+    }
+
+    if (Array.isArray(existingRecord?.events) || existingRecord?.startedAt) {
+      const legacySession = createSession(existingRecord);
+      return {
+        activeSessionId: legacySession.id,
+        sessions: [legacySession],
+      };
+    }
+
+    const firstSession = createSession();
+    return {
+      activeSessionId: firstSession.id,
+      sessions: [firstSession],
+    };
+  }
 
   function createSession(existingSession) {
+    const startedAt = existingSession?.startedAt || new Date().toISOString();
+
     return {
-      startedAt: existingSession?.startedAt || new Date().toISOString(),
-      updatedAt: existingSession?.updatedAt || new Date().toISOString(),
+      id: existingSession?.id || createSessionId(startedAt),
+      name: existingSession?.name || createSessionName(startedAt),
+      startedAt,
+      updatedAt: existingSession?.updatedAt || startedAt,
       lastEventAt: existingSession?.lastEventAt || null,
       events: Array.isArray(existingSession?.events) ? existingSession.events : [],
     };
   }
 
-  function recordKeyEvent(session, keyboardEvent, timestamp = Date.now()) {
+  function getActiveSession(record) {
+    const safeRecord = createRecord(record);
+    return safeRecord.sessions.find((session) => session.id === safeRecord.activeSessionId) || safeRecord.sessions[0];
+  }
+
+  function startSession(record, name, timestamp = Date.now()) {
+    const safeRecord = createRecord(record);
+    const startedAt = new Date(timestamp).toISOString();
+    const nextSession = createSession({
+      id: createSessionId(startedAt),
+      name: name || createSessionName(startedAt),
+      startedAt,
+      updatedAt: startedAt,
+    });
+
+    return {
+      activeSessionId: nextSession.id,
+      sessions: [nextSession, ...safeRecord.sessions].slice(0, MAX_SESSIONS),
+    };
+  }
+
+  function recordKeyEvent(record, keyboardEvent, timestamp = Date.now()) {
+    const safeRecord = createRecord(record);
+    const activeSession = getActiveSession(safeRecord);
+    const nextSession = recordKeyEventInSession(activeSession, keyboardEvent, timestamp);
+
+    return {
+      activeSessionId: nextSession.id,
+      sessions: safeRecord.sessions.map((session) => (session.id === nextSession.id ? nextSession : session)),
+    };
+  }
+
+  function recordKeyEventInSession(session, keyboardEvent, timestamp = Date.now()) {
     const nextSession = createSession(session);
     const interval = nextSession.lastEventAt ? timestamp - nextSession.lastEventAt : null;
     const isTrusted = keyboardEvent.isTrusted === true;
@@ -64,17 +130,24 @@
     };
   }
 
-  async function createProofDocument(session, manuscript) {
+  async function createProofDocument(record, manuscript) {
+    const session = getActiveSession(record);
     const summary = summarize(session);
     const textHash = await sha256(manuscript.text || "");
 
     return {
-      format: "vereda.proof.v1",
+      format: "vereda.proof.v2",
       generatedAt: new Date().toISOString(),
       rule: {
         trustedEventsOnly: true,
         organicIntervalMs: [MIN_ORGANIC_INTERVAL, MAX_ORGANIC_INTERVAL],
         storesLiteralKeys: false,
+      },
+      session: {
+        id: session.id,
+        name: session.name,
+        startedAt: session.startedAt,
+        updatedAt: session.updatedAt,
       },
       manuscript: {
         id: manuscript.id,
@@ -85,6 +158,25 @@
       summary,
       events: createSession(session).events,
     };
+  }
+
+  function createSessionId(startedAt) {
+    const slug = startedAt.replace(/\D/g, "") || String(Date.now());
+    return `proof-session-${slug}`;
+  }
+
+  function createSessionName(startedAt) {
+    const date = new Date(startedAt);
+
+    if (Number.isNaN(date.getTime())) {
+      return "Sessão sem data";
+    }
+
+    return `Sessão ${date.toLocaleDateString("pt-BR")} ${date.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })}`;
   }
 
   function classifyKey(keyboardEvent) {
@@ -143,9 +235,12 @@
   }
 
   global.VeredaProof = {
+    createRecord,
     createSession,
     createProofDocument,
+    getActiveSession,
     recordKeyEvent,
     summarize,
+    startSession,
   };
 })(window);
