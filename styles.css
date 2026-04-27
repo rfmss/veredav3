@@ -262,6 +262,24 @@ a {
   font-weight: 700;
 }
 
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--primary);
+  cursor: pointer;
+  padding: 11px 14px;
+  font-weight: 800;
+}
+
+.secondary-button:hover {
+  background: var(--surface-mid);
+}
+
 .sidebar > .primary-button {
   margin-top: auto;
 }
@@ -640,6 +658,14 @@ mark {
   margin-bottom: 34px;
 }
 
+.archive-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -903,6 +929,11 @@ mark {
   .archive-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .archive-actions {
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .proof-actions {

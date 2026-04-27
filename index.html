@@ -171,11 +171,22 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   <p class="eyebrow">Arquivo</p>
                   <h1>Seus cadernos sobre a mesa</h1>
                 </div>
-                <button class="primary-button" data-action="new-manuscript">
-                  <span class="material-symbols-outlined">add</span>
-                  Novo caderno
-                </button>
+                <div class="archive-actions">
+                  <button class="secondary-button" data-action="export-backup">
+                    <span class="material-symbols-outlined">file_save</span>
+                    Exportar acervo
+                  </button>
+                  <button class="secondary-button" data-action="import-backup">
+                    <span class="material-symbols-outlined">upload_file</span>
+                    Importar
+                  </button>
+                  <button class="primary-button" data-action="new-manuscript">
+                    <span class="material-symbols-outlined">add</span>
+                    Novo caderno
+                  </button>
+                </div>
               </div>
+              <input type="file" accept="application/json,.json,.vereda.json" data-backup-input hidden>
 
               <div class="project-grid" data-project-grid></div>
               <div class="resource-grid">
@@ -273,6 +284,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
     <script src="lexical-engine.js"></script>
     <script src="proof-engine.js"></script>
+    <script src="backup-engine.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

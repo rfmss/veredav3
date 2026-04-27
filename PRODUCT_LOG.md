@@ -78,3 +78,22 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > A prova de autoria do Vereda não pergunta “quem escreveu por você?”; ela registra, localmente, o pulso humano da escrita.
+
+## 2026-04-27 - Backup soberano do acervo
+
+Decidimos adicionar exportação e importação do acervo local como um módulo separado, `backup-engine.js`.
+
+O Vereda salva manuscritos, preferências, seleção lexical e provas de escrita no navegador. Isso é bom para privacidade e funcionamento offline, mas também exige uma saída clara para o autor levar seus dados consigo. Por isso, a tela Arquivo ganhou ações para exportar um `.vereda.json` e importar esse arquivo depois.
+
+O backup não depende de conta, nuvem ou servidor. Ele é um pacote local que o autor pode guardar onde quiser. Essa escolha reforça a soberania do usuário: o navegador é a mesa de trabalho, mas o acervo pertence ao escritor.
+
+Benefícios esperados:
+
+- O autor pode guardar cópias próprias do acervo.
+- Trocar de navegador ou máquina fica possível sem backend.
+- O app continua offline-first sem prender o usuário em um armazenamento invisível.
+- O `app.js` permanece como orquestrador, enquanto backup/restore fica em módulo próprio.
+
+Formulação curta para comunicação:
+
+> No Vereda, offline não significa preso ao navegador: o acervo pode sair pela porta da frente, em um arquivo do próprio autor.

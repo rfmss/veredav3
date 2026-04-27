@@ -48,6 +48,7 @@ const proofOrganic = document.querySelector("[data-proof-organic]");
 const proofRejected = document.querySelector("[data-proof-rejected]");
 const proofCadence = document.querySelector("[data-proof-cadence]");
 const proofTimeline = document.querySelector("[data-proof-timeline]");
+const backupInput = document.querySelector("[data-backup-input]");
 
 let state = loadState();
 let saveTimer;
@@ -432,6 +433,46 @@ async function exportProof() {
   saveStatus.textContent = "Prova de escrita exportada";
 }
 
+function exportBackup() {
+  const backup = VeredaBackup.createBackup(state);
+  const backupJson = JSON.stringify(backup, null, 2);
+  const blob = new Blob([backupJson], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  const dateStamp = new Date().toISOString().slice(0, 10);
+  link.href = url;
+  link.download = `vereda-acervo-${dateStamp}.vereda.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+  saveStatus.textContent = "Acervo exportado";
+}
+
+function requestBackupImport() {
+  backupInput.value = "";
+  backupInput.click();
+}
+
+async function importBackup(file) {
+  if (!file) {
+    return;
+  }
+
+  try {
+    const backup = await VeredaBackup.readBackup(file);
+    state = VeredaBackup.restoreBackup(state, backup);
+    renderActiveManuscript();
+    renderManuscriptNavigation();
+    renderProjectGrid();
+    renderLexicalView();
+    renderProofView();
+    applyFocusSettings();
+    persistState("Backup importado");
+    setView("arquivo");
+  } catch (error) {
+    saveStatus.textContent = error.message;
+  }
+}
+
 function updateWritingStats() {
   const text = writingArea.innerText.trim();
   const words = countWords(text);
@@ -543,6 +584,14 @@ document.addEventListener("click", (event) => {
   if (actionTarget.dataset.action === "export-proof") {
     exportProof();
   }
+
+  if (actionTarget.dataset.action === "export-backup") {
+    exportBackup();
+  }
+
+  if (actionTarget.dataset.action === "import-backup") {
+    requestBackupImport();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -583,6 +632,7 @@ writingArea.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("keydown", recordWritingProof);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
+backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
 
 renderActiveManuscript();
 renderManuscriptNavigation();
