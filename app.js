@@ -575,28 +575,26 @@ async function exportProof() {
   const manuscript = getActiveManuscript();
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofSession(), manuscript);
   const proofJson = JSON.stringify(proofDocument, null, 2);
-  const blob = new Blob([proofJson], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `${slugify(manuscript.title)}.proof.json`;
-  link.click();
-  URL.revokeObjectURL(url);
+  downloadFile(proofJson, `${slugify(manuscript.title)}.proof.json`, "application/json");
   saveStatus.textContent = "Prova de escrita exportada";
 }
 
 function exportBackup() {
   const backup = VeredaBackup.createBackup(state);
   const backupJson = JSON.stringify(backup, null, 2);
-  const blob = new Blob([backupJson], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
   const dateStamp = new Date().toISOString().slice(0, 10);
-  link.href = url;
-  link.download = `vereda-acervo-${dateStamp}.vereda.json`;
-  link.click();
-  URL.revokeObjectURL(url);
+  downloadFile(backupJson, `vereda-acervo-${dateStamp}.vereda.json`, "application/json");
   saveStatus.textContent = "Acervo exportado";
+}
+
+function exportCurrentManuscript(format) {
+  try {
+    const exportFile = VeredaExport.exportManuscript(getActiveManuscript(), format);
+    downloadFile(exportFile.content, exportFile.filename, exportFile.mimeType);
+    saveStatus.textContent = `Manuscrito exportado em .${format}`;
+  } catch (error) {
+    saveStatus.textContent = error.message;
+  }
 }
 
 function requestBackupImport() {
@@ -688,6 +686,16 @@ function slugify(value) {
     .replace(/^-|-$/g, "") || "manuscrito";
 }
 
+function downloadFile(content, filename, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 document.addEventListener("click", (event) => {
   const manuscriptTarget = event.target.closest("[data-manuscript-id]");
   const viewTarget = event.target.closest("[data-view-target]");
@@ -758,6 +766,10 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "export-backup") {
     exportBackup();
+  }
+
+  if (actionTarget.dataset.action === "export-manuscript") {
+    exportCurrentManuscript(actionTarget.dataset.exportFormat);
   }
 
   if (actionTarget.dataset.action === "import-backup") {

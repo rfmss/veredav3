@@ -207,3 +207,28 @@ Próximas etapas sugeridas:
 - Implementar exportação simples do manuscrito em `.txt` e `.md`.
 - Melhorar a Prova de Escrita com sessões nomeadas por data.
 - Separar e expandir o léxico local da Biblioteca Gramatical.
+
+## 2026-04-27 - Exportação simples do manuscrito
+
+Decidimos iniciar a camada de exportação editorial pelos formatos mais simples e confiáveis: `.txt` e `.md`.
+
+Foi criado o módulo `export-engine.js`, responsável por gerar arquivos exportáveis a partir do manuscrito ativo. A tela Arquivo ganhou ações diretas para baixar o texto em TXT ou Markdown, incluindo metadados básicos como tipo, status, marco atual, progresso e descrição.
+
+Essa decisão mantém o Vereda fiel ao offline-first: antes de formatos mais complexos, o autor precisa conseguir tirar o texto do app em formatos abertos, legíveis e fáceis de guardar ou editar em qualquer outro lugar.
+
+Benefícios esperados:
+
+- O autor pode levar o manuscrito para fora do Vereda sem depender de backup completo.
+- `.txt` e `.md` são formatos simples, duráveis e compatíveis com muitos editores.
+- A lógica de exportação fica em módulo próprio, preservando o `app.js` como orquestrador.
+- Abre caminho para exportações futuras como HTML, DOCX, EPUB e PDF.
+
+Formulação curta para comunicação:
+
+> O Vereda começa exportando pelo essencial: texto aberto, legível e do autor, sem trancas.
+
+Próximas etapas sugeridas:
+
+- Melhorar a Prova de Escrita com sessões nomeadas por data.
+- Separar e expandir o léxico local da Biblioteca Gramatical.
+- Criar painel de configurações reais do editor.
