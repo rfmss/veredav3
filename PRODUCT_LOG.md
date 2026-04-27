@@ -295,3 +295,53 @@ Próximas etapas sugeridas:
 - Adicionar versão/schema explícito no `.vrda` para migrações futuras.
 - Melhorar a Prova de Escrita com sessões nomeadas por data e timestamp com segundos.
 - Criar diretrizes de motion e paleta como parte do design system.
+
+## 2026-04-27 - Linguagem de acolhimento e templates por ofício
+
+Decidimos que a primeira linha de comunicação geral do Vereda deve ser mais calorosa, clara e acessível, em uma direção "Globoplay": menos técnica no primeiro contato, mais humana e convidativa. A profundidade técnica continua existindo, mas deve aparecer depois, quando o escritor precisar dela.
+
+Também levantamos uma decisão importante sobre templates: eles não devem ser apenas modelos vazios. O Vereda deve oferecer templates de notas e documentos que façam o escritor se sentir em casa conforme seu ofício e gênero. Um roteirista de TV, por exemplo, deve encontrar um arquivo com estrutura familiar, placeholders clicáveis e seções que orientam a escrita sem tom professoral.
+
+Templates sugeridos:
+
+- Roteiro de TV.
+- Flash fiction / conto mínimo.
+- Conto curto.
+- Conto.
+- Ensaio.
+- Matéria jornalística.
+- Crônica.
+- Romance resumido.
+- Poesia, com desdobramento por formas e estilos.
+- Ficha de personagem completa.
+
+Contraproposta de aplicação:
+
+- Módulo próprio: `template-engine.js`.
+- Templates como dados locais, sem IA e sem backend.
+- Cada template deve gerar um manuscrito `.vrda` normal, com metadados de tipo, descrição e seções.
+- Placeholders devem ser clicáveis/editáveis, mas o texto final continua pertencendo ao editor comum.
+- A interface deve permitir escolher por ofício: ficcionista, roteirista, poeta, ensaísta, jornalista.
+
+Etapa recomendada:
+
+- Depois de schema/versionamento do `.vrda`.
+- Antes de mobile/notas rápidas.
+- Em paralelo com o fortalecimento do Arquivo do Escritor, porque templates nascem naturalmente dentro do Arquivo.
+
+Benefícios esperados:
+
+- O Vereda acolhe escritores diferentes sem parecer genérico.
+- Templates viram porta de entrada emocional para o produto.
+- A ferramenta comunica domínio do nicho brasileiro.
+- A experiência deixa de ser "crie um documento em branco" e passa a ser "comece do lugar certo".
+
+Formulação curta para comunicação:
+
+> No Vereda, um roteiro, uma crônica e um poema não começam do mesmo vazio: cada forma recebe uma mesa preparada para ela.
+
+Próximas etapas sugeridas:
+
+- Adicionar versão/schema explícito no `.vrda`.
+- Criar `template-engine.js` com templates locais por gênero/ofício.
+- Rever a primeira linha de comunicação do app com linguagem mais acolhedora e menos técnica.
