@@ -5,7 +5,10 @@ const starterManuscripts = [
     id: "som-da-terra-seca",
     title: "O Som da Terra Seca",
     kind: "Romance em andamento",
+    status: "Em escrita",
     chapter: "Capítulo 12",
+    progress: 62,
+    description: "A saga de uma família sertaneja enfrentando a maior seca do século, entrelaçada com memória, fé e resistência.",
     updatedAt: new Date().toISOString(),
     text: `O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
 
@@ -19,7 +22,10 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     id: "coronel-de-pedra",
     title: "Coronel de Pedra",
     kind: "Rascunho",
+    status: "Pausado",
     chapter: "Ato 1",
+    progress: 14,
+    description: "Uma cidade pequena acorda sob a presença de um coronel que atravessa a praça como se fosse dono da manhã.",
     updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 26).toISOString(),
     text: `A cidade acordava antes dos sinos. Primeiro vinha o rangido das portas, depois o cheiro do café passando devagar, e por fim a voz do coronel atravessando a praça como se fosse dono da manhã.`,
   },
@@ -49,6 +55,9 @@ const proofRejected = document.querySelector("[data-proof-rejected]");
 const proofCadence = document.querySelector("[data-proof-cadence]");
 const proofTimeline = document.querySelector("[data-proof-timeline]");
 const backupInput = document.querySelector("[data-backup-input]");
+const metadataForm = document.querySelector("[data-metadata-form]");
+const metadataFields = document.querySelectorAll("[data-metadata-field]");
+const progressReadout = document.querySelector("[data-progress-readout]");
 
 let state = loadState();
 let saveTimer;
@@ -76,6 +85,7 @@ function loadState() {
 
     return {
       ...parsed,
+      manuscripts: VeredaArchive.normalizeManuscripts(parsed.manuscripts),
       focus: {
         ...getDefaultFocusSettings(),
         ...parsed.focus,
@@ -118,6 +128,12 @@ function persistState(status = "Salvo localmente") {
 
 function getActiveManuscript() {
   return state.manuscripts.find((manuscript) => manuscript.id === state.activeId) || state.manuscripts[0];
+}
+
+function updateActiveManuscript(nextManuscript) {
+  state.manuscripts = state.manuscripts.map((manuscript) =>
+    manuscript.id === nextManuscript.id ? nextManuscript : manuscript
+  );
 }
 
 function getActiveProofSession() {
@@ -224,9 +240,19 @@ function setActiveManuscript(id) {
   renderActiveManuscript();
   renderManuscriptNavigation();
   renderProjectGrid();
+  renderMetadataForm();
   renderProofView();
   persistState("Manuscrito aberto");
   setView("editor");
+}
+
+function selectArchiveManuscript(id) {
+  state.activeId = id;
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
+  renderProofView();
+  persistState("Projeto selecionado");
 }
 
 function renderActiveManuscript() {
@@ -235,6 +261,7 @@ function renderActiveManuscript() {
   writingArea.innerText = manuscript.text;
   updateWritingStats();
   renderLexicalView();
+  renderMetadataForm();
   renderProofView();
 }
 
@@ -258,29 +285,67 @@ function renderProjectGrid() {
     .map((manuscript, index) => {
       const words = countWords(manuscript.text);
       const featured = index === 0 ? " featured" : "";
+      const selected = manuscript.id === state.activeId ? " is-selected" : "";
 
       return `
-        <a class="project-card${featured}" href="#" data-manuscript-id="${manuscript.id}">
-          <span>${escapeHtml(manuscript.kind)}</span>
+        <button class="project-card${featured}${selected}" type="button" data-archive-select="${manuscript.id}">
+          <span>${escapeHtml(manuscript.kind)} · ${escapeHtml(manuscript.status)}</span>
           <h2>${escapeHtml(manuscript.title)}</h2>
-          <p>${escapeHtml(createExcerpt(manuscript.text))}</p>
-          <small>${escapeHtml(manuscript.chapter)} · ${words} palavras · ${formatUpdatedAt(manuscript.updatedAt)}</small>
-        </a>
+          <p>${escapeHtml(manuscript.description || createExcerpt(manuscript.text))}</p>
+          <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
+            <i style="--progress: ${manuscript.progress}%"></i>
+          </div>
+          <small>${escapeHtml(manuscript.chapter)} · ${manuscript.progress}% · ${words} palavras · ${formatUpdatedAt(manuscript.updatedAt)}</small>
+        </button>
       `;
     })
     .join("");
 }
 
+function renderMetadataForm() {
+  const manuscript = getActiveManuscript();
+
+  metadataFields.forEach((field) => {
+    field.value = manuscript[field.dataset.metadataField] ?? "";
+  });
+
+  progressReadout.textContent = `${manuscript.progress || 0}%`;
+}
+
 function updateCurrentManuscript() {
   const manuscript = getActiveManuscript();
-  manuscript.title = titleInput.value.trim() || "Manuscrito sem título";
-  manuscript.text = writingArea.innerText.trim();
-  manuscript.updatedAt = new Date().toISOString();
+  const nextManuscript = {
+    ...manuscript,
+    title: titleInput.value.trim() || "Manuscrito sem título",
+    text: writingArea.innerText.trim(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  updateActiveManuscript(nextManuscript);
 
   updateWritingStats();
   renderLexicalView();
+  renderMetadataForm();
   renderManuscriptNavigation();
   renderProjectGrid();
+  queueSave();
+}
+
+function updateCurrentMetadata() {
+  const manuscript = getActiveManuscript();
+  const formData = new FormData(metadataForm);
+  const nextManuscript = VeredaArchive.updateMetadata(manuscript, {
+    kind: formData.get("kind"),
+    status: formData.get("status"),
+    chapter: formData.get("chapter"),
+    progress: formData.get("progress"),
+    description: formData.get("description"),
+  });
+
+  updateActiveManuscript(nextManuscript);
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
   queueSave();
 }
 
@@ -292,14 +357,11 @@ function queueSave() {
 
 function createManuscript() {
   const nextNumber = state.manuscripts.length + 1;
-  const manuscript = {
+  const manuscript = VeredaArchive.createManuscript({
     id: `manuscrito-${Date.now()}`,
     title: `Novo Manuscrito ${nextNumber}`,
-    kind: "Rascunho",
-    chapter: "Primeira cena",
-    updatedAt: new Date().toISOString(),
     text: "Comece aqui. A primeira frase abre uma vereda.",
-  };
+  });
 
   state.manuscripts.unshift(manuscript);
   state.activeId = manuscript.id;
@@ -460,6 +522,7 @@ async function importBackup(file) {
   try {
     const backup = await VeredaBackup.readBackup(file);
     state = VeredaBackup.restoreBackup(state, backup);
+    state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
     renderActiveManuscript();
     renderManuscriptNavigation();
     renderProjectGrid();
@@ -544,6 +607,14 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const archiveTarget = event.target.closest("[data-archive-select]");
+
+  if (archiveTarget) {
+    event.preventDefault();
+    selectArchiveManuscript(archiveTarget.dataset.archiveSelect);
+    return;
+  }
+
   if (viewTarget) {
     event.preventDefault();
     setView(viewTarget.dataset.viewTarget);
@@ -592,6 +663,11 @@ document.addEventListener("click", (event) => {
   if (actionTarget.dataset.action === "import-backup") {
     requestBackupImport();
   }
+
+  if (actionTarget.dataset.action === "open-active-manuscript") {
+    setView("editor");
+    writingArea.focus();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -633,10 +709,12 @@ writingArea.addEventListener("keydown", recordWritingProof);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
 backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
+metadataForm.addEventListener("input", updateCurrentMetadata);
 
 renderActiveManuscript();
 renderManuscriptNavigation();
 renderProjectGrid();
+renderMetadataForm();
 renderLexicalView();
 renderProofView();
 applyFocusSettings();

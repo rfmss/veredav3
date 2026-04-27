@@ -97,3 +97,22 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > No Vereda, offline não significa preso ao navegador: o acervo pode sair pela porta da frente, em um arquivo do próprio autor.
+
+## 2026-04-27 - Arquivo como gestão editorial local
+
+Decidimos evoluir o Arquivo do Escritor de uma grade de projetos para uma área de gestão editorial local.
+
+Foi criado o módulo `archive-engine.js` para normalizar e atualizar metadados de manuscritos sem inflar o `app.js`. A tela Arquivo agora permite selecionar um projeto, editar tipo, status, marco atual, progresso e descrição. Os cards passam a mostrar status e barra de progresso, aproximando o Vereda de uma mesa real de acompanhamento de obra.
+
+Essa etapa reforça a ideia de que o Vereda não é apenas um editor de texto. Ele é um lugar de continuidade: o autor vê onde cada obra está, qual etapa precisa de atenção e pode organizar o trabalho sem sair do ambiente offline.
+
+Benefícios esperados:
+
+- O autor ganha visão editorial do acervo.
+- Metadados acompanham backups e importações.
+- O Arquivo passa a ser útil para decisão, não apenas navegação.
+- A lógica de metadados fica em módulo próprio, mantendo o `app.js` como orquestrador.
+
+Formulação curta para comunicação:
+
+> O Arquivo do Vereda deixa de ser uma estante passiva e passa a ser uma mesa de acompanhamento da obra em andamento.
