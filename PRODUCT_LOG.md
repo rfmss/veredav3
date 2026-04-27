@@ -412,3 +412,28 @@ Próximas etapas sugeridas:
 - Mostrar uma lista resumida de sessões anteriores na aba Autoria.
 - Criar `template-engine.js` com templates locais por gênero/ofício.
 - Separar e expandir o léxico local da Biblioteca Gramatical.
+
+## 2026-04-27 - Verificação avançada fica para depois
+
+Decidimos pausar a evolução imediata da camada de verificação/autoria.
+
+A Prova de Escrita já tem uma base útil: sessões nomeadas, timestamp com segundos, hash do texto, cadência e exportação `.proof.json`. O próximo refinamento natural seria listar sessões anteriores, comparar sessões e criar relatórios mais formais. Mas esse caminho começa a puxar o produto para auditoria, validade e documentação de prova antes de ampliarmos a utilidade central para o escritor.
+
+Por isso, a verificação avançada fica registrada como retorno futuro, não como prioridade da próxima etapa.
+
+Contraproposta de faseamento:
+
+- Manter a Prova de Escrita atual funcionando como base local.
+- Evitar, por enquanto, telas extras de auditoria e relatórios.
+- Avançar para templates, porque eles aumentam imediatamente o valor diário do Vereda.
+- Voltar à verificação quando o fluxo de escrita, arquivo e templates estiver mais maduro.
+
+Próxima etapa sugerida:
+
+Criar `template-engine.js` com templates locais por gênero/ofício. Essa etapa combina com a ideia do Vereda como ferramenta acolhedora: em vez de abrir sempre uma folha vazia, o escritor escolhe uma forma familiar, como roteiro de TV, crônica, conto, ensaio, romance resumido, poesia ou ficha de personagem.
+
+Próximas etapas sugeridas:
+
+- Criar `template-engine.js` com templates locais por gênero/ofício.
+- Adicionar seletor de template no Arquivo do Escritor.
+- Fazer cada template gerar um manuscrito `.vrda` normal, com metadados e placeholders editáveis.
