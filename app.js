@@ -61,6 +61,7 @@ const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
 const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
+const archiveSearch = document.querySelector("[data-archive-search]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
@@ -164,6 +165,7 @@ function getDefaultTemplateState() {
 function getDefaultArchiveState() {
   return {
     filter: "all",
+    search: "",
   };
 }
 
@@ -346,17 +348,26 @@ function renderManuscriptNavigation() {
 
 function renderProjectGrid() {
   renderArchiveFilters();
+  archiveSearch.value = state.archive.search;
+  const searchQuery = normalizeSearch(state.archive.search);
 
-  const filteredManuscripts = state.manuscripts.filter((manuscript) =>
-    state.archive.filter === "all" || getArchiveType(manuscript).id === state.archive.filter
-  );
+  const filteredManuscripts = state.manuscripts.filter((manuscript) => {
+    const matchesType = state.archive.filter === "all" || getArchiveType(manuscript).id === state.archive.filter;
+    const matchesSearch = !searchQuery || createSearchText(manuscript).includes(searchQuery);
+    return matchesType && matchesSearch;
+  });
 
   if (!filteredManuscripts.length) {
+    const message = searchQuery ? "Nenhum documento encontrado" : "Nada aqui ainda";
+    const description = searchQuery
+      ? "Tente buscar por outro termo ou limpe a busca para ver o acervo."
+      : "Crie uma nova nota ou mude o filtro para ver outros documentos.";
+
     projectGrid.innerHTML = `
       <div class="archive-empty">
         <span class="material-symbols-outlined">inventory_2</span>
-        <strong>Nada aqui ainda</strong>
-        <p>Crie uma nova nota ou mude o filtro para ver outros documentos.</p>
+        <strong>${message}</strong>
+        <p>${description}</p>
       </div>
     `;
     return;
@@ -445,6 +456,30 @@ function setArchiveFilter(filter) {
   state.archive.filter = filter;
   renderProjectGrid();
   persistState("Filtro do arquivo aplicado");
+}
+
+function setArchiveSearch(value) {
+  state.archive.search = value;
+  renderProjectGrid();
+  persistState("Busca do arquivo aplicada");
+}
+
+function createSearchText(manuscript) {
+  const type = getArchiveType(manuscript);
+  return normalizeSearch(
+    [manuscript.title, manuscript.kind, manuscript.status, manuscript.chapter, manuscript.description, manuscript.text, type.label]
+      .filter(Boolean)
+      .join(" ")
+  );
+}
+
+function normalizeSearch(value = "") {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function renderMetadataForm() {
@@ -1324,6 +1359,7 @@ writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
 backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
 metadataForm.addEventListener("input", updateCurrentMetadata);
+archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
 
 renderActiveManuscript();
 renderManuscriptNavigation();

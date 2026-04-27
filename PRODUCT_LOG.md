@@ -579,3 +579,31 @@ Próximas etapas sugeridas:
 - Adicionar busca textual por título/descrição/conteúdo.
 - Criar seção de recentes no topo do Arquivo.
 - Permitir fixar documentos importantes.
+
+## 2026-04-27 - Busca local no Arquivo
+
+Decidimos adicionar busca textual ao Arquivo para complementar os filtros por tipo.
+
+A busca funciona localmente e considera:
+
+- Título.
+- Tipo.
+- Status.
+- Marco atual.
+- Descrição.
+- Conteúdo do documento.
+- Rótulo do tipo no Arquivo.
+
+A busca é normalizada sem acentos e salva no estado local, junto com o filtro ativo. Nada é enviado para fora do navegador.
+
+Benefícios esperados:
+
+- Encontrar cenas, ideias e notas rápidas com menos atrito.
+- Tornar o acervo útil quando houver muitos documentos.
+- Preparar a base para busca mais refinada por tags no futuro.
+
+Próximas etapas sugeridas:
+
+- Criar seção de recentes no topo do Arquivo.
+- Permitir fixar documentos importantes.
+- Adicionar tags locais aos documentos.
