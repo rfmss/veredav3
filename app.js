@@ -40,9 +40,12 @@ const rulerToggle = document.querySelector('[data-action="toggle-ruler"]');
 const lexicalTitle = document.querySelector("[data-lexical-title]");
 const lexicalContext = document.querySelector("[data-lexical-context]");
 const lexicalCard = document.querySelector("[data-lexical-card]");
+const offlineStatus = document.querySelector("[data-offline-status]");
+const installButton = document.querySelector('[data-action="install-app"]');
 
 let state = loadState();
 let saveTimer;
+let deferredInstallPrompt;
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -154,6 +157,49 @@ function applyFocusSettings() {
   focusSettingControls.forEach((control) => {
     control.value = state.focus[control.dataset.focusSetting];
   });
+}
+
+function registerOfflineApp() {
+  updateConnectionStatus();
+
+  if (!("serviceWorker" in navigator)) {
+    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Offline indisponível';
+    return;
+  }
+
+  navigator.serviceWorker
+    .register("./service-worker.js")
+    .then(() => {
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Offline pronto';
+    })
+    .catch(() => {
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Offline pendente';
+    });
+}
+
+function updateConnectionStatus() {
+  if (!offlineStatus) {
+    return;
+  }
+
+  const label = navigator.onLine ? "Offline pronto" : "Sem rede";
+  const icon = navigator.onLine ? "cloud_done" : "cloud_off";
+  offlineStatus.innerHTML = `<span class="material-symbols-outlined">${icon}</span>${label}`;
+}
+
+async function installApp() {
+  if (!deferredInstallPrompt) {
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+  const choice = await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  installButton.hidden = true;
+
+  if (choice.outcome === "accepted") {
+    saveStatus.textContent = "Vereda instalado";
+  }
 }
 
 function setActiveManuscript(id) {
@@ -410,6 +456,10 @@ document.addEventListener("click", (event) => {
   if (actionTarget.dataset.action === "new-manuscript") {
     createManuscript();
   }
+
+  if (actionTarget.dataset.action === "install-app") {
+    installApp();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -430,6 +480,21 @@ focusSettingControls.forEach((control) => {
   });
 });
 
+window.addEventListener("online", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  installButton.hidden = false;
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  installButton.hidden = true;
+  saveStatus.textContent = "Vereda instalado";
+});
+
 titleInput.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
@@ -440,4 +505,5 @@ renderManuscriptNavigation();
 renderProjectGrid();
 renderLexicalView();
 applyFocusSettings();
+registerOfflineApp();
 persistState("Pronto para escrever");

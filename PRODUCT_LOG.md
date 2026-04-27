@@ -21,3 +21,39 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > O Vereda nasce como um aplicativo offline-first: a interface coordena, os motores locais trabalham, e o texto do autor permanece no próprio ambiente do autor.
+
+## 2026-04-27 - Push ao fim de cada etapa
+
+Decidimos que cada etapa implementada deve terminar com commit e `git push` para o repositório remoto.
+
+Essa regra transforma o desenvolvimento do Vereda em uma sequência de marcos pequenos, testáveis e recuperáveis. Em vez de acumular muitas mudanças locais, cada avanço do produto passa a ter um ponto de restauração claro no histórico do Git.
+
+Benefícios esperados:
+
+- Facilita testar a versão mais recente em outros ambientes.
+- Mantém o histórico do produto legível.
+- Reduz o risco de perder decisões e código entre sessões.
+- Cria uma cadência pública de evolução, útil para acompanhar o nascimento do produto.
+
+Formulação curta para comunicação:
+
+> Cada etapa do Vereda termina com um marco no Git: pequeno, testável e pronto para ser retomado.
+
+## 2026-04-27 - PWA offline instalável
+
+Decidimos iniciar a camada PWA do Vereda ainda na fase estática, sem framework e sem backend.
+
+Foram adicionados um `manifest.webmanifest`, ícones locais e um `service-worker.js` para cachear o núcleo da aplicação. O objetivo é que o Vereda funcione como um aplicativo offline após a primeira visita em um contexto compatível com service workers, como `https://` ou `localhost`.
+
+Também adicionamos um fluxo de instalação: quando o navegador considerar o app elegível, o botão "Instalar" aparece na interface. Essa decisão reforça uma ideia central do produto: o Vereda deve morar perto do autor, com acesso rápido, dados locais e funcionamento independente de conexão.
+
+Benefícios esperados:
+
+- O app pode abrir mesmo sem rede depois da primeira carga.
+- A instalação aproxima a experiência de um aplicativo nativo.
+- O cache local reduz atrito e dependência de infraestrutura.
+- O produto continua alinhado à soberania do autor: escrita, leitura e ferramentas locais.
+
+Formulação curta para comunicação:
+
+> O Vereda não quer ser apenas uma aba aberta: ele quer ser uma mesa de escrita instalada, local e pronta mesmo quando a rede desaparece.

@@ -85,6 +85,7 @@ a {
 
 .brand-lockup,
 .topbar-actions,
+.offline-badge,
 .module-tabs,
 .workspace,
 .tree-row,
@@ -157,6 +158,44 @@ a {
 .tree-row:hover,
 .nav-row:hover {
   background: var(--surface-mid);
+}
+
+.topbar-actions {
+  gap: 8px;
+}
+
+.offline-badge,
+.install-button {
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--primary);
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.offline-badge .material-symbols-outlined,
+.install-button .material-symbols-outlined {
+  font-size: 17px;
+}
+
+.install-button {
+  display: flex;
+  cursor: pointer;
+}
+
+.install-button[hidden] {
+  display: none;
+}
+
+.install-button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
 }
 
 .mobile-only {
@@ -798,6 +837,10 @@ mark {
   }
 
   .brand-lockup span {
+    display: none;
+  }
+
+  .offline-badge {
     display: none;
   }
 

@@ -1,0 +1,27 @@
+{
+  "name": "Vereda - Editor do Escritor Brasileiro",
+  "short_name": "Vereda",
+  "description": "Editor literário brasileiro offline-first, com escrita calma e ferramentas locais para autoria.",
+  "lang": "pt-BR",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fdfcfb",
+  "theme_color": "#2e4d43",
+  "categories": ["productivity", "books", "education"],
+  "icons": [
+    {
+      "src": "icons/vereda-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/vereda-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
