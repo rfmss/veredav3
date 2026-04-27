@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vereda - Editor do Escritor Brasileiro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell" data-view="editor">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <button class="icon-button mobile-only" data-action="toggle-nav" aria-label="Abrir navegação">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div>
+            <strong>Vereda</strong>
+            <span>O santuário do escritor brasileiro</span>
+          </div>
+        </div>
+
+        <nav class="module-tabs" aria-label="Módulos do Vereda">
+          <button class="tab is-active" data-view-target="editor">Manuscrito</button>
+          <button class="tab" data-view-target="biblioteca">Biblioteca</button>
+          <button class="tab" data-view-target="autoria">Autoria</button>
+          <button class="tab" data-view-target="arquivo">Arquivo</button>
+        </nav>
+
+        <div class="topbar-actions">
+          <button class="icon-button" data-action="toggle-focus" aria-label="Alternar modo foco" title="Modo foco">
+            <span class="material-symbols-outlined">visibility</span>
+          </button>
+          <button class="icon-button" aria-label="Configurações" title="Configurações">
+            <span class="material-symbols-outlined">settings</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar" data-nav>
+          <div class="sidebar-section">
+            <div class="eyebrow">Hierarquia</div>
+            <button class="tree-row is-open">
+              <span class="material-symbols-outlined">expand_more</span>
+              <span class="material-symbols-outlined">folder</span>
+              Romances
+            </button>
+            <div class="manuscript-list" data-manuscript-list></div>
+            <button class="tree-row">
+              <span class="material-symbols-outlined">chevron_right</span>
+              <span class="material-symbols-outlined">folder</span>
+              Contos
+            </button>
+            <button class="tree-row">
+              <span class="material-symbols-outlined">chevron_right</span>
+              <span class="material-symbols-outlined">folder</span>
+              Poesia
+            </button>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="eyebrow">Ferramentas</div>
+            <button class="nav-row" data-view-target="biblioteca">
+              <span class="material-symbols-outlined">auto_stories</span>
+              Biblioteca gramatical
+            </button>
+            <button class="nav-row" data-view-target="autoria">
+              <span class="material-symbols-outlined">fingerprint</span>
+              Prova de autoria
+            </button>
+            <button class="nav-row" data-view-target="arquivo">
+              <span class="material-symbols-outlined">inventory_2</span>
+              Arquivo do escritor
+            </button>
+          </div>
+
+          <button class="primary-button" data-action="new-manuscript">
+            <span class="material-symbols-outlined">add</span>
+            Novo manuscrito
+          </button>
+        </aside>
+
+        <main class="content-stage">
+          <section class="view view-editor is-active" data-view-panel="editor">
+            <article class="paper">
+              <div class="title-block">
+                <input class="title-input" value="O Som da Terra Seca" aria-label="Título do manuscrito">
+                <span class="title-rule"></span>
+              </div>
+              <div class="writing-area" contenteditable="true" spellcheck="true" aria-label="Área de escrita">
+O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
+
+— Hoje não chove — murmurou, mais por hábito do que por esperança.
+
+O velho Tião pigarreou lá dentro, o som oco batendo nas paredes de taipa. Ele tossia terra desde a seca de oitenta e dois. O rádio de pilha chiava uma moda de viola distante, engolida pela estática e pelo silêncio opressivo que se seguia.
+
+Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. A água da moringa já amargava, gosto de barro e espera. Era o quinto mês sem uma gota. O gado, o pouco que restava, pastava miragens na imensidão amarela.
+              </div>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="biblioteca">
+            <article class="paper split-paper">
+              <div>
+                <p class="eyebrow">Inspeção lexical</p>
+                <h1 data-lexical-title>Biblioteca Gramatical</h1>
+                <p class="lexical-hint">Selecione uma palavra no manuscrito e abra a Biblioteca para ver uma leitura local, sem IA e sem rede.</p>
+                <div class="reading-sample" data-lexical-context></div>
+              </div>
+              <aside class="lexical-card" data-lexical-card></aside>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="autoria">
+            <article class="paper certificate-paper">
+              <p class="eyebrow">Proof of Writing</p>
+              <h1>Certificados & Integridade</h1>
+              <p class="muted">Registro local de cadência, eventos confiáveis e hash do processo criativo.</p>
+
+              <div class="certificate-grid">
+                <div class="metric-block">
+                  <span>Integridade</span>
+                  <strong>98%</strong>
+                  <small>Eventos orgânicos detectados</small>
+                </div>
+                <div class="metric-block">
+                  <span>Hash SHA-256</span>
+                  <strong>7f8e...c4d2</strong>
+                  <small>Vinculado ao manuscrito atual</small>
+                </div>
+                <div class="metric-block">
+                  <span>Cadência média</span>
+                  <strong>65 WPM</strong>
+                  <small>Intervalos entre 30ms e 2000ms</small>
+                </div>
+              </div>
+
+              <div class="timeline">
+                <div><span></span><p>14:19 - Sessão iniciada</p></div>
+                <div><span></span><p>14:32 - 186 palavras autenticadas</p></div>
+                <div><span></span><p>14:47 - Snapshot local preparado</p></div>
+              </div>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="arquivo">
+            <article class="archive-view">
+              <div class="archive-heading">
+                <div>
+                  <p class="eyebrow">Arquivo</p>
+                  <h1>Seus cadernos sobre a mesa</h1>
+                </div>
+                <button class="primary-button" data-action="new-manuscript">
+                  <span class="material-symbols-outlined">add</span>
+                  Novo caderno
+                </button>
+              </div>
+
+              <div class="project-grid" data-project-grid></div>
+              <div class="resource-grid">
+                <a class="project-card utility" href="#">
+                  <span class="material-symbols-outlined">groups</span>
+                  <h2>Personagens</h2>
+                  <p>42 perfis detalhados.</p>
+                </a>
+                <a class="project-card utility" href="#">
+                  <span class="material-symbols-outlined">map</span>
+                  <h2>Cenários</h2>
+                  <p>18 lugares catalogados.</p>
+                </a>
+              </div>
+            </article>
+          </section>
+        </main>
+
+        <aside class="inspector">
+          <div class="inspector-section">
+            <h2>Análise Linguística</h2>
+            <div class="live-number">
+              <strong data-stat="wpm">65</strong>
+              <span>WPM</span>
+            </div>
+          </div>
+
+          <div class="inspector-section">
+            <h3>Termos frequentes</h3>
+            <div class="word-cloud">
+              <button>terra (4)</button>
+              <button>água (3)</button>
+              <button>sol (2)</button>
+              <button>seca (2)</button>
+              <button>barro (2)</button>
+            </div>
+          </div>
+
+          <div class="inspector-section">
+            <h3>Distribuição gramatical</h3>
+            <div class="grammar-bar" aria-label="Distribuição gramatical">
+              <span style="--w: 30%; --c: var(--primary)"></span>
+              <span style="--w: 20%; --c: var(--ochre)"></span>
+              <span style="--w: 15%; --c: var(--sienna)"></span>
+              <span style="--w: 15%; --c: var(--sage)"></span>
+              <span style="--w: 20%; --c: var(--cedar)"></span>
+            </div>
+            <ul class="legend">
+              <li><i style="--c: var(--primary)"></i>Substantivo <b>30%</b></li>
+              <li><i style="--c: var(--ochre)"></i>Verbo <b>20%</b></li>
+              <li><i style="--c: var(--sienna)"></i>Adjetivo <b>15%</b></li>
+              <li><i style="--c: var(--sage)"></i>Pronome <b>15%</b></li>
+            </ul>
+          </div>
+
+          <div class="inspector-section readability">
+            <h3>Legibilidade Flesch-BR</h3>
+            <div>
+              <strong>82</strong>
+              <span>Fácil<br><small>Vocabulário acessível</small></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="focus-toolbar" aria-label="Controles do modo foco">
+        <button class="icon-button" data-action="exit-focus" aria-label="Sair do modo foco" title="Sair">
+          <span class="material-symbols-outlined">fullscreen_exit</span>
+        </button>
+        <div class="focus-control">
+          <span class="material-symbols-outlined">format_size</span>
+          <label for="font-size-control">Texto</label>
+          <input id="font-size-control" type="range" min="17" max="24" step="1" value="19" data-focus-setting="fontSize">
+        </div>
+        <div class="focus-control">
+          <span class="material-symbols-outlined">width</span>
+          <label for="width-control">Largura</label>
+          <input id="width-control" type="range" min="620" max="860" step="20" value="720" data-focus-setting="width">
+        </div>
+        <button class="focus-pill" data-action="toggle-ruler" aria-pressed="false">
+          <span class="material-symbols-outlined">view_day</span>
+          Régua
+        </button>
+      </div>
+
+      <div class="focus-counter" data-focus-count>0 palavras</div>
+      <div class="focus-ruler" aria-hidden="true"></div>
+
+      <footer class="statusbar">
+        <span>Vereda Editor - Prova de Humanidade Ativa</span>
+        <span data-stat="count">186 palavras · 4 parágrafos</span>
+        <span data-save-status>Pronto para escrever</span>
+      </footer>
+    </div>
+
+    <script src="lexical-engine.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
