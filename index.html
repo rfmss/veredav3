@@ -223,6 +223,33 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               </div>
               <input type="file" accept=".vrda,application/json" data-backup-input hidden>
 
+              <section class="template-studio" aria-label="Templates guiados">
+                <div class="template-copy">
+                  <p class="eyebrow">Templates guiados</p>
+                  <h2>Comece do jeito que a sua forma pede</h2>
+                  <p>Roteiro, flash, crônica ou poema não precisam nascer do mesmo vazio. Escolha um caminho e abra um manuscrito já preparado.</p>
+                  <div class="template-tabs" data-template-tabs></div>
+                </div>
+                <div class="template-phone" aria-live="polite">
+                  <div class="template-phone-bar">
+                    <span>Vereda</span>
+                    <span class="material-symbols-outlined">offline_bolt</span>
+                  </div>
+                  <div class="template-screen" data-template-screen></div>
+                  <div class="template-nav">
+                    <button class="secondary-button" data-template-prev>
+                      <span class="material-symbols-outlined">arrow_back</span>
+                      Anterior
+                    </button>
+                    <span data-template-step-label>tela 1 de 4</span>
+                    <button class="secondary-button" data-template-next>
+                      Próxima
+                      <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
               <div class="archive-layout">
                 <div class="project-grid" data-project-grid></div>
                 <aside class="archive-detail-panel">
@@ -361,6 +388,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     <script src="archive-engine.js"></script>
     <script src="version-engine.js"></script>
     <script src="export-engine.js"></script>
+    <script src="template-engine.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

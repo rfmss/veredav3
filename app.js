@@ -60,10 +60,17 @@ const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
+const templateTabs = document.querySelector("[data-template-tabs]");
+const templateScreen = document.querySelector("[data-template-screen]");
+const templateStepLabel = document.querySelector("[data-template-step-label]");
 
 let state = loadState();
 let saveTimer;
 let deferredInstallPrompt;
+let templateState = {
+  activeId: "roteiro-tv",
+  step: 0,
+};
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -393,6 +400,24 @@ function createManuscript() {
   titleInput.select();
 }
 
+function createManuscriptFromTemplate(templateId) {
+  const templateManuscript = VeredaTemplates.createManuscript(templateId, {
+    id: `manuscrito-${Date.now()}`,
+  });
+  const manuscript = VeredaArchive.createManuscript(templateManuscript);
+
+  state.manuscripts.unshift(manuscript);
+  state.activeId = manuscript.id;
+  renderActiveManuscript();
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
+  persistState("Template aplicado");
+  setView("editor");
+  titleInput.focus();
+  titleInput.select();
+}
+
 function ensureInitialVersion(manuscript) {
   if (VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id).length > 0) {
     return;
@@ -588,6 +613,87 @@ function renderVersionList() {
     .join("");
 }
 
+function renderTemplateStudio() {
+  const templates = VeredaTemplates.listTemplates();
+  const activeTemplate = VeredaTemplates.getTemplate(templateState.activeId);
+  const activeStep = VeredaTemplates.getStep(templateState.activeId, templateState.step);
+
+  templateTabs.innerHTML = templates
+    .map((template) => {
+      const isActive = template.id === activeTemplate.id ? " is-active" : "";
+
+      return `
+        <button class="template-tab${isActive}" data-template-select="${template.id}">
+          <span class="material-symbols-outlined">${template.icon}</span>
+          ${escapeHtml(template.label)}
+        </button>
+      `;
+    })
+    .join("");
+
+  templateStepLabel.textContent = `tela ${activeStep.index + 1} de ${activeStep.total}`;
+  templateScreen.innerHTML = createTemplateStepMarkup(activeTemplate, activeStep);
+}
+
+function createTemplateStepMarkup(template, step) {
+  const dots = Array.from({ length: step.total }, (_, index) => `<i${index === step.index ? ' class="is-active"' : ""}></i>`).join("");
+  const items = Array.isArray(step.items) && step.items.length ? createTemplateItemsMarkup(step.items) : "";
+  const tip = step.tip ? `<p class="template-tip">${escapeHtml(step.tip)}</p>` : "";
+  const secondary = step.secondary ? `<button class="template-secondary" data-template-next>${escapeHtml(step.secondary)}</button>` : "";
+  const isLastStep = step.index === step.total - 1;
+  const primaryAction = isLastStep ? `data-template-use="${template.id}"` : "data-template-next";
+
+  return `
+    <div class="template-dots">${dots}</div>
+    <div class="template-icon">
+      <span class="material-symbols-outlined">${template.icon}</span>
+    </div>
+    <p class="template-eyebrow">${escapeHtml(step.eyebrow)}</p>
+    <h3>${escapeHtml(step.title)}</h3>
+    <p>${escapeHtml(step.body)}</p>
+    ${tip}
+    ${items}
+    <button class="template-primary" ${primaryAction}>${escapeHtml(step.primary)}</button>
+    ${secondary}
+  `;
+}
+
+function createTemplateItemsMarkup(items) {
+  return `
+    <div class="template-checklist">
+      ${items
+        .map(([title, subtitle, status]) => {
+          const icon = status === "done" ? "check" : status === "info" ? "info" : status === "warn" ? "priority_high" : "";
+
+          return `
+            <div class="template-check-item" data-status="${escapeHtml(status)}">
+              <span class="template-check-icon">${icon ? `<span class="material-symbols-outlined">${icon}</span>` : ""}</span>
+              <div>
+                <strong>${escapeHtml(title)}</strong>
+                <small>${escapeHtml(subtitle)}</small>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function selectTemplate(templateId) {
+  templateState = {
+    activeId: templateId,
+    step: 0,
+  };
+  renderTemplateStudio();
+}
+
+function changeTemplateStep(direction) {
+  const template = VeredaTemplates.getTemplate(templateState.activeId);
+  templateState.step = Math.min(Math.max(templateState.step + direction, 0), template.steps.length - 1);
+  renderTemplateStudio();
+}
+
 async function exportProof() {
   const manuscript = getActiveManuscript();
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
@@ -751,10 +857,38 @@ document.addEventListener("click", (event) => {
   }
 
   const versionTarget = event.target.closest("[data-version-restore]");
+  const templateSelectTarget = event.target.closest("[data-template-select]");
+  const templateUseTarget = event.target.closest("[data-template-use]");
+  const templateNextTarget = event.target.closest("[data-template-next]");
+  const templatePrevTarget = event.target.closest("[data-template-prev]");
 
   if (versionTarget) {
     event.preventDefault();
     restoreVersion(versionTarget.dataset.versionRestore);
+    return;
+  }
+
+  if (templateSelectTarget) {
+    event.preventDefault();
+    selectTemplate(templateSelectTarget.dataset.templateSelect);
+    return;
+  }
+
+  if (templateUseTarget) {
+    event.preventDefault();
+    createManuscriptFromTemplate(templateUseTarget.dataset.templateUse);
+    return;
+  }
+
+  if (templateNextTarget) {
+    event.preventDefault();
+    changeTemplateStep(1);
+    return;
+  }
+
+  if (templatePrevTarget) {
+    event.preventDefault();
+    changeTemplateStep(-1);
     return;
   }
 
@@ -873,6 +1007,7 @@ renderMetadataForm();
 renderLexicalView();
 renderProofView();
 renderVersionList();
+renderTemplateStudio();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

@@ -437,3 +437,34 @@ Próximas etapas sugeridas:
 - Criar `template-engine.js` com templates locais por gênero/ofício.
 - Adicionar seletor de template no Arquivo do Escritor.
 - Fazer cada template gerar um manuscrito `.vrda` normal, com metadados e placeholders editáveis.
+
+## 2026-04-27 - Primeiro estúdio de templates guiados
+
+Decidimos dissolver o onboarding externo de roteiro/flash fiction dentro do Vereda como uma área nativa do Arquivo, não como uma página separada.
+
+Foi criado o módulo `template-engine.js`, responsável por guardar templates locais por gênero/ofício e transformar cada template em manuscrito real. O `app.js` continua apenas orquestrando a interface: selecionar template, avançar/voltar passos e criar o manuscrito no editor.
+
+O primeiro recorte inclui:
+
+- Roteiro de TV, com teaser, atos e gancho.
+- Flash fiction, com imagem âncora, tensão, virada e fechamento.
+- Onboarding em passos antes de criar o manuscrito.
+- Placeholders dentro do texto criado, para o escritor substituir direto no editor.
+- Metadados iniciais de tipo, marco atual, descrição e progresso.
+
+Contraproposta aplicada:
+
+- O HTML externo foi absorvido como experiência de produto, mas sem copiar sua estrutura isolada.
+- Ícones SVG inline foram substituídos por Material Symbols, mantendo o sistema visual do Vereda.
+- A experiência ficou dentro do Arquivo do Escritor, onde templates fazem sentido como ponto de partida.
+- O template final vira manuscrito comum do Vereda e entra no fluxo offline, `.vrda`, versões e exportações.
+
+Formulação curta para comunicação:
+
+> Um roteiro e um flash não começam do mesmo vazio. No Vereda, cada forma abre uma mesa preparada.
+
+Próximas etapas sugeridas:
+
+- Adicionar mais templates: crônica, conto curto, ensaio, matéria jornalística, romance resumido e ficha de personagem.
+- Melhorar placeholders para seções clicáveis/selecionáveis dentro do editor.
+- Criar filtro por ofício: roteirista, ficcionista, poeta, ensaísta e jornalista.

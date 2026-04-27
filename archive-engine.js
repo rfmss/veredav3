@@ -22,16 +22,17 @@
     return manuscripts.map(normalizeManuscript);
   }
 
-  function createManuscript({ id, title, text }) {
+  function createManuscript({ id, title, text, ...metadata }) {
     return normalizeManuscript({
       id,
       title,
       text,
-      kind: DEFAULT_METADATA.kind,
-      status: DEFAULT_METADATA.status,
-      chapter: DEFAULT_METADATA.chapter,
-      progress: DEFAULT_METADATA.progress,
-      description: DEFAULT_METADATA.description,
+      kind: metadata.kind || DEFAULT_METADATA.kind,
+      status: metadata.status || DEFAULT_METADATA.status,
+      chapter: metadata.chapter || DEFAULT_METADATA.chapter,
+      progress: metadata.progress ?? DEFAULT_METADATA.progress,
+      description: metadata.description || DEFAULT_METADATA.description,
+      templateId: metadata.templateId,
       updatedAt: new Date().toISOString(),
     });
   }
