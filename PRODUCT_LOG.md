@@ -607,3 +607,35 @@ Próximas etapas sugeridas:
 - Criar seção de recentes no topo do Arquivo.
 - Permitir fixar documentos importantes.
 - Adicionar tags locais aos documentos.
+
+## 2026-04-27 - Fechamento da sessão de trabalho
+
+Pausamos o desenvolvimento ao final da etapa de busca local no Arquivo.
+
+Estado atual do Vereda:
+
+- App offline-first com PWA e cache versionado.
+- `app.js` mantido como orquestrador de interface/estado.
+- Motores separados: léxico, prova de escrita, `.vrda`, backup, arquivo, versões, exportação, templates e precisão.
+- `.vrda` definido como formato nativo versionado.
+- Criação explícita por "Nova nota": nota rápida, manuscrito em branco ou a partir do template consultivo.
+- Editor com painel consultivo lateral, lado esquerdo/direito e largura ajustável.
+- Medidores offline para Flash Fiction, Crônica, Conto curto e Ensaio.
+- Arquivo com filtros por tipo e busca local por título, descrição, metadados e conteúdo.
+- Prova de Escrita com sessões nomeadas e exportação `.proof.json`.
+
+Decisões importantes para lembrar:
+
+- O Vereda não terá IA atuando no funcionamento core.
+- Templates são consultivos: ajudam a escrever, mas não substituem a página branca.
+- O score mede aderência ao formato escolhido, não qualidade literária absoluta.
+- Tudo que for nativo do produto entra e sai como `.vrda`; TXT/MD seguem como exportações externas.
+- Motion e cores precisam comunicar; onde o movimento resolver comunicação, preferir motion discreto a texto explicativo.
+
+Próximas etapas sugeridas para retomada:
+
+- Criar seção de recentes no topo do Arquivo.
+- Permitir fixar documentos importantes.
+- Adicionar tags locais aos documentos.
+- Refinar o painel consultivo com opção de ocultar/mostrar.
+- Calibrar os medidores com exemplos reais de cada formato.
