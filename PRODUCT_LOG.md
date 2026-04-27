@@ -2,6 +2,18 @@
 
 Este arquivo registra decisões importantes tomadas durante a construção do Vereda. A intenção é servir tanto como memória técnica do projeto quanto como matéria-prima para posts futuros no blog do produto.
 
+## Regra do log
+
+Cada nova entrada relevante deve registrar:
+
+- a decisão tomada;
+- por que ela importa para o produto;
+- benefícios esperados;
+- formulação curta para comunicação;
+- próximas etapas sugeridas.
+
+Essa regra existe para manter continuidade entre sessões, reduzir decisões soltas e evitar que o projeto perca o fio do próprio raciocínio.
+
 ## 2026-04-27 - App leve, modular e offline
 
 Decidimos manter o `app.js` como um orquestrador da interface e do estado geral da aplicação, evitando que ele acumule regras de domínio.
@@ -135,3 +147,9 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > O Vereda guarda rastros locais da travessia: versões que permitem ao autor ousar sem perder o caminho de volta.
+
+Próximas etapas sugeridas:
+
+- Exportação simples do manuscrito em `.txt` e `.md`.
+- Melhorias na Prova de Escrita por sessão/data.
+- Expansão da Biblioteca Gramatical com léxico local separado.
