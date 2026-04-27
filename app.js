@@ -583,8 +583,8 @@ function exportBackup() {
   const backup = VeredaBackup.createBackup(state);
   const backupJson = JSON.stringify(backup, null, 2);
   const dateStamp = new Date().toISOString().slice(0, 10);
-  downloadFile(backupJson, `vereda-acervo-${dateStamp}.vereda.json`, "application/json");
-  saveStatus.textContent = "Acervo exportado";
+  downloadFile(backupJson, `vereda-acervo-${dateStamp}.vrda`, "application/vnd.vereda+json");
+  saveStatus.textContent = "Acervo .vrda exportado";
 }
 
 function exportCurrentManuscript(format) {

@@ -22,6 +22,11 @@
 
   function readBackup(file) {
     return new Promise((resolve, reject) => {
+      if (!file.name.endsWith(".vrda")) {
+        reject(new Error("Importe apenas arquivos nativos .vrda."));
+        return;
+      }
+
       const reader = new FileReader();
 
       reader.addEventListener("load", () => {

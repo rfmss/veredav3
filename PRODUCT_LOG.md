@@ -95,7 +95,7 @@ Formulação curta para comunicação:
 
 Decidimos adicionar exportação e importação do acervo local como um módulo separado, `backup-engine.js`.
 
-O Vereda salva manuscritos, preferências, seleção lexical e provas de escrita no navegador. Isso é bom para privacidade e funcionamento offline, mas também exige uma saída clara para o autor levar seus dados consigo. Por isso, a tela Arquivo ganhou ações para exportar um `.vereda.json` e importar esse arquivo depois.
+O Vereda salva manuscritos, preferências, seleção lexical e provas de escrita no navegador. Isso é bom para privacidade e funcionamento offline, mas também exige uma saída clara para o autor levar seus dados consigo. Por isso, a tela Arquivo ganhou ações para exportar um `.vrda` e importar esse arquivo depois.
 
 O backup não depende de conta, nuvem ou servidor. Ele é um pacote local que o autor pode guardar onde quiser. Essa escolha reforça a soberania do usuário: o navegador é a mesa de trabalho, mas o acervo pertence ao escritor.
 
@@ -141,7 +141,7 @@ Benefícios esperados:
 
 - Mais segurança para revisão e experimentação.
 - Recuperação local de versões anteriores.
-- Histórico acompanha backups `.vereda.json`.
+- Histórico acompanha backups `.vrda`.
 - O motor de versionamento evolui separado do `app.js`.
 
 Formulação curta para comunicação:
@@ -232,3 +232,28 @@ Próximas etapas sugeridas:
 - Melhorar a Prova de Escrita com sessões nomeadas por data.
 - Separar e expandir o léxico local da Biblioteca Gramatical.
 - Criar painel de configurações reais do editor.
+
+## 2026-04-27 - `.vrda` como formato nativo do Vereda
+
+Decidimos criar a extensão `.vrda` como formato nativo do Vereda.
+
+A partir desta decisão, tudo que representa acervo interno da ferramenta deve entrar e sair como `.vrda`. Exportações como `.txt` e `.md` continuam existindo, mas são saídas de leitura/interoperabilidade, não formatos nativos de restauração do app. Importação de acervo passa a aceitar apenas arquivos `.vrda`.
+
+Essa decisão ajuda a separar duas ideias importantes: o texto aberto que o autor pode levar para qualquer editor, e o pacote Vereda que preserva manuscritos, metadados, versões, provas de escrita e preferências locais.
+
+Benefícios esperados:
+
+- O formato nativo fica reconhecível e próprio do produto.
+- Reduz risco de importar JSON genérico por engano.
+- Abre caminho para validação mais rígida de arquivos Vereda.
+- Ajuda na comunicação: `.vrda` é o caderno portátil do autor dentro do ecossistema.
+
+Formulação curta para comunicação:
+
+> `.vrda` é o caderno nativo do Vereda: não apenas texto, mas acervo, processo, versões e autoria em um pacote local.
+
+Próximas etapas sugeridas:
+
+- Adicionar versão/schema explícito no `.vrda` para migrações futuras.
+- Melhorar a Prova de Escrita com sessões nomeadas por data.
+- Separar e expandir o léxico local da Biblioteca Gramatical.
