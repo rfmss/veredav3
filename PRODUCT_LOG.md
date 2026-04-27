@@ -554,3 +554,28 @@ Próximas etapas sugeridas:
 - Separar visualmente notas rápidas de manuscritos longos no Arquivo.
 - Adicionar busca/filtro por tipo de documento.
 - Criar atalho de teclado para abrir "Nova nota".
+
+## 2026-04-27 - Arquivo filtrável por tipo
+
+Decidimos melhorar a recuperação dos documentos depois de melhorar a criação.
+
+O Arquivo agora separa visualmente os documentos por tipo:
+
+- Todos.
+- Notas rápidas.
+- Manuscritos.
+- Templates.
+
+Cada filtro mostra contador próprio, e os cards passam a indicar tipo com ícone e rótulo. A classificação usa dados locais já existentes: `templateId`, `kind` e o prefixo de notas rápidas. Nada muda no formato `.vrda`; é uma camada de organização visual e de navegação.
+
+Benefícios esperados:
+
+- O escritor encontra notas rápidas sem misturar com textos longos.
+- Templates criados ficam reconhecíveis no acervo.
+- O Arquivo começa a parecer menos uma lista única e mais uma mesa organizada.
+
+Próximas etapas sugeridas:
+
+- Adicionar busca textual por título/descrição/conteúdo.
+- Criar seção de recentes no topo do Arquivo.
+- Permitir fixar documentos importantes.

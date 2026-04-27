@@ -60,6 +60,7 @@ const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
+const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
@@ -89,6 +90,7 @@ function loadState() {
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
       template: getDefaultTemplateState(),
+      archive: getDefaultArchiveState(),
       proofs: {},
       versions: {},
     };
@@ -116,6 +118,10 @@ function loadState() {
         ...getDefaultTemplateState(),
         ...parsed.template,
       },
+      archive: {
+        ...getDefaultArchiveState(),
+        ...parsed.archive,
+      },
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
     };
@@ -126,6 +132,7 @@ function loadState() {
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
       template: getDefaultTemplateState(),
+      archive: getDefaultArchiveState(),
       proofs: {},
       versions: {},
     };
@@ -151,6 +158,12 @@ function getDefaultTemplateState() {
     selectedId: "flash-fiction",
     side: "left",
     width: 340,
+  };
+}
+
+function getDefaultArchiveState() {
+  return {
+    filter: "all",
   };
 }
 
@@ -332,15 +345,33 @@ function renderManuscriptNavigation() {
 }
 
 function renderProjectGrid() {
-  projectGrid.innerHTML = state.manuscripts
+  renderArchiveFilters();
+
+  const filteredManuscripts = state.manuscripts.filter((manuscript) =>
+    state.archive.filter === "all" || getArchiveType(manuscript).id === state.archive.filter
+  );
+
+  if (!filteredManuscripts.length) {
+    projectGrid.innerHTML = `
+      <div class="archive-empty">
+        <span class="material-symbols-outlined">inventory_2</span>
+        <strong>Nada aqui ainda</strong>
+        <p>Crie uma nova nota ou mude o filtro para ver outros documentos.</p>
+      </div>
+    `;
+    return;
+  }
+
+  projectGrid.innerHTML = filteredManuscripts
     .map((manuscript, index) => {
       const words = countWords(manuscript.text);
       const featured = index === 0 ? " featured" : "";
       const selected = manuscript.id === state.activeId ? " is-selected" : "";
+      const type = getArchiveType(manuscript);
 
       return `
-        <button class="project-card${featured}${selected}" type="button" data-archive-select="${manuscript.id}">
-          <span>${escapeHtml(manuscript.kind)} · ${escapeHtml(manuscript.status)}</span>
+        <button class="project-card${featured}${selected}" type="button" data-archive-select="${manuscript.id}" data-document-type="${type.id}">
+          <span class="project-type"><i class="material-symbols-outlined">${type.icon}</i>${escapeHtml(type.label)} · ${escapeHtml(manuscript.status)}</span>
           <h2>${escapeHtml(manuscript.title)}</h2>
           <p>${escapeHtml(manuscript.description || createExcerpt(manuscript.text))}</p>
           <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
@@ -351,6 +382,69 @@ function renderProjectGrid() {
       `;
     })
     .join("");
+}
+
+function renderArchiveFilters() {
+  const counts = getArchiveTypeCounts();
+  const filters = [
+    ["all", "Todos", "inventory_2"],
+    ["quick-note", "Notas rápidas", "bolt"],
+    ["blank", "Manuscritos", "description"],
+    ["template", "Templates", "view_sidebar"],
+  ];
+
+  archiveFilterBar.innerHTML = filters
+    .map(([id, label, icon]) => {
+      const isActive = state.archive.filter === id ? " is-active" : "";
+      const count = id === "all" ? state.manuscripts.length : counts[id] || 0;
+
+      return `
+        <button class="archive-filter${isActive}" data-archive-filter="${id}">
+          <span class="material-symbols-outlined">${icon}</span>
+          ${label}
+          <b>${count}</b>
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function getArchiveTypeCounts() {
+  return state.manuscripts.reduce((counts, manuscript) => {
+    const type = getArchiveType(manuscript);
+    counts[type.id] = (counts[type.id] || 0) + 1;
+    return counts;
+  }, {});
+}
+
+function getArchiveType(manuscript) {
+  if (manuscript.templateId) {
+    return {
+      id: "template",
+      label: "Template",
+      icon: "view_sidebar",
+    };
+  }
+
+  if (manuscript.kind === "Nota rápida" || manuscript.id?.startsWith("nota-")) {
+    return {
+      id: "quick-note",
+      label: "Nota rápida",
+      icon: "bolt",
+    };
+  }
+
+  return {
+    id: "blank",
+    label: "Manuscrito",
+    icon: "description",
+  };
+}
+
+function setArchiveFilter(filter) {
+  state.archive.filter = filter;
+  renderProjectGrid();
+  persistState("Filtro do arquivo aplicado");
 }
 
 function renderMetadataForm() {
@@ -790,6 +884,10 @@ async function importBackup(file) {
     state = VeredaBackup.restoreBackup(state, backup);
     state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
     state.versions = state.versions || {};
+    state.archive = {
+      ...getDefaultArchiveState(),
+      ...state.archive,
+    };
     renderActiveManuscript();
     renderManuscriptNavigation();
     renderProjectGrid();
@@ -1021,6 +1119,7 @@ document.addEventListener("click", (event) => {
   const templateNextTarget = event.target.closest("[data-template-next]");
   const templatePrevTarget = event.target.closest("[data-template-prev]");
   const referenceTemplateTarget = event.target.closest("[data-reference-template]");
+  const archiveFilterTarget = event.target.closest("[data-archive-filter]");
 
   if (versionTarget) {
     event.preventDefault();
@@ -1055,6 +1154,12 @@ document.addEventListener("click", (event) => {
   if (referenceTemplateTarget) {
     event.preventDefault();
     selectReferenceTemplate(referenceTemplateTarget.dataset.referenceTemplate);
+    return;
+  }
+
+  if (archiveFilterTarget) {
+    event.preventDefault();
+    setArchiveFilter(archiveFilterTarget.dataset.archiveFilter);
     return;
   }
 

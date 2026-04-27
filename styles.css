@@ -1110,6 +1110,54 @@ mark {
   justify-content: flex-end;
 }
 
+.archive-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -12px 0 22px;
+}
+
+.archive-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--soft-ink);
+  cursor: pointer;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
+}
+
+.archive-filter:hover,
+.archive-filter.is-active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.archive-filter .material-symbols-outlined {
+  font-size: 17px;
+}
+
+.archive-filter b {
+  min-width: 22px;
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--primary);
+  padding: 2px 6px;
+  text-align: center;
+}
+
+.archive-filter.is-active b,
+.archive-filter:hover b {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
 .template-studio {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
@@ -1478,6 +1526,55 @@ mark {
 .project-card p {
   color: var(--soft-ink);
   line-height: 1.55;
+}
+
+.project-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.project-type i {
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.project-card[data-document-type="quick-note"] {
+  background: linear-gradient(135deg, #fff, #f8fbf5);
+}
+
+.project-card[data-document-type="template"] {
+  background: linear-gradient(135deg, #fff, #f6f8f7);
+}
+
+.archive-empty {
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--muted);
+  padding: 24px;
+  text-align: center;
+}
+
+.archive-empty .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 34px;
+}
+
+.archive-empty strong {
+  color: var(--ink);
+  margin-top: 8px;
+}
+
+.archive-empty p {
+  max-width: 280px;
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .project-progress {
