@@ -345,3 +345,37 @@ Próximas etapas sugeridas:
 - Adicionar versão/schema explícito no `.vrda`.
 - Criar `template-engine.js` com templates locais por gênero/ofício.
 - Rever a primeira linha de comunicação do app com linguagem mais acolhedora e menos técnica.
+
+## 2026-04-27 - Schema explícito do `.vrda`
+
+Decidimos formalizar o `.vrda` como envelope nativo versionado, separado da lógica de backup.
+
+Foi criado o módulo `vrda-engine.js`, responsável por gerar e validar o envelope do arquivo. O backup agora produz um payload de acervo e o `vrda-engine` embrulha esse payload com `format`, `schemaVersion`, `createdWith`, `exportedAt` e `checksum`.
+
+Estrutura atual do envelope:
+
+- `format: "vrda"`.
+- `schemaVersion: 1`.
+- `createdWith: ".vrda - editor"`.
+- `exportedAt` em ISO 8601.
+- `checksum` simples do payload ordenado.
+- `payload` com manuscritos, metadados, versões, provas, foco e estado lexical.
+
+Essa decisão prepara o Vereda para migrações futuras. Se o formato interno mudar, poderemos reconhecer versões antigas, migrar dados e mostrar erros mais claros, em vez de tratar todo arquivo como JSON genérico.
+
+Benefícios esperados:
+
+- `.vrda` ganha identidade técnica própria.
+- Importação fica mais segura e previsível.
+- Futuras migrações de dados ficam possíveis.
+- O formato nativo pode ser documentado publicamente.
+
+Formulação curta para comunicação:
+
+> `.vrda` deixa de ser só uma extensão: passa a ser um envelope versionado para carregar o acervo vivo do escritor.
+
+Próximas etapas sugeridas:
+
+- Melhorar a Prova de Escrita com sessões nomeadas por data e timestamp com segundos.
+- Criar `template-engine.js` com templates locais por gênero/ofício.
+- Separar e expandir o léxico local da Biblioteca Gramatical.
