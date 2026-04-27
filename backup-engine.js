@@ -15,6 +15,7 @@
         focus: state.focus,
         lexical: state.lexical,
         proofs: state.proofs,
+        versions: state.versions,
       },
     };
   }
@@ -63,6 +64,7 @@
       focus: data.focus || currentState.focus,
       lexical: data.lexical || currentState.lexical,
       proofs: data.proofs || {},
+      versions: data.versions || {},
     };
   }
 

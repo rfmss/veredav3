@@ -58,6 +58,7 @@ const backupInput = document.querySelector("[data-backup-input]");
 const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
+const versionList = document.querySelector("[data-version-list]");
 
 let state = loadState();
 let saveTimer;
@@ -73,6 +74,7 @@ function loadState() {
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
       proofs: {},
+      versions: {},
     };
   }
 
@@ -95,6 +97,7 @@ function loadState() {
         ...parsed.lexical,
       },
       proofs: parsed.proofs || {},
+      versions: parsed.versions || {},
     };
   } catch {
     return {
@@ -103,6 +106,7 @@ function loadState() {
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
       proofs: {},
+      versions: {},
     };
   }
 }
@@ -242,6 +246,7 @@ function setActiveManuscript(id) {
   renderProjectGrid();
   renderMetadataForm();
   renderProofView();
+  renderVersionList();
   persistState("Manuscrito aberto");
   setView("editor");
 }
@@ -252,6 +257,7 @@ function selectArchiveManuscript(id) {
   renderProjectGrid();
   renderMetadataForm();
   renderProofView();
+  renderVersionList();
   persistState("Projeto selecionado");
 }
 
@@ -263,6 +269,8 @@ function renderActiveManuscript() {
   renderLexicalView();
   renderMetadataForm();
   renderProofView();
+  ensureInitialVersion(manuscript);
+  renderVersionList();
 }
 
 function renderManuscriptNavigation() {
@@ -328,6 +336,7 @@ function updateCurrentManuscript() {
   renderMetadataForm();
   renderManuscriptNavigation();
   renderProjectGrid();
+  maybeCreateAutoVersion(nextManuscript);
   queueSave();
 }
 
@@ -346,6 +355,7 @@ function updateCurrentMetadata() {
   renderManuscriptNavigation();
   renderProjectGrid();
   renderMetadataForm();
+  maybeCreateAutoVersion(nextManuscript);
   queueSave();
 }
 
@@ -372,6 +382,55 @@ function createManuscript() {
   setView("editor");
   titleInput.focus();
   titleInput.select();
+}
+
+function ensureInitialVersion(manuscript) {
+  if (VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id).length > 0) {
+    return;
+  }
+
+  const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Primeira versão local");
+  state.versions = result.versions;
+}
+
+function maybeCreateAutoVersion(manuscript) {
+  if (!VeredaVersions.shouldCreateAutoSnapshot(state.versions, manuscript)) {
+    return;
+  }
+
+  const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Auto-save relevante");
+  state.versions = result.versions;
+  renderVersionList();
+}
+
+function createManualVersion() {
+  const manuscript = getActiveManuscript();
+  const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Versão manual");
+  state.versions = result.versions;
+  renderVersionList();
+  persistState("Versão criada");
+}
+
+function restoreVersion(versionId) {
+  const manuscript = getActiveManuscript();
+  const snapshot = VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id).find(
+    (version) => version.id === versionId
+  );
+
+  if (!snapshot) {
+    return;
+  }
+
+  const restoredManuscript = VeredaVersions.restoreSnapshot(manuscript, snapshot);
+  updateActiveManuscript(restoredManuscript);
+  renderActiveManuscript();
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
+  renderLexicalView();
+  renderProofView();
+  renderVersionList();
+  persistState("Versão restaurada");
 }
 
 function recordWritingProof(event) {
@@ -481,6 +540,37 @@ function renderProofView() {
     .join("");
 }
 
+function renderVersionList() {
+  const manuscript = getActiveManuscript();
+  const versions = VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id);
+
+  if (!versions.length) {
+    versionList.innerHTML = '<p class="muted">Nenhuma versão salva ainda.</p>';
+    return;
+  }
+
+  versionList.innerHTML = versions
+    .map((version) => {
+      const createdAt = new Date(version.createdAt).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      return `
+        <article class="version-item">
+          <div>
+            <strong>${escapeHtml(version.reason)}</strong>
+            <span>${createdAt} · ${version.wordCount} palavras</span>
+          </div>
+          <button class="secondary-button" data-version-restore="${version.id}">Restaurar</button>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 async function exportProof() {
   const manuscript = getActiveManuscript();
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofSession(), manuscript);
@@ -523,11 +613,13 @@ async function importBackup(file) {
     const backup = await VeredaBackup.readBackup(file);
     state = VeredaBackup.restoreBackup(state, backup);
     state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
+    state.versions = state.versions || {};
     renderActiveManuscript();
     renderManuscriptNavigation();
     renderProjectGrid();
     renderLexicalView();
     renderProofView();
+    renderVersionList();
     applyFocusSettings();
     persistState("Backup importado");
     setView("arquivo");
@@ -615,6 +707,14 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const versionTarget = event.target.closest("[data-version-restore]");
+
+  if (versionTarget) {
+    event.preventDefault();
+    restoreVersion(versionTarget.dataset.versionRestore);
+    return;
+  }
+
   if (viewTarget) {
     event.preventDefault();
     setView(viewTarget.dataset.viewTarget);
@@ -668,6 +768,10 @@ document.addEventListener("click", (event) => {
     setView("editor");
     writingArea.focus();
   }
+
+  if (actionTarget.dataset.action === "create-version") {
+    createManualVersion();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -717,6 +821,7 @@ renderProjectGrid();
 renderMetadataForm();
 renderLexicalView();
 renderProofView();
+renderVersionList();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

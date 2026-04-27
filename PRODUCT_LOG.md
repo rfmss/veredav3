@@ -116,3 +116,22 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > O Arquivo do Vereda deixa de ser uma estante passiva e passa a ser uma mesa de acompanhamento da obra em andamento.
+
+## 2026-04-27 - Histórico de versões local
+
+Decidimos adicionar histórico de versões como um motor separado, `version-engine.js`.
+
+O Vereda agora cria snapshots locais por manuscrito, com versões manuais e snapshots automáticos quando há uma mudança relevante no texto. Cada versão guarda texto, metadados editoriais e contagens básicas, permitindo restaurar um estado anterior sem depender de servidor ou conta.
+
+Essa decisão é importante porque escrita literária precisa de coragem para experimentar. Um histórico local reduz o medo de reescrever, cortar ou reorganizar. O autor pode voltar atrás, mas continua dono do processo e dos arquivos.
+
+Benefícios esperados:
+
+- Mais segurança para revisão e experimentação.
+- Recuperação local de versões anteriores.
+- Histórico acompanha backups `.vereda.json`.
+- O motor de versionamento evolui separado do `app.js`.
+
+Formulação curta para comunicação:
+
+> O Vereda guarda rastros locais da travessia: versões que permitem ao autor ousar sem perder o caminho de volta.
