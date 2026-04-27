@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v1";
+const CACHE_NAME = "vereda-offline-v2";
 
 const CORE_ASSETS = [
   "./",
@@ -6,6 +6,7 @@ const CORE_ASSETS = [
   "./styles.css",
   "./app.js",
   "./lexical-engine.js",
+  "./proof-engine.js",
   "./manifest.webmanifest",
   "./icons/vereda-icon.svg",
   "./icons/vereda-maskable.svg",

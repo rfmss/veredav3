@@ -586,6 +586,24 @@ mark {
   font-size: 27px;
 }
 
+.proof-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 16px;
+}
+
+.proof-actions p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .timeline {
   border-left: 1px solid var(--line);
   margin-left: 8px;
@@ -883,6 +901,11 @@ mark {
   }
 
   .archive-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .proof-actions {
     align-items: flex-start;
     flex-direction: column;
   }

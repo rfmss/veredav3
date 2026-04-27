@@ -42,6 +42,12 @@ const lexicalContext = document.querySelector("[data-lexical-context]");
 const lexicalCard = document.querySelector("[data-lexical-card]");
 const offlineStatus = document.querySelector("[data-offline-status]");
 const installButton = document.querySelector('[data-action="install-app"]');
+const proofIntegrity = document.querySelector("[data-proof-integrity]");
+const proofStatus = document.querySelector("[data-proof-status]");
+const proofOrganic = document.querySelector("[data-proof-organic]");
+const proofRejected = document.querySelector("[data-proof-rejected]");
+const proofCadence = document.querySelector("[data-proof-cadence]");
+const proofTimeline = document.querySelector("[data-proof-timeline]");
 
 let state = loadState();
 let saveTimer;
@@ -56,6 +62,7 @@ function loadState() {
       manuscripts: starterManuscripts,
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
+      proofs: {},
     };
   }
 
@@ -76,6 +83,7 @@ function loadState() {
         ...getDefaultLexicalState(),
         ...parsed.lexical,
       },
+      proofs: parsed.proofs || {},
     };
   } catch {
     return {
@@ -83,6 +91,7 @@ function loadState() {
       manuscripts: starterManuscripts,
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
+      proofs: {},
     };
   }
 }
@@ -108,6 +117,13 @@ function persistState(status = "Salvo localmente") {
 
 function getActiveManuscript() {
   return state.manuscripts.find((manuscript) => manuscript.id === state.activeId) || state.manuscripts[0];
+}
+
+function getActiveProofSession() {
+  const manuscript = getActiveManuscript();
+  const session = VeredaProof.createSession(state.proofs[manuscript.id]);
+  state.proofs[manuscript.id] = session;
+  return session;
 }
 
 function setView(viewName) {
@@ -207,6 +223,7 @@ function setActiveManuscript(id) {
   renderActiveManuscript();
   renderManuscriptNavigation();
   renderProjectGrid();
+  renderProofView();
   persistState("Manuscrito aberto");
   setView("editor");
 }
@@ -217,6 +234,7 @@ function renderActiveManuscript() {
   writingArea.innerText = manuscript.text;
   updateWritingStats();
   renderLexicalView();
+  renderProofView();
 }
 
 function renderManuscriptNavigation() {
@@ -293,6 +311,17 @@ function createManuscript() {
   titleInput.select();
 }
 
+function recordWritingProof(event) {
+  if (event.isComposing || event.ctrlKey || event.metaKey || event.altKey) {
+    return;
+  }
+
+  const manuscript = getActiveManuscript();
+  state.proofs[manuscript.id] = VeredaProof.recordKeyEvent(getActiveProofSession(), event);
+  renderProofView();
+  queueSave();
+}
+
 function captureSelectedWord(allowCollapsedSelection = false) {
   const selection = window.getSelection();
 
@@ -362,6 +391,47 @@ function renderLexicalView() {
   `;
 }
 
+function renderProofView() {
+  const session = getActiveProofSession();
+  const summary = VeredaProof.summarize(session);
+  const recentEvents = session.events.slice(-4).reverse();
+
+  proofIntegrity.textContent = `${summary.integrity}%`;
+  proofStatus.textContent = summary.status;
+  proofOrganic.textContent = summary.organicEvents;
+  proofRejected.textContent = `${summary.rejectedEvents} descartados`;
+  proofCadence.textContent = `${summary.cadenceWpm} WPM`;
+
+  if (!recentEvents.length) {
+    proofTimeline.innerHTML = "<div><span></span><p>Aguardando eventos confiáveis do editor.</p></div>";
+    return;
+  }
+
+  proofTimeline.innerHTML = recentEvents
+    .map((event) => {
+      const time = new Date(event.at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      const status = event.organic ? "evento orgânico" : "evento descartado";
+      const interval = event.interval === null ? "início da sessão" : `${event.interval}ms`;
+
+      return `<div><span></span><p>${time} - ${status} (${event.keyType}, ${interval})</p></div>`;
+    })
+    .join("");
+}
+
+async function exportProof() {
+  const manuscript = getActiveManuscript();
+  const proofDocument = await VeredaProof.createProofDocument(getActiveProofSession(), manuscript);
+  const proofJson = JSON.stringify(proofDocument, null, 2);
+  const blob = new Blob([proofJson], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${slugify(manuscript.title)}.proof.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+  saveStatus.textContent = "Prova de escrita exportada";
+}
+
 function updateWritingStats() {
   const text = writingArea.innerText.trim();
   const words = countWords(text);
@@ -413,6 +483,15 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "") || "manuscrito";
+}
+
 document.addEventListener("click", (event) => {
   const manuscriptTarget = event.target.closest("[data-manuscript-id]");
   const viewTarget = event.target.closest("[data-view-target]");
@@ -460,6 +539,10 @@ document.addEventListener("click", (event) => {
   if (actionTarget.dataset.action === "install-app") {
     installApp();
   }
+
+  if (actionTarget.dataset.action === "export-proof") {
+    exportProof();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -497,6 +580,7 @@ window.addEventListener("appinstalled", () => {
 
 titleInput.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("input", updateCurrentManuscript);
+writingArea.addEventListener("keydown", recordWritingProof);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
 
@@ -504,6 +588,7 @@ renderActiveManuscript();
 renderManuscriptNavigation();
 renderProjectGrid();
 renderLexicalView();
+renderProofView();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

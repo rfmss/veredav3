@@ -135,25 +135,31 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               <div class="certificate-grid">
                 <div class="metric-block">
                   <span>Integridade</span>
-                  <strong>98%</strong>
-                  <small>Eventos orgânicos detectados</small>
+                  <strong data-proof-integrity>0%</strong>
+                  <small data-proof-status>Aguardando escrita orgânica</small>
                 </div>
                 <div class="metric-block">
-                  <span>Hash SHA-256</span>
-                  <strong>7f8e...c4d2</strong>
-                  <small>Vinculado ao manuscrito atual</small>
+                  <span>Eventos orgânicos</span>
+                  <strong data-proof-organic>0</strong>
+                  <small data-proof-rejected>0 descartados</small>
                 </div>
                 <div class="metric-block">
                   <span>Cadência média</span>
-                  <strong>65 WPM</strong>
+                  <strong data-proof-cadence>0 WPM</strong>
                   <small>Intervalos entre 30ms e 2000ms</small>
                 </div>
               </div>
 
-              <div class="timeline">
-                <div><span></span><p>14:19 - Sessão iniciada</p></div>
-                <div><span></span><p>14:32 - 186 palavras autenticadas</p></div>
-                <div><span></span><p>14:47 - Snapshot local preparado</p></div>
+              <div class="proof-actions">
+                <button class="primary-button" data-action="export-proof">
+                  <span class="material-symbols-outlined">download</span>
+                  Baixar .proof.json
+                </button>
+                <p>O arquivo registra cadência e hash do texto, sem armazenar teclas literais.</p>
+              </div>
+
+              <div class="timeline" data-proof-timeline>
+                <div><span></span><p>Aguardando eventos confiáveis do editor.</p></div>
               </div>
             </article>
           </section>
@@ -266,6 +272,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     </div>
 
     <script src="lexical-engine.js"></script>
+    <script src="proof-engine.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

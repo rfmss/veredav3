@@ -57,3 +57,24 @@ Benefícios esperados:
 Formulação curta para comunicação:
 
 > O Vereda não quer ser apenas uma aba aberta: ele quer ser uma mesa de escrita instalada, local e pronta mesmo quando a rede desaparece.
+
+## 2026-04-27 - PoHW como motor local de autoria
+
+Decidimos implementar a Prova de Escrita Humana, PoHW, como um motor local separado em `proof-engine.js`.
+
+Esse módulo registra apenas metadados de cadência: intervalos entre teclas, tipo genérico do evento e se o evento foi considerado orgânico. Ele não armazena teclas literais nem envia texto para fora do navegador. A regra inicial considera orgânicos apenas eventos confiáveis (`isTrusted`) com intervalo entre 30ms e 2000ms.
+
+A aba Autoria passa a mostrar integridade, eventos orgânicos, eventos descartados e cadência média com base na escrita real do editor. Também foi adicionada a exportação de um `.proof.json`, contendo resumo, eventos de cadência e hash SHA-256 do texto atual.
+
+Essa decisão reforça o posicionamento do Vereda: proteger a autoria humana sem vigiar o conteúdo íntimo da escrita.
+
+Benefícios esperados:
+
+- A prova de autoria funciona offline e sem servidor.
+- O texto do autor permanece local.
+- O arquivo exportado pode acompanhar o manuscrito como evidência de processo.
+- O motor pode evoluir sem inflar o `app.js`.
+
+Formulação curta para comunicação:
+
+> A prova de autoria do Vereda não pergunta “quem escreveu por você?”; ela registra, localmente, o pulso humano da escrita.
