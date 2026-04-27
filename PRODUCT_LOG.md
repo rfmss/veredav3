@@ -468,3 +468,37 @@ Próximas etapas sugeridas:
 - Adicionar mais templates: crônica, conto curto, ensaio, matéria jornalística, romance resumido e ficha de personagem.
 - Melhorar placeholders para seções clicáveis/selecionáveis dentro do editor.
 - Criar filtro por ofício: roteirista, ficcionista, poeta, ensaísta e jornalista.
+
+## 2026-04-27 - Template consultivo ao lado do editor
+
+Decidimos mudar o papel dos templates.
+
+Em vez de transformar o template no próprio texto, o Vereda passa a tratar o template como um painel consultivo ao lado da página branca. O escritor escolhe o formato, consulta estrutura, lembretes e critérios, mas continua escrevendo em uma tela limpa e autoral.
+
+Primeira implementação:
+
+- Painel consultivo no editor, começando com Flash Fiction e Roteiro de TV.
+- Escolha de lado: template à esquerda ou à direita.
+- Divisor arrastável para ajustar quanto espaço fica para consulta e quanto fica para escrita.
+- Novo módulo `precision-engine.js`, com score local e fechado para Flash Fiction.
+- O score compara o texto com critérios do formato, sem IA, sem rede e sem julgamento literário absoluto.
+
+Critérios iniciais para Flash Fiction:
+
+- Limite de palavras.
+- Presença de imagem âncora.
+- Força da abertura.
+- Virada perceptível.
+- Fechamento em eco.
+- Compressão.
+- Respiração do texto.
+
+Formulação curta para comunicação:
+
+> O Vereda não diz se seu texto é bom. Ele mostra se o texto está cumprindo a forma que você escolheu.
+
+Próximas etapas sugeridas:
+
+- Refinar o score de Flash Fiction com critérios mais literários e calibrados.
+- Permitir ocultar/mostrar o painel consultivo com um botão.
+- Criar medidores próprios para crônica, conto curto, ensaio e roteiro.

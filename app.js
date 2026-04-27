@@ -63,6 +63,12 @@ const versionList = document.querySelector("[data-version-list]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
+const editorSplit = document.querySelector(".editor-split");
+const referenceTitle = document.querySelector("[data-reference-title]");
+const referenceTabs = document.querySelector("[data-reference-tabs]");
+const referenceBody = document.querySelector("[data-reference-body]");
+const precisionCard = document.querySelector("[data-precision-card]");
+const templateResizer = document.querySelector("[data-template-resizer]");
 
 let state = loadState();
 let saveTimer;
@@ -81,6 +87,7 @@ function loadState() {
       manuscripts: starterManuscripts,
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
+      template: getDefaultTemplateState(),
       proofs: {},
       versions: {},
     };
@@ -104,6 +111,10 @@ function loadState() {
         ...getDefaultLexicalState(),
         ...parsed.lexical,
       },
+      template: {
+        ...getDefaultTemplateState(),
+        ...parsed.template,
+      },
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
     };
@@ -113,6 +124,7 @@ function loadState() {
       manuscripts: starterManuscripts,
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
+      template: getDefaultTemplateState(),
       proofs: {},
       versions: {},
     };
@@ -130,6 +142,14 @@ function getDefaultFocusSettings() {
 function getDefaultLexicalState() {
   return {
     selectedWord: "terra",
+  };
+}
+
+function getDefaultTemplateState() {
+  return {
+    selectedId: "flash-fiction",
+    side: "left",
+    width: 340,
   };
 }
 
@@ -212,6 +232,11 @@ function applyFocusSettings() {
   });
 }
 
+function applyTemplateLayout() {
+  editorSplit.dataset.templateSide = state.template.side;
+  editorSplit.style.setProperty("--template-panel-width", `${state.template.width}px`);
+}
+
 function registerOfflineApp() {
   updateConnectionStatus();
 
@@ -283,6 +308,7 @@ function renderActiveManuscript() {
   writingArea.innerText = manuscript.text;
   updateWritingStats();
   renderLexicalView();
+  renderTemplateReference();
   renderMetadataForm();
   renderProofView();
   ensureInitialVersion(manuscript);
@@ -349,6 +375,7 @@ function updateCurrentManuscript() {
 
   updateWritingStats();
   renderLexicalView();
+  renderTemplateReference();
   renderMetadataForm();
   renderManuscriptNavigation();
   renderProjectGrid();
@@ -463,6 +490,7 @@ function restoreVersion(versionId) {
   renderMetadataForm();
   renderLexicalView();
   renderProofView();
+  renderTemplateReference();
   renderVersionList();
   persistState("Versão restaurada");
 }
@@ -760,6 +788,110 @@ function updateWritingStats() {
   wpmStat.textContent = wpm;
 }
 
+function renderTemplateReference() {
+  const template = VeredaTemplates.getTemplate(state.template.selectedId);
+  const analysis = VeredaPrecision.analyze(template, getActiveManuscript().text);
+
+  referenceTitle.textContent = template.label;
+  referenceTabs.innerHTML = VeredaTemplates.listTemplates()
+    .map((item) => {
+      const isActive = item.id === template.id ? " is-active" : "";
+
+      return `
+        <button class="reference-tab${isActive}" data-reference-template="${item.id}">
+          <span class="material-symbols-outlined">${item.icon}</span>
+          ${escapeHtml(item.label)}
+        </button>
+      `;
+    })
+    .join("");
+
+  precisionCard.innerHTML = createPrecisionMarkup(analysis);
+  referenceBody.innerHTML = createReferenceMarkup(template);
+}
+
+function createPrecisionMarkup(analysis) {
+  return `
+    <div class="precision-top">
+      <span>Precisão do formato</span>
+      <strong>${analysis.score}%</strong>
+    </div>
+    <div class="precision-meter" aria-label="Precisão do formato">
+      <i style="--score: ${analysis.score}%"></i>
+    </div>
+    <p>${escapeHtml(analysis.status)} · ${analysis.words}${analysis.limit ? `/${analysis.limit}` : ""} palavras</p>
+    <div class="precision-checks">
+      ${analysis.checks
+        .map(
+          (check) => `
+            <div class="precision-check${check.passed ? " is-passed" : ""}">
+              <span class="material-symbols-outlined">${check.passed ? "check_circle" : "radio_button_unchecked"}</span>
+              <div>
+                <strong>${escapeHtml(check.label)} <b>${check.score}%</b></strong>
+                <small>${escapeHtml(check.hint)}</small>
+              </div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function createReferenceMarkup(template) {
+  const guidance = template.guidance || { meta: [], sections: [], reminders: [] };
+
+  return `
+    <section>
+      <h3>Dados do formato</h3>
+      <div class="reference-pills">
+        ${guidance.meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+      </div>
+    </section>
+    <section>
+      <h3>Estrutura para consultar</h3>
+      <div class="reference-sections">
+        ${guidance.sections
+          .map(
+            ([title, description]) => `
+              <article>
+                <strong>${escapeHtml(title)}</strong>
+                <p>${escapeHtml(description)}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+    <section>
+      <h3>Lembretes de corte</h3>
+      <ul>
+        ${guidance.reminders.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function selectReferenceTemplate(templateId) {
+  state.template.selectedId = templateId;
+  renderTemplateReference();
+  persistState("Template consultivo selecionado");
+}
+
+function toggleTemplateSide() {
+  state.template.side = state.template.side === "left" ? "right" : "left";
+  applyTemplateLayout();
+  persistState("Lado do template ajustado");
+}
+
+function updateTemplateWidth(clientX) {
+  const bounds = editorSplit.getBoundingClientRect();
+  const rawWidth =
+    state.template.side === "left" ? clientX - bounds.left : bounds.right - clientX;
+  state.template.width = Math.min(520, Math.max(260, Math.round(rawWidth)));
+  applyTemplateLayout();
+}
+
 function countWords(text) {
   return text.trim() ? text.trim().split(/\s+/).length : 0;
 }
@@ -861,6 +993,7 @@ document.addEventListener("click", (event) => {
   const templateUseTarget = event.target.closest("[data-template-use]");
   const templateNextTarget = event.target.closest("[data-template-next]");
   const templatePrevTarget = event.target.closest("[data-template-prev]");
+  const referenceTemplateTarget = event.target.closest("[data-reference-template]");
 
   if (versionTarget) {
     event.preventDefault();
@@ -892,6 +1025,12 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (referenceTemplateTarget) {
+    event.preventDefault();
+    selectReferenceTemplate(referenceTemplateTarget.dataset.referenceTemplate);
+    return;
+  }
+
   if (viewTarget) {
     event.preventDefault();
     setView(viewTarget.dataset.viewTarget);
@@ -915,6 +1054,10 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "toggle-ruler") {
     toggleRuler();
+  }
+
+  if (actionTarget.dataset.action === "toggle-template-side") {
+    toggleTemplateSide();
   }
 
   if (actionTarget.dataset.action === "toggle-nav") {
@@ -971,6 +1114,30 @@ document.addEventListener("pointermove", (event) => {
   }
 });
 
+templateResizer.addEventListener("pointerdown", (event) => {
+  event.preventDefault();
+  templateResizer.setPointerCapture(event.pointerId);
+  editorSplit.classList.add("is-resizing");
+});
+
+templateResizer.addEventListener("pointermove", (event) => {
+  if (!editorSplit.classList.contains("is-resizing")) {
+    return;
+  }
+
+  updateTemplateWidth(event.clientX);
+});
+
+templateResizer.addEventListener("pointerup", (event) => {
+  if (!editorSplit.classList.contains("is-resizing")) {
+    return;
+  }
+
+  templateResizer.releasePointerCapture(event.pointerId);
+  editorSplit.classList.remove("is-resizing");
+  persistState("Largura do template ajustada");
+});
+
 focusSettingControls.forEach((control) => {
   control.addEventListener("input", () => {
     updateFocusSetting(control.dataset.focusSetting, control.value);
@@ -1008,6 +1175,7 @@ renderLexicalView();
 renderProofView();
 renderVersionList();
 renderTemplateStudio();
+applyTemplateLayout();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

@@ -99,12 +99,30 @@
 
         <main class="content-stage">
           <section class="view view-editor is-active" data-view-panel="editor">
-            <article class="paper">
-              <div class="title-block">
-                <input class="title-input" value="O Som da Terra Seca" aria-label="Título do manuscrito">
-                <span class="title-rule"></span>
-              </div>
-              <div class="writing-area" contenteditable="true" spellcheck="true" aria-label="Área de escrita">
+            <div class="editor-split" data-template-side="left">
+              <aside class="template-reference" data-template-reference>
+                <div class="template-reference-header">
+                  <div>
+                    <p class="eyebrow">Template consultivo</p>
+                    <strong data-reference-title>Flash fiction</strong>
+                  </div>
+                  <button class="icon-button" data-action="toggle-template-side" aria-label="Trocar lado do template" title="Trocar lado">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                  </button>
+                </div>
+                <div class="template-reference-tabs" data-reference-tabs></div>
+                <div class="precision-card" data-precision-card></div>
+                <div class="reference-body" data-reference-body></div>
+              </aside>
+
+              <button class="split-resizer" data-template-resizer aria-label="Ajustar largura do template"></button>
+
+              <article class="paper editor-paper">
+                <div class="title-block">
+                  <input class="title-input" value="O Som da Terra Seca" aria-label="Título do manuscrito">
+                  <span class="title-rule"></span>
+                </div>
+                <div class="writing-area" contenteditable="true" spellcheck="true" aria-label="Área de escrita">
 O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
 
 — Hoje não chove — murmurou, mais por hábito do que por esperança.
@@ -112,8 +130,9 @@ O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja v
 O velho Tião pigarreou lá dentro, o som oco batendo nas paredes de taipa. Ele tossia terra desde a seca de oitenta e dois. O rádio de pilha chiava uma moda de viola distante, engolida pela estática e pelo silêncio opressivo que se seguia.
 
 Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. A água da moringa já amargava, gosto de barro e espera. Era o quinto mês sem uma gota. O gado, o pouco que restava, pastava miragens na imensidão amarela.
-              </div>
-            </article>
+                </div>
+              </article>
+            </div>
           </section>
 
           <section class="view" data-view-panel="biblioteca">
@@ -389,6 +408,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     <script src="version-engine.js"></script>
     <script src="export-engine.js"></script>
     <script src="template-engine.js"></script>
+    <script src="precision-engine.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

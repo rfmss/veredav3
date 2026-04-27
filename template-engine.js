@@ -8,6 +8,21 @@
       kind: "Roteiro de TV",
       chapter: "Teaser",
       description: "Estrutura inicial para episódio de série, com teaser, atos e gancho final.",
+      guidance: {
+        meta: ["Formato", "Episódio de série", "Cenas visíveis", "Atos + gancho"],
+        sections: [
+          ["Teaser", "A cena que prende antes da abertura."],
+          ["Ato 1", "O conflito nasce e muda a rotina."],
+          ["Ato 2", "A pressão cresce e cobra escolha."],
+          ["Ato 3", "A consequência chega em cena."],
+          ["Tag / gancho", "Última imagem que puxa o próximo episódio."],
+        ],
+        reminders: [
+          "Escreva o que a câmera vê.",
+          "Troque sentimento abstrato por gesto observável.",
+          "Uma página tende a equivaler a cerca de um minuto.",
+        ],
+      },
       steps: [
         {
           eyebrow: "Comece pela cena",
@@ -90,6 +105,22 @@ PERSONAGEM
       kind: "Flash fiction",
       chapter: "Imagem âncora",
       description: "Template para uma história breve, com imagem âncora, tensão, virada e fechamento.",
+      guidance: {
+        meta: ["Subformato", "Flash - até 500 palavras", "Imagem âncora", "Virada"],
+        sections: [
+          ["Premissa", "Uma frase: o conflito em estado bruto."],
+          ["Imagem âncora", "Objeto, gesto ou detalhe sensorial que carrega o peso."],
+          ["Abertura", "Entre em cena e crie uma pergunta."],
+          ["Desenvolvimento", "Aprofunde a tensão sem explicar demais."],
+          ["Virada", "Algo muda para o leitor ou para o personagem."],
+          ["Fechamento", "A última frase conversa com a primeira."],
+        ],
+        reminders: [
+          "Cada palavra precisa justificar sua presença.",
+          "Flash fiction vive de imagem, não de explicação.",
+          "Quando terminar, teste cortar 20%.",
+        ],
+      },
       steps: [
         {
           eyebrow: "Menos de 1.000 palavras",

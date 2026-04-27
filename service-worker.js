@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v10";
+const CACHE_NAME = "vereda-offline-v11";
 
 const CORE_ASSETS = [
   "./",
@@ -13,6 +13,7 @@ const CORE_ASSETS = [
   "./version-engine.js",
   "./export-engine.js",
   "./template-engine.js",
+  "./precision-engine.js",
   "./manifest.webmanifest",
   "./favicon_io/favicon.ico",
   "./favicon_io/favicon-16x16.png",
