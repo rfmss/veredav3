@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v6";
+const CACHE_NAME = "vereda-offline-v7";
 
 const CORE_ASSETS = [
   "./",
@@ -12,8 +12,12 @@ const CORE_ASSETS = [
   "./version-engine.js",
   "./export-engine.js",
   "./manifest.webmanifest",
-  "./icons/vereda-icon.svg",
-  "./icons/vereda-maskable.svg",
+  "./favicon_io/favicon.ico",
+  "./favicon_io/favicon-16x16.png",
+  "./favicon_io/favicon-32x32.png",
+  "./favicon_io/apple-touch-icon.png",
+  "./favicon_io/android-chrome-192x192.png",
+  "./favicon_io/android-chrome-512x512.png",
 ];
 
 self.addEventListener("install", (event) => {

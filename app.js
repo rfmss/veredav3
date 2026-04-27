@@ -128,6 +128,10 @@ function getDefaultLexicalState() {
 function persistState(status = "Salvo localmente") {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   saveStatus.textContent = status;
+  saveStatus.dataset.motion = "pulse";
+  window.setTimeout(() => {
+    saveStatus.dataset.motion = "";
+  }, 700);
 }
 
 function getActiveManuscript() {
@@ -582,7 +586,7 @@ async function exportProof() {
 function exportBackup() {
   const backup = VeredaBackup.createBackup(state);
   const backupJson = JSON.stringify(backup, null, 2);
-  const dateStamp = new Date().toISOString().slice(0, 10);
+  const dateStamp = createDateTimeStamp();
   downloadFile(backupJson, `vereda-acervo-${dateStamp}.vrda`, "application/vnd.vereda+json");
   saveStatus.textContent = "Acervo .vrda exportado";
 }
@@ -684,6 +688,16 @@ function slugify(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "") || "manuscrito";
+}
+
+function createDateTimeStamp() {
+  const now = new Date();
+  const date = now.toISOString().slice(0, 10);
+  const time = [now.getHours(), now.getMinutes(), now.getSeconds()]
+    .map((value) => String(value).padStart(2, "0"))
+    .join("-");
+
+  return `${date}-${time}`;
 }
 
 function downloadFile(content, filename, mimeType) {

@@ -257,3 +257,41 @@ Próximas etapas sugeridas:
 - Adicionar versão/schema explícito no `.vrda` para migrações futuras.
 - Melhorar a Prova de Escrita com sessões nomeadas por data.
 - Separar e expandir o léxico local da Biblioteca Gramatical.
+
+## 2026-04-27 - Identidade `.vrda`, slogan e motion como linguagem
+
+Decidimos ajustar a identidade imediata do produto para reforçar o arquivo nativo e o público central: a aba do navegador passa a se chamar `.vrda - editor`, e o slogan visível passa a ser `Vereda: para escritores brasileiros.`
+
+Também decidimos tratar motion e cor como parte da comunicação do produto, não como ornamento. A proposta é que o Vereda use movimento discreto para indicar estado, continuidade e resposta da ferramenta: entrada de telas, progresso, salvamento, abertura de painéis e mudanças importantes. Onde um feedback puder ser sentido pelo movimento em vez de explicado por texto, devemos preferir motion calmo e acessível.
+
+Análise do material inicial revisitado:
+
+- Continua útil a visão do Vereda como editor sério para escritores brasileiros, com gramática PT-BR, offline-first, modo foco, impressão limpa, objeto-livro, fichas, templates, notas rápidas mobile e prova de autoria.
+- A tensão IA/offline precisa continuar resolvida pela regra atual: o core não usa IA em runtime. Personas, chat e comparação com autores ficam como módulos futuros opcionais ou simulados por regras locais, se fizer sentido.
+- O item de timestamp com data, hora e segundos reforça o `.vrda`, PoHW, backups e notas. Aplicamos isso ao nome do arquivo `.vrda`.
+- O material reforça uma lacuna ainda aberta: análise de frase/sentença e norma padrão, não só palavra isolada.
+- O mobile deve continuar como notas rápidas, não editor completo.
+- O tour do objeto-livro e impressão limpa seguem como grandes diferenciais a médio prazo.
+
+Contraproposta de aplicação:
+
+- Curto prazo: consolidar o core offline, exportações, sessões PoHW, léxico local e configurações.
+- Médio prazo: criar módulo de impressão/objeto-livro com visual mais expressivo e motion pedagógico.
+- Longo prazo: tratar lançamento/personas/minicurso como módulos editoriais locais primeiro, sem prometer inteligência artificial no core.
+
+Benefícios esperados:
+
+- A marca `.vrda` fica mais memorável e diretamente ligada ao formato nativo.
+- O slogan reduz abstração e fala com o público certo.
+- Motion passa a carregar feedback de produto sem transformar a interface em texto explicativo.
+- O log incorpora material original do processo, reduzindo risco de perder decisões fundadoras.
+
+Formulação curta para comunicação:
+
+> `.vrda - editor` é o Vereda em estado nativo: um ambiente offline para escritores brasileiros, onde cor e movimento ajudam a escrita sem competir com ela.
+
+Próximas etapas sugeridas:
+
+- Adicionar versão/schema explícito no `.vrda` para migrações futuras.
+- Melhorar a Prova de Escrita com sessões nomeadas por data e timestamp com segundos.
+- Criar diretrizes de motion e paleta como parte do design system.
