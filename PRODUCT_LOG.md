@@ -966,3 +966,15 @@ Responsabilidade de produto:
 - O Espelho não promete afinidade científica com autores canônicos.
 - A saída explica que métricas são calculadas localmente, enquanto voz, público e ecos literários são hipóteses heurísticas.
 - O objetivo é dar vocabulário de autoconhecimento ao escritor, não produzir diagnóstico definitivo.
+
+## 2026-04-28 - Logo vetorial final
+
+Atualizamos a marca oficial do Vereda a partir do arquivo `veredalogo_ok.svg`.
+
+O novo SVG foi copiado para `icons/Logo.svg`, mantendo a cor principal do produto e fundo transparente. A partir dele, regeneramos os ícones PNG do PWA, favicons e apple touch icon. O cache offline foi versionado para garantir que instalações existentes recebam a nova marca.
+
+Validação feita:
+
+- PNG 512 com canto transparente.
+- Centro do símbolo na cor `#2e4d43`.
+- Ícones 512, 192, 180, 32, 16 e `.ico` recriados.
