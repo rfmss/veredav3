@@ -218,6 +218,7 @@ a {
 .workspace {
   min-height: 0;
   align-items: stretch;
+  position: relative;
 }
 
 .sidebar {
@@ -230,6 +231,72 @@ a {
   flex-direction: column;
   gap: 28px;
   overflow-y: auto;
+  transition: width var(--motion-calm), flex-basis var(--motion-calm), padding var(--motion-calm), border-color var(--motion-calm), opacity var(--motion-quick);
+}
+
+.panel-toggle,
+.panel-rail {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(253, 252, 251, 0.92);
+  color: var(--primary);
+  cursor: pointer;
+  z-index: 14;
+}
+
+.panel-toggle:hover,
+.panel-rail:hover {
+  background: var(--surface-mid);
+}
+
+.panel-toggle {
+  align-self: flex-end;
+  flex: 0 0 auto;
+}
+
+.panel-toggle-left {
+  margin: -6px -2px -12px 0;
+}
+
+.panel-toggle-right {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.panel-rail {
+  position: absolute;
+  top: 14px;
+  display: none;
+  box-shadow: 0 8px 20px rgba(46, 77, 67, 0.08);
+}
+
+.panel-rail-left {
+  left: 12px;
+}
+
+.panel-rail-right {
+  right: 12px;
+}
+
+.app-shell.is-left-collapsed .sidebar {
+  width: 0;
+  flex-basis: 0;
+  border-right-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.app-shell.is-left-collapsed .panel-rail-left,
+.app-shell.is-right-collapsed .panel-rail-right {
+  display: inline-grid;
 }
 
 .eyebrow {
@@ -819,10 +886,23 @@ a {
 .inspector {
   width: 330px;
   flex: 0 0 330px;
+  position: relative;
   background: #fff;
   border-left: 1px solid var(--line);
   padding: 28px 24px;
   overflow-y: auto;
+  transition: width var(--motion-calm), flex-basis var(--motion-calm), padding var(--motion-calm), border-color var(--motion-calm), opacity var(--motion-quick);
+}
+
+.app-shell.is-right-collapsed .inspector {
+  width: 0;
+  flex-basis: 0;
+  border-left-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .inspector-section {
@@ -2416,6 +2496,7 @@ mark {
 .app-shell.is-focus .topbar,
 .app-shell.is-focus .sidebar,
 .app-shell.is-focus .inspector,
+.app-shell.is-focus .panel-rail,
 .app-shell.is-focus .statusbar {
   display: none;
 }
@@ -2452,7 +2533,8 @@ mark {
 }
 
 @media (max-width: 1120px) {
-  .inspector {
+  .inspector,
+  .panel-rail-right {
     display: none;
   }
 
@@ -2494,10 +2576,16 @@ mark {
     overflow-x: auto;
   }
 
-.sidebar {
+  .sidebar {
     position: fixed;
     inset: 0 auto 0 0;
     z-index: 30;
+    width: 280px;
+    flex-basis: 280px;
+    border-right-color: var(--line);
+    padding: 20px 16px;
+    opacity: 1;
+    pointer-events: auto;
     transform: translateX(-100%);
     transition: transform var(--motion-calm);
     box-shadow: var(--shadow);
@@ -2505,6 +2593,12 @@ mark {
 
   .sidebar.is-open {
     transform: translateX(0);
+  }
+
+  .panel-toggle-left,
+  .panel-rail-left,
+  .app-shell.is-left-collapsed .panel-rail-left {
+    display: none;
   }
 
   .view {

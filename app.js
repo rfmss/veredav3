@@ -134,6 +134,10 @@ function loadState() {
         ...getDefaultArchiveState(),
         ...parsed.archive,
       },
+      layout: {
+        ...getDefaultLayoutState(),
+        ...parsed.layout,
+      },
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
     };
@@ -145,6 +149,7 @@ function loadState() {
       lexical: getDefaultLexicalState(),
       template: getDefaultTemplateState(),
       archive: getDefaultArchiveState(),
+      layout: getDefaultLayoutState(),
       proofs: {},
       versions: {},
     };
@@ -179,6 +184,13 @@ function getDefaultArchiveState() {
     filter: "all",
     search: "",
     sort: "updated",
+  };
+}
+
+function getDefaultLayoutState() {
+  return {
+    leftCollapsed: false,
+    rightCollapsed: false,
   };
 }
 
@@ -224,6 +236,36 @@ function setView(viewName) {
   document.querySelectorAll("[data-view-target]").forEach((control) => {
     control.classList.toggle("is-active", control.dataset.viewTarget === viewName);
   });
+}
+
+function applyPanelLayout() {
+  shell.classList.toggle("is-left-collapsed", Boolean(state.layout.leftCollapsed));
+  shell.classList.toggle("is-right-collapsed", Boolean(state.layout.rightCollapsed));
+
+  document.querySelectorAll('[data-action="toggle-left-panel"]').forEach((control) => {
+    const collapsed = Boolean(state.layout.leftCollapsed);
+    control.setAttribute("aria-expanded", String(!collapsed));
+    control.title = collapsed ? "Abrir hierarquia" : "Ocultar hierarquia";
+  });
+
+  document.querySelectorAll('[data-action="toggle-right-panel"]').forEach((control) => {
+    const collapsed = Boolean(state.layout.rightCollapsed);
+    control.setAttribute("aria-expanded", String(!collapsed));
+    control.title = collapsed ? "Abrir análise linguística" : "Ocultar análise linguística";
+  });
+}
+
+function togglePanel(side) {
+  if (side === "left") {
+    state.layout.leftCollapsed = !state.layout.leftCollapsed;
+  }
+
+  if (side === "right") {
+    state.layout.rightCollapsed = !state.layout.rightCollapsed;
+  }
+
+  applyPanelLayout();
+  persistState(side === "left" ? "Hierarquia ajustada" : "Análise linguística ajustada");
 }
 
 function enterFocusMode() {
@@ -1645,6 +1687,14 @@ document.addEventListener("click", (event) => {
     toggleTemplatePanel();
   }
 
+  if (actionTarget.dataset.action === "toggle-left-panel") {
+    togglePanel("left");
+  }
+
+  if (actionTarget.dataset.action === "toggle-right-panel") {
+    togglePanel("right");
+  }
+
   if (actionTarget.dataset.action === "open-create-note") {
     openCreateNote();
   }
@@ -1812,6 +1862,7 @@ renderVersionList();
 renderTemplateStudio();
 updateAcademyParallax();
 applyTemplateLayout();
+applyPanelLayout();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

@@ -899,3 +899,19 @@ Benefícios esperados:
 - Guias ficam encontráveis mesmo com catálogo grande.
 - Estudantes passam a receber feedback específico de redação ENEM no painel lateral.
 - A marca visual fica consistente entre layout, favicon e PWA.
+
+## 2026-04-28 - Painéis laterais recolhíveis
+
+Decidimos melhorar a ergonomia estrutural do editor antes de adicionar mais módulos.
+
+A Hierarquia à esquerda e a Análise Linguística à direita agora podem ser recolhidas e reabertas. A área central se ajusta automaticamente ao espaço disponível, e a preferência fica salva no estado local do usuário.
+
+Benefícios esperados:
+
+- O editor ganha mais área útil sem depender do modo foco completo.
+- A pessoa pode alternar entre organização, escrita e análise conforme a etapa do trabalho.
+- A interface fica mais próxima de ferramentas profissionais de escrita e IDEs.
+
+Observação de produto:
+
+- Em telas menores, a sidebar continua usando o comportamento mobile já existente, e o painel direito permanece oculto abaixo do breakpoint.

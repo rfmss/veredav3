@@ -57,7 +57,13 @@
       </header>
 
       <div class="workspace">
+        <button class="panel-rail panel-rail-left" data-action="toggle-left-panel" aria-label="Abrir hierarquia" title="Abrir hierarquia">
+          <span class="material-symbols-outlined">right_panel_open</span>
+        </button>
         <aside class="sidebar" data-nav>
+          <button class="panel-toggle panel-toggle-left" data-action="toggle-left-panel" aria-label="Ocultar hierarquia" title="Ocultar hierarquia">
+            <span class="material-symbols-outlined">left_panel_close</span>
+          </button>
           <div class="sidebar-section">
             <div class="eyebrow">Hierarquia</div>
             <button class="tree-row is-open">
@@ -452,6 +458,9 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
         </main>
 
         <aside class="inspector">
+          <button class="panel-toggle panel-toggle-right" data-action="toggle-right-panel" aria-label="Ocultar análise linguística" title="Ocultar análise linguística">
+            <span class="material-symbols-outlined">right_panel_close</span>
+          </button>
           <div class="inspector-section">
             <h2>Análise Linguística</h2>
             <div class="live-number">
@@ -496,6 +505,9 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
             </div>
           </div>
         </aside>
+        <button class="panel-rail panel-rail-right" data-action="toggle-right-panel" aria-label="Abrir análise linguística" title="Abrir análise linguística">
+          <span class="material-symbols-outlined">left_panel_open</span>
+        </button>
       </div>
 
       <div class="focus-toolbar" aria-label="Controles do modo foco">
