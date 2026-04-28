@@ -639,3 +639,22 @@ Próximas etapas sugeridas para retomada:
 - Adicionar tags locais aos documentos.
 - Refinar o painel consultivo com opção de ocultar/mostrar.
 - Calibrar os medidores com exemplos reais de cada formato.
+
+## 2026-04-28 - Recentes no Arquivo
+
+Decidimos criar uma seção de documentos recentes no topo do Arquivo.
+
+A busca e os filtros já ajudavam a encontrar documentos, mas o uso diário pede um caminho mais direto para retomar o que acabou de ser editado. A nova faixa "Continue de onde parou" usa o `updatedAt` local dos manuscritos e respeita o filtro/busca atual do Arquivo, mantendo a navegação coerente com o recorte que o escritor escolheu.
+
+Benefícios esperados:
+
+- O autor retoma textos recentes com menos atrito.
+- O Arquivo passa a funcionar melhor como mesa de trabalho diária.
+- Filtros por tipo ficam mais úteis, mostrando recentes de notas, manuscritos ou templates.
+- A mudança aproveita metadados já existentes, sem alterar o formato `.vrda`.
+
+Próximas etapas sugeridas:
+
+- Permitir fixar documentos importantes.
+- Adicionar tags locais aos documentos.
+- Refinar o painel consultivo com opção de ocultar/mostrar.

@@ -62,6 +62,7 @@ const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
 const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
 const archiveSearch = document.querySelector("[data-archive-search]");
+const recentDocuments = document.querySelector("[data-recent-documents]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
@@ -357,6 +358,8 @@ function renderProjectGrid() {
     return matchesType && matchesSearch;
   });
 
+  renderRecentDocuments(filteredManuscripts);
+
   if (!filteredManuscripts.length) {
     const message = searchQuery ? "Nenhum documento encontrado" : "Nada aqui ainda";
     const description = searchQuery
@@ -393,6 +396,45 @@ function renderProjectGrid() {
       `;
     })
     .join("");
+}
+
+function renderRecentDocuments(manuscripts) {
+  const recentItems = [...manuscripts]
+    .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
+    .slice(0, 4);
+
+  if (!recentItems.length) {
+    recentDocuments.hidden = true;
+    recentDocuments.innerHTML = "";
+    return;
+  }
+
+  recentDocuments.hidden = false;
+  recentDocuments.innerHTML = `
+    <div class="recent-documents-heading">
+      <div>
+        <p class="eyebrow">Recentes</p>
+        <h2>Continue de onde parou</h2>
+      </div>
+      <span>${recentItems.length} ${recentItems.length === 1 ? "documento" : "documentos"}</span>
+    </div>
+    <div class="recent-document-list">
+      ${recentItems.map(createRecentDocumentMarkup).join("")}
+    </div>
+  `;
+}
+
+function createRecentDocumentMarkup(manuscript) {
+  const type = getArchiveType(manuscript);
+  const selected = manuscript.id === state.activeId ? " is-selected" : "";
+
+  return `
+    <button class="recent-document${selected}" type="button" data-archive-select="${manuscript.id}">
+      <span class="material-symbols-outlined">${type.icon}</span>
+      <strong>${escapeHtml(manuscript.title)}</strong>
+      <small>${escapeHtml(type.label)} · ${formatUpdatedAt(manuscript.updatedAt)}</small>
+    </button>
+  `;
 }
 
 function renderArchiveFilters() {
@@ -1081,6 +1123,11 @@ function formatUpdatedAt(value) {
   }
 
   return updatedAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
+}
+
+function getUpdatedTime(value) {
+  const time = new Date(value).getTime();
+  return Number.isNaN(time) ? 0 : time;
 }
 
 function escapeHtml(value) {
