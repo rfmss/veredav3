@@ -978,3 +978,17 @@ Validação feita:
 - PNG 512 com canto transparente.
 - Centro do símbolo na cor `#2e4d43`.
 - Ícones 512, 192, 180, 32, 16 e `.ico` recriados.
+
+## 2026-04-28 - Paletas brasileiras
+
+Decidimos incorporar o esquema oficial de paletas brasileiras ao Vereda.
+
+A interface agora tem um botão de paleta na barra superior, que alterna entre Vereda, Cerrado, Mata Atlântica, Amazônia e versões escuras derivadas das mesmas famílias cromáticas. A escolha fica salva localmente.
+
+Também adicionamos na Academia um texto de produto sobre atenção ao detalhe: as cores partem de paisagens brasileiras e reforçam que o Vereda pretende tratar o produto digital com a mesma minúcia que um bom escritor dedica à frase.
+
+Benefícios esperados:
+
+- O Vereda ganha identidade visual brasileira sem perder sobriedade.
+- O usuário pode escolher um ambiente de escrita mais claro ou mais escuro.
+- A paleta deixa de ser decoração e passa a comunicar postura editorial: atenção, detalhe, textura e ritmo.

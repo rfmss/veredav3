@@ -84,6 +84,17 @@ const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
+const themeName = document.querySelector("[data-theme-name]");
+
+const colorThemes = [
+  { id: "vereda", label: "Vereda" },
+  { id: "cerrado", label: "Cerrado" },
+  { id: "mata", label: "Mata" },
+  { id: "amazonia", label: "Amazônia" },
+  { id: "cerrado-dark", label: "Cerrado escuro" },
+  { id: "mata-dark", label: "Mata escura" },
+  { id: "amazonia-dark", label: "Amazônia escura" },
+];
 
 let state = loadState();
 let saveTimer;
@@ -141,6 +152,10 @@ function loadState() {
         ...getDefaultLayoutState(),
         ...parsed.layout,
       },
+      appearance: {
+        ...getDefaultAppearanceState(),
+        ...parsed.appearance,
+      },
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
     };
@@ -153,6 +168,7 @@ function loadState() {
       template: getDefaultTemplateState(),
       archive: getDefaultArchiveState(),
       layout: getDefaultLayoutState(),
+      appearance: getDefaultAppearanceState(),
       proofs: {},
       versions: {},
     };
@@ -194,6 +210,12 @@ function getDefaultLayoutState() {
   return {
     leftCollapsed: false,
     rightCollapsed: false,
+  };
+}
+
+function getDefaultAppearanceState() {
+  return {
+    theme: "vereda",
   };
 }
 
@@ -269,6 +291,26 @@ function togglePanel(side) {
 
   applyPanelLayout();
   persistState(side === "left" ? "Hierarquia ajustada" : "Análise linguística ajustada");
+}
+
+function applyColorTheme() {
+  const theme = colorThemes.find((item) => item.id === state.appearance.theme) || colorThemes[0];
+
+  if (theme.id === "vereda") {
+    document.documentElement.removeAttribute("data-theme");
+  } else {
+    document.documentElement.dataset.theme = theme.id;
+  }
+
+  themeName.textContent = theme.label;
+}
+
+function cycleColorTheme() {
+  const currentIndex = colorThemes.findIndex((item) => item.id === state.appearance.theme);
+  const nextTheme = colorThemes[(currentIndex + 1) % colorThemes.length] || colorThemes[0];
+  state.appearance.theme = nextTheme.id;
+  applyColorTheme();
+  persistState(`Paleta ${nextTheme.label} aplicada`);
 }
 
 function enterFocusMode() {
@@ -1795,6 +1837,10 @@ document.addEventListener("click", (event) => {
     togglePanel("right");
   }
 
+  if (actionTarget.dataset.action === "cycle-theme") {
+    cycleColorTheme();
+  }
+
   if (actionTarget.dataset.action === "voice-use-active") {
     useActiveManuscriptForVoice();
   }
@@ -1972,6 +2018,7 @@ renderTemplateStudio();
 updateAcademyParallax();
 applyTemplateLayout();
 applyPanelLayout();
+applyColorTheme();
 applyFocusSettings();
 registerOfflineApp();
 persistState("Pronto para escrever");

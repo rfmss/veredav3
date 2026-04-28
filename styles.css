@@ -4,6 +4,10 @@
   --surface-low: #f4f4f1;
   --surface-mid: #eeeeec;
   --surface-high: #e3e2e0;
+  --card: #ffffff;
+  --topbar-bg: rgba(253, 252, 251, 0.92);
+  --sidebar-bg: #f5f2ee;
+  --overlay-bg: rgba(26, 26, 26, 0.24);
   --ink: #1a1a1a;
   --muted: #727975;
   --soft-ink: #414845;
@@ -21,6 +25,138 @@
   --motion-quick: 160ms ease;
   --motion-calm: 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
   font-family: Inter, system-ui, sans-serif;
+}
+
+[data-theme="cerrado"] {
+  --paper: #f5edd2;
+  --surface: #f8f1dc;
+  --surface-low: #efe4bf;
+  --surface-mid: #e8d9a0;
+  --surface-high: #dec16e;
+  --card: #fff9e8;
+  --topbar-bg: rgba(255, 249, 232, 0.92);
+  --sidebar-bg: #efe4bf;
+  --ink: #1c1a14;
+  --muted: #7b6b42;
+  --soft-ink: #3d3219;
+  --line: #dfcf9b;
+  --primary: #c68b2e;
+  --primary-deep: #3d3219;
+  --sage: #9f8c43;
+  --ochre: #e8c84a;
+  --sienna: #8d5a24;
+  --cedar: #3d3219;
+  --shadow: 0 18px 50px rgba(61, 50, 25, 0.1);
+}
+
+[data-theme="mata"] {
+  --paper: #f5f0e8;
+  --surface: #f8f4ee;
+  --surface-low: #e8efe7;
+  --surface-mid: #d6e4d8;
+  --surface-high: #c8e8d4;
+  --card: #fffdf8;
+  --topbar-bg: rgba(255, 253, 248, 0.92);
+  --sidebar-bg: #e8efe7;
+  --ink: #0d1f18;
+  --muted: #65736a;
+  --soft-ink: #1a4533;
+  --line: #d6ded6;
+  --primary: #1a4533;
+  --primary-deep: #0d1f18;
+  --sage: #2e7d52;
+  --ochre: #e8a060;
+  --sienna: #a6643b;
+  --cedar: #17362d;
+  --shadow: 0 18px 50px rgba(13, 31, 24, 0.1);
+}
+
+[data-theme="amazonia"] {
+  --paper: #faf6f0;
+  --surface: #fbf7f3;
+  --surface-low: #f2e9ee;
+  --surface-mid: #e4d8ed;
+  --surface-high: #d0c4f0;
+  --card: #fffaf6;
+  --topbar-bg: rgba(255, 250, 246, 0.92);
+  --sidebar-bg: #f2e9ee;
+  --ink: #1a0f2e;
+  --muted: #75677f;
+  --soft-ink: #3b2068;
+  --line: #e3d6dc;
+  --primary: #3b2068;
+  --primary-deep: #1a0f2e;
+  --sage: #2e7d52;
+  --ochre: #f0c070;
+  --sienna: #c45b7e;
+  --cedar: #3b2068;
+  --shadow: 0 18px 50px rgba(26, 15, 46, 0.1);
+}
+
+[data-theme="cerrado-dark"] {
+  --paper: #1c1a14;
+  --surface: #242015;
+  --surface-low: #2c2617;
+  --surface-mid: #3d3219;
+  --surface-high: #574725;
+  --card: #252116;
+  --topbar-bg: rgba(28, 26, 20, 0.94);
+  --sidebar-bg: #211e15;
+  --ink: #f5edd2;
+  --muted: #c9b77c;
+  --soft-ink: #e8d9a0;
+  --line: #4d4022;
+  --primary: #e8c84a;
+  --primary-deep: #c68b2e;
+  --sage: #b8a657;
+  --ochre: #c68b2e;
+  --sienna: #d4923d;
+  --cedar: #e8d9a0;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="mata-dark"] {
+  --paper: #0d1f18;
+  --surface: #10271e;
+  --surface-low: #143026;
+  --surface-mid: #1a4533;
+  --surface-high: #236245;
+  --card: #10261e;
+  --topbar-bg: rgba(13, 31, 24, 0.94);
+  --sidebar-bg: #10271e;
+  --ink: #f5f0e8;
+  --muted: #9fb7a8;
+  --soft-ink: #c8e8d4;
+  --line: #24513d;
+  --primary: #e8a060;
+  --primary-deep: #2e7d52;
+  --sage: #76bf8c;
+  --ochre: #e8a060;
+  --sienna: #bf7444;
+  --cedar: #c8e8d4;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="amazonia-dark"] {
+  --paper: #1a0f2e;
+  --surface: #21133b;
+  --surface-low: #2b1a4a;
+  --surface-mid: #3b2068;
+  --surface-high: #513080;
+  --card: #21133b;
+  --topbar-bg: rgba(26, 15, 46, 0.94);
+  --sidebar-bg: #21133b;
+  --ink: #faf6f0;
+  --muted: #b8a9c8;
+  --soft-ink: #d0c4f0;
+  --line: #4c3370;
+  --primary: #f0c070;
+  --primary-deep: #c45b7e;
+  --sage: #7dbf9a;
+  --ochre: #f0c070;
+  --sienna: #c45b7e;
+  --cedar: #d0c4f0;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -70,7 +206,7 @@ a {
   justify-content: space-between;
   gap: 20px;
   padding: 0 28px;
-  background: rgba(253, 252, 251, 0.92);
+  background: var(--topbar-bg);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
   z-index: 20;
@@ -178,7 +314,8 @@ a {
 }
 
 .offline-badge,
-.install-button {
+.install-button,
+.theme-button {
   align-items: center;
   gap: 6px;
   border: 1px solid var(--line);
@@ -192,11 +329,13 @@ a {
 }
 
 .offline-badge .material-symbols-outlined,
-.install-button .material-symbols-outlined {
+.install-button .material-symbols-outlined,
+.theme-button .material-symbols-outlined {
   font-size: 17px;
 }
 
-.install-button {
+.install-button,
+.theme-button {
   display: flex;
   cursor: pointer;
 }
@@ -206,6 +345,12 @@ a {
 }
 
 .install-button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.theme-button:hover {
   background: var(--primary);
   border-color: var(--primary);
   color: white;
@@ -224,7 +369,7 @@ a {
 .sidebar {
   width: 280px;
   flex: 0 0 280px;
-  background: #f5f2ee;
+  background: var(--sidebar-bg);
   border-right: 1px solid var(--line);
   padding: 20px 16px;
   display: flex;
@@ -242,7 +387,7 @@ a {
   border-radius: 8px;
   display: inline-grid;
   place-items: center;
-  background: rgba(253, 252, 251, 0.92);
+  background: var(--topbar-bg);
   color: var(--primary);
   cursor: pointer;
   z-index: 14;
@@ -370,7 +515,7 @@ a {
   z-index: 80;
   display: grid;
   place-items: center;
-  background: rgba(26, 26, 26, 0.24);
+  background: var(--overlay-bg);
   padding: 20px;
   backdrop-filter: blur(6px);
 }
@@ -383,7 +528,7 @@ a {
   width: min(720px, 100%);
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   box-shadow: 0 28px 80px rgba(26, 26, 26, 0.18);
   padding: 22px;
   animation: surface-in var(--motion-calm);
@@ -429,7 +574,7 @@ a {
 
 .create-note-card:hover {
   border-color: var(--primary);
-  background: #fff;
+  background: var(--card);
   transform: translateY(-2px);
 }
 
@@ -474,7 +619,7 @@ a {
 }
 
 .paper {
-  background: rgba(253, 252, 251, 0.78);
+  background: color-mix(in srgb, var(--card) 82%, transparent);
 }
 
 .view-editor {
@@ -529,7 +674,7 @@ a {
   overflow-y: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   box-shadow: var(--shadow);
   padding: 18px;
 }
@@ -805,7 +950,7 @@ a {
 .editor-paper {
   width: 100%;
   min-height: calc(100vh - 176px);
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow);
@@ -887,7 +1032,7 @@ a {
   width: 330px;
   flex: 0 0 330px;
   position: relative;
-  background: #fff;
+  background: var(--card);
   border-left: 1px solid var(--line);
   padding: 28px 24px;
   overflow-y: auto;
@@ -1042,7 +1187,7 @@ mark {
 .project-card {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   box-shadow: var(--shadow);
 }
 
@@ -1298,7 +1443,7 @@ mark {
   gap: 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--card);
   color: var(--muted);
   padding: 9px 12px;
 }
@@ -1340,7 +1485,7 @@ mark {
   gap: 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--card);
   color: var(--soft-ink);
   cursor: pointer;
   padding: 9px 12px;
@@ -1416,7 +1561,7 @@ mark {
   column-gap: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   color: inherit;
   cursor: pointer;
   padding: 12px;
@@ -1651,7 +1796,7 @@ mark {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--primary);
-  background: #fff;
+  background: var(--card);
   padding: 6px 9px;
   font-size: 11px;
   font-weight: 800;
@@ -1659,7 +1804,7 @@ mark {
 
 .academy-path .secondary-button {
   border-color: var(--line);
-  background: #fff;
+  background: var(--card);
   color: var(--primary);
 }
 
@@ -1765,7 +1910,7 @@ mark {
   align-items: start;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(253, 252, 251, 0.86);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
   padding: 12px;
 }
 
@@ -1782,6 +1927,35 @@ mark {
   line-height: 1.5;
 }
 
+.palette-note {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.45fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--primary) 10%, transparent), transparent 46%),
+    var(--card);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.palette-note h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.palette-note p:not(.eyebrow) {
+  margin: 0;
+  color: var(--soft-ink);
+  line-height: 1.65;
+}
+
 .voice-mirror {
   display: grid;
   grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
@@ -1790,7 +1964,7 @@ mark {
   margin-bottom: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   box-shadow: var(--shadow);
   padding: 20px;
 }
@@ -1843,7 +2017,7 @@ mark {
 
 .voice-mirror textarea:focus {
   border-color: var(--primary);
-  background: #fff;
+  background: var(--card);
 }
 
 .voice-meta {
@@ -1860,7 +2034,7 @@ mark {
 .voice-result {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(253, 252, 251, 0.8);
+  background: color-mix(in srgb, var(--card) 80%, transparent);
   padding: 14px;
 }
 
@@ -1914,7 +2088,7 @@ mark {
 .voice-metric {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   padding: 12px;
 }
 
@@ -1943,7 +2117,7 @@ mark {
 .voice-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   padding: 12px;
 }
 
@@ -2011,7 +2185,7 @@ mark {
   margin-bottom: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   box-shadow: var(--shadow);
   padding: 20px;
 }
@@ -2097,7 +2271,7 @@ mark {
   gap: 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--card);
   color: var(--muted);
   cursor: pointer;
   padding: 8px 10px;
@@ -2148,7 +2322,7 @@ mark {
 .template-tab.is-active,
 .template-tab:hover {
   border-color: var(--primary);
-  background: #fff;
+  background: var(--card);
   color: var(--primary);
 }
 
@@ -2627,7 +2801,7 @@ mark {
   transform: translateX(-50%);
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(253, 252, 251, 0.86);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
   box-shadow: var(--shadow);
   padding: 8px;
   opacity: 0.28;
@@ -2901,6 +3075,7 @@ mark {
   .create-note-options,
   .academy-paths,
   .academy-book-anatomy,
+  .palette-note,
   .voice-mirror,
   .voice-columns,
   .template-studio {
