@@ -47,10 +47,16 @@
             <span class="material-symbols-outlined">download</span>
             Instalar
           </button>
-          <button class="theme-button" data-action="cycle-theme" aria-label="Trocar esquema de cores" title="Trocar paleta">
-            <span class="material-symbols-outlined">palette</span>
-            <span data-theme-name>Vereda</span>
-          </button>
+          <div class="theme-picker">
+            <button class="theme-button" data-action="cycle-theme" aria-label="Trocar esquema de cores" aria-describedby="theme-note" title="Trocar paleta">
+              <span class="material-symbols-outlined">palette</span>
+              <span data-theme-name>Vereda</span>
+            </button>
+            <div class="theme-popover" id="theme-note" role="note">
+              <strong data-theme-note-title>Paleta Vereda</strong>
+              <p data-theme-note-text>Esta é a paleta-base: papel claro, verde profundo e acentos terrosos para sustentar escrita longa com calma.</p>
+            </div>
+          </div>
           <button class="icon-button" data-action="toggle-focus" aria-label="Alternar modo foco" title="Modo foco">
             <span class="material-symbols-outlined">visibility</span>
           </button>
@@ -424,14 +430,6 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                     </div>
                   </div>
                 </div>
-              </section>
-
-              <section class="palette-note" aria-label="Paletas brasileiras do Vereda">
-                <div>
-                  <p class="eyebrow">Paletas do Brasil</p>
-                  <h2>O detalhe também escreve</h2>
-                </div>
-                <p>As cores do Vereda partem de paisagens brasileiras: cerrado, mata, rio, argila, flor, sombra. Um produto para escritores precisa prestar atenção ao mínimo: contraste, respiro, textura, ritmo. É a mesma disciplina de uma boa frase, só aplicada à tela.</p>
               </section>
 
               <section class="voice-mirror" aria-label="Espelho de Voz">

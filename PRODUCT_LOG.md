@@ -992,3 +992,11 @@ Benefícios esperados:
 - O Vereda ganha identidade visual brasileira sem perder sobriedade.
 - O usuário pode escolher um ambiente de escrita mais claro ou mais escuro.
 - A paleta deixa de ser decoração e passa a comunicar postura editorial: atenção, detalhe, textura e ritmo.
+
+## 2026-04-28 - Balão contextual das paletas
+
+Revisamos a explicação das paletas brasileiras.
+
+O texto sobre cores saiu de uma seção fixa na Academia e foi movido para um balão contextual ligado ao botão de paleta. Assim, a pessoa entende o motivo de cada esquema de cores no momento exato em que escolhe a aparência do Vereda.
+
+Cada paleta agora tem uma descrição própria, conectando a escolha cromática à experiência de escrita: Cerrado, Mata Atlântica, Amazônia e suas versões escuras.

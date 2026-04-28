@@ -85,15 +85,59 @@ const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
 const themeName = document.querySelector("[data-theme-name]");
+const themeNoteTitle = document.querySelector("[data-theme-note-title]");
+const themeNoteText = document.querySelector("[data-theme-note-text]");
 
 const colorThemes = [
-  { id: "vereda", label: "Vereda" },
-  { id: "cerrado", label: "Cerrado" },
-  { id: "mata", label: "Mata" },
-  { id: "amazonia", label: "Amazônia" },
-  { id: "cerrado-dark", label: "Cerrado escuro" },
-  { id: "mata-dark", label: "Mata escura" },
-  { id: "amazonia-dark", label: "Amazônia escura" },
+  {
+    id: "vereda",
+    label: "Vereda",
+    noteTitle: "Paleta Vereda",
+    note:
+      "Papel claro, verde profundo e acentos terrosos. É a base calma: feita para leitura longa, revisão cuidadosa e escrita sem ruído.",
+  },
+  {
+    id: "cerrado",
+    label: "Cerrado",
+    noteTitle: "Cerrado",
+    note:
+      "Terra seca, capim-dourado, ipê e areia clara. Uma paleta de resistência luminosa: pouca ornamentação, muito calor e precisão.",
+  },
+  {
+    id: "mata",
+    label: "Mata",
+    noteTitle: "Mata Atlântica",
+    note:
+      "Verde de sombra, musgo, bruma e flor-de-laranjeira. Pensada para lembrar que a escrita também precisa de umidade, pausa e profundidade.",
+  },
+  {
+    id: "amazonia",
+    label: "Amazônia",
+    noteTitle: "Amazônia e Várzea",
+    note:
+      "Rio negro, névoa, argila quente e boto-rosa. Uma paleta para textos de imaginação larga, contraste forte e presença sensorial.",
+  },
+  {
+    id: "cerrado-dark",
+    label: "Cerrado escuro",
+    noteTitle: "Cerrado escuro",
+    note:
+      "A mesma terra em luz baixa: noite do cerrado, dourado contido e contraste de fogueira. Boa para escrever com foco e pouca claridade.",
+  },
+  {
+    id: "mata-dark",
+    label: "Mata escura",
+    noteTitle: "Mata escura",
+    note:
+      "Sombra vegetal, verde fechado e acento de flor. Um modo noturno para quem quer concentração sem abandonar a textura brasileira.",
+  },
+  {
+    id: "amazonia-dark",
+    label: "Amazônia escura",
+    noteTitle: "Amazônia escura",
+    note:
+      "Rio profundo, entardecer roxo e argila acesa. Feita para escrita noturna, atmosférica, com cor suficiente para não virar tela genérica.",
+  },
 ];
 
 let state = loadState();
@@ -303,6 +347,8 @@ function applyColorTheme() {
   }
 
   themeName.textContent = theme.label;
+  themeNoteTitle.textContent = theme.noteTitle;
+  themeNoteText.textContent = theme.note;
 }
 
 function cycleColorTheme() {
