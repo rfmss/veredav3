@@ -39,7 +39,7 @@
       createCheck("Abertura com pergunta", firstSentence.length > 20 && firstSentence.length < 180, scoreOpening(firstSentence), "A primeira frase precisa abrir tensão, não explicar o mundo."),
       createCheck("Virada perceptível", turnHits > 0, Math.min(100, turnHits * 34), "Uma mudança de leitura ajuda o texto a fechar com força."),
       createCheck("Fechamento em eco", firstLastEcho >= 20, firstLastEcho, "O fim pode espelhar, contrariar ou iluminar a abertura."),
-      createCheck("Compressão", explanationHits <= 3 && repeatedRatio < 0.18, scoreCompression(explanationHits, repeatedRatio), "Flash fiction perde força quando explica ou repete demais."),
+      createCheck("Compressão", explanationHits <= 3 && repeatedRatio < 0.18, scoreCompression(explanationHits, repeatedRatio), "Ficção-relâmpago perde força quando explica ou repete demais."),
       createCheck("Respiração do texto", paragraphs.length >= 2 && sentences.length >= 3, Math.min(100, paragraphs.length * 22 + sentences.length * 8), "Blocos e frases precisam dar ritmo sem virar resumo."),
     ];
 
@@ -112,7 +112,7 @@
   function analyzeGeneric(template, text, words) {
     const checks = [
       createCheck("Texto iniciado", words > 0, words > 0 ? 100 : 0, "Comece com um primeiro bloco de escrita."),
-      createCheck("Forma escolhida", Boolean(template?.id), 100, "O texto está ligado a um template consultivo."),
+      createCheck("Forma escolhida", Boolean(template?.id), 100, "O texto está ligado a um guia de escrita."),
       createCheck("Tamanho útil", words >= 50, Math.min(100, words * 2), "Um rascunho maior permite análise melhor."),
     ];
 

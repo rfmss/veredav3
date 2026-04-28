@@ -721,3 +721,31 @@ Próximas etapas sugeridas:
 - Melhorar a lista de versões locais com mais contexto e ações mais claras.
 - Revisar UX mobile do editor, arquivo e criação de notas.
 - Fazer um teste manual completo do fluxo M1.
+
+## 2026-04-28 - Guia de Ofícios Literários
+
+Decidimos substituir a linguagem visível de "templates consultivos" por "Guias de Escrita" e "Guia de Ofícios Literários".
+
+A mudança nasceu de um material externo de referência sobre ofícios e gêneros literários. Em vez de importar esse HTML como página separada, dissolvemos a ideia no produto: a interface passa a falar em guias, ofícios e aderência à forma; o painel lateral vira "Guia de escrita"; a área de criação passa a se chamar "Guia de Ofícios Literários"; e termos restantes em inglês na interface foram adaptados para português brasileiro.
+
+Também adicionamos novos guias locais inspirados nesse material:
+
+- Romance comercial.
+- Poesia lírica.
+- Reportagem.
+- Newsletter editorial.
+
+Esses guias continuam sendo dados locais, sem IA em runtime e sem rede. A lógica técnica ainda pode usar nomes internos como `template` por compatibilidade, mas a linguagem do produto para o escritor passa a ser brasileira e editorial.
+
+Benefícios esperados:
+
+- O Vereda soa menos genérico e mais próximo do mercado literário brasileiro.
+- A ideia de "ofício" amplia o produto para além de modelos de documento.
+- O escritor escolhe uma prática de escrita, não apenas um molde.
+- A interface fica mais consistente em PT-BR.
+
+Próximas etapas sugeridas:
+
+- Expandir o Guia de Ofícios com subgêneros restantes do material de referência.
+- Criar medidores específicos para romance, poesia, reportagem e newsletter.
+- Revisar nomes internos em uma etapa técnica futura, se isso deixar de ser apenas detalhe de implementação.

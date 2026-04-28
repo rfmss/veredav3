@@ -42,15 +42,15 @@
           primary: "Entendi, continuar",
         },
         {
-          eyebrow: "Como o template funciona",
-          title: "A estrutura já está pronta para preencher.",
-          body: "Cada seção tem uma função clara, sem virar aula. Você troca o placeholder pela cena que quer colocar no mundo.",
+          eyebrow: "Como o guia funciona",
+          title: "A estrutura já está pronta para escrever.",
+          body: "Cada seção tem uma função clara, sem virar aula. Você troca o marcador pela cena que quer colocar no mundo.",
           items: [
             ["Teaser", "A cena que prende antes da abertura", "done"],
             ["Ato 1, 2 e 3", "Onde o conflito nasce, cresce e resolve", "done"],
             ["Tag / gancho", "A cena final que puxa para o próximo episódio", "done"],
           ],
-          primary: "Ver o template",
+          primary: "Ver o guia",
         },
         {
           eyebrow: "Antes de abrir",
@@ -99,14 +99,14 @@ PERSONAGEM
     },
     {
       id: "flash-fiction",
-      label: "Flash fiction",
+      label: "Ficção-relâmpago",
       icon: "edit_note",
-      title: "Flash fiction",
-      kind: "Flash fiction",
+      title: "Ficção-relâmpago",
+      kind: "Ficção-relâmpago",
       chapter: "Imagem âncora",
-      description: "Template para uma história breve, com imagem âncora, tensão, virada e fechamento.",
+      description: "Guia para uma história breve, com imagem âncora, tensão, virada e fechamento.",
       guidance: {
-        meta: ["Subformato", "Flash - até 500 palavras", "Imagem âncora", "Virada"],
+        meta: ["Subformato", "Relâmpago - até 500 palavras", "Imagem âncora", "Virada"],
         sections: [
           ["Premissa", "Uma frase: o conflito em estado bruto."],
           ["Imagem âncora", "Objeto, gesto ou detalhe sensorial que carrega o peso."],
@@ -117,7 +117,7 @@ PERSONAGEM
         ],
         reminders: [
           "Cada palavra precisa justificar sua presença.",
-          "Flash fiction vive de imagem, não de explicação.",
+          "Ficção-relâmpago vive de imagem, não de explicação.",
           "Quando terminar, teste cortar 20%.",
         ],
       },
@@ -126,18 +126,18 @@ PERSONAGEM
           eyebrow: "Menos de 1.000 palavras",
           title: "Uma história inteira em poucas linhas.",
           body:
-            "Flash fiction não é conto incompleto. É uma forma própria: cada palavra precisa justificar sua presença.",
+            "Ficção-relâmpago não é conto incompleto. É uma forma própria: cada palavra precisa justificar sua presença.",
           primary: "Quero escrever",
-          secondary: "O que é flash fiction?",
+          secondary: "O que é ficção-relâmpago?",
         },
         {
           eyebrow: "Subformatos",
-          title: "Flash fiction não é só tamanho.",
+          title: "Ficção-relâmpago não é só tamanho.",
           body: "Escolha o fôlego certo para o que você quer contar.",
           items: [
             ["Micro - até 100 palavras", "Um momento, uma virada, nenhum desperdício.", "info"],
-            ["Flash - até 500 palavras", "Cabe abertura, conflito e fechamento.", "done"],
-            ["Sudden fiction - até 1.000 palavras", "Mais espaço sem perder tensão.", "warn"],
+            ["Relâmpago - até 500 palavras", "Cabe abertura, conflito e fechamento.", "done"],
+            ["Ficção súbita - até 1.000 palavras", "Mais espaço sem perder tensão.", "warn"],
           ],
           primary: "Continuar",
         },
@@ -162,7 +162,7 @@ PERSONAGEM
       ],
       text: `# [TÍTULO]
 
-Forma: Flash fiction
+Forma: Ficção-relâmpago
 Meta: até [500] palavras
 
 ## Imagem âncora
@@ -192,7 +192,7 @@ Meta: até [500] palavras
       title: "Crônica",
       kind: "Crônica",
       chapter: "Cena cotidiana",
-      description: "Template consultivo para transformar uma observação do cotidiano em texto breve com olhar autoral.",
+      description: "Guia para transformar uma observação do cotidiano em texto breve com olhar autoral.",
       guidance: {
         meta: ["Cotidiano", "Olhar autoral", "Leveza", "Fecho reflexivo"],
         sections: [
@@ -243,7 +243,7 @@ Forma: Crônica
       title: "Conto curto",
       kind: "Conto curto",
       chapter: "Conflito central",
-      description: "Template consultivo para narrativa curta com personagem, conflito, cena e consequência.",
+      description: "Guia para narrativa curta com personagem, conflito, cena e consequência.",
       guidance: {
         meta: ["Personagem", "Conflito", "Cena", "Consequência"],
         sections: [
@@ -298,7 +298,7 @@ Forma: Conto curto
       title: "Ensaio",
       kind: "Ensaio",
       chapter: "Tese provisória",
-      description: "Template consultivo para defender uma ideia com percurso, tensão argumentativa e voz própria.",
+      description: "Guia para defender uma ideia com percurso, tensão argumentativa e voz própria.",
       guidance: {
         meta: ["Tese", "Argumento", "Contraponto", "Conclusão aberta"],
         sections: [
@@ -345,6 +345,226 @@ Forma: Ensaio
 ## Fecho
 
 [O que o leitor leva depois da travessia?]`,
+    },
+    {
+      id: "romance-comercial",
+      label: "Romance comercial",
+      icon: "menu_book",
+      title: "Romance comercial",
+      kind: "Romance comercial",
+      chapter: "Premissa e gancho",
+      description: "Guia para narrativa longa com enredo forte, personagem com objetivo claro e experiência de leitura contínua.",
+      guidance: {
+        meta: ["Ficção", "80.000 a 120.000 palavras", "Três atos", "Gancho de capítulo"],
+        sections: [
+          ["Promessa ao leitor", "Que tipo de experiência este romance entrega: suspense, romance, aventura, drama histórico?"],
+          ["Protagonista", "Quem deseja algo com força suficiente para sustentar muitas páginas?"],
+          ["Conflito externo", "Qual obstáculo concreto impede o objetivo?"],
+          ["Viradas", "Quais mudanças de rumo renovam a leitura ao longo dos atos?"],
+          ["Gancho de capítulo", "O que faz o leitor continuar depois de cada bloco?"],
+        ],
+        reminders: [
+          "Defina o gênero antes de escrever: cada público traz expectativas próprias.",
+          "Capítulos curtos ajudam quando o motor é enredo.",
+          "O romance comercial não é menor: ele firma outro contrato com o leitor.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Ficção de fôlego",
+          title: "Um romance comercial promete travessia.",
+          body: "Comece pela experiência do leitor: que tensão, desejo ou pergunta sustenta o livro inteiro?",
+          primary: "Criar romance",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Romance comercial
+Gênero: [suspense, romance histórico, fantasia, drama familiar...]
+
+## Promessa ao leitor
+
+[Que experiência este livro entrega?]
+
+## Protagonista
+
+[Quem conduz a história e o que essa pessoa quer?]
+
+## Conflito externo
+
+[O que impede esse desejo de se realizar?]
+
+## Viradas principais
+
+[Liste três mudanças de rumo que renovam a leitura.]
+
+## Gancho do primeiro capítulo
+
+[Qual pergunta faz o leitor virar a página?]`,
+    },
+    {
+      id: "poesia-lirica",
+      label: "Poesia lírica",
+      icon: "format_quote",
+      title: "Poesia lírica",
+      kind: "Poesia lírica",
+      chapter: "Imagem e som",
+      description: "Guia para poema com consciência de imagem, emoção, som e virada final.",
+      guidance: {
+        meta: ["Poesia", "Verso livre ou forma fixa", "Imagem + som", "Leitura em voz alta"],
+        sections: [
+          ["Núcleo sensível", "Que emoção, pergunta ou imagem pede poema?"],
+          ["Imagem central", "Qual objeto, cena ou gesto carrega o sentido?"],
+          ["Música do verso", "Onde o poema respira, repete, corta ou acelera?"],
+          ["Virada", "Que mudança de imagem ou pensamento abre o final?"],
+          ["Leitura em voz alta", "O poema aguenta ser ouvido?"],
+        ],
+        reminders: [
+          "Poesia existe no som antes de existir na explicação.",
+          "Evite dizer a emoção cedo demais: deixe a imagem trabalhar.",
+          "A última linha precisa mudar a temperatura do poema.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Imagem e respiração",
+          title: "Um poema começa quando a linguagem escuta.",
+          body: "Escolha uma imagem concreta e leia cada verso em voz alta. O sentido também mora no som.",
+          primary: "Criar poema",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Poesia lírica
+
+## Núcleo
+
+[Que imagem, emoção ou pergunta acendeu o poema?]
+
+## Versos
+
+[Escreva sem explicar cedo demais.]
+
+## Som
+
+[Leia em voz alta e marque cortes, repetições ou silêncios.]
+
+## Virada
+
+[Qual imagem final muda a leitura do começo?]`,
+    },
+    {
+      id: "reportagem",
+      label: "Reportagem",
+      icon: "newspaper",
+      title: "Reportagem",
+      kind: "Reportagem",
+      chapter: "Pauta e apuração",
+      description: "Guia para texto jornalístico com pauta clara, fontes, contexto e apuração verificável.",
+      guidance: {
+        meta: ["Jornalismo", "Apuração factual", "Fontes múltiplas", "Lide forte"],
+        sections: [
+          ["Pauta", "Qual pergunta pública este texto precisa responder?"],
+          ["Lide", "O que o leitor precisa saber primeiro?"],
+          ["Fontes", "Quem confirma, contradiz ou contextualiza a história?"],
+          ["Contexto", "Que dado ou histórico impede leitura superficial?"],
+          ["Checagem", "O que precisa ser verificado antes da publicação?"],
+        ],
+        reminders: [
+          "A melhor pauta nasce de uma pergunta concreta.",
+          "Fonte única raramente sustenta reportagem.",
+          "A clareza do lide não substitui a profundidade da apuração.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Apuração antes de opinião",
+          title: "Reportagem é o ofício de ir atrás.",
+          body: "Comece pela pergunta que move a pauta e liste o que ainda precisa ser confirmado.",
+          primary: "Criar reportagem",
+        },
+      ],
+      text: `# [TÍTULO]
+
+Forma: Reportagem
+
+## Pauta
+
+[Qual pergunta esta reportagem responde?]
+
+## Lide
+
+[O fato mais importante, com clareza.]
+
+## Fontes
+
+- [Fonte 1]
+- [Fonte 2]
+- [Fonte de contraponto]
+
+## Contexto
+
+[Dados, histórico ou cenário necessário.]
+
+## Checagem
+
+[O que ainda precisa ser confirmado?]`,
+    },
+    {
+      id: "newsletter-editorial",
+      label: "Newsletter editorial",
+      icon: "alternate_email",
+      title: "Newsletter editorial",
+      kind: "Newsletter editorial",
+      chapter: "Edição e voz",
+      description: "Guia para publicação periódica por e-mail, com voz consistente, curadoria e relação direta com o leitor.",
+      guidance: {
+        meta: ["Conteúdo editorial", "Periodicidade", "Voz própria", "Relação direta"],
+        sections: [
+          ["Promessa da edição", "Por que esta edição merece chegar à caixa de entrada?"],
+          ["Abertura", "Gancho pessoal, editorial ou informativo."],
+          ["Corpo", "Ideia principal, curadoria ou narrativa da semana."],
+          ["Ritual", "Quadro recorrente que cria familiaridade."],
+          ["Chamada final", "O que o leitor faz, pensa ou espera depois?"],
+        ],
+        reminders: [
+          "Newsletter é contrato de periodicidade e voz.",
+          "Você não precisa falar com todos: precisa ser reconhecível para os seus leitores.",
+          "A edição boa parece conversa, mas tem estrutura.",
+        ],
+      },
+      steps: [
+        {
+          eyebrow: "Audiência própria",
+          title: "Uma newsletter cria encontro recorrente.",
+          body: "Defina a promessa da edição antes de escrever. O leitor abriu espaço na caixa de entrada dele.",
+          primary: "Criar newsletter",
+        },
+      ],
+      text: `# [TÍTULO DA EDIÇÃO]
+
+Forma: Newsletter editorial
+Periodicidade: [semanal, quinzenal, mensal]
+
+## Promessa da edição
+
+[Por que esta edição existe?]
+
+## Abertura
+
+[Comece com voz, cena, pergunta ou notícia.]
+
+## Corpo
+
+[Desenvolva a ideia principal ou curadoria.]
+
+## Quadro recorrente
+
+[Uma seção que pode voltar nas próximas edições.]
+
+## Fecho
+
+[Convite, pergunta ou chamada final.]`,
     },
   ];
 

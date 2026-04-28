@@ -262,10 +262,10 @@ function applyTemplateLayout() {
 
   templatePanelToggles.forEach((toggle) => {
     const isHeaderToggle = toggle.closest(".template-reference-header");
-    const label = state.template.open ? "Ocultar template consultivo" : "Mostrar template consultivo";
+    const label = state.template.open ? "Ocultar guia de escrita" : "Mostrar guia de escrita";
     toggle.setAttribute("aria-expanded", String(state.template.open));
     toggle.setAttribute("aria-label", label);
-    toggle.title = state.template.open ? "Ocultar template" : "Mostrar template";
+    toggle.title = state.template.open ? "Ocultar guia" : "Mostrar guia";
 
     const icon = toggle.querySelector(".material-symbols-outlined");
     if (icon) {
@@ -278,17 +278,17 @@ function registerOfflineApp() {
   updateConnectionStatus();
 
   if (!("serviceWorker" in navigator)) {
-    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Offline indisponível';
+    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Uso sem internet indisponível';
     return;
   }
 
   navigator.serviceWorker
     .register("./service-worker.js")
     .then(() => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Offline pronto';
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
     })
     .catch(() => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Offline pendente';
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Modo sem internet pendente';
     });
 }
 
@@ -297,7 +297,7 @@ function updateConnectionStatus() {
     return;
   }
 
-  const label = navigator.onLine ? "Offline pronto" : "Sem rede";
+  const label = navigator.onLine ? "Pronto sem internet" : "Sem rede";
   const icon = navigator.onLine ? "cloud_done" : "cloud_off";
   offlineStatus.innerHTML = `<span class="material-symbols-outlined">${icon}</span>${label}`;
 }
@@ -573,7 +573,7 @@ function renderArchiveFilters() {
     ["all", "Todos", "inventory_2"],
     ["quick-note", "Notas rápidas", "bolt"],
     ["blank", "Manuscritos", "description"],
-    ["template", "Templates", "view_sidebar"],
+    ["template", "Guias", "view_sidebar"],
   ];
 
   archiveFilterBar.innerHTML = filters
@@ -604,7 +604,7 @@ function getArchiveType(manuscript) {
   if (manuscript.templateId) {
     return {
       id: "template",
-      label: "Template",
+      label: "Guia",
       icon: "view_sidebar",
     };
   }
@@ -855,7 +855,7 @@ function createManuscriptFromTemplate(templateId) {
   });
   const manuscript = VeredaArchive.createManuscript(templateManuscript);
 
-  addManuscript(manuscript, "Template aplicado");
+  addManuscript(manuscript, "Guia aplicado");
 }
 
 function createFromReferenceTemplate() {
@@ -988,7 +988,7 @@ function renderLexicalView() {
       <div><dt>Ocorrências</dt><dd>${analysis.count}</dd></div>
       <div><dt>Origem</dt><dd>Motor local</dd></div>
     </dl>
-    <p class="lexical-disclaimer">Classificação aproximada por regras offline. Sem IA, sem envio de texto.</p>
+    <p class="lexical-disclaimer">Classificação aproximada por regras locais. Sem IA, sem envio de texto.</p>
   `;
 }
 
@@ -1234,10 +1234,10 @@ function renderTemplateReference() {
 function createPrecisionMarkup(analysis) {
   return `
     <div class="precision-top">
-      <span>Precisão do formato</span>
+      <span>Aderência à forma</span>
       <strong>${analysis.score}%</strong>
     </div>
-    <div class="precision-meter" aria-label="Precisão do formato">
+    <div class="precision-meter" aria-label="Aderência à forma">
       <i style="--score: ${analysis.score}%"></i>
     </div>
     <p>${escapeHtml(analysis.status)} · ${analysis.words}${analysis.limit ? `/${analysis.limit}` : ""} palavras</p>
@@ -1296,20 +1296,20 @@ function createReferenceMarkup(template) {
 function selectReferenceTemplate(templateId) {
   state.template.selectedId = templateId;
   renderTemplateReference();
-  persistState("Template consultivo selecionado");
+  persistState("Guia de escrita selecionado");
 }
 
 function toggleTemplateSide() {
   state.template.side = state.template.side === "left" ? "right" : "left";
   state.template.open = true;
   applyTemplateLayout();
-  persistState("Lado do template ajustado");
+  persistState("Lado do guia ajustado");
 }
 
 function toggleTemplatePanel() {
   state.template.open = !state.template.open;
   applyTemplateLayout();
-  persistState(state.template.open ? "Template consultivo aberto" : "Template consultivo oculto");
+  persistState(state.template.open ? "Guia de escrita aberto" : "Guia de escrita oculto");
 }
 
 function updateTemplateWidth(clientX) {
@@ -1655,7 +1655,7 @@ templateResizer.addEventListener("pointerup", (event) => {
 
   templateResizer.releasePointerCapture(event.pointerId);
   editorSplit.classList.remove("is-resizing");
-  persistState("Largura do template ajustada");
+  persistState("Largura do guia ajustada");
 });
 
 focusSettingControls.forEach((control) => {
