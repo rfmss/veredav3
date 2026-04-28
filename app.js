@@ -70,6 +70,7 @@ const recentDocuments = document.querySelector("[data-recent-documents]");
 const craftTabs = document.querySelector("[data-craft-tabs]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateStudio = document.querySelector(".template-studio");
+const templateSearch = document.querySelector("[data-template-search]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
 const editorSplit = document.querySelector(".editor-split");
@@ -88,6 +89,7 @@ let templateState = {
   activeId: "roteiro-tv",
   step: 0,
   craftId: "roteiro",
+  query: "",
 };
 
 function loadState() {
@@ -1067,8 +1069,14 @@ function renderTemplateStudio() {
   const activeTemplate = VeredaTemplates.getTemplate(templateState.activeId);
   templateState.craftId = templateState.craftId || activeTemplate.oficio || "ficcao";
   const crafts = VeredaTemplates.listOficios();
-  const templates = VeredaTemplates.listTemplates({ oficio: templateState.craftId });
+  const query = normalizeSearch(templateState.query);
+  const sourceTemplates = query ? VeredaTemplates.listTemplates() : VeredaTemplates.listTemplates({ oficio: templateState.craftId });
+  const templates = query
+    ? sourceTemplates.filter((template) => normalizeSearch(`${template.label} ${template.title} ${template.description} ${template.oficio}`).includes(query))
+    : sourceTemplates;
   const activeStep = VeredaTemplates.getStep(templateState.activeId, templateState.step);
+
+  templateSearch.value = templateState.query;
 
   craftTabs.innerHTML = crafts
     .map((craft) => {
@@ -1084,18 +1092,20 @@ function renderTemplateStudio() {
     })
     .join("");
 
-  templateTabs.innerHTML = templates
-    .map((template) => {
-      const isActive = template.id === activeTemplate.id ? " is-active" : "";
+  templateTabs.innerHTML = templates.length
+    ? templates
+        .map((template) => {
+          const isActive = template.id === activeTemplate.id ? " is-active" : "";
 
-      return `
-        <button class="template-tab${isActive}" data-template-select="${template.id}">
-          <span class="material-symbols-outlined">${template.icon}</span>
-          ${escapeHtml(template.label)}
-        </button>
-      `;
-    })
-    .join("");
+          return `
+            <button class="template-tab${isActive}" data-template-select="${template.id}">
+              <span class="material-symbols-outlined">${template.icon}</span>
+              ${escapeHtml(template.label)}
+            </button>
+          `;
+        })
+        .join("")
+    : `<p class="template-empty">Nenhum guia encontrado para "${escapeHtml(templateState.query)}".</p>`;
 
   templateStepLabel.textContent = `tela ${activeStep.index + 1} de ${activeStep.total}`;
   templateScreen.innerHTML = createTemplateStepMarkup(activeTemplate, activeStep);
@@ -1152,6 +1162,7 @@ function selectTemplate(templateId) {
     activeId: templateId,
     step: 0,
     craftId: template.oficio || templateState.craftId,
+    query: templateState.query,
   };
   renderTemplateStudio();
 }
@@ -1168,7 +1179,13 @@ function selectCraft(craftId) {
     activeId: nextTemplate.id,
     step: 0,
     craftId,
+    query: "",
   };
+  renderTemplateStudio();
+}
+
+function setTemplateSearch(query) {
+  templateState.query = query;
   renderTemplateStudio();
 }
 
@@ -1432,12 +1449,20 @@ function getUpdatedTime(value) {
 }
 
 function escapeHtml(value) {
-  return value
+  return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function normalizeSearch(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
 function slugify(value) {
@@ -1775,6 +1800,7 @@ metadataForm.addEventListener("input", updateCurrentMetadata);
 metadataForm.addEventListener("focusout", renderMetadataForm);
 archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
 archiveSort.addEventListener("change", () => setArchiveSort(archiveSort.value));
+templateSearch.addEventListener("input", () => setTemplateSearch(templateSearch.value));
 
 renderActiveManuscript();
 renderManuscriptNavigation();

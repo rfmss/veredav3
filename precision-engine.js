@@ -19,6 +19,10 @@
       return analyzeEnsaio(normalizedText, words);
     }
 
+    if (template.oficio === "estudo-vestibular" || template.id === "redacao-enem") {
+      return analyzeEnem(normalizedText, words);
+    }
+
     return analyzeGeneric(template, normalizedText, words);
   }
 
@@ -107,6 +111,33 @@
     ];
 
     return summarize(checks, words, 5000);
+  }
+
+  function analyzeEnem(text, words) {
+    const paragraphs = text.split(/\n+/).map((item) => item.trim()).filter(Boolean);
+    const sentences = splitSentences(text);
+    const connectorHits = countMatches(text, /\b(além disso|ademais|outrossim|soma-se a isso|nesse sentido|isso ocorre porque|haja vista|no entanto|contudo|todavia|portanto|dessa forma|desse modo|diante do exposto|a fim de|para que|por meio de)\b/gi);
+    const repertoryHits = countMatches(text, /\b(segundo|de acordo com|conforme|filósofo|sociólogo|constituição|lei|ibge|onu|unesco|obra|livro|filme|história|pesquisa|dados)\b/gi);
+    const thesisHits = countMatches(text, /\b(problema|persistência|desafio|decorre|deve-se|causa|consequência|necessário|torna-se)\b/gi);
+    const informalHits = countMatches(text, /\b(tipo|né|pra|tá|coisa|legal|muito top|aí|daí)\b/gi);
+    const copiedMotivatorHits = countMatches(text, /\b(texto motivador|como mostra o texto|na coletânea)\b/gi);
+    const agentHits = countMatches(text, /\b(estado|governo|ministério|escola|mídia|empresas|sociedade civil|família|ongs|poder público)\b/gi);
+    const actionHits = countMatches(text, /\b(deve|devem|promover|criar|ampliar|fiscalizar|implementar|garantir|realizar|desenvolver|regulamentar)\b/gi);
+    const meansHits = countMatches(text, /\b(por meio de|mediante|através de|com campanhas|por intermédio|em parceria)\b/gi);
+    const purposeHits = countMatches(text, /\b(a fim de|para que|com o objetivo de|com a finalidade de|visando)\b/gi);
+    const effectHits = countMatches(text, /\b(com isso|assim|desse modo|dessa forma|resultado|efeito|reduzir|mitigar|combater|assegurar)\b/gi);
+    const interventionScore = [agentHits, actionHits, meansHits, purposeHits, effectHits].filter(Boolean).length;
+
+    const checks = [
+      createCheck("C1 - norma padrão", informalHits === 0 && words >= 80, Math.max(0, 96 - informalHits * 22), "Evite informalidade, marcas de fala e deslizes acumulados de registro."),
+      createCheck("C2 - proposta e recorte", words >= 120 && copiedMotivatorHits === 0, getRangeScore(words, 120, 450) - copiedMotivatorHits * 18, "Mostre que entendeu o tema real sem copiar os textos motivadores."),
+      createCheck("C3 - tese e argumentos", thesisHits >= 3 && repertoryHits >= 1, Math.min(100, thesisHits * 12 + repertoryHits * 24), "Tese, repertório e argumentos precisam trabalhar juntos."),
+      createCheck("C4 - coesão", connectorHits >= 4 && paragraphs.length >= 3, Math.min(100, connectorHits * 13 + paragraphs.length * 10), "Use conectivos com função clara e parágrafos em progressão."),
+      createCheck("C5 - intervenção", interventionScore >= 4, interventionScore * 20, "Inclua agente, ação, meio, finalidade e efeito respeitando direitos humanos."),
+      createCheck("Arquitetura ENEM", paragraphs.length >= 4 && sentences.length >= 8, Math.min(100, paragraphs.length * 18 + sentences.length * 4), "Introdução, dois desenvolvimentos e proposta final deixam a correção mais legível."),
+    ];
+
+    return summarize(checks, words, 450);
   }
 
   function analyzeGeneric(template, text, words) {

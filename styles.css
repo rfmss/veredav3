@@ -111,8 +111,8 @@ a {
   display: block;
   margin: 0;
   background: var(--primary);
-  -webkit-mask: url("favicon_io/android-chrome-512x512.png") center / contain no-repeat;
-  mask: url("favicon_io/android-chrome-512x512.png") center / contain no-repeat;
+  -webkit-mask: url("icons/Logo.svg") center / contain no-repeat;
+  mask: url("icons/Logo.svg") center / contain no-repeat;
 }
 
 .brand-lockup strong {
@@ -1739,10 +1739,47 @@ mark {
   line-height: 1.55;
 }
 
+.template-search {
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--primary);
+  padding: 10px 13px;
+}
+
+.template-search .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.template-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.template-search input::placeholder {
+  color: var(--muted);
+}
+
 .template-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.template-empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 14px;
+  font-size: 13px;
 }
 
 .craft-tabs {

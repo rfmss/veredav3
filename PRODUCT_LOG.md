@@ -882,3 +882,20 @@ Benefícios esperados:
 - O Arquivo volta a cumprir função de organização do acervo.
 - A Academia ganha status de módulo central do produto.
 - O visual fica mais coeso com a interface principal.
+
+## 2026-04-28 - Navegação, busca, ENEM e marca vetorial
+
+Decidimos fechar o primeiro pacote de navegabilidade da Academia.
+
+A sidebar agora também tem atalho para Academia prática, além da navegação superior. O Guia de Ofícios ganhou busca textual para encontrar guias por termos como ENEM, ISBN, query, capa ou repertório sem depender apenas das abas de família.
+
+Também adicionamos uma análise local para guias de Estudo e vestibular. O medidor ENEM estima aderência pelas cinco competências: norma padrão, compreensão da proposta, tese e repertório, coesão e proposta de intervenção. A análise continua local, indicativa e sem envio de dados.
+
+O arquivo `icons/Logo.svg` passa a ser a marca vetorial oficial. Limpamos o fundo do SVG, aplicamos a cor principal do Vereda e regeneramos os ícones PNG do PWA, favicons e apple touch icon a partir da nova marca. O manifest também referencia o SVG e inclui atalhos de app.
+
+Benefícios esperados:
+
+- Academia fica acessível pela barra superior e pela sidebar.
+- Guias ficam encontráveis mesmo com catálogo grande.
+- Estudantes passam a receber feedback específico de redação ENEM no painel lateral.
+- A marca visual fica consistente entre layout, favicon e PWA.
