@@ -75,6 +75,7 @@ const referenceTabs = document.querySelector("[data-reference-tabs]");
 const referenceBody = document.querySelector("[data-reference-body]");
 const precisionCard = document.querySelector("[data-precision-card]");
 const templateResizer = document.querySelector("[data-template-resizer]");
+const templatePanelToggles = document.querySelectorAll("[data-template-panel-toggle]");
 const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
 
 let state = loadState();
@@ -163,6 +164,7 @@ function getDefaultTemplateState() {
     selectedId: "flash-fiction",
     side: "left",
     width: 340,
+    open: true,
   };
 }
 
@@ -256,6 +258,20 @@ function applyFocusSettings() {
 function applyTemplateLayout() {
   editorSplit.dataset.templateSide = state.template.side;
   editorSplit.style.setProperty("--template-panel-width", `${state.template.width}px`);
+  editorSplit.classList.toggle("is-template-collapsed", !state.template.open);
+
+  templatePanelToggles.forEach((toggle) => {
+    const isHeaderToggle = toggle.closest(".template-reference-header");
+    const label = state.template.open ? "Ocultar template consultivo" : "Mostrar template consultivo";
+    toggle.setAttribute("aria-expanded", String(state.template.open));
+    toggle.setAttribute("aria-label", label);
+    toggle.title = state.template.open ? "Ocultar template" : "Mostrar template";
+
+    const icon = toggle.querySelector(".material-symbols-outlined");
+    if (icon) {
+      icon.textContent = isHeaderToggle && state.template.open ? "left_panel_close" : "view_sidebar";
+    }
+  });
 }
 
 function registerOfflineApp() {
@@ -1285,8 +1301,15 @@ function selectReferenceTemplate(templateId) {
 
 function toggleTemplateSide() {
   state.template.side = state.template.side === "left" ? "right" : "left";
+  state.template.open = true;
   applyTemplateLayout();
   persistState("Lado do template ajustado");
+}
+
+function toggleTemplatePanel() {
+  state.template.open = !state.template.open;
+  applyTemplateLayout();
+  persistState(state.template.open ? "Template consultivo aberto" : "Template consultivo oculto");
 }
 
 function updateTemplateWidth(clientX) {
@@ -1506,6 +1529,10 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "toggle-template-side") {
     toggleTemplateSide();
+  }
+
+  if (actionTarget.dataset.action === "toggle-template-panel") {
+    toggleTemplatePanel();
   }
 
   if (actionTarget.dataset.action === "open-create-note") {

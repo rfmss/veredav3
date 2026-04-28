@@ -700,3 +700,24 @@ Próximas etapas sugeridas:
 - Refinar o painel consultivo com opção de ocultar/mostrar.
 - Criar confirmação e fluxo próprio para futuras ações destrutivas, como excluir ou arquivar.
 - Considerar uma visualização compacta do Arquivo quando houver muitos documentos.
+
+## 2026-04-28 - Editor com consulta recolhível
+
+Decidimos dar ao escritor controle explícito sobre o painel consultivo do editor.
+
+O painel lateral de templates agora pode ser ocultado e mostrado sem entrar no modo foco total. O estado fica salvo em `state.template.open`, junto com lado e largura do painel. Quando a consulta é recolhida, a página branca ocupa melhor o espaço e o botão "Template" permite voltar ao modo com referência lateral.
+
+Essa etapa mantém a filosofia dos templates consultivos: eles ajudam quando o autor quer consultar forma, critérios e lembretes, mas não precisam permanecer visíveis durante toda a escrita.
+
+Benefícios esperados:
+
+- O editor alterna melhor entre escrita limpa e escrita com referência.
+- A preferência do escritor persiste entre sessões.
+- O painel consultivo continua acessível sem competir com a página branca.
+- O modo foco total fica reservado para leitura/escrita imersiva, enquanto o novo controle cobre a alternância cotidiana.
+
+Próximas etapas sugeridas:
+
+- Melhorar a lista de versões locais com mais contexto e ações mais claras.
+- Revisar UX mobile do editor, arquivo e criação de notas.
+- Fazer um teste manual completo do fluxo M1.

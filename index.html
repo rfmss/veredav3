@@ -109,6 +109,9 @@
                   <button class="icon-button" data-action="toggle-template-side" aria-label="Trocar lado do template" title="Trocar lado">
                     <span class="material-symbols-outlined">swap_horiz</span>
                   </button>
+                  <button class="icon-button" data-action="toggle-template-panel" data-template-panel-toggle aria-label="Ocultar template consultivo" title="Ocultar template">
+                    <span class="material-symbols-outlined">left_panel_close</span>
+                  </button>
                 </div>
                 <div class="template-reference-tabs" data-reference-tabs></div>
                 <div class="precision-card" data-precision-card></div>
@@ -118,6 +121,12 @@
               <button class="split-resizer" data-template-resizer aria-label="Ajustar largura do template"></button>
 
               <article class="paper editor-paper">
+                <div class="editor-mode-bar">
+                  <button class="secondary-button" data-action="toggle-template-panel" data-template-panel-toggle aria-expanded="true">
+                    <span class="material-symbols-outlined">view_sidebar</span>
+                    Template
+                  </button>
+                </div>
                 <div class="title-block">
                   <input class="title-input" value="O Som da Terra Seca" aria-label="Título do manuscrito">
                   <span class="title-rule"></span>
