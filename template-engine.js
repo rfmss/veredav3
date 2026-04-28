@@ -6,6 +6,7 @@
     { id: "nao-ficcao", label: "Não ficção", icon: "article" },
     { id: "jornalismo", label: "Jornalismo", icon: "newspaper" },
     { id: "comercial-tecnica", label: "Comercial e técnica", icon: "workspaces" },
+    { id: "estudo-vestibular", label: "Estudo e vestibular", icon: "school" },
   ];
 
   const templates = [
@@ -687,6 +688,7 @@ Periodicidade: [semanal, quinzenal, mensal]
       ...naoFiccaoGuides(),
       ...jornalismoGuides(),
       ...comercialTecnicaGuides(),
+      ...estudoVestibularGuides(),
     ];
   }
 
@@ -732,6 +734,183 @@ Periodicidade: [semanal, quinzenal, mensal]
       guide("quadrinhos", "comercial-tecnica", "Escrita para quadrinhos", "view_comfy", "Painel e página", "Guia para roteiro de HQ, página, painel, legenda e colaboração visual.", ["HQ", "Painel", "Página", "Imagem + palavra"], "PAINEL 1: A mesa posta para dois.\nPAINEL 2: Uma cadeira vazia.\nBALÃO: Hoje ele vem."),
       guide("escrita-tecnica", "comercial-tecnica", "Escrita técnica", "science", "Rigor e narrativa", "Guia para relatório, ensaio acadêmico, divulgação ou documento técnico com clareza.", ["Rigor", "Método", "Dados", "Narrativa"], "O dado isolado sugere melhora. A série histórica, porém, mostra outra coisa: a queda começou antes da política analisada."),
     ];
+  }
+
+  function estudoVestibularGuides() {
+    return [
+      createGuide({
+        id: "redacao-enem",
+        oficio: "estudo-vestibular",
+        label: "Redação ENEM completa",
+        icon: "assignment",
+        chapter: "Projeto até revisão",
+        description: "Guia para construir a redação dissertativo-argumentativa do ENEM pelas cinco competências da banca.",
+        meta: ["ENEM", "5 competências", "Até 30 linhas", "1000 pontos"],
+        sections: [
+          ["Competência 1", "Norma padrão: ortografia, concordância, regência, pontuação e escolha formal de palavras."],
+          ["Competência 2", "Compreensão da proposta: tema real, recorte correto e repertório pertinente."],
+          ["Competência 3", "Seleção e organização: tese, argumentos relevantes e progressão lógica."],
+          ["Competência 4", "Coesão: conectivos precisos, retomadas claras e parágrafos que avançam."],
+          ["Competência 5", "Intervenção: agente, ação, meio, finalidade e efeito, sempre respeitando direitos humanos."],
+        ],
+        reminders: [
+          "Use os primeiros minutos para fazer projeto de texto.",
+          "Não copie frases dos textos motivadores.",
+          "A conclusão do ENEM resolve; ela não apenas resume.",
+        ],
+        text: "## Projeto de texto\n\nTema real: [qual problema a proposta cobra?]\nTese: [por que esse problema persiste?]\nArgumento 1: [causa ou obstáculo principal]\nArgumento 2: [segunda causa, consequência ou agente envolvido]\nProposta: [agente + ação + meio + finalidade + efeito]\n\n## Introdução\n\n[Contextualização pertinente.] [Delimitação do problema.] [Tese com dois caminhos argumentativos.]\n\n## Desenvolvimento I\n\n[Tópico frasal.] [Explicação.] [Repertório ou exemplo.] [Conclusão parcial ligada à tese.]\n\n## Desenvolvimento II\n\n[Tópico frasal.] [Explicação.] [Repertório ou exemplo diferente.] [Conclusão parcial.]\n\n## Proposta de intervenção\n\n[Diante disso, agente deve realizar ação por meio de meio, a fim de finalidade, gerando efeito concreto.]",
+        model: {
+          exemplar: "Redações nota 1000 do ENEM e matrizes oficiais de correção, pela relação entre estrutura, repertório e intervenção.",
+          why: "A redação ENEM forte mostra domínio formal e projeto argumentativo antes de tentar impressionar.",
+          references: ["Matriz ENEM", "Cartilhas de redação do Inep", "Corretores de redação", "Pré-vestibulares brasileiros"],
+          placeholder: "A persistência de [problema] no Brasil revela não apenas [causa 1], mas também [causa 2]. Nesse cenário, torna-se necessário analisar [argumento 1] e [argumento 2] para propor uma intervenção efetiva.",
+        },
+      }),
+      createGuide({
+        id: "projeto-texto-enem",
+        oficio: "estudo-vestibular",
+        label: "Projeto de texto",
+        icon: "schema",
+        chapter: "10 minutos decisivos",
+        description: "Guia para planejar tese, argumentos, repertório e intervenção antes de escrever a redação.",
+        meta: ["Planejamento", "Tema real", "Tese", "Argumentos"],
+        sections: [
+          ["Tema real", "Transforme a frase da proposta em problema concreto, sem fugir do recorte."],
+          ["Tese", "Diga por que o problema existe ou persiste."],
+          ["Argumento 1", "Escolha uma causa, obstáculo ou agente social para desenvolver."],
+          ["Argumento 2", "Traga outro eixo, diferente do primeiro, para ampliar a análise."],
+          ["Intervenção", "Já defina agente e ação antes de escrever a introdução."],
+        ],
+        reminders: ["Projeto curto evita repetição.", "Repertório precisa servir ao argumento.", "Se a tese é vaga, o texto inteiro fica instável."],
+        text: "## Tema real\n\n[O que exatamente a proposta pede?]\n\n## Tese\n\n[O problema persiste porque...]\n\n## Argumento 1\n\n[Causa, obstáculo ou dado que sustenta a tese.]\n\n## Argumento 2\n\n[Outro eixo de análise.]\n\n## Proposta\n\nAgente: [quem age]\nAção: [o que faz]\nMeio: [como faz]\nFinalidade: [para quê]\nEfeito: [resultado esperado]",
+        model: vestibularModel("Projeto de texto", "Um bom projeto antecipa a redação inteira em poucas linhas.", "Tema: [x]. Tese: [x ocorre por causa de y e z]. Desenvolvimento I: [y]. Desenvolvimento II: [z]. Intervenção: [agente + ação]."),
+      }),
+      createGuide({
+        id: "introducao-enem",
+        oficio: "estudo-vestibular",
+        label: "Introdução ENEM",
+        icon: "start",
+        chapter: "Contexto e tese",
+        description: "Guia para abrir a redação com repertório pertinente, problema delimitado e tese clara.",
+        meta: ["Introdução", "Repertório", "Delimitação", "Tese"],
+        sections: [
+          ["Contextualização", "Comece por dado, obra, conceito, marco histórico ou fenômeno social pertinente."],
+          ["Ponte", "Mostre como o repertório se conecta ao tema da proposta."],
+          ["Problema", "Delimite o que está em discussão no Brasil contemporâneo."],
+          ["Tese", "Anuncie os dois eixos que serão defendidos no desenvolvimento."],
+        ],
+        reminders: ["Evite aberturas genéricas.", "Não use repertório que você não consegue explicar.", "A tese deve orientar o resto do texto."],
+        text: "## Contexto\n\n[Repertório ou observação social pertinente.]\n\n## Ponte com o tema\n\n[Como esse repertório ilumina o problema?]\n\n## Tese\n\n[Defenda que o problema persiste por causa de argumento 1 e argumento 2.]",
+        model: vestibularModel("Introdução ENEM", "A introdução boa entrega direção, não enfeite.", "Embora [repertório] evidencie [valor ou problema], observa-se, no Brasil, [tema]. Tal quadro decorre de [causa 1] e [causa 2], fatores que precisam ser enfrentados."),
+      }),
+      createGuide({
+        id: "desenvolvimento-enem",
+        oficio: "estudo-vestibular",
+        label: "Desenvolvimento ENEM",
+        icon: "format_align_left",
+        chapter: "Argumento em progressão",
+        description: "Guia para parágrafos de desenvolvimento com tópico frasal, explicação, repertório e conclusão parcial.",
+        meta: ["Argumentação", "Tópico frasal", "Repertório", "C-03 e C-04"],
+        sections: [
+          ["Tópico frasal", "Primeira frase que anuncia o argumento do parágrafo."],
+          ["Explicação", "Desdobre a causa, consequência ou mecanismo do problema."],
+          ["Repertório", "Use dado, conceito ou exemplo como prova, não como decoração."],
+          ["Conclusão parcial", "Retome a tese e feche o raciocínio antes de passar ao próximo parágrafo."],
+        ],
+        reminders: ["Cada parágrafo precisa defender uma ideia principal.", "Não empilhe repertórios.", "Conectivo errado confunde a lógica."],
+        text: "## Tópico frasal\n\n[O primeiro obstáculo é...]\n\n## Explicação\n\n[Como esse obstáculo produz o problema?]\n\n## Repertório ou exemplo\n\n[Referência pertinente e explicada.]\n\n## Conclusão parcial\n\n[Portanto, esse fator reforça a tese porque...]",
+        model: vestibularModel("Desenvolvimento ENEM", "O desenvolvimento precisa provar a tese por etapas.", "Em primeiro plano, [argumento] intensifica [problema]. Isso ocorre porque [explicação]. Nesse sentido, [repertório] demonstra que [conexão]. Logo, [fecho parcial]."),
+      }),
+      createGuide({
+        id: "proposta-intervencao",
+        oficio: "estudo-vestibular",
+        label: "Proposta de intervenção",
+        icon: "task_alt",
+        chapter: "Cinco elementos",
+        description: "Guia para formular solução completa no ENEM com agente, ação, meio, finalidade e efeito.",
+        meta: ["C-05", "Agente", "Ação", "Direitos humanos"],
+        sections: [
+          ["Agente", "Quem tem legitimidade para agir: Estado, escola, mídia, empresas, famílias ou sociedade civil."],
+          ["Ação", "O que será feito: criar, ampliar, fiscalizar, promover, regulamentar, capacitar."],
+          ["Meio", "Como a ação será executada: campanhas, políticas públicas, parcerias, leis, formação."],
+          ["Finalidade", "Para que a ação existe, ligada ao problema analisado."],
+          ["Efeito", "Resultado concreto esperado, sem fórmula vaga."],
+        ],
+        reminders: ["Não transforme punição em solução principal.", "Detalhe pelo menos um elemento.", "Respeite os direitos humanos."],
+        text: "## Agente\n\n[Quem deve agir?]\n\n## Ação\n\n[O que deve ser feito?]\n\n## Meio\n\n[Por meio de quê?]\n\n## Finalidade\n\n[A fim de quê?]\n\n## Efeito\n\n[Qual mudança concreta se espera?]\n\n## Parágrafo final\n\n[Diante do exposto, agente deve ação por meio de meio, a fim de finalidade. Com isso, espera-se efeito.]",
+        model: vestibularModel("Proposta de intervenção", "A conclusão do ENEM é uma solução detalhada, não uma frase de encerramento.", "Diante disso, [agente] deve [ação], por meio de [meio], a fim de [finalidade]. Assim, será possível [efeito concreto], respeitando [garantia/direito]."),
+      }),
+      createGuide({
+        id: "repertorio-sociocultural",
+        oficio: "estudo-vestibular",
+        label: "Repertório sociocultural",
+        icon: "public",
+        chapter: "Referência com função",
+        description: "Guia para escolher e aplicar repertório de filosofia, literatura, história, ciência, direito e dados.",
+        meta: ["C-03", "Pertinência", "Autoria", "Conexão"],
+        sections: [
+          ["Filosofia", "Use conceito para explicar causa ou valor em disputa."],
+          ["Dados e pesquisa", "Traga fonte confiável e conecte o número ao argumento."],
+          ["Literatura e arte", "Use obra como analogia ou retrato do problema."],
+          ["História e ciência", "Mostre origem, permanência ou efeito verificável."],
+          ["Direito e sociologia", "Compare garantia formal e realidade social."],
+        ],
+        reminders: ["Não invente citação.", "Repertório sem explicação perde força.", "Uma referência simples e bem conectada vale mais que nome difícil solto."],
+        text: "## Repertório escolhido\n\n[Autor, obra, dado, lei, conceito ou evento.]\n\n## Ideia central\n\n[O que essa referência mostra?]\n\n## Conexão com o tema\n\n[Como ela prova ou ilumina seu argumento?]\n\n## Frase pronta para adaptar\n\nSegundo [fonte], [ideia/dado]. Essa perspectiva evidencia que [conexão com o tema].",
+        model: vestibularModel("Repertório sociocultural", "O repertório funciona quando participa do argumento.", "De acordo com [fonte], [dado ou conceito]. Essa informação evidencia que [tema] não se limita a [aparência do problema], mas envolve [argumento central]."),
+      }),
+      createGuide({
+        id: "coesao-conectivos",
+        oficio: "estudo-vestibular",
+        label: "Coesão e conectivos",
+        icon: "link",
+        chapter: "Progressão lógica",
+        description: "Guia para organizar progressão textual com conectivos de adição, causa, oposição, conclusão, exemplo e finalidade.",
+        meta: ["C-04", "Coesão", "Conectivos", "Retomada"],
+        sections: [
+          ["Adição e progressão", "Além disso; ademais; soma-se a isso; de igual modo."],
+          ["Causa e explicação", "Isso ocorre porque; tal fato se deve a; em virtude de."],
+          ["Oposição", "No entanto; contudo; apesar disso; embora."],
+          ["Conclusão", "Portanto; dessa forma; diante do exposto; assim."],
+          ["Finalidade", "A fim de; para que; com o objetivo de; por meio de."],
+        ],
+        reminders: ["Conectivo bonito não salva relação lógica errada.", "Varie retomadas: problema, questão, cenário, entrave.", "Coesão também é ordem de ideias."],
+        text: "## Relação lógica\n\n[Adição, causa, oposição, conclusão, exemplo ou finalidade?]\n\n## Conectivo escolhido\n\n[Escolha o termo adequado.]\n\n## Retomada\n\n[Que palavra substitui o termo anterior sem repetir?]\n\n## Parágrafo revisado\n\n[Reescreva conectando as frases com precisão.]",
+        model: vestibularModel("Coesão e conectivos", "Coesão é a engenharia discreta que permite a banca acompanhar o raciocínio.", "Além disso, [argumento 2] amplia o problema. Isso ocorre porque [causa]. Portanto, [conclusão parcial] torna-se indispensável para compreender [tema]."),
+      }),
+      createGuide({
+        id: "fuvest-unicamp",
+        oficio: "estudo-vestibular",
+        label: "Redação Fuvest e Unicamp",
+        icon: "account_balance",
+        chapter: "Banca e gênero",
+        description: "Guia para adaptar escrita a propostas de vestibular que cobram autoria, gênero textual e leitura de coletânea.",
+        meta: ["Fuvest", "Unicamp", "Coletânea", "Gênero textual"],
+        sections: [
+          ["Leitura da proposta", "Identifique tema, gênero, interlocutor e finalidade antes de escrever."],
+          ["Coletânea", "Use os textos como ponto de partida, não como muleta."],
+          ["Gênero", "Respeite carta, artigo, dissertação, manifesto, crônica ou outro formato pedido."],
+          ["Autoria", "Mostre posição própria e controle de linguagem."],
+          ["Adequação", "A banca avalia se o texto cumpre a situação comunicativa."],
+        ],
+        reminders: ["Fuvest e Unicamp não seguem a fórmula ENEM.", "Gênero textual manda na estrutura.", "Interlocutor muda tom, vocabulário e estratégia."],
+        text: "## Proposta\n\nTema: [tema]\nGênero solicitado: [gênero]\nInterlocutor: [para quem se escreve]\nFinalidade: [o que o texto deve fazer]\n\n## Leitura da coletânea\n\n[Ideias úteis sem copiar.]\n\n## Plano\n\n[Como o gênero organiza começo, desenvolvimento e fechamento?]\n\n## Texto\n\n[Escreva respeitando situação comunicativa e autoria.]",
+        model: vestibularModel("Fuvest e Unicamp", "Nessas bancas, a forma solicitada muda o contrato do texto.", "Antes de defender uma tese, identifique quem fala, para quem fala e com que finalidade. A boa resposta nasce dessa situação comunicativa."),
+      }),
+      guide("dissertacao-escolar", "estudo-vestibular", "Dissertação escolar", "edit_note", "Tese e argumento", "Guia para provas e trabalhos escolares com tese, argumentos, evidência e conclusão coerente.", ["Escola", "Tese", "Argumentos", "Conclusão"], "Este texto defende que [tese], pois [argumento 1] e [argumento 2] mostram a importância de [tema]."),
+      guide("resumo-resenha", "estudo-vestibular", "Resumo e resenha", "rate_review", "Síntese e crítica", "Guia para resumir com fidelidade e resenhar com avaliação crítica clara.", ["Síntese", "Fidelidade", "Avaliação", "Referência"], "A obra [título], de [autor], apresenta [tema central]. Sua principal contribuição está em [avaliação crítica]."),
+      guide("interpretacao-literaria", "estudo-vestibular", "Interpretação literária", "search", "Texto e evidência", "Guia para analisar textos literários e responder questões com evidência do próprio texto.", ["Literatura", "Análise", "Evidência", "Resposta"], "O recurso de [figura/voz/imagem] revela [efeito de sentido], pois o trecho [evidência] indica [interpretação]."),
+      guide("revisao-gramatical", "estudo-vestibular", "Revisão gramatical", "fact_check", "C-01 sem tropeços", "Guia para revisar concordância, regência, crase, pontuação, acentuação e informalidade.", ["Norma padrão", "C-01", "Revisão", "Clareza"], "Revise primeiro os verbos, depois a pontuação, depois as retomadas. A nota da forma costuma cair por acúmulo, não por um deslize isolado."),
+    ];
+  }
+
+  function vestibularModel(exemplar, why, placeholder) {
+    return {
+      exemplar: `${exemplar}: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.`,
+      why,
+      references: ["Matriz ENEM", "Cartilhas do Inep", "Fuvest", "Unicamp", "Professores de redação"],
+      placeholder,
+    };
   }
 
   function guide(id, oficio, label, icon, chapter, description, meta, placeholder) {
@@ -844,7 +1023,7 @@ Periodicidade: [semanal, quinzenal, mensal]
     const template = templates.find((item) => item.id === templateId) || templates[0];
     return {
       ...template,
-      model: models[template.id],
+      model: models[template.id] || template.model,
     };
   }
 

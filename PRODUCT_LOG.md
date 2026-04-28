@@ -802,3 +802,39 @@ Próximas etapas sugeridas:
 - Criar medidores específicos para os novos guias.
 - Permitir busca rápida dentro do Guia de Ofícios.
 - Permitir inserir a amostra do texto-modelo no manuscrito com um clique.
+
+## 2026-04-28 - Estudo e vestibular no Guia de Ofícios
+
+Decidimos absorver o material de "Estudo & Vestibular" como uma nova família do Guia de Ofícios, em vez de criar uma página separada.
+
+A nova aba "Estudo e vestibular" reúne guias voltados a estudantes brasileiros, com foco em redação ENEM, Fuvest, Unicamp e produção escolar. A organização segue o documento de referência: competências do ENEM, fluxo por etapas, repertório sociocultural, conectivos e guias rápidos.
+
+Foram adicionados guias para:
+
+- Redação ENEM completa.
+- Projeto de texto.
+- Introdução ENEM.
+- Desenvolvimento ENEM.
+- Proposta de intervenção.
+- Repertório sociocultural.
+- Coesão e conectivos.
+- Redação Fuvest e Unicamp.
+- Dissertação escolar.
+- Resumo e resenha.
+- Interpretação literária.
+- Revisão gramatical.
+
+Também corrigimos o carregamento dos textos-modelo dos guias expandidos: quando um guia tem modelo próprio, ele agora é preservado mesmo sem entrada no catálogo legado.
+
+Benefícios esperados:
+
+- O Vereda passa a atender também estudantes, sem abandonar a lógica de ofícios.
+- A redação ENEM fica acessível por competências e por etapa de escrita.
+- O material de vestibular fica integrado ao mesmo editor, com placeholder prático ao lado.
+- O produto ganha um caminho educacional claro para ensino médio, pré-vestibular e primeiros textos acadêmicos.
+
+Próximas etapas sugeridas:
+
+- Transformar o medidor de competências do HTML em análise local dentro do editor.
+- Criar busca rápida nos guias para quem chega pelo tipo de prova.
+- Permitir alternar entre "modo escritor" e "modo estudante" na entrada do estúdio.
