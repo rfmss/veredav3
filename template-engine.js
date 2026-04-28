@@ -1,7 +1,17 @@
 (function templateEngine(global) {
+  const oficios = [
+    { id: "ficcao", label: "Ficção", icon: "auto_stories" },
+    { id: "roteiro", label: "Roteiro", icon: "movie" },
+    { id: "poesia", label: "Poesia", icon: "format_quote" },
+    { id: "nao-ficcao", label: "Não ficção", icon: "article" },
+    { id: "jornalismo", label: "Jornalismo", icon: "newspaper" },
+    { id: "comercial-tecnica", label: "Comercial e técnica", icon: "workspaces" },
+  ];
+
   const templates = [
     {
       id: "roteiro-tv",
+      oficio: "roteiro",
       label: "Roteiro de TV",
       icon: "movie",
       title: "Roteirista de série",
@@ -99,6 +109,7 @@ PERSONAGEM
     },
     {
       id: "flash-fiction",
+      oficio: "ficcao",
       label: "Ficção-relâmpago",
       icon: "edit_note",
       title: "Ficção-relâmpago",
@@ -187,6 +198,7 @@ Meta: até [500] palavras
     },
     {
       id: "cronica",
+      oficio: "nao-ficcao",
       label: "Crônica",
       icon: "article",
       title: "Crônica",
@@ -238,6 +250,7 @@ Forma: Crônica
     },
     {
       id: "conto-curto",
+      oficio: "ficcao",
       label: "Conto curto",
       icon: "auto_stories",
       title: "Conto curto",
@@ -293,6 +306,7 @@ Forma: Conto curto
     },
     {
       id: "ensaio",
+      oficio: "nao-ficcao",
       label: "Ensaio",
       icon: "subject",
       title: "Ensaio",
@@ -348,6 +362,7 @@ Forma: Ensaio
     },
     {
       id: "romance-comercial",
+      oficio: "ficcao",
       label: "Romance comercial",
       icon: "menu_book",
       title: "Romance comercial",
@@ -404,6 +419,7 @@ Gênero: [suspense, romance histórico, fantasia, drama familiar...]
     },
     {
       id: "poesia-lirica",
+      oficio: "poesia",
       label: "Poesia lírica",
       icon: "format_quote",
       title: "Poesia lírica",
@@ -455,6 +471,7 @@ Forma: Poesia lírica
     },
     {
       id: "reportagem",
+      oficio: "jornalismo",
       label: "Reportagem",
       icon: "newspaper",
       title: "Reportagem",
@@ -512,6 +529,7 @@ Forma: Reportagem
     },
     {
       id: "newsletter-editorial",
+      oficio: "jornalismo",
       label: "Newsletter editorial",
       icon: "alternate_email",
       title: "Newsletter editorial",
@@ -566,7 +584,182 @@ Periodicidade: [semanal, quinzenal, mensal]
 
 [Convite, pergunta ou chamada final.]`,
     },
+    ...createExpandedGuides(),
   ];
+
+  function createExpandedGuides() {
+    return expandedGuideData().map(createGuide);
+  }
+
+  function createGuide({ id, oficio, label, icon, chapter, description, meta, sections, reminders, text, model }) {
+    return {
+      id,
+      oficio,
+      label,
+      icon,
+      title: label,
+      kind: label,
+      chapter,
+      description,
+      guidance: { meta, sections, reminders },
+      steps: [
+        {
+          eyebrow: "Ofício",
+          title: `${label} tem uma lógica própria.`,
+          body: description,
+          primary: `Criar ${label.toLowerCase()}`,
+        },
+      ],
+      text: `# [TÍTULO]\n\nForma: ${label}\n\n${text}`,
+      model,
+    };
+  }
+
+  function expandedGuideData() {
+    return [
+      {
+        id: "romance-literario",
+        oficio: "ficcao",
+        label: "Romance literário",
+        icon: "local_library",
+        chapter: "Voz e fissura",
+        description: "Guia para narrativa longa em que linguagem, ambiguidade e consciência formal carregam a travessia.",
+        meta: ["Ficção", "Voz", "Ambiguidade", "Forma"],
+        sections: [["Voz inevitável", "Que frase só este narrador poderia dizer?"], ["Ferida central", "Que conflito íntimo move o livro?"], ["Forma", "O texto pede fragmento, fluxo ou capítulos?"], ["Imagem recorrente", "Que objeto retorna transformado?"], ["Acúmulo", "O romance faz ressoar, não apenas resolver."]],
+        reminders: ["A voz é o produto.", "Ambiguidade não é confusão.", "A forma precisa participar do sentido."],
+        text: "## Voz\n\n[Abra com uma frase que revele ritmo, mundo e ferida.]\n\n## Matéria íntima\n\n[Que conflito não se resolve apenas por ação externa?]\n\n## Forma\n\n[Como este livro quer ser contado?]",
+        model: { exemplar: "Raduan Nassar, Clarice Lispector e Hilda Hilst, pela voz como acontecimento.", why: "O romance literário se sustenta quando forma e tema são inseparáveis.", references: ["Raduan Nassar", "Clarice Lispector", "Hilda Hilst", "João Gilberto Noll", "Marilene Felinto"], placeholder: "Fazia anos que ele não atravessava aquela rua, mas a rua continuava atravessando tudo que ele dizia." },
+      },
+      {
+        id: "ficcao-cientifica",
+        oficio: "ficcao",
+        label: "Ficção científica",
+        icon: "rocket_launch",
+        chapter: "Hipótese e humanidade",
+        description: "Guia para extrapolar tecnologia, sociedade ou futuro sem perder o conflito humano.",
+        meta: ["Hipótese", "Mundo possível", "Custo humano", "Presente revelado"],
+        sections: [["E se...", "Qual hipótese desloca o mundo conhecido?"], ["Regra", "O que mudou e quais são os limites?"], ["Custo humano", "Quem paga o preço?"], ["Cotidiano alterado", "Como o novo mundo aparece em gestos simples?"], ["Comentário", "O futuro ilumina o agora."]],
+        reminders: ["Tecnologia sem consequência vira cenário.", "Explique regras por ação.", "O estranho fica forte quando toca o familiar."],
+        text: "## Hipótese\n\n[E se...]\n\n## Regra\n\n[Como esse mundo funciona?]\n\n## Personagem\n\n[Quem sofre ou deseja dentro dessa hipótese?]",
+        model: { exemplar: "André Carneiro, Jeronymo Monteiro e Bráulio Tavares, pela especulação ligada ao humano.", why: "A ficção científica brasileira ganha força quando a ideia revela solidão, poder, medo ou desigualdade.", references: ["André Carneiro", "Jeronymo Monteiro", "Bráulio Tavares", "Fábio Fernandes", "Roberto de Sousa Causo"], placeholder: "O aplicativo avisou que ela morreria às 16h12. Às 16h11, o filho ligou perguntando se ainda tinha feijão." },
+      },
+      {
+        id: "fantasia-brasileira",
+        oficio: "ficcao",
+        label: "Fantasia brasileira",
+        icon: "auto_fix_high",
+        chapter: "Maravilhoso cotidiano",
+        description: "Guia para fantástico, magia ou absurdo instalados no cotidiano brasileiro.",
+        meta: ["Fantástico", "Cotidiano", "Regra do espanto", "Consequência"],
+        sections: [["Evento impossível", "O que acontece sem pedir licença ao real?"], ["Normalidade", "Como as pessoas seguem vivendo?"], ["Regra mágica", "Que limite organiza o espanto?"], ["Raiz local", "Que território ancora a fantasia?"], ["Consequência", "O impossível muda alguma coisa."]],
+        reminders: ["Trate o impossível com seriedade.", "Escute o cotidiano brasileiro.", "Toda magia cobra algum preço."],
+        text: "## O impossível\n\n[Algo irreal acontece como se sempre tivesse acontecido.]\n\n## O cotidiano\n\n[Quem cozinha, paga conta ou espera ônibus dentro do espanto?]",
+        model: { exemplar: "Murilo Rubião e José J. Veiga, pelo fantástico que entra na sala sem explicar origem.", why: "A fantasia brasileira pode nascer da invasão do absurdo no dia comum.", references: ["Murilo Rubião", "José J. Veiga", "Lygia Fagundes Telles", "Aline Valek"], placeholder: "Na terça-feira, a sombra da igreja descolou da parede e foi beber água no coreto." },
+      },
+      {
+        id: "terror-horror",
+        oficio: "ficcao",
+        label: "Terror e horror",
+        icon: "dark_mode",
+        chapter: "Medo ancorado",
+        description: "Guia para medo psicológico, social, corporal ou sobrenatural com detalhe familiar.",
+        meta: ["Medo", "Atmosfera", "Escalada", "Perturbação"],
+        sections: [["Medo central", "O que ameaça corpo, casa ou memória?"], ["Detalhe familiar", "Que objeto comum fica errado?"], ["Escalada", "Como o desconforto cresce?"], ["Revelação", "O que se descobre tarde demais?"], ["Resíduo", "Que imagem continua depois do fim?"]],
+        reminders: ["O medo mais forte começa reconhecível.", "Evite explicar o monstro cedo.", "Violência sem ponto de vista vira ruído."],
+        text: "## Detalhe errado\n\n[Algo comum aparece com uma diferença mínima.]\n\n## Escalada\n\n[O que piora a cada cena?]\n\n## Resíduo\n\n[Que imagem deve ficar no leitor?]",
+        model: { exemplar: "Rubem Fonseca e autores de horror literário, pela violência tratada como normalidade perturbadora.", why: "O horror brasileiro muitas vezes nasce da casa, da rua e da naturalização do brutal.", references: ["Rubem Fonseca", "Marcelino Freire", "Cristhiano Aguiar", "Ana Paula Maia"], placeholder: "A geladeira começou a repetir a voz da avó morta sempre que alguém deixava a porta aberta." },
+      },
+      {
+        id: "fanfiction",
+        oficio: "ficcao",
+        label: "Fanfiction",
+        icon: "diversity_3",
+        chapter: "Variação e afeto",
+        description: "Guia para praticar voz, diálogo e emoção dentro de universo já amado.",
+        meta: ["Comunidade", "Universo compartilhado", "Voz", "Variação"],
+        sections: [["Canon ou AU", "Você segue ou desloca as regras?"], ["Desejo da cena", "Que relação o leitor veio procurar?"], ["Voz", "O personagem fala como ele mesmo?"], ["Comunidade", "Que promessa afetiva existe?"], ["Aprendizado", "Que técnica você treina aqui?"]],
+        reminders: ["Fanfic é laboratório.", "Respeite expectativa antes de subverter.", "Use o universo pronto para treinar cena e voz."],
+        text: "## Universo\n\n[Canon, AU ou recorte alternativo.]\n\n## Cena desejada\n\n[Que encontro, conflito ou reparação move o texto?]\n\n## Voz\n\n[Como manter o personagem reconhecível?]",
+        model: { exemplar: "Comunidades brasileiras de Wattpad, Spirit e AO3, pela prática intensa de diálogo e serialização.", why: "Fanfic ensina a escrever com leitor real do outro lado.", references: ["Babi Dewet", "Wattpad Brasil", "Spirit Fanfics", "AO3 em português"], placeholder: "Ela conhecia aquela fala de todos os episódios. O problema é que, naquela noite, ele disse a frase olhando para outra pessoa." },
+      },
+      ...roteiroGuides(),
+      ...poesiaGuides(),
+      ...naoFiccaoGuides(),
+      ...jornalismoGuides(),
+      ...comercialTecnicaGuides(),
+    ];
+  }
+
+  function roteiroGuides() {
+    return [
+      guide("roteiro-filme", "roteiro", "Roteiro de filme", "theaters", "Arco fechado", "Guia para curta ou longa com conflito visual, viradas e cena final forte.", ["Cinema", "Três atos", "Imagem", "Arco fechado"], "EXT. RODOVIÁRIA - FIM DE TARDE\n\nEla desce do ônibus com uma sacola e um endereço antigo. Ninguém veio buscar."),
+      guide("documentario", "roteiro", "Documentário", "videocam", "Pergunta e escuta", "Guia para tratamento documental com pergunta, personagem real e abertura ao inesperado.", ["Não ficção audiovisual", "Tratamento", "Personagem real", "Escuta"], "A câmera espera. A mulher dobra uma camisa, desfaz a dobra e pergunta se pode começar de novo."),
+      guide("dramaturgia", "roteiro", "Dramaturgia", "comedy_mask", "Palavra em cena", "Guia para teatro, rubrica, conflito ao vivo e tensão pela palavra.", ["Teatro", "Cena", "Rubrica", "Conflito ao vivo"], "ELA: Você guardou a cadeira dele.\n\nELE: Ninguém senta ali.\n\nELA: Ele morreu há sete anos."),
+      guide("roteiro-games", "roteiro", "Roteiro de games", "sports_esports", "Escolha e consequência", "Guia para narrativa interativa com escolhas, missões, diálogos e sistema.", ["Interatividade", "Escolha", "Consequência", "Mundo jogável"], "OPÇÃO A: Entregar a água ao vilarejo.\nOPÇÃO B: Guardar a água para atravessar o sertão.\n\nA escolha altera quem abre a próxima porta."),
+      guide("podcast-ficcional", "roteiro", "Podcast ficcional", "graphic_eq", "Cena sonora", "Guia para drama em áudio, diálogo, ambiência e clareza de vozes.", ["Áudio", "Voz", "Ambiência", "Cena sem imagem"], "SOM: Ventilador velho. Um copo toca a mesa.\n\nVOZ: Se você ouviu a fita até aqui, já sabe que eu menti no começo."),
+    ];
+  }
+
+  function poesiaGuides() {
+    return [
+      guide("slam", "poesia", "Slam e palavra falada", "mic", "Voz e corpo", "Guia para poema performático com ritmo, presença e urgência pública.", ["Performance", "3 minutos", "Voz", "Corpo"], "minha rua não cabe no mapa\nmas cabe inteira\nquando minha mãe chama meu nome"),
+      guide("poesia-digital", "poesia", "Poesia digital", "phone_iphone", "Tela e impacto", "Guia para poema curto pensado para tela, circulação e leitura rápida.", ["Tela", "Imagem final", "Brevidade", "Compartilhamento"], "guardei teu silêncio\nnuma pasta chamada\ncoisas que ainda respondem"),
+      guide("letra-musica", "poesia", "Letra de música", "music_note", "Melodia e repetição", "Guia para letra em função de melodia, refrão, imagem e canto.", ["Canção", "Refrão", "Métrica", "Voz cantada"], "se a cidade dorme cedo\neu aprendo a te esquecer\nno intervalo do semáforo"),
+    ];
+  }
+
+  function naoFiccaoGuides() {
+    return [
+      guide("memoir", "nao-ficcao", "Memória e autobiografia", "history_edu", "Cena lembrada", "Guia para narrar vida real por cenas, transformação e recorte significativo.", ["Memória", "Eu narrador", "Cena", "Transformação"], "Naquele dia, aprendi que adulto também mente olhando para o chão."),
+      guide("livro-reportagem", "nao-ficcao", "Livro-reportagem", "library_books", "Apuração longa", "Guia para investigação em livro, personagens reais, documentos e arco narrativo.", ["Jornalismo narrativo", "Pesquisa longa", "Personagens reais", "Capítulos"], "O processo tinha 842 páginas. A história, porém, começava num recibo dobrado dentro de uma Bíblia."),
+    ];
+  }
+
+  function jornalismoGuides() {
+    return [
+      guide("critica-cultural", "jornalismo", "Crítica cultural", "reviews", "Tese sobre obra", "Guia para análise de obra cultural com argumento, contexto e posição crítica.", ["Crítica", "Tese", "Contexto", "Argumento"], "O problema do filme não está no que ele mostra, mas na pressa com que tenta nos dizer o que sentir."),
+      guide("coluna-opiniao", "jornalismo", "Coluna de opinião", "edit_square", "Tese e provocação", "Guia para texto opinativo com tese, voz reconhecível e conclusão provocadora.", ["Opinião", "Tese", "Voz", "Recorrência"], "O país chama de polêmica aquilo que ainda não teve coragem de chamar pelo nome."),
+    ];
+  }
+
+  function comercialTecnicaGuides() {
+    return [
+      guide("copywriting", "comercial-tecnica", "Copywriting", "campaign", "Promessa e conversão", "Guia para escrita persuasiva com promessa clara, prova e chamada para ação.", ["Persuasão", "Promessa", "Prova", "Ação"], "Não é só uma agenda. É o lugar onde sua semana para de mandar em você."),
+      guide("conteudo-digital", "comercial-tecnica", "Conteúdo digital", "language", "Explicação útil", "Guia para conteúdo informativo, claro e encontrável sem perder voz.", ["Conteúdo", "Clareza", "SEO humano", "Utilidade"], "Você já ouviu esse termo. Mas o que ele muda na sua vida prática ainda costuma ficar fora da explicação."),
+      guide("ux-writing", "comercial-tecnica", "UX writing", "touch_app", "Microtexto útil", "Guia para botões, mensagens, erros e fluxos com clareza humana.", ["Interface", "Microcopy", "Clareza", "Ação"], "Não conseguimos salvar agora. Seu texto continua aqui. Tente novamente em alguns segundos."),
+      guide("roteiro-youtube", "comercial-tecnica", "Roteiro para vídeo", "smart_display", "Gancho e retenção", "Guia para YouTube, Reels ou vídeo explicativo com gancho, ritmo e entrega.", ["Vídeo", "Gancho", "Retenção", "Fala"], "Esse dado parece pequeno. Mas ele explica por que sua cidade esquenta mais do que a previsão diz."),
+      guide("ghostwriting", "comercial-tecnica", "Ghostwriting", "person_edit", "Voz do outro", "Guia para escrever na voz de outra pessoa com entrevista, estrutura e discrição.", ["Voz alheia", "Entrevista", "Discrição", "Estrutura"], "Eu não queria contar essa história como exemplo de superação. Queria contar porque foi ali que parei de fingir certeza."),
+      guide("quadrinhos", "comercial-tecnica", "Escrita para quadrinhos", "view_comfy", "Painel e página", "Guia para roteiro de HQ, página, painel, legenda e colaboração visual.", ["HQ", "Painel", "Página", "Imagem + palavra"], "PAINEL 1: A mesa posta para dois.\nPAINEL 2: Uma cadeira vazia.\nBALÃO: Hoje ele vem."),
+      guide("escrita-tecnica", "comercial-tecnica", "Escrita técnica", "science", "Rigor e narrativa", "Guia para relatório, ensaio acadêmico, divulgação ou documento técnico com clareza.", ["Rigor", "Método", "Dados", "Narrativa"], "O dado isolado sugere melhora. A série histórica, porém, mostra outra coisa: a queda começou antes da política analisada."),
+    ];
+  }
+
+  function guide(id, oficio, label, icon, chapter, description, meta, placeholder) {
+    return createGuide({
+      id,
+      oficio,
+      label,
+      icon,
+      chapter,
+      description,
+      meta,
+      sections: [
+        ["Pergunta do ofício", "Qual é a pergunta que este formato precisa responder?"],
+        ["Material central", "Que cena, dado, imagem, fala ou sistema sustenta o texto?"],
+        ["Estrutura", "Como o texto organiza começo, desenvolvimento e virada?"],
+        ["Leitor ou público", "Que expectativa a pessoa traz para este formato?"],
+        ["Fecho", "Que gesto final deixa a forma completa?"],
+      ],
+      reminders: ["Comece pelo gesto central do ofício.", "Troque abstração por uma cena ou decisão concreta.", "Revise perguntando se o formato foi respeitado."],
+      text: "## Pergunta do ofício\n\n[O que este texto precisa fazer?]\n\n## Material central\n\n[Que cena, dado, imagem ou fala sustenta a peça?]\n\n## Estrutura\n\n[Como a forma organiza a leitura?]",
+      model: {
+        exemplar: `${label}: referências brasileiras do ofício e de sua circulação contemporânea.`,
+        why: `${label} funciona quando técnica, público e voz trabalham juntos.`,
+        references: ["Autores brasileiros", "Mercado editorial brasileiro", "Prática contemporânea"],
+        placeholder,
+      },
+    });
+  }
 
   const models = {
     "roteiro-tv": {
@@ -634,8 +827,17 @@ Periodicidade: [semanal, quinzenal, mensal]
     },
   };
 
-  function listTemplates() {
-    return templates.map(({ id, label, icon, title, description }) => ({ id, label, icon, title, description }));
+  function listTemplates(options = {}) {
+    return templates
+      .filter((template) => !options.oficio || template.oficio === options.oficio)
+      .map(({ id, oficio, label, icon, title, description }) => ({ id, oficio, label, icon, title, description }));
+  }
+
+  function listOficios() {
+    return oficios.map((oficio) => ({
+      ...oficio,
+      count: templates.filter((template) => template.oficio === oficio.id).length,
+    }));
   }
 
   function getTemplate(templateId) {
@@ -676,6 +878,7 @@ Periodicidade: [semanal, quinzenal, mensal]
     createManuscript,
     getStep,
     getTemplate,
+    listOficios,
     listTemplates,
   };
 })(window);

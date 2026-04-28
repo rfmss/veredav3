@@ -66,6 +66,7 @@ const archiveSort = document.querySelector("[data-archive-sort]");
 const pinnedDocuments = document.querySelector("[data-pinned-documents]");
 const ongoingDocuments = document.querySelector("[data-ongoing-documents]");
 const recentDocuments = document.querySelector("[data-recent-documents]");
+const craftTabs = document.querySelector("[data-craft-tabs]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
@@ -84,6 +85,7 @@ let deferredInstallPrompt;
 let templateState = {
   activeId: "roteiro-tv",
   step: 0,
+  craftId: "roteiro",
 };
 
 function loadState() {
@@ -1060,9 +1062,25 @@ function renderVersionList() {
 }
 
 function renderTemplateStudio() {
-  const templates = VeredaTemplates.listTemplates();
   const activeTemplate = VeredaTemplates.getTemplate(templateState.activeId);
+  templateState.craftId = templateState.craftId || activeTemplate.oficio || "ficcao";
+  const crafts = VeredaTemplates.listOficios();
+  const templates = VeredaTemplates.listTemplates({ oficio: templateState.craftId });
   const activeStep = VeredaTemplates.getStep(templateState.activeId, templateState.step);
+
+  craftTabs.innerHTML = crafts
+    .map((craft) => {
+      const isActive = craft.id === templateState.craftId ? " is-active" : "";
+
+      return `
+        <button class="craft-tab${isActive}" data-craft-select="${craft.id}">
+          <span class="material-symbols-outlined">${craft.icon}</span>
+          ${escapeHtml(craft.label)}
+          <b>${craft.count}</b>
+        </button>
+      `;
+    })
+    .join("");
 
   templateTabs.innerHTML = templates
     .map((template) => {
@@ -1127,9 +1145,27 @@ function createTemplateItemsMarkup(items) {
 }
 
 function selectTemplate(templateId) {
+  const template = VeredaTemplates.getTemplate(templateId);
   templateState = {
     activeId: templateId,
     step: 0,
+    craftId: template.oficio || templateState.craftId,
+  };
+  renderTemplateStudio();
+}
+
+function selectCraft(craftId) {
+  const templates = VeredaTemplates.listTemplates({ oficio: craftId });
+  const nextTemplate = templates[0];
+
+  if (!nextTemplate) {
+    return;
+  }
+
+  templateState = {
+    activeId: nextTemplate.id,
+    step: 0,
+    craftId,
   };
   renderTemplateStudio();
 }
@@ -1216,7 +1252,7 @@ function renderTemplateReference() {
 
   referenceTitle.textContent = template.label;
   updateWritingPlaceholder(template);
-  referenceTabs.innerHTML = VeredaTemplates.listTemplates()
+  referenceTabs.innerHTML = VeredaTemplates.listTemplates({ oficio: template.oficio })
     .map((item) => {
       const isActive = item.id === template.id ? " is-active" : "";
 
@@ -1479,6 +1515,7 @@ document.addEventListener("click", (event) => {
   const templateUseTarget = event.target.closest("[data-template-use]");
   const templateNextTarget = event.target.closest("[data-template-next]");
   const templatePrevTarget = event.target.closest("[data-template-prev]");
+  const craftSelectTarget = event.target.closest("[data-craft-select]");
   const referenceTemplateTarget = event.target.closest("[data-reference-template]");
   const archiveFilterTarget = event.target.closest("[data-archive-filter]");
 
@@ -1509,6 +1546,12 @@ document.addEventListener("click", (event) => {
   if (templatePrevTarget) {
     event.preventDefault();
     changeTemplateStep(-1);
+    return;
+  }
+
+  if (craftSelectTarget) {
+    event.preventDefault();
+    selectCraft(craftSelectTarget.dataset.craftSelect);
     return;
   }
 

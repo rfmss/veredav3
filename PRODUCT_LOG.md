@@ -770,3 +770,35 @@ Próximas etapas sugeridas:
 - Completar o catálogo para os 32 subgêneros do material de referência.
 - Criar seleção de ofício antes da seleção de guia, quando a lista crescer.
 - Permitir inserir o placeholder no manuscrito com um clique, se o autor quiser partir do exemplo.
+
+## 2026-04-28 - Guia de Ofícios expandido e organizado
+
+Decidimos expandir o Guia de Ofícios Literários sem transformar a tela em uma lista longa demais.
+
+A navegação do estúdio agora é feita em duas camadas: primeiro a pessoa escolhe o ofício, depois escolhe o guia específico dentro daquele ofício. Cada aba de ofício mostra contador de guias disponíveis, e o painel lateral do editor passa a mostrar apenas guias do mesmo ofício do guia ativo, mantendo a consulta mais legível.
+
+O catálogo agora cobre seis famílias:
+
+- Ficção.
+- Roteiro.
+- Poesia.
+- Não ficção.
+- Jornalismo.
+- Comercial e técnica.
+
+Foram adicionados guias para romance literário, ficção científica, fantasia brasileira, terror e horror, fanfiction, roteiro de filme, documentário, dramaturgia, roteiro de games, podcast ficcional, slam, poesia digital, letra de música, memória/autobiografia, livro-reportagem, crítica cultural, coluna de opinião, copywriting, conteúdo digital, UX writing, roteiro para vídeo, ghostwriting, quadrinhos e escrita técnica.
+
+Observação: o material de referência falava em 32 subgêneros, mas a contagem efetiva pela própria lista soma 33 quando "escrita acadêmica/técnica" entra junto do bloco comercial e técnico. Mantivemos os 33 para não perder nenhum caminho útil.
+
+Benefícios esperados:
+
+- O escritor encontra primeiro o território de trabalho, depois o formato.
+- A lista cresce sem perder compreensão.
+- O Vereda passa a cobrir escrita literária, audiovisual, jornalística, digital e técnica no mesmo sistema local.
+- O painel consultivo segue mais calmo, filtrado pelo ofício em uso.
+
+Próximas etapas sugeridas:
+
+- Criar medidores específicos para os novos guias.
+- Permitir busca rápida dentro do Guia de Ofícios.
+- Permitir inserir a amostra do texto-modelo no manuscrito com um clique.

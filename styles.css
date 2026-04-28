@@ -1450,6 +1450,55 @@ mark {
   gap: 10px;
 }
 
+.craft-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+
+.craft-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
+}
+
+.craft-tab:hover,
+.craft-tab.is-active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.craft-tab .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.craft-tab b {
+  min-width: 20px;
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--primary);
+  padding: 1px 6px;
+  text-align: center;
+}
+
+.craft-tab:hover b,
+.craft-tab.is-active b {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
 .template-tab {
   display: inline-flex;
   align-items: center;
