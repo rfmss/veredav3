@@ -915,3 +915,21 @@ Benefícios esperados:
 Observação de produto:
 
 - Em telas menores, a sidebar continua usando o comportamento mobile já existente, e o painel direito permanece oculto abaixo do breakpoint.
+
+## 2026-04-28 - Roadmap operacional
+
+Decidimos criar um documento de roadmap dentro do repositório para evitar perda de contexto, excesso de ambição sem sequência e promessas imprecisas.
+
+O arquivo `VEREDA_ROADMAP.md` passa a registrar o estado atual do projeto, os princípios de responsabilidade, o próximo pacote sugerido e os critérios mínimos de pronto. A primeira grande proposta registrada é o "Espelho de Voz", uma ferramenta de autoconhecimento literário baseada em métricas locais e leitura interpretativa assumida.
+
+Ponto de responsabilidade importante:
+
+- O Espelho de Voz não deve vender afinidade literária como estilometria científica.
+- Métricas reais, como TTR e média de palavras por frase, devem ser calculadas localmente.
+- Leituras como público provável, assinatura de voz e ecos literários devem ser comunicadas como interpretação, não como verdade objetiva.
+
+Benefícios esperados:
+
+- O projeto ganha uma fonte de verdade mais estável que a conversa.
+- Fica mais fácil retomar depois de pausas sem alucinar continuidade.
+- Cada próximo pacote pode ser comparado com princípios e critérios de pronto.
