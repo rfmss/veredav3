@@ -838,3 +838,32 @@ Próximas etapas sugeridas:
 - Transformar o medidor de competências do HTML em análise local dentro do editor.
 - Criar busca rápida nos guias para quem chega pelo tipo de prova.
 - Permitir alternar entre "modo escritor" e "modo estudante" na entrada do estúdio.
+
+## 2026-04-28 - Academia prática: mercado e anatomia do livro
+
+Decidimos registrar o medidor ENEM como próximo pacote e avançar agora em duas frentes novas: o escritor no mercado e a consciência do livro como objeto.
+
+Dois materiais externos foram dissolvidos no Vereda:
+
+- Um guia de lançamento editorial para orientar o autor entre autopublicação, submissão a editoras, checklist de lançamento e mentalidade de carreira.
+- Uma anatomia do livro para explicar capa, lombada, miolo, pré-texto, pós-texto, arquivo digital, página de capítulo e vocabulário editorial.
+
+A integração aconteceu em duas camadas. No Arquivo, criamos uma área visual de "Academia prática", com cartões de rota, uma anatomia visual do livro e movimento parallax sutil. No Guia de Ofícios, criamos duas novas famílias acionáveis:
+
+- Mercado editorial.
+- Objeto livro.
+
+Foram adicionados guias para mapa de lançamento, autopublicação independente, submissão a editoras, comparativo de publicação, checklist de lançamento, mentalidade de autor, partes físicas do livro, miolo e pré/pós-texto, ritos de entrada, livro como arquivo digital, página de capítulo e glossário do livro.
+
+Benefícios esperados:
+
+- O Vereda passa a funcionar como uma pequena academia prática para quem escreve e quer publicar.
+- O escritor entende o mercado sem sair do mesmo fluxo onde organiza seus manuscritos.
+- O livro deixa de ser tratado apenas como texto e passa a ser compreendido como objeto editorial, arquivo e experiência de leitura.
+- Os layouts ricos dos materiais de referência foram preservados como esqueleto visual, mas adaptados à linguagem, paleta e interação do Vereda.
+
+Próximas etapas sugeridas:
+
+- Implementar o medidor ENEM local no editor.
+- Criar uma busca transversal nos guias por termos como ISBN, query, capa, KDP e epígrafe.
+- Transformar checklists de lançamento em itens marcáveis persistentes por projeto.

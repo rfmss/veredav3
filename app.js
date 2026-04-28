@@ -32,6 +32,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 ];
 
 const shell = document.querySelector(".app-shell");
+const contentStage = document.querySelector(".content-stage");
 const nav = document.querySelector("[data-nav]");
 const titleInput = document.querySelector(".title-input");
 const writingArea = document.querySelector(".writing-area");
@@ -68,6 +69,7 @@ const ongoingDocuments = document.querySelector("[data-ongoing-documents]");
 const recentDocuments = document.querySelector("[data-recent-documents]");
 const craftTabs = document.querySelector("[data-craft-tabs]");
 const templateTabs = document.querySelector("[data-template-tabs]");
+const templateStudio = document.querySelector(".template-studio");
 const templateScreen = document.querySelector("[data-template-screen]");
 const templateStepLabel = document.querySelector("[data-template-step-label]");
 const editorSplit = document.querySelector(".editor-split");
@@ -1176,6 +1178,21 @@ function changeTemplateStep(direction) {
   renderTemplateStudio();
 }
 
+function updateAcademyParallax() {
+  const parallaxItems = document.querySelectorAll("[data-parallax-speed]");
+  const viewportMiddle = contentStage.clientHeight / 2;
+
+  parallaxItems.forEach((item) => {
+    const speed = Number(item.dataset.parallaxSpeed) || 0;
+    const rect = item.getBoundingClientRect();
+    const parentRect = contentStage.getBoundingClientRect();
+    const relativeMiddle = rect.top - parentRect.top + rect.height / 2;
+    const offset = (relativeMiddle - viewportMiddle) * speed;
+
+    item.style.transform = `translate3d(0, ${offset}px, 0)`;
+  });
+}
+
 async function exportProof() {
   const manuscript = getActiveManuscript();
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
@@ -1552,6 +1569,9 @@ document.addEventListener("click", (event) => {
   if (craftSelectTarget) {
     event.preventDefault();
     selectCraft(craftSelectTarget.dataset.craftSelect);
+    if (craftSelectTarget.closest(".academy-board")) {
+      templateStudio.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     return;
   }
 
@@ -1731,6 +1751,7 @@ focusSettingControls.forEach((control) => {
 
 window.addEventListener("online", updateConnectionStatus);
 window.addEventListener("offline", updateConnectionStatus);
+contentStage.addEventListener("scroll", () => requestAnimationFrame(updateAcademyParallax));
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
@@ -1763,6 +1784,7 @@ renderLexicalView();
 renderProofView();
 renderVersionList();
 renderTemplateStudio();
+updateAcademyParallax();
 applyTemplateLayout();
 applyFocusSettings();
 registerOfflineApp();
