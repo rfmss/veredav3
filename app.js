@@ -64,6 +64,7 @@ const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
 const archiveSearch = document.querySelector("[data-archive-search]");
 const archiveSort = document.querySelector("[data-archive-sort]");
 const pinnedDocuments = document.querySelector("[data-pinned-documents]");
+const ongoingDocuments = document.querySelector("[data-ongoing-documents]");
 const recentDocuments = document.querySelector("[data-recent-documents]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
@@ -363,8 +364,9 @@ function renderProjectGrid() {
   });
   const sortedManuscripts = sortArchiveManuscripts(filteredManuscripts);
 
-  renderRecentDocuments(filteredManuscripts);
   renderPinnedDocuments(filteredManuscripts);
+  renderOngoingDocuments(filteredManuscripts);
+  renderRecentDocuments(filteredManuscripts);
 
   if (!sortedManuscripts.length) {
     const message = searchQuery ? "Nenhum documento encontrado" : "Nada aqui ainda";
@@ -393,7 +395,7 @@ function renderProjectGrid() {
       const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
 
       return `
-        <button class="project-card${featured}${selected}${pinned}" type="button" data-archive-select="${manuscript.id}" data-document-type="${type.id}">
+        <article class="project-card${featured}${selected}${pinned}" data-archive-select="${manuscript.id}" data-document-type="${type.id}" role="button" tabindex="0">
           <span class="project-pin material-symbols-outlined" data-archive-pin="${manuscript.id}" role="button" tabindex="0" aria-label="${pinLabel}" title="${pinLabel}">push_pin</span>
           <span class="project-type"><i class="material-symbols-outlined">${type.icon}</i>${escapeHtml(type.label)} · ${escapeHtml(manuscript.status)}</span>
           <h2>${escapeHtml(manuscript.title)}</h2>
@@ -403,7 +405,21 @@ function renderProjectGrid() {
             <i style="--progress: ${manuscript.progress}%"></i>
           </div>
           <small>${escapeHtml(manuscript.chapter)} · ${manuscript.progress}% · ${words} palavras · ${formatUpdatedAt(manuscript.updatedAt)}</small>
-        </button>
+          <div class="project-actions" aria-label="Ações de ${escapeHtml(manuscript.title)}">
+            <button type="button" data-archive-quick="open" data-archive-document="${manuscript.id}" title="Abrir no editor" aria-label="Abrir ${escapeHtml(manuscript.title)} no editor">
+              <span class="material-symbols-outlined">edit_note</span>
+            </button>
+            <button type="button" data-archive-quick="export" data-archive-format="txt" data-archive-document="${manuscript.id}" title="Exportar TXT" aria-label="Exportar ${escapeHtml(manuscript.title)} em TXT">
+              TXT
+            </button>
+            <button type="button" data-archive-quick="export" data-archive-format="md" data-archive-document="${manuscript.id}" title="Exportar MD" aria-label="Exportar ${escapeHtml(manuscript.title)} em Markdown">
+              MD
+            </button>
+            <button type="button" data-archive-quick="duplicate" data-archive-document="${manuscript.id}" title="Duplicar" aria-label="Duplicar ${escapeHtml(manuscript.title)}">
+              <span class="material-symbols-outlined">content_copy</span>
+            </button>
+          </div>
+        </article>
       `;
     })
     .join("");
@@ -429,6 +445,34 @@ function renderPinnedDocuments(manuscripts) {
     </div>
     <div class="archive-strip-list">
       ${pinnedItems.map((manuscript) => createCompactDocumentMarkup(manuscript, "pinned-document")).join("")}
+    </div>
+  `;
+}
+
+function renderOngoingDocuments(manuscripts) {
+  const ongoingItems = sortArchiveManuscripts(
+    manuscripts.filter((manuscript) => ["Em escrita", "Revisão"].includes(manuscript.status))
+  ).slice(0, 6);
+
+  if (!ongoingItems.length) {
+    ongoingDocuments.hidden = true;
+    ongoingDocuments.innerHTML = "";
+    return;
+  }
+
+  ongoingDocuments.hidden = false;
+  ongoingDocuments.innerHTML = `
+    <div class="archive-strip-heading">
+      <div>
+        <p class="eyebrow">Em andamento</p>
+        <h2>Pedem atenção</h2>
+      </div>
+      <span>${ongoingItems.length} ${ongoingItems.length === 1 ? "documento" : "documentos"}</span>
+    </div>
+    <div class="archive-strip-list">
+      ${ongoingItems
+        .map((manuscript) => createCompactDocumentMarkup(manuscript, "ongoing-document", `${manuscript.status} · ${manuscript.progress}%`))
+        .join("")}
     </div>
   `;
 }
@@ -459,17 +503,18 @@ function renderRecentDocuments(manuscripts) {
   `;
 }
 
-function createCompactDocumentMarkup(manuscript, className) {
+function createCompactDocumentMarkup(manuscript, className, metaLabel) {
   const type = getArchiveType(manuscript);
   const selected = manuscript.id === state.activeId ? " is-selected" : "";
   const pinned = manuscript.pinned ? " is-pinned" : "";
   const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
+  const meta = metaLabel || `${type.label} · ${formatUpdatedAt(manuscript.updatedAt)}`;
 
   return `
     <button class="${className}${selected}${pinned}" type="button" data-archive-select="${manuscript.id}">
       <span class="material-symbols-outlined">${type.icon}</span>
       <strong>${escapeHtml(manuscript.title)}</strong>
-      <small>${escapeHtml(type.label)} · ${formatUpdatedAt(manuscript.updatedAt)}</small>
+      <small>${escapeHtml(meta)}</small>
       <i class="material-symbols-outlined" data-archive-pin="${manuscript.id}" role="button" tabindex="0" aria-label="${pinLabel}" title="${pinLabel}">push_pin</i>
     </button>
   `;
@@ -596,6 +641,65 @@ function togglePinnedManuscript(id) {
   renderProjectGrid();
   renderMetadataForm();
   queueSave();
+}
+
+function openArchiveManuscript(id) {
+  state.activeId = id;
+  renderActiveManuscript();
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
+  persistState("Manuscrito aberto");
+  setView("editor");
+  writingArea.focus();
+}
+
+function exportArchiveManuscript(id, format) {
+  const manuscript = state.manuscripts.find((item) => item.id === id);
+
+  if (!manuscript) {
+    saveStatus.textContent = "Documento não encontrado";
+    return;
+  }
+
+  try {
+    const exportFile = VeredaExport.exportManuscript(manuscript, format);
+    downloadFile(exportFile.content, exportFile.filename, exportFile.mimeType);
+    saveStatus.textContent = `${manuscript.title} exportado em .${format}`;
+  } catch (error) {
+    saveStatus.textContent = error.message;
+  }
+}
+
+function duplicateManuscript(id) {
+  const manuscript = state.manuscripts.find((item) => item.id === id);
+
+  if (!manuscript) {
+    saveStatus.textContent = "Documento não encontrado";
+    return;
+  }
+
+  const duplicate = VeredaArchive.createManuscript({
+    id: `copia-${Date.now()}`,
+    title: `Cópia de ${manuscript.title}`,
+    text: manuscript.text,
+    kind: manuscript.kind,
+    status: manuscript.status,
+    chapter: manuscript.chapter,
+    progress: manuscript.progress,
+    description: manuscript.description,
+    tags: manuscript.tags,
+    templateId: manuscript.templateId,
+  });
+
+  state.manuscripts.unshift(duplicate);
+  state.activeId = duplicate.id;
+  renderActiveManuscript();
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  renderMetadataForm();
+  persistState("Documento duplicado");
+  setView("arquivo");
 }
 
 function createSearchText(manuscript) {
@@ -1280,6 +1384,7 @@ document.addEventListener("click", (event) => {
   const viewTarget = event.target.closest("[data-view-target]");
   const actionTarget = event.target.closest("[data-action]");
   const archivePinTarget = event.target.closest("[data-archive-pin]");
+  const archiveQuickTarget = event.target.closest("[data-archive-quick]");
 
   if (manuscriptTarget) {
     event.preventDefault();
@@ -1291,6 +1396,28 @@ document.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
     togglePinnedManuscript(archivePinTarget.dataset.archivePin);
+    return;
+  }
+
+  if (archiveQuickTarget) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const action = archiveQuickTarget.dataset.archiveQuick;
+    const id = archiveQuickTarget.dataset.archiveDocument;
+
+    if (action === "open") {
+      openArchiveManuscript(id);
+    }
+
+    if (action === "export") {
+      exportArchiveManuscript(id, archiveQuickTarget.dataset.archiveFormat);
+    }
+
+    if (action === "duplicate") {
+      duplicateManuscript(id);
+    }
+
     return;
   }
 
@@ -1441,10 +1568,21 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("keydown", (event) => {
   const archivePinTarget = event.target.closest("[data-archive-pin]");
+  const archiveCardTarget = event.target.closest(".project-card[data-archive-select]");
 
   if (archivePinTarget && (event.key === "Enter" || event.key === " ")) {
     event.preventDefault();
     togglePinnedManuscript(archivePinTarget.dataset.archivePin);
+    return;
+  }
+
+  if (archiveCardTarget && (event.key === "Enter" || event.key === " ")) {
+    if (event.target.closest("button, [data-archive-pin]")) {
+      return;
+    }
+
+    event.preventDefault();
+    selectArchiveManuscript(archiveCardTarget.dataset.archiveSelect);
     return;
   }
 

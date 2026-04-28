@@ -679,3 +679,24 @@ Próximas etapas sugeridas:
 - Criar ações rápidas no card: abrir, exportar e duplicar.
 - Criar seção "Em andamento" para documentos em escrita ou revisão.
 - Refinar o painel consultivo com opção de ocultar/mostrar.
+
+## 2026-04-28 - Ações rápidas e seção Em andamento
+
+Decidimos transformar o Arquivo em uma mesa de ação, não apenas uma área de organização.
+
+Foram adicionadas ações rápidas nos cards principais: abrir no editor, exportar TXT, exportar MD e duplicar documento. A duplicação cria um novo manuscrito local com novo `id` e novo `updatedAt`, mantendo texto, metadados e tags, mas sem reaproveitar provas de escrita ou versões anteriores.
+
+Também foi criada a seção "Em andamento", baseada nos status `Em escrita` e `Revisão`. Ela aparece no topo do Arquivo junto de Fixados e Recentes, respeitando busca e filtros ativos.
+
+Benefícios esperados:
+
+- O escritor age direto sobre o documento sem precisar trocar de contexto.
+- Exportar um texto específico fica mais previsível.
+- Duplicar rascunhos encoraja experimentação sem alterar o original.
+- A seção Em andamento mantém prioridades editoriais visíveis mesmo quando o documento não é recente.
+
+Próximas etapas sugeridas:
+
+- Refinar o painel consultivo com opção de ocultar/mostrar.
+- Criar confirmação e fluxo próprio para futuras ações destrutivas, como excluir ou arquivar.
+- Considerar uma visualização compacta do Arquivo quando houver muitos documentos.

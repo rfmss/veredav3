@@ -1203,6 +1203,7 @@ mark {
 }
 
 .pinned-documents,
+.ongoing-documents,
 .recent-documents {
   margin: 0 0 22px;
 }
@@ -1234,6 +1235,7 @@ mark {
 }
 
 .recent-document,
+.ongoing-document,
 .pinned-document {
   display: grid;
   grid-template-columns: 34px minmax(0, 1fr) 24px;
@@ -1253,8 +1255,14 @@ mark {
   background: linear-gradient(135deg, #fff, #f8fbf5);
 }
 
+.ongoing-document {
+  background: linear-gradient(135deg, #fff, #fbfaf5);
+}
+
 .recent-document:hover,
 .recent-document.is-selected,
+.ongoing-document:hover,
+.ongoing-document.is-selected,
 .pinned-document:hover,
 .pinned-document.is-selected {
   border-color: var(--primary);
@@ -1263,6 +1271,7 @@ mark {
 }
 
 .recent-document > .material-symbols-outlined,
+.ongoing-document > .material-symbols-outlined,
 .pinned-document > .material-symbols-outlined {
   grid-row: span 2;
   width: 34px;
@@ -1276,6 +1285,8 @@ mark {
 
 .recent-document strong,
 .recent-document small,
+.ongoing-document strong,
+.ongoing-document small,
 .pinned-document strong,
 .pinned-document small {
   min-width: 0;
@@ -1285,12 +1296,14 @@ mark {
 }
 
 .recent-document strong,
+.ongoing-document strong,
 .pinned-document strong {
   color: var(--ink);
   font-size: 13px;
 }
 
 .recent-document small,
+.ongoing-document small,
 .pinned-document small {
   color: var(--muted);
   font-size: 11px;
@@ -1298,6 +1311,7 @@ mark {
 }
 
 .recent-document i,
+.ongoing-document i,
 .pinned-document i {
   grid-column: 3;
   grid-row: 1 / span 2;
@@ -1307,8 +1321,10 @@ mark {
 }
 
 .recent-document.is-pinned i,
+.ongoing-document.is-pinned i,
 .pinned-document.is-pinned i,
 .recent-document i:hover,
+.ongoing-document i:hover,
 .pinned-document i:hover {
   color: var(--primary);
   opacity: 1;
@@ -1573,6 +1589,7 @@ mark {
 
 .archive-layout .project-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(300px, auto);
 }
 
 .archive-detail-panel {
@@ -1704,6 +1721,10 @@ mark {
 .project-card p {
   color: var(--soft-ink);
   line-height: 1.55;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .tag-list {
@@ -1720,6 +1741,38 @@ mark {
   padding: 4px 8px;
   font-size: 11px;
   font-weight: 800;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.project-actions button {
+  min-width: 34px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 900;
+  transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
+}
+
+.project-actions button:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.project-actions .material-symbols-outlined {
+  font-size: 17px;
 }
 
 .project-type {
