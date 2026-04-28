@@ -665,6 +665,41 @@ a {
   padding-left: 18px;
 }
 
+.reference-model article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+  padding: 12px;
+}
+
+.reference-model strong,
+.reference-model small {
+  display: block;
+}
+
+.reference-model strong {
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.reference-model small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.reference-example {
+  margin: 10px 0;
+  border-left: 2px solid var(--primary);
+  color: var(--soft-ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 13px;
+  line-height: 1.6;
+  padding-left: 10px;
+  white-space: pre-wrap;
+}
+
 .split-resizer {
   width: 10px;
   border: 0;
@@ -750,6 +785,12 @@ a {
   font-size: var(--reading-size);
   line-height: 1.78;
   letter-spacing: 0;
+}
+
+.writing-area:empty::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+  opacity: 0.72;
 }
 
 .writing-area:focus {

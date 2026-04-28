@@ -749,3 +749,24 @@ Próximas etapas sugeridas:
 - Expandir o Guia de Ofícios com subgêneros restantes do material de referência.
 - Criar medidores específicos para romance, poesia, reportagem e newsletter.
 - Revisar nomes internos em uma etapa técnica futura, se isso deixar de ser apenas detalhe de implementação.
+
+## 2026-04-28 - Textos-modelo no guia lateral
+
+Decidimos enriquecer o lado do editor que antes podia parecer vazio demais quando a pessoa escolhia um guia.
+
+Cada guia de escrita passa a ter um bloco de "Texto-modelo" no painel lateral, com autor ou obra de referência, motivo técnico da escolha, conjunto de autores brasileiros para estudo e uma pequena amostra original que serve também como placeholder do editor quando o manuscrito está vazio.
+
+Optamos por não embutir trechos longos ou possivelmente reconstruídos de obras protegidas. O material do catálogo foi usado como curadoria: autores, obras, critérios e função técnica do exemplo. O texto exibido como placeholder é original do Vereda, inspirado na lógica do gênero, não cópia de obra literária.
+
+Benefícios esperados:
+
+- O editor vazio passa a sugerir uma temperatura de escrita, não apenas uma folha branca.
+- O guia lateral vira uma pequena aula de ofício sem depender de texto explicativo longo.
+- O produto ganha repertório brasileiro sem risco de misturar citação incerta com conteúdo autoral.
+- A pessoa pode começar pelo gesto do gênero: cena, imagem, pauta, verso, tese ou gancho.
+
+Próximas etapas sugeridas:
+
+- Completar o catálogo para os 32 subgêneros do material de referência.
+- Criar seleção de ofício antes da seleção de guia, quando a lista crescer.
+- Permitir inserir o placeholder no manuscrito com um clique, se o autor quiser partir do exemplo.

@@ -568,12 +568,82 @@ Periodicidade: [semanal, quinzenal, mensal]
     },
   ];
 
+  const models = {
+    "roteiro-tv": {
+      exemplar: "Central do Brasil, de Marcos Bernstein e João Emanuel Carneiro, pela apresentação de personagem por ação visível.",
+      why: "O roteiro forte não explica psicologia: mostra gesto, lugar, silêncio e consequência.",
+      references: ["Glória Perez", "George Moura", "Anna Muylaert", "Kleber Mendonça Filho"],
+      placeholder:
+        "INT. COZINHA - AMANHECER\n\nA mãe coloca três pratos na mesa. Só há duas pessoas em casa.\n\nO filho percebe o terceiro prato, mas não pergunta nada.",
+    },
+    "flash-fiction": {
+      exemplar: "Millôr Fernandes e suas formas brevíssimas, pela compressão radical de vida, erro e fim.",
+      why: "A ficção-relâmpago brasileira funciona quando uma imagem pequena carrega uma vida inteira.",
+      references: ["Millôr Fernandes", "Rubem Braga", "Bartolomeu Campos de Queirós", "Carlos Drummond de Andrade"],
+      placeholder:
+        "A chave continuou na porta três dias depois do enterro. Ninguém teve coragem de tirá-la. Era a última coisa da casa que ainda esperava alguém voltar.",
+    },
+    cronica: {
+      exemplar: "Rubem Braga, pela capacidade de transformar um acontecimento mínimo em ressonância humana.",
+      why: "A crônica não é o fato cotidiano: é o que o fato desperta quando alguém olha de novo.",
+      references: ["Rubem Braga", "Paulo Mendes Campos", "Fernando Sabino", "Luis Fernando Verissimo", "Moacyr Scliar"],
+      placeholder:
+        "A fila do pão andava devagar, mas ninguém reclamava. Havia uma chuva fina lá fora e, por algum acordo silencioso, todos pareciam adiando a volta para casa.",
+    },
+    "conto-curto": {
+      exemplar: "Dalton Trevisan e Lygia Fagundes Telles, pela entrada imediata em cena e pela tensão sem sobra.",
+      why: "O conto curto precisa instalar personagem, desejo e ameaça sem explicar o mundo antes.",
+      references: ["Dalton Trevisan", "Clarice Lispector", "Lygia Fagundes Telles", "João Antônio", "Rubem Fonseca"],
+      placeholder:
+        "Nelsa voltou para buscar o guarda-chuva e encontrou o irmão sentado no escuro. Ele segurava o envelope que ela tinha escondido havia vinte anos.",
+    },
+    ensaio: {
+      exemplar: "Antonio Candido, pelo rigor que pensa literatura como sistema vivo, sem perder clareza.",
+      why: "O ensaio literário convence quando a ideia tem voz, percurso e coragem de se corrigir em público.",
+      references: ["Antonio Candido", "Alfredo Bosi", "Roberto Schwarz", "Silviano Santiago", "Flora Sussekind"],
+      placeholder:
+        "Toda leitura começa antes do livro. Começa no repertório, no medo, na classe social, na lembrança que o leitor traz sem declarar.",
+    },
+    "romance-comercial": {
+      exemplar: "Luiz Alfredo Garcia-Roza, pela cena policial limpa, objetiva e imediatamente legível.",
+      why: "O romance comercial respeita a experiência do leitor: pergunta clara, ritmo e promessa de continuidade.",
+      references: ["Luiz Alfredo Garcia-Roza", "Patricia Melo", "Raphael Montes", "Tony Bellotto"],
+      placeholder:
+        "O corpo apareceu no único elevador que não tinha câmera. No bolso do paletó, havia uma foto da síndica tirada naquele mesmo dia.",
+    },
+    "poesia-lirica": {
+      exemplar: "Carlos Drummond de Andrade e Adelia Prado, pela imagem concreta que sustenta pensamento e emoção.",
+      why: "A poesia lírica não precisa explicar o sentimento quando encontra uma imagem com peso sonoro.",
+      references: ["Carlos Drummond de Andrade", "Adelia Prado", "Ferreira Gullar", "Ana Cristina Cesar", "Cora Coralina"],
+      placeholder:
+        "no varal, a camisa do meu pai\nbate no vento\ncomo se ainda tivesse peito",
+    },
+    reportagem: {
+      exemplar: "Eliane Brum e Daniela Arbex, pela apuração que encontra personagem sem abandonar o rigor.",
+      why: "A reportagem forte transforma dado em experiência verificável, com fonte, contexto e rosto humano.",
+      references: ["Eliane Brum", "Daniela Arbex", "Zuenir Ventura", "Ruy Castro", "Fernando Morais"],
+      placeholder:
+        "Às 5h17, a primeira moradora abriu a janela e viu a água na altura do portão. Às 6h, a rua já não tinha nome: era um braço do rio.",
+    },
+    "newsletter-editorial": {
+      exemplar: "Newsletters brasileiras de curadoria e jornalismo explicativo, pela voz recorrente e contrato direto com o leitor.",
+      why: "A newsletter funciona quando a pessoa reconhece uma voz e entende por que aquela edição precisava existir.",
+      references: ["Meio", "Rádio Novelo", "Nexo Jornal", "Agência Bori"],
+      placeholder:
+        "Bom dia. Esta edição começa com uma pergunta simples: quem ganha quando uma cidade esquece seus próprios escritores?",
+    },
+  };
+
   function listTemplates() {
     return templates.map(({ id, label, icon, title, description }) => ({ id, label, icon, title, description }));
   }
 
   function getTemplate(templateId) {
-    return templates.find((template) => template.id === templateId) || templates[0];
+    const template = templates.find((item) => item.id === templateId) || templates[0];
+    return {
+      ...template,
+      model: models[template.id],
+    };
   }
 
   function getStep(templateId, stepIndex) {

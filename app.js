@@ -343,6 +343,7 @@ function renderActiveManuscript() {
   const manuscript = getActiveManuscript();
   titleInput.value = manuscript.title;
   writingArea.innerText = manuscript.text;
+  updateWritingPlaceholder();
   updateWritingStats();
   renderLexicalView();
   renderTemplateReference();
@@ -1214,6 +1215,7 @@ function renderTemplateReference() {
   const analysis = VeredaPrecision.analyze(template, getActiveManuscript().text);
 
   referenceTitle.textContent = template.label;
+  updateWritingPlaceholder(template);
   referenceTabs.innerHTML = VeredaTemplates.listTemplates()
     .map((item) => {
       const isActive = item.id === template.id ? " is-active" : "";
@@ -1261,8 +1263,10 @@ function createPrecisionMarkup(analysis) {
 
 function createReferenceMarkup(template) {
   const guidance = template.guidance || { meta: [], sections: [], reminders: [] };
+  const model = template.model ? createModelMarkup(template.model) : "";
 
   return `
+    ${model}
     <section>
       <h3>Dados do formato</h3>
       <div class="reference-pills">
@@ -1291,6 +1295,24 @@ function createReferenceMarkup(template) {
       </ul>
     </section>
   `;
+}
+
+function createModelMarkup(model) {
+  return `
+    <section class="reference-model">
+      <h3>Texto-modelo</h3>
+      <article>
+        <strong>${escapeHtml(model.exemplar)}</strong>
+        <p>${escapeHtml(model.why)}</p>
+        <div class="reference-example">${escapeHtml(model.placeholder)}</div>
+        <small>Referências: ${model.references.map(escapeHtml).join(", ")}.</small>
+      </article>
+    </section>
+  `;
+}
+
+function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.template.selectedId)) {
+  writingArea.dataset.placeholder = template.model?.placeholder || "Comece aqui. A primeira frase abre uma vereda.";
 }
 
 function selectReferenceTemplate(templateId) {
