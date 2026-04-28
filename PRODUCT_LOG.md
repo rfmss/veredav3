@@ -658,3 +658,24 @@ Próximas etapas sugeridas:
 - Permitir fixar documentos importantes.
 - Adicionar tags locais aos documentos.
 - Refinar o painel consultivo com opção de ocultar/mostrar.
+
+## 2026-04-28 - Arquivo com fixados, ordenação e tags
+
+Decidimos tratar a organização do Arquivo como um pacote coeso, em vez de avançar em microetapas isoladas.
+
+Foram adicionados documentos fixados, ordenação local do acervo e tags por manuscrito. Os fixados criam uma faixa própria acima dos recentes, a ordenação permite alternar entre atualizados, título, progresso e tipo, e as tags aparecem nos cards, entram na busca local e acompanham exportações `.txt`/`.md`.
+
+Essa etapa mantém o Vereda dentro da lógica offline-first: tudo é metadado local do documento, salvo no navegador e levado dentro do `.vrda`. A preferência de ordenação também passa a acompanhar o backup do acervo.
+
+Benefícios esperados:
+
+- Projetos prioritários ficam sempre à mão.
+- O Arquivo se adapta a diferentes modos de trabalho: retomada, revisão, organização alfabética ou acompanhamento de progresso.
+- Tags dão vocabulário próprio ao escritor sem exigir uma taxonomia rígida.
+- A busca local fica mais expressiva sem depender de servidor ou IA.
+
+Próximas etapas sugeridas:
+
+- Criar ações rápidas no card: abrir, exportar e duplicar.
+- Criar seção "Em andamento" para documentos em escrita ou revisão.
+- Refinar o painel consultivo com opção de ocultar/mostrar.

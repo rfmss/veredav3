@@ -5,6 +5,8 @@
     chapter: "Primeira cena",
     progress: 0,
     description: "Sem descrição ainda.",
+    tags: [],
+    pinned: false,
   };
 
   function normalizeManuscript(manuscript) {
@@ -15,6 +17,8 @@
       chapter: manuscript.chapter || DEFAULT_METADATA.chapter,
       progress: normalizeProgress(manuscript.progress),
       description: manuscript.description || createDescription(manuscript.text),
+      tags: normalizeTags(manuscript.tags),
+      pinned: Boolean(manuscript.pinned),
     };
   }
 
@@ -32,6 +36,8 @@
       chapter: metadata.chapter || DEFAULT_METADATA.chapter,
       progress: metadata.progress ?? DEFAULT_METADATA.progress,
       description: metadata.description || DEFAULT_METADATA.description,
+      tags: normalizeTags(metadata.tags),
+      pinned: Boolean(metadata.pinned),
       templateId: metadata.templateId,
       updatedAt: new Date().toISOString(),
     });
@@ -42,6 +48,8 @@
       ...manuscript,
       ...metadata,
       progress: normalizeProgress(metadata.progress),
+      tags: normalizeTags(metadata.tags),
+      pinned: metadata.pinned ?? manuscript.pinned,
       updatedAt: new Date().toISOString(),
     });
   }
@@ -67,6 +75,16 @@
     }
 
     return Math.min(100, Math.max(0, Math.round(numberValue)));
+  }
+
+  function normalizeTags(value) {
+    const rawTags = Array.isArray(value) ? value : String(value || "").split(",");
+
+    return [...new Set(
+      rawTags
+        .map((tag) => tag.trim())
+        .filter(Boolean)
+    )].slice(0, 12);
   }
 
   function truncate(value, limit) {

@@ -248,8 +248,18 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   <input type="search" placeholder="Buscar no acervo" data-archive-search aria-label="Buscar no acervo">
                 </label>
                 <div class="archive-filter-bar" data-archive-filter-bar></div>
+                <label class="archive-sort">
+                  <span class="material-symbols-outlined">sort</span>
+                  <select data-archive-sort aria-label="Ordenar acervo">
+                    <option value="updated">Atualizados</option>
+                    <option value="title">Título</option>
+                    <option value="progress">Progresso</option>
+                    <option value="type">Tipo</option>
+                  </select>
+                </label>
               </div>
 
+              <section class="pinned-documents" data-pinned-documents aria-label="Documentos fixados"></section>
               <section class="recent-documents" data-recent-documents aria-label="Documentos recentes"></section>
 
               <section class="template-studio" aria-label="Templates guiados">
@@ -305,6 +315,10 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                       Progresso
                       <input type="range" min="0" max="100" step="1" name="progress" data-metadata-field="progress">
                       <span class="progress-readout" data-progress-readout>0%</span>
+                    </label>
+                    <label>
+                      Tags
+                      <input type="text" name="tags" data-metadata-field="tags" placeholder="ex: revisão, personagem, capítulo 2">
                     </label>
                     <label class="wide-field">
                       Descrição

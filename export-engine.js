@@ -7,6 +7,7 @@
       `Status: ${manuscript.status}`,
       `Marco atual: ${manuscript.chapter}`,
       `Progresso: ${manuscript.progress}%`,
+      `Tags: ${formatTags(manuscript.tags)}`,
       "",
       manuscript.description,
       "",
@@ -27,6 +28,7 @@
       "- Status: " + manuscript.status,
       "- Marco atual: " + manuscript.chapter,
       "- Progresso: " + manuscript.progress + "%",
+      "- Tags: " + formatTags(manuscript.tags),
       "",
       "---",
       "",
@@ -68,6 +70,10 @@
       .map((paragraph) => paragraph.trim())
       .filter(Boolean)
       .join("\n\n");
+  }
+
+  function formatTags(tags = []) {
+    return Array.isArray(tags) && tags.length ? tags.join(", ") : "Sem tags";
   }
 
   function slugify(value) {

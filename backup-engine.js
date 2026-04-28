@@ -5,6 +5,7 @@
         manuscripts: state.manuscripts,
         focus: state.focus,
         lexical: state.lexical,
+        archive: state.archive,
         proofs: state.proofs,
         versions: state.versions,
     });
@@ -48,6 +49,7 @@
       manuscripts: data.manuscripts,
       focus: data.focus || currentState.focus,
       lexical: data.lexical || currentState.lexical,
+      archive: data.archive || currentState.archive,
       proofs: data.proofs || {},
       versions: data.versions || {},
     };

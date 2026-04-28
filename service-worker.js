@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v16";
+const CACHE_NAME = "vereda-offline-v17";
 
 const CORE_ASSETS = [
   "./",

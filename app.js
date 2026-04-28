@@ -62,6 +62,8 @@ const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
 const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
 const archiveSearch = document.querySelector("[data-archive-search]");
+const archiveSort = document.querySelector("[data-archive-sort]");
+const pinnedDocuments = document.querySelector("[data-pinned-documents]");
 const recentDocuments = document.querySelector("[data-recent-documents]");
 const templateTabs = document.querySelector("[data-template-tabs]");
 const templateScreen = document.querySelector("[data-template-screen]");
@@ -167,6 +169,7 @@ function getDefaultArchiveState() {
   return {
     filter: "all",
     search: "",
+    sort: "updated",
   };
 }
 
@@ -350,6 +353,7 @@ function renderManuscriptNavigation() {
 function renderProjectGrid() {
   renderArchiveFilters();
   archiveSearch.value = state.archive.search;
+  archiveSort.value = state.archive.sort;
   const searchQuery = normalizeSearch(state.archive.search);
 
   const filteredManuscripts = state.manuscripts.filter((manuscript) => {
@@ -357,10 +361,12 @@ function renderProjectGrid() {
     const matchesSearch = !searchQuery || createSearchText(manuscript).includes(searchQuery);
     return matchesType && matchesSearch;
   });
+  const sortedManuscripts = sortArchiveManuscripts(filteredManuscripts);
 
   renderRecentDocuments(filteredManuscripts);
+  renderPinnedDocuments(filteredManuscripts);
 
-  if (!filteredManuscripts.length) {
+  if (!sortedManuscripts.length) {
     const message = searchQuery ? "Nenhum documento encontrado" : "Nada aqui ainda";
     const description = searchQuery
       ? "Tente buscar por outro termo ou limpe a busca para ver o acervo."
@@ -376,18 +382,23 @@ function renderProjectGrid() {
     return;
   }
 
-  projectGrid.innerHTML = filteredManuscripts
+  projectGrid.innerHTML = sortedManuscripts
     .map((manuscript, index) => {
       const words = countWords(manuscript.text);
       const featured = index === 0 ? " featured" : "";
       const selected = manuscript.id === state.activeId ? " is-selected" : "";
       const type = getArchiveType(manuscript);
+      const tags = createTagMarkup(manuscript.tags);
+      const pinned = manuscript.pinned ? " is-pinned" : "";
+      const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
 
       return `
-        <button class="project-card${featured}${selected}" type="button" data-archive-select="${manuscript.id}" data-document-type="${type.id}">
+        <button class="project-card${featured}${selected}${pinned}" type="button" data-archive-select="${manuscript.id}" data-document-type="${type.id}">
+          <span class="project-pin material-symbols-outlined" data-archive-pin="${manuscript.id}" role="button" tabindex="0" aria-label="${pinLabel}" title="${pinLabel}">push_pin</span>
           <span class="project-type"><i class="material-symbols-outlined">${type.icon}</i>${escapeHtml(type.label)} · ${escapeHtml(manuscript.status)}</span>
           <h2>${escapeHtml(manuscript.title)}</h2>
           <p>${escapeHtml(manuscript.description || createExcerpt(manuscript.text))}</p>
+          ${tags}
           <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
             <i style="--progress: ${manuscript.progress}%"></i>
           </div>
@@ -396,6 +407,30 @@ function renderProjectGrid() {
       `;
     })
     .join("");
+}
+
+function renderPinnedDocuments(manuscripts) {
+  const pinnedItems = sortArchiveManuscripts(manuscripts.filter((manuscript) => manuscript.pinned)).slice(0, 6);
+
+  if (!pinnedItems.length) {
+    pinnedDocuments.hidden = true;
+    pinnedDocuments.innerHTML = "";
+    return;
+  }
+
+  pinnedDocuments.hidden = false;
+  pinnedDocuments.innerHTML = `
+    <div class="archive-strip-heading">
+      <div>
+        <p class="eyebrow">Fixados</p>
+        <h2>Na mesa agora</h2>
+      </div>
+      <span>${pinnedItems.length} ${pinnedItems.length === 1 ? "documento" : "documentos"}</span>
+    </div>
+    <div class="archive-strip-list">
+      ${pinnedItems.map((manuscript) => createCompactDocumentMarkup(manuscript, "pinned-document")).join("")}
+    </div>
+  `;
 }
 
 function renderRecentDocuments(manuscripts) {
@@ -411,29 +446,63 @@ function renderRecentDocuments(manuscripts) {
 
   recentDocuments.hidden = false;
   recentDocuments.innerHTML = `
-    <div class="recent-documents-heading">
+    <div class="archive-strip-heading">
       <div>
         <p class="eyebrow">Recentes</p>
         <h2>Continue de onde parou</h2>
       </div>
       <span>${recentItems.length} ${recentItems.length === 1 ? "documento" : "documentos"}</span>
     </div>
-    <div class="recent-document-list">
-      ${recentItems.map(createRecentDocumentMarkup).join("")}
+    <div class="archive-strip-list">
+      ${recentItems.map((manuscript) => createCompactDocumentMarkup(manuscript, "recent-document")).join("")}
     </div>
   `;
 }
 
-function createRecentDocumentMarkup(manuscript) {
+function createCompactDocumentMarkup(manuscript, className) {
   const type = getArchiveType(manuscript);
   const selected = manuscript.id === state.activeId ? " is-selected" : "";
+  const pinned = manuscript.pinned ? " is-pinned" : "";
+  const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
 
   return `
-    <button class="recent-document${selected}" type="button" data-archive-select="${manuscript.id}">
+    <button class="${className}${selected}${pinned}" type="button" data-archive-select="${manuscript.id}">
       <span class="material-symbols-outlined">${type.icon}</span>
       <strong>${escapeHtml(manuscript.title)}</strong>
       <small>${escapeHtml(type.label)} · ${formatUpdatedAt(manuscript.updatedAt)}</small>
+      <i class="material-symbols-outlined" data-archive-pin="${manuscript.id}" role="button" tabindex="0" aria-label="${pinLabel}" title="${pinLabel}">push_pin</i>
     </button>
+  `;
+}
+
+function sortArchiveManuscripts(manuscripts) {
+  const sortMode = state.archive.sort || "updated";
+  return [...manuscripts].sort((a, b) => {
+    if (sortMode === "title") {
+      return a.title.localeCompare(b.title, "pt-BR");
+    }
+
+    if (sortMode === "progress") {
+      return Number(b.progress || 0) - Number(a.progress || 0) || a.title.localeCompare(b.title, "pt-BR");
+    }
+
+    if (sortMode === "type") {
+      return getArchiveType(a).label.localeCompare(getArchiveType(b).label, "pt-BR") || a.title.localeCompare(b.title, "pt-BR");
+    }
+
+    return getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt);
+  });
+}
+
+function createTagMarkup(tags = []) {
+  if (!tags.length) {
+    return "";
+  }
+
+  return `
+    <div class="tag-list">
+      ${tags.slice(0, 4).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
+    </div>
   `;
 }
 
@@ -506,10 +575,33 @@ function setArchiveSearch(value) {
   persistState("Busca do arquivo aplicada");
 }
 
+function setArchiveSort(value) {
+  state.archive.sort = value;
+  renderProjectGrid();
+  persistState("Ordenação do arquivo aplicada");
+}
+
+function togglePinnedManuscript(id) {
+  const manuscript = state.manuscripts.find((item) => item.id === id);
+
+  if (!manuscript) {
+    return;
+  }
+
+  const nextManuscript = VeredaArchive.updateMetadata(manuscript, {
+    pinned: !manuscript.pinned,
+  });
+
+  updateActiveManuscript(nextManuscript);
+  renderProjectGrid();
+  renderMetadataForm();
+  queueSave();
+}
+
 function createSearchText(manuscript) {
   const type = getArchiveType(manuscript);
   return normalizeSearch(
-    [manuscript.title, manuscript.kind, manuscript.status, manuscript.chapter, manuscript.description, manuscript.text, type.label]
+    [manuscript.title, manuscript.kind, manuscript.status, manuscript.chapter, manuscript.description, manuscript.text, type.label, ...(manuscript.tags || [])]
       .filter(Boolean)
       .join(" ")
   );
@@ -528,7 +620,8 @@ function renderMetadataForm() {
   const manuscript = getActiveManuscript();
 
   metadataFields.forEach((field) => {
-    field.value = manuscript[field.dataset.metadataField] ?? "";
+    const value = manuscript[field.dataset.metadataField] ?? "";
+    field.value = Array.isArray(value) ? value.join(", ") : value;
   });
 
   progressReadout.textContent = `${manuscript.progress || 0}%`;
@@ -557,19 +650,25 @@ function updateCurrentManuscript() {
 
 function updateCurrentMetadata() {
   const manuscript = getActiveManuscript();
+  const activeMetadataField = document.activeElement?.dataset?.metadataField;
   const formData = new FormData(metadataForm);
   const nextManuscript = VeredaArchive.updateMetadata(manuscript, {
     kind: formData.get("kind"),
     status: formData.get("status"),
     chapter: formData.get("chapter"),
     progress: formData.get("progress"),
+    tags: formData.get("tags"),
     description: formData.get("description"),
   });
 
   updateActiveManuscript(nextManuscript);
   renderManuscriptNavigation();
   renderProjectGrid();
-  renderMetadataForm();
+  if (activeMetadataField !== "tags" && activeMetadataField !== "description" && activeMetadataField !== "kind" && activeMetadataField !== "chapter") {
+    renderMetadataForm();
+  } else {
+    progressReadout.textContent = `${nextManuscript.progress || 0}%`;
+  }
   maybeCreateAutoVersion(nextManuscript);
   queueSave();
 }
@@ -1180,10 +1279,18 @@ document.addEventListener("click", (event) => {
   const manuscriptTarget = event.target.closest("[data-manuscript-id]");
   const viewTarget = event.target.closest("[data-view-target]");
   const actionTarget = event.target.closest("[data-action]");
+  const archivePinTarget = event.target.closest("[data-archive-pin]");
 
   if (manuscriptTarget) {
     event.preventDefault();
     setActiveManuscript(manuscriptTarget.dataset.manuscriptId);
+    return;
+  }
+
+  if (archivePinTarget) {
+    event.preventDefault();
+    event.stopPropagation();
+    togglePinnedManuscript(archivePinTarget.dataset.archivePin);
     return;
   }
 
@@ -1333,6 +1440,14 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  const archivePinTarget = event.target.closest("[data-archive-pin]");
+
+  if (archivePinTarget && (event.key === "Enter" || event.key === " ")) {
+    event.preventDefault();
+    togglePinnedManuscript(archivePinTarget.dataset.archivePin);
+    return;
+  }
+
   if (event.key === "Escape" && shell.classList.contains("is-focus")) {
     exitFocusMode();
   }
@@ -1406,7 +1521,9 @@ writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
 backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
 metadataForm.addEventListener("input", updateCurrentMetadata);
+metadataForm.addEventListener("focusout", renderMetadataForm);
 archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
+archiveSort.addEventListener("change", () => setArchiveSort(archiveSort.value));
 
 renderActiveManuscript();
 renderManuscriptNavigation();
