@@ -19,6 +19,7 @@ O Vereda já tem:
 - Busca no Guia de Ofícios.
 - Medidores locais de aderência à forma, incluindo ENEM.
 - Painéis laterais recolhíveis.
+- Espelho de Voz local em primeiro corte.
 
 ## Princípios de responsabilidade
 
@@ -29,7 +30,7 @@ O Vereda já tem:
 - Cada pacote deve terminar com validação, registro no `PRODUCT_LOG.md`, commit e push.
 - Alterações de design devem respeitar o guia visual existente: interface de trabalho, cartões contidos, paleta sóbria e tipografia editorial.
 
-## Próximo pacote: Espelho de Voz
+## Pacote entregue: Espelho de Voz
 
 Objetivo: criar uma ferramenta de autoconhecimento literário para o escritor, sem fingir que ela é um oráculo.
 
@@ -74,14 +75,12 @@ Como tratar DNA literário:
 - Explicar que a aproximação vem de padrões observáveis e curadoria crítica local.
 - Preferir famílias de gesto literário: introspectivo, oral, imagético, ensaístico, seco, barroco, contemplativo, narrativo direto.
 
-Arquitetura sugerida:
+Arquitetura:
 
-- Criar `voice-engine.js` para métricas e heurísticas locais.
-- Adicionar painel do Espelho na Academia em `index.html`.
-- Adicionar estilos próprios em `styles.css`, alinhados ao Vereda.
-- Integrar ações no `app.js`.
-- Atualizar `service-worker.js`.
-- Registrar em `PRODUCT_LOG.md`.
+- `voice-engine.js` concentra métricas e heurísticas locais.
+- O painel do Espelho fica na Academia.
+- O usuário pode colar corpus ou usar o manuscrito ativo.
+- A saída separa métricas calculadas, leitura de voz, forças, pontos cegos, campos semânticos, temperatura emocional e exercícios.
 
 Validação mínima:
 

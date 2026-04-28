@@ -422,6 +422,34 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                 </div>
               </section>
 
+              <section class="voice-mirror" aria-label="Espelho de Voz">
+                <div class="voice-mirror-copy">
+                  <p class="eyebrow">Espelho de Voz</p>
+                  <h2>Uma radiografia local da sua escrita</h2>
+                  <p>Cole um corpus ou use o manuscrito ativo. O Vereda calcula métricas reais e devolve uma leitura crítica assumida como hipótese de trabalho, não como sentença sobre sua literatura.</p>
+                  <div class="voice-actions">
+                    <button class="secondary-button" data-action="voice-use-active">
+                      <span class="material-symbols-outlined">edit_note</span>
+                      Usar manuscrito ativo
+                    </button>
+                    <button class="primary-button" data-action="voice-analyze">
+                      <span class="material-symbols-outlined">psychology</span>
+                      Analisar voz
+                    </button>
+                  </div>
+                </div>
+                <div class="voice-mirror-workbench">
+                  <textarea data-voice-input placeholder="Cole aqui um conto, capítulo, ensaio ou conjunto de textos. Acima de 500 palavras a leitura fica mais estável." aria-label="Corpus para o Espelho de Voz"></textarea>
+                  <div class="voice-meta">
+                    <span data-voice-count>0 palavras</span>
+                    <span>análise local · sem API · sem envio</span>
+                  </div>
+                  <div class="voice-result" data-voice-result>
+                    <p>O espelho ainda está vazio. Traga texto suficiente para que a voz deixe marcas.</p>
+                  </div>
+                </div>
+              </section>
+
               <section class="template-studio" aria-label="Guia de Ofícios Literários">
                 <div class="template-copy">
                   <p class="eyebrow">Guia de Ofícios Literários</p>
@@ -580,6 +608,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     <script src="export-engine.js"></script>
     <script src="template-engine.js"></script>
     <script src="precision-engine.js"></script>
+    <script src="voice-engine.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -933,3 +933,36 @@ Benefícios esperados:
 - O projeto ganha uma fonte de verdade mais estável que a conversa.
 - Fica mais fácil retomar depois de pausas sem alucinar continuidade.
 - Cada próximo pacote pode ser comparado com princípios e critérios de pronto.
+
+## 2026-04-28 - Espelho de Voz local
+
+Decidimos implementar o primeiro corte do Espelho de Voz como ferramenta da Academia.
+
+A ferramenta aceita corpus colado ou usa o manuscrito ativo. A análise roda 100% localmente em `voice-engine.js`, sem API externa e sem envio de dados.
+
+O Espelho calcula métricas objetivas:
+
+- contagem de palavras, frases e parágrafos;
+- TTR simples;
+- densidade lexical aproximada;
+- média e variação de palavras por frase;
+- repetição de palavras relevantes;
+- pontuação;
+- campos semânticos dominantes por léxicos locais;
+- temperatura emocional por léxicos locais.
+
+Também devolve uma leitura interpretativa assumida:
+
+- título provisório da voz;
+- gesto literário provável;
+- ecos possíveis;
+- forças;
+- pontos cegos;
+- público provável;
+- exercícios de revisão.
+
+Responsabilidade de produto:
+
+- O Espelho não promete afinidade científica com autores canônicos.
+- A saída explica que métricas são calculadas localmente, enquanto voz, público e ecos literários são hipóteses heurísticas.
+- O objetivo é dar vocabulário de autoconhecimento ao escritor, não produzir diagnóstico definitivo.

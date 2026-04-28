@@ -81,6 +81,9 @@ const precisionCard = document.querySelector("[data-precision-card]");
 const templateResizer = document.querySelector("[data-template-resizer]");
 const templatePanelToggles = document.querySelectorAll("[data-template-panel-toggle]");
 const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
+const voiceInput = document.querySelector("[data-voice-input]");
+const voiceCount = document.querySelector("[data-voice-count]");
+const voiceResult = document.querySelector("[data-voice-result]");
 
 let state = loadState();
 let saveTimer;
@@ -1237,6 +1240,103 @@ function changeTemplateStep(direction) {
   renderTemplateStudio();
 }
 
+function useActiveManuscriptForVoice() {
+  voiceInput.value = getActiveManuscript().text.trim();
+  updateVoiceCount();
+  renderVoiceMirror();
+  setView("academia");
+  voiceInput.focus();
+}
+
+function updateVoiceCount() {
+  const words = countWords(voiceInput.value);
+  voiceCount.textContent = `${words} ${words === 1 ? "palavra" : "palavras"}`;
+}
+
+function renderVoiceMirror() {
+  const text = voiceInput.value.trim();
+  const words = countWords(text);
+
+  if (words < 80) {
+    voiceResult.innerHTML = `<p>Traga ao menos 80 palavras para uma primeira leitura. Acima de 500, o espelho fica menos instável.</p>`;
+    return;
+  }
+
+  const analysis = VeredaVoice.analyze(text);
+  voiceResult.innerHTML = createVoiceMirrorMarkup(analysis);
+  saveStatus.textContent = "Espelho de Voz atualizado";
+}
+
+function createVoiceMirrorMarkup(analysis) {
+  return `
+    <div class="voice-result-header">
+      <div>
+        <h3>${escapeHtml(analysis.voice.title)}</h3>
+        <p>${escapeHtml(analysis.voice.description)}</p>
+      </div>
+      <span class="voice-pill">${escapeHtml(analysis.voice.gesture)}</span>
+    </div>
+    <div class="voice-metrics">
+      ${createVoiceMetric("Palavras", analysis.counts.words)}
+      ${createVoiceMetric("TTR", `${analysis.metrics.ttr}%`)}
+      ${createVoiceMetric("Densidade", `${analysis.metrics.lexicalDensity}%`)}
+      ${createVoiceMetric("Pal/frase", analysis.metrics.avgSentence)}
+    </div>
+    <div class="voice-columns">
+      ${createVoicePanel("Ecos possíveis", analysis.voice.echoes)}
+      ${createVoicePanel("Forças", analysis.strengths)}
+      ${createVoicePanel("Pontos cegos", analysis.blindSpots)}
+      ${createVoicePanel("Exercícios", analysis.exercises)}
+      ${createVoiceBars("Temperatura", analysis.emotional)}
+      ${createVoiceBars("Campos", analysis.fields)}
+    </div>
+    <p class="voice-disclaimer">${escapeHtml(analysis.disclaimer)}</p>
+  `;
+}
+
+function createVoiceMetric(label, value) {
+  return `
+    <div class="voice-metric">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+    </div>
+  `;
+}
+
+function createVoicePanel(title, items) {
+  return `
+    <div class="voice-panel">
+      <h4>${escapeHtml(title)}</h4>
+      <ul>
+        ${(items.length ? items : ["Sem marcas suficientes neste corpus."])
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("")}
+      </ul>
+    </div>
+  `;
+}
+
+function createVoiceBars(title, items) {
+  return `
+    <div class="voice-panel">
+      <h4>${escapeHtml(title)}</h4>
+      <div class="voice-bars">
+        ${(items.length ? items : [{ label: "baixo sinal", score: 8, hits: 0 }])
+          .map(
+            (item) => `
+              <div class="voice-bar">
+                <span>${escapeHtml(item.label)}</span>
+                <i style="--w:${Math.max(8, item.score)}%"></i>
+                <b>${item.hits}</b>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
 function updateAcademyParallax() {
   const parallaxItems = document.querySelectorAll("[data-parallax-speed]");
   const viewportMiddle = contentStage.clientHeight / 2;
@@ -1695,6 +1795,14 @@ document.addEventListener("click", (event) => {
     togglePanel("right");
   }
 
+  if (actionTarget.dataset.action === "voice-use-active") {
+    useActiveManuscriptForVoice();
+  }
+
+  if (actionTarget.dataset.action === "voice-analyze") {
+    renderVoiceMirror();
+  }
+
   if (actionTarget.dataset.action === "open-create-note") {
     openCreateNote();
   }
@@ -1851,6 +1959,7 @@ metadataForm.addEventListener("focusout", renderMetadataForm);
 archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
 archiveSort.addEventListener("change", () => setArchiveSort(archiveSort.value));
 templateSearch.addEventListener("input", () => setTemplateSearch(templateSearch.value));
+voiceInput.addEventListener("input", updateVoiceCount);
 
 renderActiveManuscript();
 renderManuscriptNavigation();
