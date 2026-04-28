@@ -34,6 +34,7 @@
           <button class="tab" data-view-target="biblioteca">Biblioteca</button>
           <button class="tab" data-view-target="autoria">Autoria</button>
           <button class="tab" data-view-target="arquivo">Arquivo</button>
+          <button class="tab" data-view-target="academia">Academia</button>
         </nav>
 
         <div class="topbar-actions">
@@ -273,13 +274,72 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               <section class="ongoing-documents" data-ongoing-documents aria-label="Documentos em andamento"></section>
               <section class="recent-documents" data-recent-documents aria-label="Documentos recentes"></section>
 
+              <div class="archive-layout">
+                <div class="project-grid" data-project-grid></div>
+                <aside class="archive-detail-panel">
+                  <p class="eyebrow">Detalhes do projeto</p>
+                  <form class="metadata-form" data-metadata-form>
+                    <label>
+                      Tipo
+                      <input type="text" name="kind" data-metadata-field="kind">
+                    </label>
+                    <label>
+                      Status
+                      <select name="status" data-metadata-field="status">
+                        <option>Em escrita</option>
+                        <option>Revisão</option>
+                        <option>Pausado</option>
+                        <option>Concluído</option>
+                      </select>
+                    </label>
+                    <label>
+                      Marco atual
+                      <input type="text" name="chapter" data-metadata-field="chapter">
+                    </label>
+                    <label>
+                      Progresso
+                      <input type="range" min="0" max="100" step="1" name="progress" data-metadata-field="progress">
+                      <span class="progress-readout" data-progress-readout>0%</span>
+                    </label>
+                    <label>
+                      Tags
+                      <input type="text" name="tags" data-metadata-field="tags" placeholder="ex: revisão, personagem, capítulo 2">
+                    </label>
+                    <label class="wide-field">
+                      Descrição
+                      <textarea rows="5" name="description" data-metadata-field="description"></textarea>
+                    </label>
+                  </form>
+                  <button class="primary-button" data-action="open-active-manuscript">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    Abrir no editor
+                  </button>
+                </aside>
+              </div>
+              <div class="resource-grid">
+                <a class="project-card utility" href="#">
+                  <span class="material-symbols-outlined">groups</span>
+                  <h2>Personagens</h2>
+                  <p>42 perfis detalhados.</p>
+                </a>
+                <a class="project-card utility" href="#">
+                  <span class="material-symbols-outlined">map</span>
+                  <h2>Cenários</h2>
+                  <p>18 lugares catalogados.</p>
+                </a>
+              </div>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="academia">
+            <article class="academy-view">
               <section class="academy-board" aria-label="Academia prática do escritor">
                 <div class="academy-parallax academy-word" data-parallax-speed="0.12">PUBLICAR</div>
                 <div class="academy-parallax academy-word is-secondary" data-parallax-speed="-0.08">LIVRO</div>
                 <div class="academy-hero">
                   <p class="eyebrow">Academia prática</p>
-                  <h2>Do manuscrito ao objeto livro</h2>
-                  <p>Dois mapas novos entram no Vereda: o caminho de lançamento do escritor no mercado e a anatomia material do livro. Estratégia, objeto, arquivo e rito editorial no mesmo lugar em que você escreve.</p>
+                  <h1>Do manuscrito ao objeto livro</h1>
+                  <p>Mercado editorial, anatomia do livro e guias de ofício em uma bancada só. Aqui o Vereda ajuda você a entender a forma, preparar o projeto e transformar escrita em obra publicável.</p>
                 </div>
 
                 <div class="academy-paths">
@@ -355,7 +415,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                 <div class="template-copy">
                   <p class="eyebrow">Guia de Ofícios Literários</p>
                   <h2>Comece pelo ofício que a sua forma pede</h2>
-                  <p>Ficção, roteiro, poesia, não ficção e jornalismo não nascem do mesmo vazio. Escolha um guia e abra uma mesa preparada para escrever.</p>
+                  <p>Ficção, roteiro, poesia, não ficção, jornalismo, mercado editorial e objeto livro não nascem do mesmo vazio. Escolha um guia e abra uma mesa preparada para escrever.</p>
                   <div class="craft-tabs" data-craft-tabs></div>
                   <div class="template-tabs" data-template-tabs></div>
                 </div>
@@ -378,61 +438,6 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   </div>
                 </div>
               </section>
-
-              <div class="archive-layout">
-                <div class="project-grid" data-project-grid></div>
-                <aside class="archive-detail-panel">
-                  <p class="eyebrow">Detalhes do projeto</p>
-                  <form class="metadata-form" data-metadata-form>
-                    <label>
-                      Tipo
-                      <input type="text" name="kind" data-metadata-field="kind">
-                    </label>
-                    <label>
-                      Status
-                      <select name="status" data-metadata-field="status">
-                        <option>Em escrita</option>
-                        <option>Revisão</option>
-                        <option>Pausado</option>
-                        <option>Concluído</option>
-                      </select>
-                    </label>
-                    <label>
-                      Marco atual
-                      <input type="text" name="chapter" data-metadata-field="chapter">
-                    </label>
-                    <label>
-                      Progresso
-                      <input type="range" min="0" max="100" step="1" name="progress" data-metadata-field="progress">
-                      <span class="progress-readout" data-progress-readout>0%</span>
-                    </label>
-                    <label>
-                      Tags
-                      <input type="text" name="tags" data-metadata-field="tags" placeholder="ex: revisão, personagem, capítulo 2">
-                    </label>
-                    <label class="wide-field">
-                      Descrição
-                      <textarea rows="5" name="description" data-metadata-field="description"></textarea>
-                    </label>
-                  </form>
-                  <button class="primary-button" data-action="open-active-manuscript">
-                    <span class="material-symbols-outlined">edit_note</span>
-                    Abrir no editor
-                  </button>
-                </aside>
-              </div>
-              <div class="resource-grid">
-                <a class="project-card utility" href="#">
-                  <span class="material-symbols-outlined">groups</span>
-                  <h2>Personagens</h2>
-                  <p>42 perfis detalhados.</p>
-                </a>
-                <a class="project-card utility" href="#">
-                  <span class="material-symbols-outlined">map</span>
-                  <h2>Cenários</h2>
-                  <p>18 lugares catalogados.</p>
-                </a>
-              </div>
             </article>
           </section>
         </main>

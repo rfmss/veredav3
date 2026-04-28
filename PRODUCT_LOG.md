@@ -867,3 +867,18 @@ Próximas etapas sugeridas:
 - Implementar o medidor ENEM local no editor.
 - Criar uma busca transversal nos guias por termos como ISBN, query, capa, KDP e epígrafe.
 - Transformar checklists de lançamento em itens marcáveis persistentes por projeto.
+
+## 2026-04-28 - Academia acessível pelo topo
+
+Decidimos que a Academia prática e o Guia de Ofícios não deveriam ficar escondidos dentro do Arquivo.
+
+A navegação superior agora tem um módulo próprio chamado "Academia". Movemos para lá a área de Academia prática e o Guia de Ofícios Literários, deixando o Arquivo focado em acervo, filtros, documentos recentes e metadados.
+
+Também ajustamos o visual da Academia para ficar mais alinhado ao guia de design do Vereda: fundo claro, cartões discretos, tipografia editorial e parallax apenas como textura sutil, não como peça destacada demais.
+
+Benefícios esperados:
+
+- A pessoa encontra os guias sem precisar entrar no Arquivo.
+- O Arquivo volta a cumprir função de organização do acervo.
+- A Academia ganha status de módulo central do produto.
+- O visual fica mais coeso com a interface principal.
