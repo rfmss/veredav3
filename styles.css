@@ -100,8 +100,19 @@ a {
 }
 
 .brand-lockup {
-  gap: 12px;
+  gap: 10px;
   min-width: 250px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: block;
+  margin: 0;
+  background: var(--primary);
+  -webkit-mask: url("favicon_io/android-chrome-512x512.png") center / contain no-repeat;
+  mask: url("favicon_io/android-chrome-512x512.png") center / contain no-repeat;
 }
 
 .brand-lockup strong {
@@ -112,11 +123,11 @@ a {
   letter-spacing: -0.02em;
 }
 
-.brand-lockup span {
+.brand-lockup > div > span {
   display: block;
   color: var(--muted);
   font-size: 11px;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .module-tabs {
@@ -2424,7 +2435,7 @@ mark {
     flex: 1;
   }
 
-  .brand-lockup span {
+  .brand-lockup > div > span {
     display: none;
   }
 
