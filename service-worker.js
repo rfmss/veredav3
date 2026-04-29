@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v34";
-const ASSET_VERSION = "20260429-2";
+const CACHE_NAME = "vereda-offline-v35";
+const ASSET_VERSION = "20260429-3";
 
 const CORE_ASSETS = [
   "./",
@@ -18,11 +18,11 @@ const CORE_ASSETS = [
   `./voice-engine.js?v=${ASSET_VERSION}`,
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
   "./icons/Logo.svg",
-  `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
   "./favicon_io/site.webmanifest",
-  `./favicon_io/favicon.ico?v=${ASSET_VERSION}`,
-  `./favicon_io/favicon-16x16.png?v=${ASSET_VERSION}`,
-  `./favicon_io/favicon-32x32.png?v=${ASSET_VERSION}`,
+  `./favicon_io/tab-favicon.ico?v=${ASSET_VERSION}`,
+  `./favicon_io/tab-favicon-16x16.png?v=${ASSET_VERSION}`,
+  `./favicon_io/tab-favicon-32x32.png?v=${ASSET_VERSION}`,
+  `./favicon_io/tab-favicon-48x48.png?v=${ASSET_VERSION}`,
   `./favicon_io/apple-touch-icon.png?v=${ASSET_VERSION}`,
   "./favicon_io/android-chrome-192x192.png",
   "./favicon_io/android-chrome-512x512.png",

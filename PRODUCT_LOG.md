@@ -1082,3 +1082,19 @@ Objetivo:
 - evitar que navegador, GitHub Pages ou service worker continuem servindo o favicon/JS/CSS antigos;
 - acelerar a troca para a variante pastel do ícone da aba;
 - manter a experiência offline sem preservar assets obsoletos.
+
+## 2026-04-29 - Favicon dedicado da aba
+
+Atualizamos apenas o ícone da aba do navegador a partir de `veredalogo_CORRETO_OK_V2.png`.
+
+Foram gerados arquivos dedicados `tab-favicon-*` dentro de `favicon_io`, e o `index.html` deixou de anunciar o SVG como favicon para evitar que o navegador insistisse no ícone antigo. Os ícones internos da marca e os ícones de instalação permanecem separados desse favicon de aba.
+
+Também subimos o cache offline para `vereda-offline-v35` e os assets para `?v=20260429-3`.
+
+Validação feita:
+
+- favicons de aba gerados em 16, 32, 48 e `.ico`;
+- `node --check app.js`;
+- `node --check service-worker.js`;
+- referências locais do HTML presentes;
+- assets do service worker presentes.
