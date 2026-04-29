@@ -1098,3 +1098,15 @@ Validação feita:
 - `node --check service-worker.js`;
 - referências locais do HTML presentes;
 - assets do service worker presentes.
+
+## 2026-04-29 - Novo reset de cache da aba
+
+Forçamos mais uma invalidação para garantir troca do favicon em navegadores que ainda seguravam assets antigos.
+
+Alterações:
+
+- assets do HTML atualizados para `?v=20260429-4`;
+- service worker atualizado para `vereda-offline-v36`;
+- `ASSET_VERSION` atualizado para `20260429-4`.
+
+Objetivo: obrigar o navegador e o service worker a buscar novamente favicon, manifest, CSS e scripts publicados.
