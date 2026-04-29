@@ -1118,3 +1118,19 @@ Reduzimos levemente a área visual do favicon da aba.
 O arquivo original do logo foi mantido, mas os favicons `tab-favicon-*` foram regenerados com canvas maior antes do resize final. Assim, o círculo ganha margem dentro do quadrado reservado pelo navegador e deixa de parecer cortado nas bordas.
 
 Também subimos o cache offline para `vereda-offline-v37` e os assets para `?v=20260429-5`.
+
+## 2026-04-29 - Vocabulário Decolonizador
+
+Decidimos dissolver o arquivo `dicionario_decolonizador.html` como ferramenta nativa da Academia, não como página HTML separada.
+
+A primeira versão entra como consulta local: busca, filtros por categoria e cards com termo a revisar, alternativas, motivo e nota de contexto. Os dados ficam em `decolonial-engine.js`, preservando a regra do projeto de manter ferramentas centrais sem rede e sem API.
+
+Tarefas futuras registradas no roadmap:
+
+- verificar o manuscrito ativo contra o vocabulário;
+- destacar ocorrências no painel de Análise Linguística;
+- diferenciar uso crítico, histórico e problemático;
+- permitir copiar alternativas;
+- ampliar o vocabulário com curadoria e exemplos brasileiros.
+
+Também subimos o cache offline para `vereda-offline-v38` e os assets para `?v=20260429-6`.

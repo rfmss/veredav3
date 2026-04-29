@@ -84,6 +84,10 @@ const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
+const decolonialSearch = document.querySelector("[data-decolonial-search]");
+const decolonialFilters = document.querySelector("[data-decolonial-filters]");
+const decolonialCount = document.querySelector("[data-decolonial-count]");
+const decolonialList = document.querySelector("[data-decolonial-list]");
 const themePicker = document.querySelector("[data-theme-picker]");
 const themeButton = document.querySelector("[data-action='toggle-theme-menu']");
 const themeMenu = document.querySelector("[data-theme-menu]");
@@ -154,6 +158,10 @@ const colorThemes = [
 let state = loadState();
 let saveTimer;
 let deferredInstallPrompt;
+let decolonialState = {
+  category: "all",
+  query: "",
+};
 let templateState = {
   activeId: "roteiro-tv",
   step: 0,
@@ -1482,6 +1490,55 @@ function createVoiceBars(title, items) {
   `;
 }
 
+function renderDecolonialTool() {
+  if (!window.VeredaDecolonial || !decolonialFilters || !decolonialList) {
+    return;
+  }
+
+  const categories = window.VeredaDecolonial.listCategories();
+  const entries = window.VeredaDecolonial.listEntries(decolonialState);
+  const total = window.VeredaDecolonial.listEntries().length;
+
+  decolonialFilters.innerHTML = [
+    `<button class="decolonial-filter ${decolonialState.category === "all" ? "is-active" : ""}" type="button" data-decolonial-category="all">Todos <b>${total}</b></button>`,
+    ...categories.map(
+      (category) => `
+        <button class="decolonial-filter ${decolonialState.category === category.id ? "is-active" : ""}" type="button" data-decolonial-category="${category.id}">
+          ${escapeHtml(category.label)}
+          <b>${category.count}</b>
+        </button>
+      `
+    ),
+  ].join("");
+
+  decolonialCount.textContent = `${entries.length} ${entries.length === 1 ? "entrada" : "entradas"}`;
+
+  if (!entries.length) {
+    decolonialList.innerHTML = `<div class="decolonial-empty">Nenhuma entrada encontrada.</div>`;
+    return;
+  }
+
+  decolonialList.innerHTML = entries
+    .map((entry) => {
+      const alternatives = entry.alternatives.map((alternative) => `<span>${escapeHtml(alternative)}</span>`).join("");
+      return `
+        <article class="decolonial-entry">
+          <div class="decolonial-entry-header">
+            <strong>${escapeHtml(entry.avoid)}</strong>
+            <span>${escapeHtml(entry.category)}</span>
+          </div>
+          <div class="decolonial-alternatives">
+            <i class="material-symbols-outlined" aria-hidden="true">arrow_forward</i>
+            ${alternatives}
+          </div>
+          <p>${escapeHtml(entry.reason)}</p>
+          <small>${escapeHtml(entry.context)}</small>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function updateAcademyParallax() {
   const parallaxItems = document.querySelectorAll("[data-parallax-speed]");
   const viewportMiddle = contentStage.clientHeight / 2;
@@ -1851,6 +1908,7 @@ document.addEventListener("click", (event) => {
   const craftSelectTarget = event.target.closest("[data-craft-select]");
   const referenceTemplateTarget = event.target.closest("[data-reference-template]");
   const archiveFilterTarget = event.target.closest("[data-archive-filter]");
+  const decolonialCategoryTarget = event.target.closest("[data-decolonial-category]");
 
   if (versionTarget) {
     event.preventDefault();
@@ -1900,6 +1958,13 @@ document.addEventListener("click", (event) => {
   if (archiveFilterTarget) {
     event.preventDefault();
     setArchiveFilter(archiveFilterTarget.dataset.archiveFilter);
+    return;
+  }
+
+  if (decolonialCategoryTarget) {
+    event.preventDefault();
+    decolonialState.category = decolonialCategoryTarget.dataset.decolonialCategory;
+    renderDecolonialTool();
     return;
   }
 
@@ -2121,6 +2186,10 @@ archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.val
 archiveSort.addEventListener("change", () => setArchiveSort(archiveSort.value));
 templateSearch.addEventListener("input", () => setTemplateSearch(templateSearch.value));
 voiceInput.addEventListener("input", updateVoiceCount);
+decolonialSearch.addEventListener("input", () => {
+  decolonialState.query = decolonialSearch.value;
+  renderDecolonialTool();
+});
 
 renderActiveManuscript();
 renderManuscriptNavigation();
@@ -2130,6 +2199,7 @@ renderLexicalView();
 renderProofView();
 renderVersionList();
 renderTemplateStudio();
+renderDecolonialTool();
 updateAcademyParallax();
 applyTemplateLayout();
 applyPanelLayout();

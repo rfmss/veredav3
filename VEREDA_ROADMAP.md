@@ -20,6 +20,7 @@ O Vereda já tem:
 - Medidores locais de aderência à forma, incluindo ENEM.
 - Painéis laterais recolhíveis.
 - Espelho de Voz local em primeiro corte.
+- Vocabulário Decolonizador consultivo na Academia.
 
 ## Princípios de responsabilidade
 
@@ -140,6 +141,19 @@ Antes de chamar de MVP público:
 - testar importação/exportação;
 - criar um pequeno roteiro de uso;
 - revisar textos de promessa para evitar exagero.
+
+### 6. Evolução do Vocabulário Decolonizador
+
+Transformar a consulta inicial em ferramenta de revisão contextual.
+
+Escopo futuro:
+
+- verificar o manuscrito ativo e listar ocorrências do vocabulário;
+- mostrar sugestões no painel direito de Análise Linguística;
+- diferenciar uso crítico, histórico, ficcional e problemático;
+- permitir copiar alternativa ou inserir anotação de revisão;
+- ampliar a base com exemplos de uso, contraindicações e fontes de curadoria;
+- criar estado "termo sensível revisado" por manuscrito.
 
 ## Critérios de "pronto" por pacote
 
