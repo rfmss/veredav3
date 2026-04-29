@@ -1157,3 +1157,14 @@ Observação técnica:
 
 - O navegador recebe o SVG novo diretamente para a aba.
 - Os PNGs/ICO continuam como fallback e ícones de instalação.
+
+## 2026-04-29 - QA visual mobile e aba clara
+
+Após a revisão visual, ajustamos quatro pontos de layout:
+
+- a aba do navegador agora aponta para `vereda-logo-light.svg`, mantendo a marca fiel à versão clara usada no site;
+- em telas estreitas, o manuscrito aparece antes do Guia de escrita, e o guia mantém rolagem vertical própria quando necessário;
+- os módulos da barra superior ganharam rolagem horizontal mais estável no mobile;
+- a Academia recebeu ajustes de escala, respiro e hierarquia visual para evitar sensação de corte em telas menores.
+
+Também suavizamos as barras de rolagem internas e subimos o cache offline para `vereda-offline-v41` com assets em `?v=20260429-9`.

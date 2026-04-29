@@ -789,6 +789,9 @@ a {
   min-width: 0;
   flex: 1 1 auto;
   overflow: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 34%, transparent) transparent;
 }
 
 .view {
@@ -869,6 +872,8 @@ a {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 34%, transparent) transparent;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--card);
@@ -1233,6 +1238,9 @@ a {
   border-left: 1px solid var(--line);
   padding: 28px 24px;
   overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 34%, transparent) transparent;
   transition: width var(--motion-calm), flex-basis var(--motion-calm), padding var(--motion-calm), border-color var(--motion-calm), opacity var(--motion-quick);
 }
 
@@ -3287,6 +3295,12 @@ mark {
 }
 
 @media (max-width: 820px) {
+  html,
+  body,
+  .app-shell {
+    overflow-x: hidden;
+  }
+
   .app-shell {
     grid-template-rows: auto minmax(0, 1fr) auto;
   }
@@ -3323,8 +3337,38 @@ mark {
 
   .module-tabs {
     order: 3;
+    flex: 1 0 100%;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .module-tabs .tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .topbar-actions {
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .theme-button {
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 0;
+  }
+
+  .theme-button [data-theme-name] {
+    display: none;
   }
 
   .sidebar {
@@ -3356,6 +3400,15 @@ mark {
     padding: 34px 18px 56px;
   }
 
+  .view-editor {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .content-stage {
+    overflow-x: hidden;
+  }
+
   .editor-split,
   .editor-split[data-template-side="right"] {
     height: auto;
@@ -3371,6 +3424,30 @@ mark {
     max-height: none;
   }
 
+  .editor-paper {
+    max-width: 100%;
+    overflow: hidden;
+    padding: clamp(24px, 7vw, 34px);
+  }
+
+  .writing-area,
+  .reading-sample,
+  .title-input {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .editor-paper,
+  .editor-split[data-template-side="right"] .editor-paper {
+    order: 1;
+  }
+
+  .template-reference,
+  .editor-split[data-template-side="right"] .template-reference {
+    order: 2;
+    max-height: min(620px, 70vh);
+  }
+
   .split-resizer {
     display: none;
   }
@@ -3379,6 +3456,10 @@ mark {
   .paper h1,
   .archive-heading h1 {
     font-size: 34px;
+  }
+
+  .title-input {
+    font-size: clamp(27px, 7vw, 31px);
   }
 
   .split-paper,
@@ -3451,6 +3532,38 @@ mark {
 
   .academy-path {
     min-height: 0;
+    padding: 18px;
+  }
+
+  .academy-word {
+    right: -16px;
+    font-size: clamp(54px, 16vw, 96px);
+  }
+
+  .academy-word.is-secondary {
+    bottom: -12px;
+    left: -10px;
+  }
+
+  .academy-hero h1 {
+    font-size: clamp(32px, 9vw, 44px);
+    line-height: 1.04;
+  }
+
+  .academy-hero p,
+  .academy-path p:not(.eyebrow) {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .academy-path-number {
+    top: 10px;
+    right: 12px;
+    font-size: 62px;
+  }
+
+  .academy-path h3 {
+    font-size: 26px;
   }
 
   .academy-anatomy-list div {
