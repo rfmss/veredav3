@@ -1,63 +1,315 @@
-# Bíblia do Projeto: Vereda — O Santuário do Escritor Brasileiro
+# Vereda Design System
 
-## 1. Visão Geral
-O **Vereda** é um ecossistema de escrita focado em autores brasileiros, projetado para oferecer um ambiente de "Tecnologia Calma" (Calm Tech), livre de distrações e focado na excelência linguística e na soberania do autor. O projeto se diferencia pela integração de ferramentas de análise profunda da língua portuguesa e pela proteção da autoria humana contra a geração em massa por IA.
+Guia de design do Vereda, editor offline-first para escritores brasileiros.
 
----
+Este documento existe para manter o produto coerente enquanto cresce. Ele deve orientar decisões de interface, linguagem, cores, componentes e validação visual. Quando houver conflito entre novidade e clareza, a clareza vence.
 
-## 2. Identidade Visual (Vereda Design System)
-*   **Estética:** "Papel e Tinta", minimalista, sofisticada e serena.
-*   **Cores:** 
-    *   Primária: #2E4D43 (Verde Vereda - remete à mata e ao sertão).
-    *   Fundo: #FDFCFB (Off-white/Creme - reduz o cansaço visual).
-    *   Acento: Tons terrosos e pastéis literários para marcação de texto.
-*   **Tipografia:** 
-    *   Serifada: Palatino ou similar (para o corpo do texto, visando legibilidade).
-    *   Sans-serif: Inter ou system-ui (para interfaces e ferramentas).
+## 1. Norte do Produto
 
----
+O Vereda e uma ferramenta de trabalho para escrita longa, revisao e organizacao autoral. A interface deve parecer editorial, calma e precisa, nao uma landing page, rede social ou painel corporativo generico.
 
-## 3. Módulos e Funcionalidades Core
+Principios:
 
-### A. O Editor Inteligente (Escrita e Foco)
-*   **Modo Foco Dinâmico:** As barras laterais colapsam automaticamente ao iniciar a digitação e reaparecem em pausas ou via botão manual.
-*   **Modo Leitor Imersivo:** 
-    *   Tema claro (papel).
-    *   **Régua de Foco:** Máscara de opacidade com abertura central vazada para guiar a leitura linha a linha.
-    *   **Autoscroll:** Controles de Play/Pause e ajuste de velocidade para revisão rítmica.
-*   **Gestão de Documentos:** Estrutura em árvore (Outliner) para capítulos, cenas e "Bíblia do Projeto" (notas/personagens).
+- Escrita em primeiro lugar: a tela deve proteger concentracao, legibilidade e continuidade.
+- Brasil sem caricatura: cores, palavras e referencias podem nascer de paisagens e praticas brasileiras, mas sempre com sobriedade.
+- Local por padrao: funcoes centrais rodam sem rede e sem IA em runtime.
+- Metricas com honestidade: numeros sao numeros; leituras interpretativas devem ser apresentadas como hipoteses.
+- Ferramenta, nao vitrine: evitar hero sections, decoracao gratuita, cards excessivos e textos explicando a propria interface.
 
-### B. PoHW — Proof of Writing (Prova de Autoria Humana)
-*   **Rastreador de Cadência:** Monitora a latência entre teclas (Keystroke dynamics).
-*   **Regra de Ouro:** Apenas eventos `isTrusted` com intervalo entre 30ms e 2000ms são considerados orgânicos.
-*   **Certificação:** Gera um arquivo `.proof.json` com o log de eventos e um Hash SHA-256 que vincula o texto original ao processo de criação.
-*   **Tribunal de Autoria:** Interface para editores e autores validarem a integridade humana do manuscrito.
+## 2. Personalidade Visual
 
-### C. Academia Gramatical (Análise Linguística)
-*   **Níveis de Análise:** Morfologia, Sintaxe e Semântica.
-*   **Inspeção Lexical:** Ao selecionar uma palavra, o sistema exibe sua classe gramatical (conforme as 10 classes do PT-BR) com explicações "Estilo Globoplay" (amigáveis) seguidas de definições técnicas rigorosas.
-*   **Métricas de Texto:** 
-    *   Legibilidade Flesch-BR.
-    *   Gráfico de Ritmo (variação de tamanho de períodos).
-    *   Densidade de Classes (nominal vs. verbal).
+Palavras-chave:
 
-### D. Organize-se (Planner Literário)
-*   **Timeline Spine:** Visualização vertical dos dias do ano.
-*   **Event Pills:** Notas coloridas integradas à linha do tempo.
-*   **Heatmap de Produtividade:** Régua de meses com indicadores de volume de escrita.
-*   **Feriados Brasileiros:** Integração automática de datas nacionais.
+- editorial;
+- sereno;
+- artesanal;
+- rigoroso;
+- brasileiro;
+- offline;
+- legivel.
 
----
+O Vereda deve lembrar uma mesa de escrita bem organizada: papel, margem, tinta, fichas, guias e instrumentos tecnicos discretos. A sofisticacao vem da proporcao, do silencio visual e dos detalhes, nao de efeitos chamativos.
 
-## 4. Estratégia de Mercado e Mentoria
-*   **Mapeamento de Persona Literária:** Ferramenta que analisa o corpus (texto) do autor para sugerir perfis de leitores ideais e estratégias de recrutamento de leitores beta.
-*   **Trilha do Lançamento:** Guia de Personal Branding e marketing em parallax, ensinando o equilíbrio entre o alcance das grandes redes (X/Twitter) e a soberania das redes federadas.
-*   **Santuário & Neurociência:** Mentor de produtividade integrado com temporizadores baseados em ciclos de foco e conselhos para proteção da voz autoral.
+Evitar:
 
----
+- gradientes ornamentais;
+- blobs, orbes e fundos puramente decorativos;
+- paletas de uma unica familia cromatica;
+- elementos gigantes em areas de trabalho;
+- cards dentro de cards;
+- texto explicando funcionalidades obvias;
+- excesso de sombras, arredondamentos ou badges.
 
-## 5. Especificações Técnicas para Implementação
-*   **Frontend:** HTML5/CSS3 moderno, voltado para conversão em componentes React/JSX.
-*   **Persistência:** O projeto deve ser **Offline-First**. Sincronização inicial via service workers; armazenamento local de JSON (manuscritos + logs de prova).
-*   **Exportação:** Saída padronizada conforme as regras do objeto livro (Capa, Miolo, Epígrafe, Colofão, etc.).
-*   **Arquitetura:** Template base unificado (`vereda-integrado.html`) que serve como casca para todos os módulos.
+## 3. Layout
+
+Estrutura principal:
+
+- Topbar fixa: marca, abas principais, estado offline, instalacao, paletas, foco e configuracoes.
+- Sidebar esquerda: hierarquia, ferramentas e navegacao estrutural.
+- Centro: editor, arquivo, biblioteca ou academia.
+- Painel direito: analise linguistica e feedback contextual.
+- Statusbar: estado de prova de escrita, contagem e salvamento.
+
+Regras:
+
+- A area de escrita sempre deve ter prioridade visual.
+- Painel lateral existe para apoiar, nao competir com o texto.
+- Sidebars devem poder recolher sem quebrar a composicao.
+- Em telas menores, menus e paineis devem ceder espaco ao conteudo principal.
+- Secoes de pagina devem ser faixas ou layouts sem moldura; cards ficam para itens repetidos, modais e ferramentas realmente enquadradas.
+
+## 4. Paletas Brasileiras
+
+As paletas comunicam ambientes de escrita inspirados em paisagens brasileiras. Elas nao sao tema decorativo isolado; ajudam a escolher temperatura, contraste e atmosfera.
+
+Paletas atuais:
+
+- Vereda: papel claro, verde profundo e acentos terrosos.
+- Cerrado: terra seca, capim-dourado, ipe e areia clara.
+- Mata Atlantica: sombra vegetal, musgo, bruma e flor quente.
+- Amazonia: rio profundo, nevoa, argila e rosa de entardecer.
+- Modos escuros: versoes noturnas derivadas das mesmas familias cromaticas.
+
+Boas praticas:
+
+- Usar variaveis CSS para toda cor estrutural.
+- Evitar `#fff` e `#000` hardcoded em componentes.
+- Garantir contraste em texto, botoes, estados ativos, graficos e badges.
+- Testar cada paleta em Editor, Arquivo, Academia e painel direito.
+- Amostras de cor devem ajudar escolha rapida, como no seletor de paletas.
+
+Variaveis principais:
+
+- `--paper`: fundo amplo da experiencia.
+- `--surface`, `--surface-low`, `--surface-mid`, `--surface-high`: camadas de UI.
+- `--card`: superficies contidas.
+- `--topbar-bg`, `--sidebar-bg`, `--overlay-bg`: regioes estruturais.
+- `--ink`, `--soft-ink`, `--muted`: texto.
+- `--line`: bordas e divisores.
+- `--primary`, `--primary-deep`: acao e identidade.
+- `--sage`, `--ochre`, `--sienna`, `--cedar`: acentos e graficos.
+
+## 5. Tipografia
+
+O produto usa duas vozes tipograficas:
+
+- Interface: `Inter`, `system-ui`, sans-serif.
+- Escrita e titulos editoriais: `Noto Serif`, Georgia, serif.
+
+Regras:
+
+- Texto do editor deve favorecer leitura longa, com tamanho confortavel e entrelinha generosa.
+- Controles, menus e metricas usam sans-serif compacta e clara.
+- Titulos internos de paineis devem ser menores e mais densos que titulos de pagina.
+- Nao escalar fonte com largura de viewport.
+- Letter-spacing deve ser `0` na maioria dos textos; usar espacamento so em rotulos pequenos e tecnicos.
+- Nunca deixar texto estourar dentro de botoes, abas, cards ou chips.
+
+## 6. Componentes
+
+### Botoes
+
+Usar botoes de texto apenas para comandos claros. Quando houver icone consagrado, usar Material Symbols ou biblioteca existente.
+
+Tipos:
+
+- Icon button: foco, configuracoes, recolher painel, navegacao rapida.
+- Text button: instalar, exportar, criar, importar.
+- Segmented/tabs: modos e secoes principais.
+- Option button: escolha de paleta, filtros, guias.
+
+Estados obrigatorios:
+
+- hover;
+- focus visivel;
+- active/selected;
+- disabled quando aplicavel.
+
+### Cards
+
+Cards devem ser contidos e funcionais:
+
+- documentos no Arquivo;
+- guias da Academia;
+- blocos de metricas;
+- modais e overlays;
+- ferramentas com escopo fechado.
+
+Evitar cards como moldura de uma pagina inteira.
+
+Raio:
+
+- Preferir `8px` ou menos.
+- Pills podem usar `999px` quando forem badges, chips ou controles pequenos.
+
+### Menus e Popovers
+
+Menus devem abrir por clique ou foco intencional, nao por hover quando isso puder encobrir trabalho.
+
+Regras:
+
+- Fechar ao clicar fora.
+- Fechar com `Escape`.
+- Indicar estado via `aria-expanded`.
+- Nao encobrir informacao critica por acidente.
+- Em mobile, reduzir colunas e respeitar largura da tela.
+
+### Graficos e Metricas
+
+Graficos devem ser legiveis antes de serem bonitos.
+
+Regras:
+
+- Usar poucas cores e sempre derivadas da paleta ativa.
+- Incluir rotulo numerico quando o grafico for interpretativo.
+- Nao usar cor como unico sinal de estado.
+- Evitar visual de dashboard chamativo.
+
+## 7. Linguagem de Interface
+
+Tom:
+
+- brasileiro;
+- editorial;
+- direto;
+- acolhedor sem infantilizar;
+- tecnico quando necessario, mas com explicacao curta.
+
+Preferir:
+
+- "Guia de escrita" em vez de "template" na interface.
+- "Arquivo do escritor" para acervo.
+- "Prova de autoria" para PoHW.
+- "Ecos possiveis" em vez de "similaridade com autor".
+- "Hipotese de leitura" em vez de "diagnostico".
+
+Evitar:
+
+- prometer IA no core;
+- dizer que uma metrica prova qualidade literaria;
+- jargoes em ingles quando houver termo bom em portugues;
+- instrucoes visiveis sobre a propria interface quando um controle claro resolve.
+
+## 8. Acessibilidade e Ergonomia
+
+Regras minimas:
+
+- Todo botao iconico precisa de `aria-label` e `title` quando util.
+- Estados de foco devem ser visiveis.
+- Contraste deve ser testado em todos os temas.
+- Alvos clicaveis devem ter tamanho confortavel.
+- Motion deve ser discreto e respeitar `prefers-reduced-motion`.
+- Conteudo nao pode ficar inacessivel atras de popovers, paineis ou barras fixas.
+- Teclado deve cobrir menus, modais e acoes principais.
+
+## 9. Responsividade
+
+Breakpoints atuais devem preservar a hierarquia:
+
+- Desktop amplo: editor com sidebar e painel direito.
+- Desktop medio: permitir recolhimento de paineis.
+- Tablet/mobile: priorizar conteudo central, esconder painel direito e transformar navegacao em acesso compacto.
+
+Regras:
+
+- Nunca depender de hover em mobile.
+- Menus devem caber em `100vw`.
+- Grades devem reduzir colunas antes de comprimir texto.
+- Areas de escrita e ferramentas fixas precisam de dimensoes estaveis para evitar saltos.
+
+## 10. Modulos do Produto
+
+### Editor
+
+Experiencia principal. Deve ser silenciosa, confiavel e responsiva.
+
+Prioridades:
+
+- escrita;
+- titulo;
+- guia selecionado;
+- foco;
+- contagem e salvamento.
+
+### Arquivo
+
+Ferramenta de retomada e organizacao. Deve ser escaneavel e eficiente.
+
+Prioridades:
+
+- recentes;
+- fixados;
+- filtros;
+- busca;
+- metadados;
+- exportacao e duplicacao.
+
+### Biblioteca Gramatical
+
+Referencia local e didatica. Deve equilibrar rigor tecnico e clareza.
+
+### Academia
+
+Espaco de aprendizado e ferramentas autorais. Nao deve virar pagina promocional.
+
+Prioridades:
+
+- Guia de Oficios Literarios;
+- Espelho de Voz;
+- materiais de revisao, publicacao e estudo;
+- checklists persistentes quando implementados.
+
+### Analise Linguistica
+
+Painel auxiliar. Deve mostrar sinais claros sem tomar a tela.
+
+Prioridades:
+
+- termos frequentes;
+- distribuicao gramatical;
+- legibilidade;
+- sugestoes contextuais;
+- feedback do guia ativo.
+
+## 11. Motion
+
+Movimento deve comunicar estado, continuidade e resposta.
+
+Usar para:
+
+- abrir e recolher paineis;
+- transicoes de view;
+- salvamento e progresso;
+- menus e popovers;
+- modo foco.
+
+Evitar:
+
+- animacao decorativa continua;
+- movimentos grandes em ferramentas de escrita;
+- efeitos que dificultem leitura.
+
+Duracoes atuais:
+
+- `--motion-quick`: interacoes pequenas.
+- `--motion-calm`: paineis e transicoes estruturais.
+
+## 12. Criterios de Pronto Para Design
+
+Antes de encerrar uma mudanca visual:
+
+- Testar Editor, Arquivo, Academia e painel direito.
+- Testar pelo menos Vereda, uma paleta clara e uma paleta escura.
+- Conferir mobile em largura estreita.
+- Verificar hover, foco, estado ativo e `Escape` em menus.
+- Rodar checagem sintatica dos arquivos JS tocados.
+- Registrar decisoes relevantes no `PRODUCT_LOG.md`.
+
+Checklist rapido:
+
+- Nao ha texto sobreposto.
+- Nao ha popover aberto por acidente.
+- Nao ha card dentro de card.
+- Nao ha cor estrutural fora das variaveis sem motivo.
+- A escrita continua sendo o ponto mais importante da tela.
+

@@ -1000,3 +1000,71 @@ Revisamos a explicação das paletas brasileiras.
 O texto sobre cores saiu de uma seção fixa na Academia e foi movido para um balão contextual ligado ao botão de paleta. Assim, a pessoa entende o motivo de cada esquema de cores no momento exato em que escolhe a aparência do Vereda.
 
 Cada paleta agora tem uma descrição própria, conectando a escolha cromática à experiência de escrita: Cerrado, Mata Atlântica, Amazônia e suas versões escuras.
+
+## 2026-04-28 - QA de fechamento do dia
+
+Decidimos fechar o dia com uma rodada curta de QA e criar um log de retomada para amanhã.
+
+O arquivo `QA_2026-04-28.md` registra checagens executadas, estado do produto, fios soltos, riscos e ordem sugerida para o próximo dia.
+
+Resultado geral: verde para continuar. Sintaxe dos motores principais passou, manifests estão válidos, assets referenciados existem, views estão conectadas e os 57 guias seguem carregando.
+
+Fios soltos principais:
+
+- `.codex` local fora do commit.
+- `logoVeredaok.psd` não rastreado; decidir destino amanhã.
+- QA visual das paletas ainda pendente.
+- Checklists persistentes por projeto continuam como próximo pacote funcional.
+
+## 2026-04-29 - Retomada visual das paletas
+
+Retomamos pelo QA visual indicado no fechamento anterior.
+
+O botão de paletas brasileiras deixou de alternar os temas em ciclo e passou a abrir um seletor direto. O balão contextual agora aparece apenas por clique, lista Vereda, Cerrado, Mata Atlântica, Amazônia e versões escuras com amostras de cor, e fecha ao clicar fora ou pressionar Escape.
+
+Motivo do ajuste:
+
+- O hover/focus do balão anterior podia ficar aberto por acidente e cobrir a Análise Linguística.
+- "Escolher cores" pede comparação direta entre opções, não um ciclo invisível.
+- As paletas passam a comunicar melhor o vínculo com paisagens brasileiras no momento da escolha.
+
+## 2026-04-29 - Design system operacional
+
+Recriamos o `DESIGN.md` como guia de design operacional do Vereda.
+
+O documento deixa de funcionar como bíblia inicial de intenções e passa a orientar decisões práticas: norte do produto, personalidade visual, layout, paletas brasileiras, tipografia, componentes, linguagem, acessibilidade, responsividade, motion e critérios de pronto.
+
+Decisão importante:
+
+- O Vereda deve continuar com aparência de ferramenta editorial de trabalho, não de landing page, rede social ou dashboard genérico.
+- Menus e popovers devem abrir por intenção clara, fechar por clique fora ou Escape e nunca encobrir trabalho por acidente.
+- Alterações visuais futuras devem ser verificadas nas paletas claras e escuras antes de serem consideradas prontas.
+
+## 2026-04-29 - QA automatizado de retomada
+
+Executamos uma rodada de QA local depois dos ajustes de paleta e do novo design system.
+
+Resultado geral: verde para continuar. Os motores JavaScript passaram em checagem sintática, os manifests seguem válidos, os assets locais do HTML e do service worker foram encontrados, as views principais continuam conectadas e os 57 guias seguem carregando.
+
+Registro detalhado criado em `QA_2026-04-29.md`.
+
+Alerta mantido:
+
+- Ainda existem ocorrências de `#fff` hardcoded no CSS. Não é falha de build, mas deve entrar na auditoria visual das paletas escuras.
+
+## 2026-04-29 - Correção de contraste em temas e favicon
+
+Corrigimos o alerta visual de brancos hardcoded no CSS.
+
+As cores claras usadas em componentes foram movidas para variáveis semânticas de tema, incluindo texto sobre cor primária, superfícies translúcidas, destaques de cartões e dicas. Isso melhora o comportamento das paletas escuras, especialmente porque algumas usam acentos primários claros.
+
+Também criamos `icons/Logo-tab.svg` em verde pastel claro (`#bfe3cf`) para o ícone da aba do navegador. O SVG institucional `icons/Logo.svg` permanece em verde Vereda para uso interno da marca, enquanto favicons PNG/ICO foram recoloridos para a variante pastel e o cache offline subiu para `vereda-offline-v33`.
+
+Validação feita:
+
+- `node --check app.js`
+- `node --check service-worker.js`
+- manifests JSON válidos;
+- referências locais do HTML presentes;
+- assets do service worker presentes;
+- pixel central do favicon 32 em `srgba(191,227,207,0.878431)`.

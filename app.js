@@ -84,6 +84,10 @@ const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
+const themePicker = document.querySelector("[data-theme-picker]");
+const themeButton = document.querySelector("[data-action='toggle-theme-menu']");
+const themeMenu = document.querySelector("[data-theme-menu]");
+const themeOptions = document.querySelector("[data-theme-options]");
 const themeName = document.querySelector("[data-theme-name]");
 const themeNoteTitle = document.querySelector("[data-theme-note-title]");
 const themeNoteText = document.querySelector("[data-theme-note-text]");
@@ -92,6 +96,7 @@ const colorThemes = [
   {
     id: "vereda",
     label: "Vereda",
+    swatch: ["#fdfcfb", "#2e4d43", "#a85d2a"],
     noteTitle: "Paleta Vereda",
     note:
       "Papel claro, verde profundo e acentos terrosos. É a base calma: feita para leitura longa, revisão cuidadosa e escrita sem ruído.",
@@ -99,6 +104,7 @@ const colorThemes = [
   {
     id: "cerrado",
     label: "Cerrado",
+    swatch: ["#f5edd2", "#c68b2e", "#3d3219"],
     noteTitle: "Cerrado",
     note:
       "Terra seca, capim-dourado, ipê e areia clara. Uma paleta de resistência luminosa: pouca ornamentação, muito calor e precisão.",
@@ -106,6 +112,7 @@ const colorThemes = [
   {
     id: "mata",
     label: "Mata",
+    swatch: ["#f5f0e8", "#1a4533", "#e8a060"],
     noteTitle: "Mata Atlântica",
     note:
       "Verde de sombra, musgo, bruma e flor-de-laranjeira. Pensada para lembrar que a escrita também precisa de umidade, pausa e profundidade.",
@@ -113,6 +120,7 @@ const colorThemes = [
   {
     id: "amazonia",
     label: "Amazônia",
+    swatch: ["#faf6f0", "#3b2068", "#c45b7e"],
     noteTitle: "Amazônia e Várzea",
     note:
       "Rio negro, névoa, argila quente e boto-rosa. Uma paleta para textos de imaginação larga, contraste forte e presença sensorial.",
@@ -120,6 +128,7 @@ const colorThemes = [
   {
     id: "cerrado-dark",
     label: "Cerrado escuro",
+    swatch: ["#1c1a14", "#dfb84a", "#8f4e2f"],
     noteTitle: "Cerrado escuro",
     note:
       "A mesma terra em luz baixa: noite do cerrado, dourado contido e contraste de fogueira. Boa para escrever com foco e pouca claridade.",
@@ -127,6 +136,7 @@ const colorThemes = [
   {
     id: "mata-dark",
     label: "Mata escura",
+    swatch: ["#0d1f18", "#8eb79a", "#d88b70"],
     noteTitle: "Mata escura",
     note:
       "Sombra vegetal, verde fechado e acento de flor. Um modo noturno para quem quer concentração sem abandonar a textura brasileira.",
@@ -134,6 +144,7 @@ const colorThemes = [
   {
     id: "amazonia-dark",
     label: "Amazônia escura",
+    swatch: ["#1a0f2e", "#9fb8aa", "#d2766b"],
     noteTitle: "Amazônia escura",
     note:
       "Rio profundo, entardecer roxo e argila acesa. Feita para escrita noturna, atmosférica, com cor suficiente para não virar tela genérica.",
@@ -349,13 +360,47 @@ function applyColorTheme() {
   themeName.textContent = theme.label;
   themeNoteTitle.textContent = theme.noteTitle;
   themeNoteText.textContent = theme.note;
+  renderThemeOptions(theme.id);
 }
 
-function cycleColorTheme() {
-  const currentIndex = colorThemes.findIndex((item) => item.id === state.appearance.theme);
-  const nextTheme = colorThemes[(currentIndex + 1) % colorThemes.length] || colorThemes[0];
+function renderThemeOptions(activeThemeId) {
+  themeOptions.innerHTML = colorThemes
+    .map(
+      (theme) => `
+        <button class="theme-option" type="button" data-action="select-theme" data-theme-id="${theme.id}" aria-pressed="${theme.id === activeThemeId}">
+          <span class="theme-swatch" aria-hidden="true">
+            ${theme.swatch.map((color) => `<i style="background:${color}"></i>`).join("")}
+          </span>
+          <span>${escapeHtml(theme.label)}</span>
+        </button>
+      `
+    )
+    .join("");
+}
+
+function setThemeMenuOpen(isOpen) {
+  themeMenu.classList.toggle("is-visible", isOpen);
+  themeButton.setAttribute("aria-expanded", String(isOpen));
+}
+
+function toggleThemeMenu() {
+  setThemeMenuOpen(!themeMenu.classList.contains("is-visible"));
+}
+
+function closeThemeMenu() {
+  setThemeMenuOpen(false);
+}
+
+function selectColorTheme(themeId) {
+  const nextTheme = colorThemes.find((item) => item.id === themeId);
+
+  if (!nextTheme) {
+    return;
+  }
+
   state.appearance.theme = nextTheme.id;
   applyColorTheme();
+  closeThemeMenu();
   persistState(`Paleta ${nextTheme.label} aplicada`);
 }
 
@@ -1739,6 +1784,10 @@ document.addEventListener("click", (event) => {
   const archivePinTarget = event.target.closest("[data-archive-pin]");
   const archiveQuickTarget = event.target.closest("[data-archive-quick]");
 
+  if (!themePicker.contains(event.target)) {
+    closeThemeMenu();
+  }
+
   if (manuscriptTarget) {
     event.preventDefault();
     setActiveManuscript(manuscriptTarget.dataset.manuscriptId);
@@ -1883,8 +1932,12 @@ document.addEventListener("click", (event) => {
     togglePanel("right");
   }
 
-  if (actionTarget.dataset.action === "cycle-theme") {
-    cycleColorTheme();
+  if (actionTarget.dataset.action === "toggle-theme-menu") {
+    toggleThemeMenu();
+  }
+
+  if (actionTarget.dataset.action === "select-theme") {
+    selectColorTheme(actionTarget.dataset.themeId);
   }
 
   if (actionTarget.dataset.action === "voice-use-active") {
@@ -1975,6 +2028,10 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "Escape" && shell.classList.contains("is-focus")) {
     exitFocusMode();
+  }
+
+  if (event.key === "Escape" && themeMenu.classList.contains("is-visible")) {
+    closeThemeMenu();
   }
 
   if (event.key === "Escape" && !createNoteOverlay.hidden) {

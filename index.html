@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2e4d43">
     <title>.vrda - editor</title>
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="icon" href="icons/Logo.svg" type="image/svg+xml">
+    <link rel="icon" href="icons/Logo-tab.svg" type="image/svg+xml">
     <link rel="icon" href="favicon_io/favicon.ico" sizes="any">
     <link rel="icon" href="favicon_io/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -47,14 +47,15 @@
             <span class="material-symbols-outlined">download</span>
             Instalar
           </button>
-          <div class="theme-picker">
-            <button class="theme-button" data-action="cycle-theme" aria-label="Trocar esquema de cores" aria-describedby="theme-note" title="Trocar paleta">
+          <div class="theme-picker" data-theme-picker>
+            <button class="theme-button" data-action="toggle-theme-menu" aria-label="Escolher esquema de cores" aria-haspopup="true" aria-expanded="false" title="Escolher paleta">
               <span class="material-symbols-outlined">palette</span>
               <span data-theme-name>Vereda</span>
             </button>
-            <div class="theme-popover" id="theme-note" role="note">
+            <div class="theme-popover" id="theme-note" role="menu" data-theme-menu>
               <strong data-theme-note-title>Paleta Vereda</strong>
               <p data-theme-note-text>Esta é a paleta-base: papel claro, verde profundo e acentos terrosos para sustentar escrita longa com calma.</p>
+              <div class="theme-options" data-theme-options></div>
             </div>
           </div>
           <button class="icon-button" data-action="toggle-focus" aria-label="Alternar modo foco" title="Modo foco">
