@@ -1110,3 +1110,11 @@ Alterações:
 - `ASSET_VERSION` atualizado para `20260429-4`.
 
 Objetivo: obrigar o navegador e o service worker a buscar novamente favicon, manifest, CSS e scripts publicados.
+
+## 2026-04-29 - Ajuste de respiro no favicon da aba
+
+Reduzimos levemente a área visual do favicon da aba.
+
+O arquivo original do logo foi mantido, mas os favicons `tab-favicon-*` foram regenerados com canvas maior antes do resize final. Assim, o círculo ganha margem dentro do quadrado reservado pelo navegador e deixa de parecer cortado nas bordas.
+
+Também subimos o cache offline para `vereda-offline-v37` e os assets para `?v=20260429-5`.
