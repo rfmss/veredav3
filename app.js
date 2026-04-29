@@ -466,10 +466,22 @@ function registerOfflineApp() {
     return;
   }
 
+  let refreshingAfterUpdate = false;
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshingAfterUpdate) {
+      return;
+    }
+
+    refreshingAfterUpdate = true;
+    window.location.reload();
+  });
+
   navigator.serviceWorker
     .register("./service-worker.js")
-    .then(() => {
+    .then((registration) => {
       offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
+      registration.update();
     })
     .catch(() => {
       offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Modo sem internet pendente';

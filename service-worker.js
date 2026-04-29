@@ -1,28 +1,29 @@
-const CACHE_NAME = "vereda-offline-v33";
+const CACHE_NAME = "vereda-offline-v34";
+const ASSET_VERSION = "20260429-2";
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./lexical-engine.js",
-  "./proof-engine.js",
-  "./vrda-engine.js",
-  "./backup-engine.js",
-  "./archive-engine.js",
-  "./version-engine.js",
-  "./export-engine.js",
-  "./template-engine.js",
-  "./precision-engine.js",
-  "./voice-engine.js",
-  "./manifest.webmanifest",
+  `./styles.css?v=${ASSET_VERSION}`,
+  `./app.js?v=${ASSET_VERSION}`,
+  `./lexical-engine.js?v=${ASSET_VERSION}`,
+  `./proof-engine.js?v=${ASSET_VERSION}`,
+  `./vrda-engine.js?v=${ASSET_VERSION}`,
+  `./backup-engine.js?v=${ASSET_VERSION}`,
+  `./archive-engine.js?v=${ASSET_VERSION}`,
+  `./version-engine.js?v=${ASSET_VERSION}`,
+  `./export-engine.js?v=${ASSET_VERSION}`,
+  `./template-engine.js?v=${ASSET_VERSION}`,
+  `./precision-engine.js?v=${ASSET_VERSION}`,
+  `./voice-engine.js?v=${ASSET_VERSION}`,
+  `./manifest.webmanifest?v=${ASSET_VERSION}`,
   "./icons/Logo.svg",
-  "./icons/Logo-tab.svg",
+  `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
   "./favicon_io/site.webmanifest",
-  "./favicon_io/favicon.ico",
-  "./favicon_io/favicon-16x16.png",
-  "./favicon_io/favicon-32x32.png",
-  "./favicon_io/apple-touch-icon.png",
+  `./favicon_io/favicon.ico?v=${ASSET_VERSION}`,
+  `./favicon_io/favicon-16x16.png?v=${ASSET_VERSION}`,
+  `./favicon_io/favicon-32x32.png?v=${ASSET_VERSION}`,
+  `./favicon_io/apple-touch-icon.png?v=${ASSET_VERSION}`,
   "./favicon_io/android-chrome-192x192.png",
   "./favicon_io/android-chrome-512x512.png",
 ];
@@ -43,7 +44,7 @@ self.addEventListener("activate", (event) => {
       .then((cacheNames) =>
         Promise.all(
           cacheNames
-            .filter((cacheName) => cacheName !== CACHE_NAME)
+            .filter((cacheName) => cacheName.startsWith("vereda-offline-") && cacheName !== CACHE_NAME)
             .map((cacheName) => caches.delete(cacheName))
         )
       )

@@ -1068,3 +1068,17 @@ Validação feita:
 - referências locais do HTML presentes;
 - assets do service worker presentes;
 - pixel central do favicon 32 em `srgba(191,227,207,0.878431)`.
+
+## 2026-04-29 - Reset forte de cache
+
+Forçamos uma nova rodada de invalidação de cache depois da publicação.
+
+O HTML passou a chamar manifest, favicon, CSS e scripts com `?v=20260429-2`, e o service worker subiu para `vereda-offline-v34`, usando a mesma versão nos assets precacheados. Na ativação, o worker agora apaga apenas caches antigos do Vereda e mantém o cache atual.
+
+Também ajustamos o registro do service worker no app para chamar `registration.update()` e recarregar a página uma vez quando um novo worker assumir controle.
+
+Objetivo:
+
+- evitar que navegador, GitHub Pages ou service worker continuem servindo o favicon/JS/CSS antigos;
+- acelerar a troca para a variante pastel do ícone da aba;
+- manter a experiência offline sem preservar assets obsoletos.
