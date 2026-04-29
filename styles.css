@@ -815,10 +815,12 @@ a {
 .editor-split {
   --template-panel-width: 340px;
   width: min(1180px, 100%);
-  min-height: calc(100vh - 176px);
+  height: max(520px, calc(100vh - 176px));
+  min-height: 0;
   display: grid;
   grid-template-columns: var(--template-panel-width) 10px minmax(0, 1fr);
   gap: 0;
+  align-items: stretch;
   margin: 0 auto;
 }
 
@@ -857,7 +859,11 @@ a {
 
 .template-reference {
   min-width: 0;
+  min-height: 0;
+  max-height: 100%;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--card);
@@ -3347,6 +3353,7 @@ mark {
 
   .editor-split,
   .editor-split[data-template-side="right"] {
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -3356,6 +3363,7 @@ mark {
   .editor-paper {
     width: 100%;
     min-height: auto;
+    max-height: none;
   }
 
   .split-resizer {

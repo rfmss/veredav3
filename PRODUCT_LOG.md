@@ -1134,3 +1134,13 @@ Tarefas futuras registradas no roadmap:
 - ampliar o vocabulário com curadoria e exemplos brasileiros.
 
 Também subimos o cache offline para `vereda-offline-v38` e os assets para `?v=20260429-6`.
+
+## 2026-04-29 - Rolagem independente do Guia de Escrita
+
+Corrigimos a ergonomia do painel "Guia de escrita" no editor.
+
+Antes, o guia crescia junto com o conteúdo e obrigava a pessoa a rolar a página inteira para acessar todos os blocos. Agora o split do editor tem altura útil controlada, e o painel do guia usa rolagem vertical própria com `overscroll-behavior: contain`.
+
+Em mobile, o comportamento continua em coluna e sem travar altura, para preservar leitura em telas estreitas.
+
+Também subimos o cache offline para `vereda-offline-v39` e os assets para `?v=20260429-7`.
