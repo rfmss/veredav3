@@ -741,6 +741,38 @@ a {
   line-height: 1.1;
 }
 
+.create-note-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.create-note-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--soft-ink);
+  cursor: pointer;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.create-note-type:hover,
+.create-note-type.is-active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.create-note-type .material-symbols-outlined {
+  font-size: 17px;
+}
+
 .create-note-options {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

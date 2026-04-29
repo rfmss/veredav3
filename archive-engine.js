@@ -1,5 +1,8 @@
 (function archiveEngine(global) {
+  const DOCUMENT_TYPES = ["manuscrito", "pesquisa", "personagem", "cena", "mundo", "cronologia", "glossário"];
+
   const DEFAULT_METADATA = {
+    type: "manuscrito",
     kind: "Rascunho",
     status: "Em escrita",
     chapter: "Primeira cena",
@@ -12,6 +15,7 @@
   function normalizeManuscript(manuscript) {
     return {
       ...manuscript,
+      type: normalizeType(manuscript.type),
       kind: manuscript.kind || DEFAULT_METADATA.kind,
       status: manuscript.status || inferStatus(manuscript.kind),
       chapter: manuscript.chapter || DEFAULT_METADATA.chapter,
@@ -32,6 +36,7 @@
       title,
       text,
       kind: metadata.kind || DEFAULT_METADATA.kind,
+      type: normalizeType(metadata.type),
       status: metadata.status || DEFAULT_METADATA.status,
       chapter: metadata.chapter || DEFAULT_METADATA.chapter,
       progress: metadata.progress ?? DEFAULT_METADATA.progress,
@@ -47,6 +52,7 @@
     return normalizeManuscript({
       ...manuscript,
       ...metadata,
+      type: normalizeType(metadata.type ?? manuscript.type),
       progress: normalizeProgress(metadata.progress),
       tags: normalizeTags(metadata.tags),
       pinned: metadata.pinned ?? manuscript.pinned,
@@ -77,6 +83,10 @@
     return Math.min(100, Math.max(0, Math.round(numberValue)));
   }
 
+  function normalizeType(value) {
+    return DOCUMENT_TYPES.includes(value) ? value : DEFAULT_METADATA.type;
+  }
+
   function normalizeTags(value) {
     const rawTags = Array.isArray(value) ? value : String(value || "").split(",");
 
@@ -93,6 +103,7 @@
 
   global.VeredaArchive = {
     createManuscript,
+    DOCUMENT_TYPES,
     normalizeManuscript,
     normalizeManuscripts,
     updateMetadata,

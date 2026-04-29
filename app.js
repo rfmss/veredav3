@@ -4,6 +4,7 @@ const starterManuscripts = [
   {
     id: "som-da-terra-seca",
     title: "O Som da Terra Seca",
+    type: "manuscrito",
     kind: "Romance em andamento",
     status: "Em escrita",
     chapter: "Capítulo 12",
@@ -21,6 +22,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
   {
     id: "coronel-de-pedra",
     title: "Coronel de Pedra",
+    type: "manuscrito",
     kind: "Rascunho",
     status: "Pausado",
     chapter: "Ato 1",
@@ -81,6 +83,7 @@ const precisionCard = document.querySelector("[data-precision-card]");
 const templateResizer = document.querySelector("[data-template-resizer]");
 const templatePanelToggles = document.querySelectorAll("[data-template-panel-toggle]");
 const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
+const createNoteTypes = document.querySelector("[data-create-note-types]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
@@ -159,9 +162,20 @@ const colorThemes = [
   },
 ];
 
+const documentTypes = [
+  { id: "manuscrito", label: "Manuscrito", icon: "description", kind: "Manuscrito em branco", chapter: "Primeira página" },
+  { id: "pesquisa", label: "Pesquisa", icon: "travel_explore", kind: "Pesquisa", chapter: "Referências" },
+  { id: "personagem", label: "Personagem", icon: "person_edit", kind: "Personagem", chapter: "Ficha" },
+  { id: "cena", label: "Cena", icon: "movie_edit", kind: "Cena", chapter: "Rascunho de cena" },
+  { id: "mundo", label: "Mundo", icon: "public", kind: "Mundo", chapter: "Worldbuilding" },
+  { id: "cronologia", label: "Cronologia", icon: "timeline", kind: "Cronologia", chapter: "Linha do tempo" },
+  { id: "glossário", label: "Glossário", icon: "dictionary", kind: "Glossário", chapter: "Termos" },
+];
+
 let state = loadState();
 let saveTimer;
 let deferredInstallPrompt;
+let createNoteType = "manuscrito";
 let decolonialState = {
   category: "all",
   query: "",
@@ -298,6 +312,10 @@ function persistState(status = "Salvo localmente") {
 
 function getActiveManuscript() {
   return state.manuscripts.find((manuscript) => manuscript.id === state.activeId) || state.manuscripts[0];
+}
+
+function isManuscriptDocument(manuscript = getActiveManuscript()) {
+  return (manuscript.type || "manuscrito") === "manuscrito";
 }
 
 function updateActiveManuscript(nextManuscript) {
@@ -567,10 +585,11 @@ function renderManuscriptNavigation() {
   manuscriptList.innerHTML = state.manuscripts
     .map((manuscript) => {
       const isCurrent = manuscript.id === state.activeId ? " is-current" : "";
+      const type = getArchiveType(manuscript);
 
       return `
         <button class="tree-row manuscript-row${isCurrent}" data-manuscript-id="${manuscript.id}">
-          <span class="material-symbols-outlined">description</span>
+          <span class="material-symbols-outlined">${type.icon}</span>
           ${escapeHtml(manuscript.title)}
         </button>
       `;
@@ -579,6 +598,10 @@ function renderManuscriptNavigation() {
 }
 
 function renderProjectGrid() {
+  if (!isArchiveFilterAvailable(state.archive.filter)) {
+    state.archive.filter = "all";
+  }
+
   renderArchiveFilters();
   archiveSearch.value = state.archive.search;
   archiveSort.value = state.archive.sort;
@@ -782,9 +805,7 @@ function renderArchiveFilters() {
   const counts = getArchiveTypeCounts();
   const filters = [
     ["all", "Todos", "inventory_2"],
-    ["quick-note", "Notas rápidas", "bolt"],
-    ["blank", "Manuscritos", "description"],
-    ["template", "Guias", "view_sidebar"],
+    ...documentTypes.map((type) => [type.id, type.label, type.icon]),
   ];
 
   archiveFilterBar.innerHTML = filters
@@ -812,33 +833,22 @@ function getArchiveTypeCounts() {
 }
 
 function getArchiveType(manuscript) {
-  if (manuscript.templateId) {
-    return {
-      id: "template",
-      label: "Guia",
-      icon: "view_sidebar",
-    };
-  }
-
-  if (manuscript.kind === "Nota rápida" || manuscript.id?.startsWith("nota-")) {
-    return {
-      id: "quick-note",
-      label: "Nota rápida",
-      icon: "bolt",
-    };
-  }
-
-  return {
-    id: "blank",
-    label: "Manuscrito",
-    icon: "description",
-  };
+  const id = manuscript.type || "manuscrito";
+  return documentTypes.find((type) => type.id === id) || documentTypes[0];
 }
 
 function setArchiveFilter(filter) {
+  if (!isArchiveFilterAvailable(filter)) {
+    return;
+  }
+
   state.archive.filter = filter;
   renderProjectGrid();
   persistState("Filtro do arquivo aplicado");
+}
+
+function isArchiveFilterAvailable(filter) {
+  return filter === "all" || documentTypes.some((type) => type.id === filter);
 }
 
 function setArchiveSearch(value) {
@@ -1012,11 +1022,43 @@ function queueSave() {
 }
 
 function openCreateNote() {
+  renderCreateNoteTypes();
   createNoteOverlay.hidden = false;
 }
 
 function closeCreateNote() {
   createNoteOverlay.hidden = true;
+}
+
+function renderCreateNoteTypes() {
+  if (!createNoteTypes) {
+    return;
+  }
+
+  createNoteTypes.innerHTML = documentTypes
+    .map((type) => {
+      const isActive = type.id === createNoteType ? " is-active" : "";
+      return `
+        <button class="create-note-type${isActive}" type="button" data-create-note-type="${type.id}" aria-pressed="${type.id === createNoteType}">
+          <span class="material-symbols-outlined">${type.icon}</span>
+          ${escapeHtml(type.label)}
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function selectCreateNoteType(typeId) {
+  if (!documentTypes.some((type) => type.id === typeId)) {
+    return;
+  }
+
+  createNoteType = typeId;
+  renderCreateNoteTypes();
+}
+
+function getCreateNoteType() {
+  return documentTypes.find((type) => type.id === createNoteType) || documentTypes[0];
 }
 
 function addManuscript(manuscript, status) {
@@ -1034,40 +1076,68 @@ function addManuscript(manuscript, status) {
 }
 
 function createQuickNote() {
+  const type = getCreateNoteType();
   const nextNumber = state.manuscripts.length + 1;
   const manuscript = VeredaArchive.createManuscript({
     id: `nota-${Date.now()}`,
-    title: `Nota rápida ${nextNumber}`,
+    title: `${type.label} ${nextNumber}`,
     text: "",
-    kind: "Nota rápida",
-    chapter: "Captura",
-    description: "Ideia solta, cena breve ou lembrete de escrita.",
+    type: type.id,
+    kind: type.kind,
+    chapter: type.chapter,
+    description: type.id === "manuscrito" ? "Ideia solta, cena breve ou lembrete de escrita." : createProjectNoteDescription(type),
   });
 
-  addManuscript(manuscript, "Nota rápida criada");
+  addManuscript(manuscript, `${type.label} criado`);
 }
 
 function createBlankManuscript() {
+  const type = getCreateNoteType();
   const nextNumber = state.manuscripts.length + 1;
   const manuscript = VeredaArchive.createManuscript({
-    id: `manuscrito-${Date.now()}`,
-    title: `Novo Manuscrito ${nextNumber}`,
-    text: "Comece aqui. A primeira frase abre uma vereda.",
-    kind: "Manuscrito em branco",
-    chapter: "Primeira página",
-    description: "Documento livre para escrita longa.",
+    id: `${type.id}-${Date.now()}`,
+    title: type.id === "manuscrito" ? `Novo Manuscrito ${nextNumber}` : `${type.label} ${nextNumber}`,
+    text: createProjectNoteText(type),
+    type: type.id,
+    kind: type.kind,
+    chapter: type.chapter,
+    description: type.id === "manuscrito" ? "Documento livre para escrita longa." : createProjectNoteDescription(type),
   });
 
-  addManuscript(manuscript, "Manuscrito em branco criado");
+  addManuscript(manuscript, `${type.label} criado`);
 }
 
 function createManuscriptFromTemplate(templateId) {
   const templateManuscript = VeredaTemplates.createManuscript(templateId, {
     id: `manuscrito-${Date.now()}`,
   });
-  const manuscript = VeredaArchive.createManuscript(templateManuscript);
+  const manuscript = VeredaArchive.createManuscript({
+    ...templateManuscript,
+    type: "manuscrito",
+  });
 
   addManuscript(manuscript, "Guia aplicado");
+}
+
+function createProjectNoteText(type) {
+  if (type.id === "manuscrito") {
+    return "Comece aqui. A primeira frase abre uma vereda.";
+  }
+
+  return "";
+}
+
+function createProjectNoteDescription(type) {
+  const descriptions = {
+    pesquisa: "Fontes, hipóteses, referências e perguntas abertas do projeto.",
+    personagem: "Ficha de personagem, desejo, contradição, voz e arco.",
+    cena: "Rascunho ou planejamento de uma cena específica.",
+    mundo: "Worldbuilding: tecnologia, território, cultura, regras e limites.",
+    cronologia: "Linha do tempo de acontecimentos internos e externos da história.",
+    glossário: "Termos, nomes, conceitos e vocabulário próprio do projeto.",
+  };
+
+  return descriptions[type.id] || "Nota de projeto vinculada ao acervo.";
 }
 
 function createFromReferenceTemplate() {
@@ -1401,6 +1471,15 @@ function changeTemplateStep(direction) {
 }
 
 function useActiveManuscriptForVoice() {
+  if (!isManuscriptDocument()) {
+    voiceInput.value = "";
+    updateVoiceCount();
+    voiceResult.innerHTML = `<p>O Espelho de Voz analisa manuscritos. Notas de pesquisa, mundo, personagem, cena, cronologia e glossário ficam fora dessa leitura.</p>`;
+    setView("academia");
+    voiceInput.focus();
+    return;
+  }
+
   voiceInput.value = getActiveManuscript().text.trim();
   updateVoiceCount();
   renderVoiceMirror();
@@ -1678,7 +1757,7 @@ function updateWritingStats() {
 
 function renderTemplateReference() {
   const template = VeredaTemplates.getTemplate(state.template.selectedId);
-  const analysis = VeredaPrecision.analyze(template, getActiveManuscript().text);
+  const manuscript = getActiveManuscript();
 
   referenceTitle.textContent = template.label;
   updateWritingPlaceholder(template);
@@ -1695,8 +1774,33 @@ function renderTemplateReference() {
     })
     .join("");
 
-  precisionCard.innerHTML = createPrecisionMarkup(analysis);
+  precisionCard.innerHTML = isManuscriptDocument(manuscript)
+    ? createPrecisionMarkup(VeredaPrecision.analyze(template, manuscript.text))
+    : createProjectNotePrecisionMarkup(manuscript);
   referenceBody.innerHTML = createReferenceMarkup(template);
+}
+
+function createProjectNotePrecisionMarkup(manuscript) {
+  const type = getArchiveType(manuscript);
+  return `
+    <div class="precision-top">
+      <span>Nota de projeto</span>
+      <strong>--</strong>
+    </div>
+    <div class="precision-meter" aria-label="Aderência indisponível para nota de projeto">
+      <i style="--score: 0%"></i>
+    </div>
+    <p>${escapeHtml(type.label)} não passa por aderência à forma.</p>
+    <div class="precision-checks">
+      <div class="precision-check is-passed">
+        <span class="material-symbols-outlined">info</span>
+        <div>
+          <strong>Use como material de apoio</strong>
+          <small>Pesquisa, mundo, personagens e cronologia ajudam o manuscrito, mas não são avaliados como texto final.</small>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function createPrecisionMarkup(analysis) {
@@ -1961,6 +2065,7 @@ document.addEventListener("click", (event) => {
   const referenceTemplateTarget = event.target.closest("[data-reference-template]");
   const archiveFilterTarget = event.target.closest("[data-archive-filter]");
   const decolonialCategoryTarget = event.target.closest("[data-decolonial-category]");
+  const createNoteTypeTarget = event.target.closest("[data-create-note-type]");
 
   if (versionTarget) {
     event.preventDefault();
@@ -2010,6 +2115,12 @@ document.addEventListener("click", (event) => {
   if (archiveFilterTarget) {
     event.preventDefault();
     setArchiveFilter(archiveFilterTarget.dataset.archiveFilter);
+    return;
+  }
+
+  if (createNoteTypeTarget) {
+    event.preventDefault();
+    selectCreateNoteType(createNoteTypeTarget.dataset.createNoteType);
     return;
   }
 

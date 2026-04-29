@@ -1178,3 +1178,13 @@ O léxico decolonial foi ampliado para 131 entradas e passou a cobrir também de
 A copy do toggle explicita que a análise é local, serve como lente crítica e não decide pelo autor. Quando ativado, o observador mostra ocorrências, categorias, alternativas e notas de contexto.
 
 Também subimos o cache offline para `vereda-offline-v42` com assets em `?v=20260429-10`.
+
+## 2026-04-29 - Tipos de documento no Arquivo
+
+Iniciamos a estrutura leve de projeto literário sem criar uma UI complexa.
+
+O schema local de manuscrito ganhou o campo `type`, com os tipos `manuscrito`, `pesquisa`, `personagem`, `cena`, `mundo`, `cronologia` e `glossário`. O modal "Nova nota" agora permite escolher o tipo antes de criar o documento, e o Arquivo passa a filtrar visualmente por esses tipos.
+
+Notas de projeto continuam abrindo no editor, mas não passam pela aderência à forma do `precision-engine.js`. O Espelho de Voz também não carrega automaticamente notas de projeto como se fossem manuscritos.
+
+Também subimos o cache offline para `vereda-offline-v43` com assets em `?v=20260429-11`.
