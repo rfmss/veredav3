@@ -88,6 +88,10 @@ const decolonialSearch = document.querySelector("[data-decolonial-search]");
 const decolonialFilters = document.querySelector("[data-decolonial-filters]");
 const decolonialCount = document.querySelector("[data-decolonial-count]");
 const decolonialList = document.querySelector("[data-decolonial-list]");
+const decolonialObserverToggle = document.querySelector("[data-decolonial-observer-toggle]");
+const decolonialObserver = document.querySelector("[data-decolonial-observer]");
+const decolonialObserverSummary = document.querySelector("[data-decolonial-observer-summary]");
+const decolonialObserverList = document.querySelector("[data-decolonial-observer-list]");
 const themePicker = document.querySelector("[data-theme-picker]");
 const themeButton = document.querySelector("[data-action='toggle-theme-menu']");
 const themeMenu = document.querySelector("[data-theme-menu]");
@@ -161,6 +165,7 @@ let deferredInstallPrompt;
 let decolonialState = {
   category: "all",
   query: "",
+  observerEnabled: false,
 };
 let templateState = {
   activeId: "roteiro-tv",
@@ -551,6 +556,7 @@ function renderActiveManuscript() {
   updateWritingStats();
   renderLexicalView();
   renderTemplateReference();
+  renderDecolonialObserver();
   renderMetadataForm();
   renderProofView();
   ensureInitialVersion(manuscript);
@@ -966,6 +972,7 @@ function updateCurrentManuscript() {
   updateWritingStats();
   renderLexicalView();
   renderTemplateReference();
+  renderDecolonialObserver();
   renderMetadataForm();
   renderManuscriptNavigation();
   renderProjectGrid();
@@ -1512,6 +1519,7 @@ function renderDecolonialTool() {
   ].join("");
 
   decolonialCount.textContent = `${entries.length} ${entries.length === 1 ? "entrada" : "entradas"}`;
+  renderDecolonialObserver();
 
   if (!entries.length) {
     decolonialList.innerHTML = `<div class="decolonial-empty">Nenhuma entrada encontrada.</div>`;
@@ -1525,7 +1533,7 @@ function renderDecolonialTool() {
         <article class="decolonial-entry">
           <div class="decolonial-entry-header">
             <strong>${escapeHtml(entry.avoid)}</strong>
-            <span>${escapeHtml(entry.category)}</span>
+            <span>${escapeHtml(entry.categoryLabel || entry.category)}</span>
           </div>
           <div class="decolonial-alternatives">
             <i class="material-symbols-outlined" aria-hidden="true">arrow_forward</i>
@@ -1533,6 +1541,50 @@ function renderDecolonialTool() {
           </div>
           <p>${escapeHtml(entry.reason)}</p>
           <small>${escapeHtml(entry.context)}</small>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function renderDecolonialObserver() {
+  if (!window.VeredaDecolonial || !decolonialObserver || !decolonialObserverSummary || !decolonialObserverList) {
+    return;
+  }
+
+  decolonialObserver.hidden = !decolonialState.observerEnabled;
+
+  if (!decolonialState.observerEnabled) {
+    decolonialObserverList.innerHTML = "";
+    return;
+  }
+
+  const manuscript = getActiveManuscript();
+  const findings = window.VeredaDecolonial.detectText(manuscript.text);
+  const occurrences = findings.reduce((total, item) => total + item.count, 0);
+
+  if (!findings.length) {
+    decolonialObserverSummary.textContent = "Nenhum alerta encontrado neste manuscrito.";
+    decolonialObserverList.innerHTML = `<div class="decolonial-observer-empty">O texto passou limpo por esta lente. Ainda vale revisar contexto, representação e ponto de vista.</div>`;
+    return;
+  }
+
+  decolonialObserverSummary.textContent = `${occurrences} ${occurrences === 1 ? "ocorrência" : "ocorrências"} em ${findings.length} ${findings.length === 1 ? "termo" : "termos"}.`;
+  decolonialObserverList.innerHTML = findings
+    .map((entry) => {
+      const alternatives = entry.alternatives.map((alternative) => `<span>${escapeHtml(alternative)}</span>`).join("");
+      return `
+        <article class="decolonial-alert">
+          <div class="decolonial-alert-header">
+            <strong>${escapeHtml(entry.avoid)}</strong>
+            <span>${entry.count}x · ${escapeHtml(entry.categoryLabel)}</span>
+          </div>
+          <div class="decolonial-alternatives">
+            <i class="material-symbols-outlined" aria-hidden="true">arrow_forward</i>
+            ${alternatives}
+          </div>
+          <p>${escapeHtml(entry.reason)}</p>
+          <small>${entry.contextual ? "Atenção ao contexto. " : ""}${escapeHtml(entry.context)}</small>
         </article>
       `;
     })
@@ -2189,6 +2241,10 @@ voiceInput.addEventListener("input", updateVoiceCount);
 decolonialSearch.addEventListener("input", () => {
   decolonialState.query = decolonialSearch.value;
   renderDecolonialTool();
+});
+decolonialObserverToggle.addEventListener("change", () => {
+  decolonialState.observerEnabled = decolonialObserverToggle.checked;
+  renderDecolonialObserver();
 });
 
 renderActiveManuscript();

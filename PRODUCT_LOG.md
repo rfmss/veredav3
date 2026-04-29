@@ -1168,3 +1168,13 @@ Após a revisão visual, ajustamos quatro pontos de layout:
 - a Academia recebeu ajustes de escala, respiro e hierarquia visual para evitar sensação de corte em telas menores.
 
 Também suavizamos as barras de rolagem internas e subimos o cache offline para `vereda-offline-v41` com assets em `?v=20260429-9`.
+
+## 2026-04-29 - Observador Decolonial no manuscrito
+
+Dissolvemos o arquivo `observador_decolonial_v3_full.html` no motor nativo do Vereda.
+
+O léxico decolonial foi ampliado para 131 entradas e passou a cobrir também deficiência, gênero e classe, além das categorias já presentes. A interface ganhou um toggle na ferramenta Vocabulário Decolonizador para observar o manuscrito ativo durante a revisão, sem textarea duplicado e sem envio de dados.
+
+A copy do toggle explicita que a análise é local, serve como lente crítica e não decide pelo autor. Quando ativado, o observador mostra ocorrências, categorias, alternativas e notas de contexto.
+
+Também subimos o cache offline para `vereda-offline-v42` com assets em `?v=20260429-10`.

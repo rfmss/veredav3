@@ -2381,9 +2381,129 @@ mark {
   line-height: 1.6;
 }
 
+.decolonial-toggle-card {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+  cursor: pointer;
+  padding: 12px;
+}
+
+.decolonial-toggle-card input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  margin-top: 2px;
+}
+
+.decolonial-toggle-card strong {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.decolonial-toggle-card small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .decolonial-workbench {
   display: grid;
   gap: 12px;
+}
+
+.decolonial-observer {
+  display: grid;
+  gap: 10px;
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 7%, var(--card));
+  padding: 14px;
+}
+
+.decolonial-observer[hidden] {
+  display: none;
+}
+
+.decolonial-observer-summary {
+  display: grid;
+  gap: 4px;
+}
+
+.decolonial-observer-summary strong {
+  color: var(--primary);
+  font-size: 15px;
+}
+
+.decolonial-observer-summary span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.decolonial-observer-list {
+  display: grid;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 34%, transparent) transparent;
+}
+
+.decolonial-alert,
+.decolonial-observer-empty {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  padding: 12px;
+}
+
+.decolonial-alert-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.decolonial-alert-header strong {
+  color: var(--ink);
+  text-decoration: line-through;
+  text-decoration-color: var(--sienna);
+  text-decoration-thickness: 2px;
+}
+
+.decolonial-alert-header span {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--surface-mid);
+  color: var(--primary);
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.decolonial-alert p {
+  margin: 0 0 6px;
+  color: var(--soft-ink);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.decolonial-alert small,
+.decolonial-observer-empty {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .decolonial-search {
