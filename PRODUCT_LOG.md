@@ -1144,3 +1144,16 @@ Antes, o guia crescia junto com o conteúdo e obrigava a pessoa a rolar a págin
 Em mobile, o comportamento continua em coluna e sem travar altura, para preservar leitura em telas estreitas.
 
 Também subimos o cache offline para `vereda-offline-v39` e os assets para `?v=20260429-7`.
+
+## 2026-04-29 - Marca final com contraste por paleta
+
+Atualizamos a marca do Vereda a partir dos arquivos `veredaLOGOescuro.svg` e `veredaLOGO_Claro.svg`.
+
+O site passa a usar a marca com círculo verde e símbolo claro nas paletas claras, e a marca com círculo claro e símbolo verde nas paletas escuras. A aba do navegador e o manifest apontam para a versão de alto contraste com círculo claro.
+
+Também atualizamos os ícones principais, regeneramos os PNGs de instalação a partir da nova família visual possível no ambiente local, e subimos o cache offline para `vereda-offline-v40` com assets em `?v=20260429-8`.
+
+Observação técnica:
+
+- O navegador recebe o SVG novo diretamente para a aba.
+- Os PNGs/ICO continuam como fallback e ícones de instalação.

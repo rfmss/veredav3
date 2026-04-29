@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v39";
-const ASSET_VERSION = "20260429-7";
+const CACHE_NAME = "vereda-offline-v40";
+const ASSET_VERSION = "20260429-8";
 
 const CORE_ASSETS = [
   "./",
@@ -18,7 +18,10 @@ const CORE_ASSETS = [
   `./voice-engine.js?v=${ASSET_VERSION}`,
   `./decolonial-engine.js?v=${ASSET_VERSION}`,
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
-  "./icons/Logo.svg",
+  `./icons/Logo.svg?v=${ASSET_VERSION}`,
+  `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
+  `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
+  `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
   "./favicon_io/site.webmanifest",
   `./favicon_io/tab-favicon.ico?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-16x16.png?v=${ASSET_VERSION}`,

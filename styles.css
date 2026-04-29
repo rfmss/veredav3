@@ -23,6 +23,7 @@
   --highlight-template-end: #f6f8f7;
   --tip-bg: #fff3df;
   --tip-ink: #765020;
+  --brand-mark-image: url("icons/vereda-logo-light.svg");
   --line: #e5e1de;
   --primary: #2e4d43;
   --primary-deep: #17362d;
@@ -63,6 +64,7 @@
   --highlight-template-end: #f3eacb;
   --tip-bg: #f3dfad;
   --tip-ink: #4f3516;
+  --brand-mark-image: url("icons/vereda-logo-light.svg");
   --line: #dfcf9b;
   --primary: #c68b2e;
   --primary-deep: #3d3219;
@@ -97,6 +99,7 @@
   --highlight-template-end: #e6eeea;
   --tip-bg: #f4dfc3;
   --tip-ink: #5b3a1f;
+  --brand-mark-image: url("icons/vereda-logo-light.svg");
   --line: #d6ded6;
   --primary: #1a4533;
   --primary-deep: #0d1f18;
@@ -131,6 +134,7 @@
   --highlight-template-end: #eee8ef;
   --tip-bg: #f7dfce;
   --tip-ink: #633826;
+  --brand-mark-image: url("icons/vereda-logo-light.svg");
   --line: #e3d6dc;
   --primary: #3b2068;
   --primary-deep: #1a0f2e;
@@ -165,6 +169,7 @@
   --highlight-template-end: #2f2a1b;
   --tip-bg: #3d3219;
   --tip-ink: #f5e2a3;
+  --brand-mark-image: url("icons/vereda-logo-dark.svg");
   --line: #4d4022;
   --primary: #e8c84a;
   --primary-deep: #c68b2e;
@@ -199,6 +204,7 @@
   --highlight-template-end: #18352b;
   --tip-bg: #2b3727;
   --tip-ink: #f0c89c;
+  --brand-mark-image: url("icons/vereda-logo-dark.svg");
   --line: #24513d;
   --primary: #e8a060;
   --primary-deep: #2e7d52;
@@ -233,6 +239,7 @@
   --highlight-template-end: #2c2047;
   --tip-bg: #3a2449;
   --tip-ink: #f0c9a0;
+  --brand-mark-image: url("icons/vereda-logo-dark.svg");
   --line: #4c3370;
   --primary: #f0c070;
   --primary-deep: #c45b7e;
@@ -330,9 +337,7 @@ a {
   flex: 0 0 34px;
   display: block;
   margin: 0;
-  background: var(--primary);
-  -webkit-mask: url("icons/Logo.svg") center / contain no-repeat;
-  mask: url("icons/Logo.svg") center / contain no-repeat;
+  background: var(--brand-mark-image) center / contain no-repeat;
 }
 
 .brand-lockup strong {
