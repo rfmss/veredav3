@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v47";
-const ASSET_VERSION = "20260429-15";
+const CACHE_NAME = "vereda-offline-v48";
+const ASSET_VERSION = "20260429-16";
 
 const CORE_ASSETS = [
   "./",
@@ -23,7 +23,6 @@ const CORE_ASSETS = [
   `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
   "./favicon_io/site.webmanifest",
-  `./favicon_io/tab-favicon.ico?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-16x16.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-32x32.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-48x48.png?v=${ASSET_VERSION}`,

@@ -1224,3 +1224,11 @@ Trocamos a prioridade do favicon da aba para PNG, removendo o SVG da lista de í
 Os arquivos `tab-favicon-16x16.png`, `tab-favicon-32x32.png`, `tab-favicon-48x48.png`, `tab-favicon-180x180.png` e `tab-favicon.ico` foram regenerados com o logo claro em fundo verde, recentralizado com respiro para evitar corte visual nas bordas da aba.
 
 O manifesto agora também prioriza PNG para o ícone principal. O cache offline subiu para `vereda-offline-v47` com assets em `?v=20260429-15`.
+
+## 2026-04-29 - Favicon redondo sem fallback ICO
+
+Removemos o fallback `.ico` do `<head>` para a aba usar apenas PNG transparente.
+
+Os PNGs da aba agora são derivados diretamente do `android-chrome-512x512.png`, sem recorte e sem recomposição em uma nova caixa. A intenção é preservar o logo redondo como ele é: círculo verde, marca clara e transparência fora do círculo.
+
+Também registramos no `VEREDA_ROADMAP.md` as pendências pausadas: `.docx`, risco de perda por cache/localStorage, atalhos PWA e estrutura literária mais completa. O cache offline subiu para `vereda-offline-v48` com assets em `?v=20260429-16`.

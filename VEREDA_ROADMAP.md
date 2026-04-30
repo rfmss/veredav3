@@ -92,6 +92,15 @@ Validação mínima:
 
 ## Pacotes seguintes
 
+### Pendências seguradas para as próximas rodadas
+
+Estas frentes ficam anotadas, mas pausadas enquanto o foco está no polimento da barra/aba do navegador:
+
+- exportação `.docx` para submissão editorial brasileira;
+- aviso forte e fluxo de backup contra perda de dados ao limpar cache/localStorage;
+- atalhos PWA com destinos distintos, especialmente Academia;
+- estrutura de projeto literário mais completa além do campo `type`.
+
 ### 1. Checklists persistentes por projeto
 
 Transformar guias de lançamento e revisão em checklists marcáveis por manuscrito.
