@@ -101,6 +101,16 @@ Estas frentes ficam anotadas, mas pausadas enquanto o foco está no polimento da
 - polimento futuro dos atalhos PWA, alem dos destinos distintos ja entregues para Manuscrito e Academia;
 - estrutura de projeto literário mais completa além do campo `type`.
 
+### Bots de manutenção futura
+
+Para manter a Vereda útil por anos sem depender de revisão manual de tudo:
+
+- bot de fontes oficiais: checar mensalmente LDA, EDA/FBN, gov.br, CBL, ISBN, depósito legal e links citados;
+- bot jurídico-editorial: abrir issue quando procedimento, preço, atendimento ou norma de direitos autorais mudar;
+- bot de QA visual: gerar screenshots de Editor, Arquivo, Autoria e Academia em desktop/mobile a cada pull request;
+- bot de cache/PWA: validar manifest, service worker, favicons, rotas de atalhos e assets versionados por release;
+- bot de integridade local: rodar `node --check`, validar JSON, mapear referências quebradas e anexar resumo ao QA.
+
 ### 1. Checklists persistentes por projeto
 
 Transformar guias de lançamento e revisão em checklists marcáveis por manuscrito.

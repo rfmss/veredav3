@@ -9,6 +9,7 @@
     { id: "estudo-vestibular", label: "Estudo e vestibular", icon: "school" },
     { id: "mercado-editorial", label: "Mercado editorial", icon: "storefront" },
     { id: "objeto-livro", label: "Objeto livro", icon: "book_4" },
+    { id: "direitos-autorais", label: "Direitos do autor", icon: "gavel" },
   ];
 
   const templates = [
@@ -693,6 +694,7 @@ Periodicidade: [semanal, quinzenal, mensal]
       ...estudoVestibularGuides(),
       ...mercadoEditorialGuides(),
       ...objetoLivroGuides(),
+      ...direitosAutoraisGuides(),
     ];
   }
 
@@ -1151,6 +1153,68 @@ Periodicidade: [semanal, quinzenal, mensal]
         reminders: ["Nomear bem ajuda a pedir bem.", "Vocabulário editorial reduz ruído com profissionais.", "Termo técnico serve para clareza, não para pose."],
         text: "## Termos que preciso dominar\n\nMancha tipográfica:\nFólio:\nRecto/verso:\nSangria:\nISBN:\nFicha catalográfica:\nColofão:\nLombada:\nTítulo corrente:\n\n## Dúvidas para produção\n\n[Liste termos que ainda preciso confirmar com editor/diagramador.]",
         model: livroModel("Glossário do livro", "Quem conhece os termos participa melhor das decisões editoriais.", "Quando eu disser [termo], quero me referir a [definição]. Se houver dúvida, registro exemplo visual antes de pedir alteração."),
+      }),
+    ];
+  }
+
+  function direitosAutoraisGuides() {
+    return [
+      createGuide({
+        id: "direitos-primeiro-mapa",
+        oficio: "direitos-autorais",
+        label: "Primeiro mapa de direitos",
+        icon: "policy",
+        chapter: "Criação e prova",
+        description: "Guia para entender o que a Vereda orienta, o que a lei protege e quando consultar fonte oficial.",
+        meta: ["Orientação", "LDA", "Registro", "Fontes oficiais"],
+        sections: [
+          ["Criação", "Texto expresso nasce protegido; ideia, gênero e método não bastam."],
+          ["Rastro", "Versões, backups, e-mails e prova de autoria ajudam a reconstruir processo."],
+          ["Registro", "O EDA/FBN pode registrar obra intelectual e emitir certidão."],
+          ["Limite", "A Vereda não substitui advogado, órgão oficial ou edital atualizado."],
+          ["Rotina", "Antes de contrato ou litígio, confira fontes oficiais no dia."],
+        ],
+        reminders: ["Proteção automática não dispensa prova.", "Fonte oficial envelhece melhor que print de blog.", "Quando houver dinheiro ou conflito, procure especialista."],
+        text: "## O que criei\n\n[Tipo de obra, versão e data.]\n\n## O que consigo provar\n\n[Versões, backup, e-mails, .proof.json, testemunhas.]\n\n## Fontes que vou consultar\n\n[Planalto, EDA/FBN, gov.br, CBL, edital ou contrato.]\n\n## Próxima decisão\n\n[Registrar, submeter, negociar, publicar ou pedir orientação jurídica.]",
+        model: mercadoModel("Primeiro mapa de direitos", "O escritor ganha segurança quando separa criação, prova, mercado e fonte oficial.", "A Vereda me mostra o mapa. Antes de assinar, registrar ou litigar, eu confiro a fonte oficial atualizada e, se necessário, consulto especialista."),
+      }),
+      createGuide({
+        id: "checklist-submissao-direitos",
+        oficio: "direitos-autorais",
+        label: "Checklist de submissão e direitos",
+        icon: "outbox",
+        chapter: "Envio editorial",
+        description: "Guia para submeter manuscrito guardando versão, edital, data, exclusividade e política de ineditismo.",
+        meta: ["Submissão", "Edital", "Ineditismo", "Exclusividade"],
+        sections: [
+          ["Versão enviada", "Guarde o arquivo exato que saiu da sua mão."],
+          ["Regras", "Salve edital, formulário, política de simultâneas e prazo de resposta."],
+          ["Comunicação", "Guarde e-mail, protocolo, confirmação e resposta."],
+          ["Ineditismo", "Veja se rede social, blog, newsletter ou plataforma contam como publicação."],
+          ["Direitos", "Submissão não é cessão; contrato vem depois."],
+        ],
+        reminders: ["Não envie uma versão que você não consegue recuperar.", "Exclusividade sem prazo é sinal de alerta.", "Cada editora define sua porta de entrada."],
+        text: "## Versão enviada\n\nTítulo:\nData:\nArquivo:\nFormato exigido:\n\n## Edital ou política\n\nLink/fonte:\nPrazo de resposta:\nExclusividade:\nIneditismo:\n\n## Registro do envio\n\nDestinatário:\nE-mail/protocolo:\nResposta:\n\n## Cuidados\n\n[O que preciso confirmar antes de enviar de novo?]",
+        model: mercadoModel("Checklist de submissão e direitos", "Submeter melhor é conseguir provar o que foi enviado, quando e sob quais regras.", "Enviei [obra] para [editora/agente] em [data], seguindo [edital/política]. A versão preservada é [arquivo]."),
+      }),
+      createGuide({
+        id: "leitura-contrato-editorial",
+        oficio: "direitos-autorais",
+        label: "Leitura de contrato editorial",
+        icon: "contract",
+        chapter: "Antes de assinar",
+        description: "Guia para marcar prazo, território, direitos cedidos, preferência, royalties e reversão antes de assinar.",
+        meta: ["Contrato", "Licença", "Cessão", "Reversão"],
+        sections: [
+          ["Escopo", "Quais direitos, mídias e territórios entram no contrato?"],
+          ["Prazo", "Por quanto tempo a editora explora a obra?"],
+          ["Dinheiro", "Royalties, adiantamento, base de cálculo e prestação de contas."],
+          ["Preferência", "A editora prende seu próximo livro? Por quanto tempo?"],
+          ["Saída", "Quando os direitos voltam para você?"],
+        ],
+        reminders: ["Direitos autorais se interpretam restritivamente.", "Ceda só o necessário.", "Contrato alto, amplo ou confuso merece advogado."],
+        text: "## Escopo\n\nDireitos cedidos/licenciados:\nMídias:\nTerritório:\nPrazo:\n\n## Dinheiro\n\nRoyalties:\nBase de cálculo:\nAdiantamento:\nPrestação de contas:\n\n## Alertas\n\nPreferência pelo próximo livro:\nDireitos audiovisuais:\nTradução:\nAudiobook:\nReversão:\n\n## Próxima ação\n\n[Assinar, negociar, pedir parecer ou recusar.]",
+        model: mercadoModel("Leitura de contrato editorial", "O contrato deve dizer exatamente o que sai da mão do autor, por quanto tempo e em troca de quê.", "Antes de assinar, eu preciso entender escopo, prazo, território, remuneração, preferência e reversão."),
       }),
     ];
   }

@@ -108,6 +108,10 @@ const decolonialObserverToggle = document.querySelector("[data-decolonial-observ
 const decolonialObserver = document.querySelector("[data-decolonial-observer]");
 const decolonialObserverSummary = document.querySelector("[data-decolonial-observer-summary]");
 const decolonialObserverList = document.querySelector("[data-decolonial-observer-list]");
+const rightsLab = document.querySelector("[data-rights-lab]");
+const rightsSearch = document.querySelector("[data-rights-search]");
+const rightsCards = document.querySelector("[data-rights-cards]");
+const rightsSources = document.querySelector("[data-rights-sources]");
 const topbarSearch = document.querySelector("[data-topbar-search]");
 const globalSearchInput = document.querySelector("[data-global-search-input]");
 const globalSearchResults = document.querySelector("[data-global-search-results]");
@@ -222,6 +226,9 @@ let decolonialState = {
   category: "all",
   query: "",
   observerEnabled: false,
+};
+let rightsState = {
+  query: "",
 };
 let templateState = {
   activeId: "roteiro-tv",
@@ -1961,6 +1968,69 @@ function renderDecolonialObserver() {
     .join("");
 }
 
+function renderRightsLab() {
+  if (!window.VeredaRights || !rightsCards || !rightsSources) {
+    return;
+  }
+
+  const query = normalizeSearch(rightsState.query);
+  const cards = window.VeredaRights.getCards().filter((card) => {
+    if (!query) {
+      return true;
+    }
+
+    return normalizeSearch(
+      [
+        card.eyebrow,
+        card.title,
+        card.body,
+        card.watch,
+        card.source,
+        ...(card.do || []),
+      ].join(" ")
+    ).includes(query);
+  });
+
+  rightsCards.innerHTML = cards.length
+    ? cards.map(createRightsCardMarkup).join("")
+    : `<div class="rights-empty">Nenhum cuidado encontrado. Tente buscar por contrato, registro, ISBN, IA, plágio ou submissão.</div>`;
+
+  rightsSources.innerHTML = window.VeredaRights
+    .getSources()
+    .map(
+      (source) => `
+        <a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
+          <span>${escapeHtml(source.label)}</span>
+          <small>${escapeHtml(source.note)}</small>
+        </a>
+      `
+    )
+    .join("");
+}
+
+function createRightsCardMarkup(card) {
+  return `
+    <article class="rights-card">
+      <div class="rights-card-header">
+        <span class="material-symbols-outlined">${escapeHtml(card.icon)}</span>
+        <div>
+          <p class="eyebrow">${escapeHtml(card.eyebrow)}</p>
+          <h3>${escapeHtml(card.title)}</h3>
+        </div>
+      </div>
+      <p>${escapeHtml(card.body)}</p>
+      <ul>
+        ${card.do.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+      <div class="rights-watch">
+        <strong>Atenção</strong>
+        <span>${escapeHtml(card.watch)}</span>
+      </div>
+      <small>${escapeHtml(card.source)}</small>
+    </article>
+  `;
+}
+
 function updateAcademyParallax() {
   const parallaxItems = document.querySelectorAll("[data-parallax-speed]");
   const viewportMiddle = contentStage.clientHeight / 2;
@@ -2662,6 +2732,10 @@ document.addEventListener("click", (event) => {
     toggleGlobalSearch();
   }
 
+  if (actionTarget.dataset.action === "scroll-rights" && rightsLab) {
+    rightsLab.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   if (actionTarget.dataset.action === "select-theme") {
     selectColorTheme(actionTarget.dataset.themeId);
   }
@@ -2860,6 +2934,10 @@ decolonialSearch.addEventListener("input", () => {
   decolonialState.query = decolonialSearch.value;
   renderDecolonialTool();
 });
+rightsSearch.addEventListener("input", () => {
+  rightsState.query = rightsSearch.value;
+  renderRightsLab();
+});
 decolonialObserverToggle.addEventListener("change", () => {
   decolonialState.observerEnabled = decolonialObserverToggle.checked;
   renderDecolonialObserver();
@@ -2886,6 +2964,7 @@ renderVersionList();
 renderBackupWarning();
 renderTemplateStudio();
 renderDecolonialTool();
+renderRightsLab();
 updateAcademyParallax();
 applyTemplateLayout();
 applyPanelLayout();

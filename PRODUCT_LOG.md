@@ -1288,3 +1288,13 @@ Dissolvemos `/home/rafamass/Downloads/autosave_filesystem_demo.html` como uma ca
 Adicionamos `filesystem-backup-engine.js` usando File System Access API + IndexedDB para lembrar o `FileSystemFileHandle` quando o navegador permite. No Arquivo, o escritor pode escolher um arquivo destino uma vez, salvar manualmente e manter autosave em intervalo configurável. A escrita local em `localStorage` continua sendo a primeira linha de defesa; o arquivo externo é a cópia contra falta de luz, bateria e limpeza de cache.
 
 Firefox e Safari recebem mensagem de indisponibilidade, sem quebrar o fluxo normal de exportação `.vrda`. O cache offline subiu para `vereda-offline-v55` com assets em `?v=20260430-03`.
+
+## 2026-04-30 - Direitos do Autor na Academia
+
+Dissolvemos os materiais de direitos autorais como orientação prática na Academia, não como página-aula separada.
+
+Criamos `rights-engine.js` com cartões por situação de uso: escrita, submissão, contrato, prova de autoria, autoedição, coautoria, citação, IA e narrativas de comunidades. A interface deixa explícito que a Vereda não garante aconselhamento jurídico: ela sinaliza riscos, preserva rastros e aponta fontes oficiais para consulta atualizada.
+
+Também adicionamos a família "Direitos do autor" ao Guia de Ofícios, com guias acionáveis para primeiro mapa de direitos, submissão e leitura de contrato editorial. A banca de especialistas foi usada como critério editorial interno para incorporar lacunas sem teatralizar autoridade dentro da UI.
+
+Registramos no roadmap os bots futuros de manutenção: fontes oficiais, revisão jurídico-editorial, QA visual, cache/PWA e integridade local. O cache offline subiu para `vereda-offline-v56` com assets em `?v=20260430-04`.
