@@ -2,6 +2,7 @@ const STORAGE_KEY = "vereda.manuscripts.v1";
 const CHECKLIST_STORAGE_KEY = "vereda.checklists.v1";
 const BACKUP_META_STORAGE_KEY = "vereda.backup-meta.v1";
 const BACKUP_WARNING_DAYS = 7;
+const VIEW_ROUTES = new Set(["editor", "biblioteca", "autoria", "arquivo", "academia"]);
 
 const starterManuscripts = [
   {
@@ -380,7 +381,31 @@ function getActiveProofSession() {
   return record ? VeredaProof.getActiveSession(record) : null;
 }
 
-function setView(viewName) {
+function getViewFromRoute() {
+  const route = window.location.hash.replace(/^#\/?/, "");
+  return VIEW_ROUTES.has(route) ? route : "editor";
+}
+
+function updateRouteForView(viewName, mode = "push") {
+  const nextHash = `#${viewName}`;
+
+  if (window.location.hash === nextHash) {
+    return;
+  }
+
+  if (mode === "replace") {
+    window.history.replaceState(null, "", nextHash);
+    return;
+  }
+
+  window.history.pushState(null, "", nextHash);
+}
+
+function setView(viewName, options = {}) {
+  if (!VIEW_ROUTES.has(viewName)) {
+    return;
+  }
+
   shell.dataset.view = viewName;
   exitFocusMode();
   nav.classList.remove("is-open");
@@ -392,6 +417,10 @@ function setView(viewName) {
   document.querySelectorAll("[data-view-target]").forEach((control) => {
     control.classList.toggle("is-active", control.dataset.viewTarget === viewName);
   });
+
+  if (options.updateRoute) {
+    updateRouteForView(viewName, options.routeMode);
+  }
 }
 
 function applyPanelLayout() {
@@ -2420,7 +2449,7 @@ document.addEventListener("click", (event) => {
 
   if (viewTarget) {
     event.preventDefault();
-    setView(viewTarget.dataset.viewTarget);
+    setView(viewTarget.dataset.viewTarget, { updateRoute: true });
   }
 
   if (!actionTarget) {
@@ -2614,6 +2643,8 @@ focusSettingControls.forEach((control) => {
 
 window.addEventListener("online", updateConnectionStatus);
 window.addEventListener("offline", updateConnectionStatus);
+window.addEventListener("hashchange", () => setView(getViewFromRoute()));
+window.addEventListener("load", () => setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" }));
 contentStage.addEventListener("scroll", () => requestAnimationFrame(updateAcademyParallax));
 
 window.addEventListener("beforeinstallprompt", (event) => {
@@ -2681,5 +2712,6 @@ applyTemplateLayout();
 applyPanelLayout();
 applyColorTheme();
 applyFocusSettings();
+setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" });
 registerOfflineApp();
 persistState("Pronto para escrever");

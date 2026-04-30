@@ -1248,3 +1248,11 @@ Substituímos os favicons da aba pelo pacote novo em `/home/rafamass/Downloads/0
 Os PNGs originais tinham canto branco opaco. Removemos esse fundo branco na geração local para preservar transparência real fora do círculo, mantendo o desenho redondo do novo logo. Também atualizamos os ícones PWA `android-chrome-192x192.png` e `android-chrome-512x512.png`.
 
 O cache offline subiu para `vereda-offline-v50` com assets em `?v=20260429-18`.
+
+## 2026-04-29 - Atalhos PWA com rotas distintas
+
+Corrigimos os atalhos do PWA para que "Manuscrito" e "Academia" não apontem mais para o mesmo destino.
+
+O `manifest.webmanifest` agora usa `./#editor` no `start_url` e no atalho Manuscrito, e `./#academia` no atalho Academia. O `app.js` passa a ler `location.hash` na inicialização e em `hashchange`, mantendo a navegação interna sincronizada com hashes simples: `#editor`, `#biblioteca`, `#autoria`, `#arquivo` e `#academia`.
+
+O cache offline subiu para `vereda-offline-v51` com assets em `?v=20260429-19`.

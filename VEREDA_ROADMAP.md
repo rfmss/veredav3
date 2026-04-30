@@ -98,7 +98,7 @@ Estas frentes ficam anotadas, mas pausadas enquanto o foco está no polimento da
 
 - exportação `.docx` para submissão editorial brasileira;
 - reforco futuro do fluxo de backup automatico/sugerido, alem do aviso inicial ja entregue;
-- atalhos PWA com destinos distintos, especialmente Academia;
+- polimento futuro dos atalhos PWA, alem dos destinos distintos ja entregues para Manuscrito e Academia;
 - estrutura de projeto literário mais completa além do campo `type`.
 
 ### 1. Checklists persistentes por projeto

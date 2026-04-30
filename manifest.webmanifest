@@ -3,7 +3,7 @@
   "short_name": ".vrda",
   "description": "Editor literário brasileiro offline-first, com escrita calma e ferramentas locais para autoria.",
   "lang": "pt-BR",
-  "start_url": ".",
+  "start_url": "./#editor",
   "scope": ".",
   "display": "standalone",
   "orientation": "any",
@@ -12,19 +12,19 @@
   "categories": ["productivity", "books", "education"],
   "icons": [
     {
-      "src": "favicon_io/android-chrome-512x512.png?v=20260429-18",
+      "src": "favicon_io/android-chrome-512x512.png?v=20260429-19",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "favicon_io/android-chrome-192x192.png?v=20260429-18",
+      "src": "favicon_io/android-chrome-192x192.png?v=20260429-19",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "favicon_io/android-chrome-512x512.png?v=20260429-18",
+      "src": "favicon_io/android-chrome-512x512.png?v=20260429-19",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -35,15 +35,15 @@
       "name": "Manuscrito",
       "short_name": "Editor",
       "description": "Abrir o editor de manuscrito.",
-      "url": ".",
-      "icons": [{ "src": "favicon_io/android-chrome-192x192.png?v=20260429-18", "sizes": "192x192" }]
+      "url": "./#editor",
+      "icons": [{ "src": "favicon_io/android-chrome-192x192.png?v=20260429-19", "sizes": "192x192" }]
     },
     {
       "name": "Academia",
       "short_name": "Academia",
       "description": "Abrir o Vereda para consultar guias de escrita.",
-      "url": ".",
-      "icons": [{ "src": "favicon_io/android-chrome-192x192.png?v=20260429-18", "sizes": "192x192" }]
+      "url": "./#academia",
+      "icons": [{ "src": "favicon_io/android-chrome-192x192.png?v=20260429-19", "sizes": "192x192" }]
     }
   ]
 }
