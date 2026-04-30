@@ -346,13 +346,19 @@ function updateActiveManuscript(nextManuscript) {
 
 function getActiveProofRecord() {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    return null;
+  }
+
   const record = VeredaProof.createRecord(state.proofs[manuscript.id]);
   state.proofs[manuscript.id] = record;
   return record;
 }
 
 function getActiveProofSession() {
-  return VeredaProof.getActiveSession(getActiveProofRecord());
+  const record = getActiveProofRecord();
+  return record ? VeredaProof.getActiveSession(record) : null;
 }
 
 function setView(viewName) {
@@ -1276,6 +1282,10 @@ function createFromReferenceTemplate() {
 }
 
 function ensureInitialVersion(manuscript) {
+  if (!isManuscriptDocument(manuscript)) {
+    return;
+  }
+
   if (VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id).length > 0) {
     return;
   }
@@ -1285,6 +1295,10 @@ function ensureInitialVersion(manuscript) {
 }
 
 function maybeCreateAutoVersion(manuscript) {
+  if (!isManuscriptDocument(manuscript)) {
+    return;
+  }
+
   if (!VeredaVersions.shouldCreateAutoSnapshot(state.versions, manuscript)) {
     return;
   }
@@ -1296,6 +1310,13 @@ function maybeCreateAutoVersion(manuscript) {
 
 function createManualVersion() {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    saveStatus.textContent = "Versões ficam disponíveis apenas para manuscritos";
+    renderVersionList();
+    return;
+  }
+
   const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Versão manual");
   state.versions = result.versions;
   renderVersionList();
@@ -1304,6 +1325,11 @@ function createManualVersion() {
 
 function restoreVersion(versionId) {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    return;
+  }
+
   const snapshot = VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id).find(
     (version) => version.id === versionId
   );
@@ -1326,7 +1352,7 @@ function restoreVersion(versionId) {
 }
 
 function recordWritingProof(event) {
-  if (event.isComposing || event.ctrlKey || event.metaKey || event.altKey) {
+  if (!isManuscriptDocument() || event.isComposing || event.ctrlKey || event.metaKey || event.altKey) {
     return;
   }
 
@@ -1407,6 +1433,18 @@ function renderLexicalView() {
 
 function renderProofView() {
   const session = getActiveProofSession();
+
+  if (!session) {
+    proofSessionName.textContent = "Nota de suporte";
+    proofIntegrity.textContent = "--";
+    proofStatus.textContent = "Prova de autoria só para manuscritos";
+    proofOrganic.textContent = "0";
+    proofRejected.textContent = "0 descartados";
+    proofCadence.textContent = "-- WPM";
+    proofTimeline.innerHTML = "<div><span></span><p>Pesquisa, personagem, cena, mundo, cronologia e glossário não geram prova de autoria.</p></div>";
+    return;
+  }
+
   const summary = VeredaProof.summarize(session);
   const recentEvents = session.events.slice(-4).reverse();
 
@@ -1435,6 +1473,13 @@ function renderProofView() {
 
 function startNewProofSession() {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    saveStatus.textContent = "Prova de autoria só para manuscritos";
+    renderProofView();
+    return;
+  }
+
   state.proofs[manuscript.id] = VeredaProof.startSession(getActiveProofRecord());
   renderProofView();
   persistState("Nova sessão de autoria");
@@ -1442,6 +1487,12 @@ function startNewProofSession() {
 
 function renderVersionList() {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    versionList.innerHTML = '<p class="muted">Versões ficam disponíveis apenas para manuscritos. Notas de suporte acompanham o acervo e o backup.</p>';
+    return;
+  }
+
   const versions = VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id);
 
   if (!versions.length) {
@@ -1818,6 +1869,13 @@ function updateAcademyParallax() {
 
 async function exportProof() {
   const manuscript = getActiveManuscript();
+
+  if (!isManuscriptDocument(manuscript)) {
+    saveStatus.textContent = "Prova de autoria só para manuscritos";
+    renderProofView();
+    return;
+  }
+
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
   const proofJson = JSON.stringify(proofDocument, null, 2);
   downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.proof.json`, "application/json");

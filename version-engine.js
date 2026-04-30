@@ -7,6 +7,7 @@
       id: `version-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
       manuscriptId: manuscript.id,
       title: manuscript.title,
+      type: manuscript.type || "manuscrito",
       kind: manuscript.kind,
       status: manuscript.status,
       chapter: manuscript.chapter,
@@ -52,6 +53,7 @@
     return {
       ...manuscript,
       title: snapshot.title,
+      type: snapshot.type || manuscript.type || "manuscrito",
       kind: snapshot.kind,
       status: snapshot.status,
       chapter: snapshot.chapter,

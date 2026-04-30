@@ -1206,3 +1206,13 @@ Adicionamos uma busca leve na topbar, sem worker e sem indexação externa.
 A função `searchAll(query)` percorre os manuscritos já carregados em memória a partir de `vereda.manuscripts.v1` e retorna até 8 resultados com `title`, `content`, `type` e `updatedAt`. O campo de busca expande ao clicar na lupa, mostra um dropdown e abre o documento selecionado no editor.
 
 Também subimos o cache offline para `vereda-offline-v45` com assets em `?v=20260429-13`.
+
+## 2026-04-29 - Guardas de autoria para notas de suporte
+
+Corrigimos a separação entre manuscritos e notas de projeto na Autoria.
+
+O `proof-engine.js` permanece sem alteração. O `version-engine.js` passa a preservar `type` nos snapshots e na restauração. No `app.js`, prova de autoria, sessões de autoria, exportação `.proof.json`, versões manuais e versões automáticas ficam restritas a documentos `type === "manuscrito"`.
+
+Quando o documento ativo é pesquisa, personagem, cena, mundo, cronologia ou glossário, a aba Autoria mostra uma mensagem neutra em vez de métricas falsas.
+
+Também subimos o cache offline para `vereda-offline-v46` com assets em `?v=20260429-14`.
