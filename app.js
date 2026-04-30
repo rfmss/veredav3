@@ -189,8 +189,10 @@ const documentTypes = [
   { id: "tema", label: "Tema", icon: "psychology", kind: "Tema", chapter: "Intenção autoral" },
   { id: "escaleta", label: "Escaleta", icon: "format_list_numbered", kind: "Escaleta", chapter: "Roteiro" },
   { id: "cena-roteiro", label: "Cena de roteiro", icon: "theaters", kind: "Cena de roteiro", chapter: "Roteiro" },
+  { id: "ato", label: "Ato", icon: "view_timeline", kind: "Ato", chapter: "Roteiro" },
+  { id: "personagem-roteiro", label: "Personagem de roteiro", icon: "co_present", kind: "Personagem de roteiro", chapter: "Roteiro" },
   { id: "pauta", label: "Pauta", icon: "newspaper", kind: "Pauta", chapter: "Jornalismo" },
-  { id: "fonte-jorn", label: "Fonte", icon: "contact_mail", kind: "Fonte jornalística", chapter: "Apuração" },
+  { id: "fonte", label: "Fonte", icon: "contact_mail", kind: "Fonte jornalística", chapter: "Apuração" },
   { id: "entrevista", label: "Entrevista", icon: "record_voice_over", kind: "Entrevista", chapter: "Apuração" },
   { id: "fato", label: "Fato", icon: "fact_check", kind: "Fato", chapter: "Verificação" },
   { id: "poema", label: "Poema", icon: "format_quote", kind: "Poema", chapter: "Poesia" },
@@ -733,6 +735,8 @@ function renderProjectGrid() {
       const selected = manuscript.id === state.activeId ? " is-selected" : "";
       const type = getArchiveType(manuscript);
       const tags = createTagMarkup(manuscript.tags);
+      const summary = VeredaArchive.docSummary(manuscript);
+      const cardDescription = summary || manuscript.description || createExcerpt(manuscript.text);
       const pinned = manuscript.pinned ? " is-pinned" : "";
       const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
       const checklistProgress = getChecklistProgress(manuscript);
@@ -748,7 +752,7 @@ function renderProjectGrid() {
           <span class="project-pin material-symbols-outlined" data-archive-pin="${manuscript.id}" role="button" tabindex="0" aria-label="${pinLabel}" title="${pinLabel}">push_pin</span>
           <span class="project-type"><i class="material-symbols-outlined">${type.icon}</i>${escapeHtml(type.label)} · ${escapeHtml(manuscript.status)}</span>
           <h2>${escapeHtml(manuscript.title)}</h2>
-          <p>${escapeHtml(manuscript.description || createExcerpt(manuscript.text))}</p>
+          <p>${escapeHtml(cardDescription)}</p>
           ${tags}
           <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
             <i style="--progress: ${progressValue}%"></i>
@@ -857,7 +861,8 @@ function createCompactDocumentMarkup(manuscript, className, metaLabel) {
   const selected = manuscript.id === state.activeId ? " is-selected" : "";
   const pinned = manuscript.pinned ? " is-pinned" : "";
   const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
-  const meta = metaLabel || `${type.label} · ${formatUpdatedAt(manuscript.updatedAt)}`;
+  const summary = VeredaArchive.docSummary(manuscript);
+  const meta = metaLabel || [type.label, summary || formatUpdatedAt(manuscript.updatedAt)].filter(Boolean).join(" · ");
 
   return `
     <button class="${className}${selected}${pinned}" type="button" data-archive-select="${manuscript.id}">
@@ -1355,8 +1360,10 @@ function createProjectNoteDescription(type) {
     glossário: "Termos, nomes, conceitos e vocabulário próprio do projeto.",
     escaleta: "Sequência de cenas com função dramática.",
     "cena-roteiro": "Cena de roteiro com slug line, ação e personagens.",
+    ato: "Divisão estrutural do roteiro, com função dramática e virada.",
+    "personagem-roteiro": "Versão audiovisual de personagem, com função, voz e apresentação.",
     pauta: "Proposta jornalística com gancho, angulação, prazo e fontes.",
-    "fonte-jorn": "Pessoa real ouvida na apuração.",
+    fonte: "Pessoa real ouvida na apuração.",
     entrevista: "Perguntas, respostas brutas e trechos selecionados.",
     fato: "Dado verificável, fonte primária e status de apuração.",
     poema: "Composição poética e suas decisões formais.",

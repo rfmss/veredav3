@@ -17,8 +17,10 @@
     "tema",
     "escaleta",
     "cena-roteiro",
+    "ato",
+    "personagem-roteiro",
     "pauta",
-    "fonte-jorn",
+    "fonte",
     "entrevista",
     "fato",
     "poema",
@@ -26,6 +28,54 @@
     "argumento",
     "crônica",
   ];
+
+  const TYPE_ALIASES = {
+    "fonte-jorn": "fonte",
+  };
+
+  const TYPE_FAMILY = {
+    projeto: "base",
+    manuscrito: "base",
+    pesquisa: "base",
+    glossário: "base",
+    submissão: "base",
+    revisão: "base",
+    personagem: "ficção",
+    cena: "ficção",
+    mundo: "ficção",
+    lugar: "ficção",
+    instituição: "ficção",
+    objeto: "ficção",
+    cronologia: "ficção",
+    capítulo: "ficção",
+    tema: "ficção",
+    escaleta: "roteiro",
+    "cena-roteiro": "roteiro",
+    ato: "roteiro",
+    "personagem-roteiro": "roteiro",
+    pauta: "jornalismo",
+    fonte: "jornalismo",
+    entrevista: "jornalismo",
+    fato: "jornalismo",
+    poema: "poesia",
+    "série-poética": "poesia",
+    argumento: "ensaio",
+    crônica: "ensaio",
+    livro: "pausado",
+    direitos: "pausado",
+  };
+
+  const ARCHIVE_ORDER = ["base", "ficção", "roteiro", "jornalismo", "poesia", "ensaio", "pausado"];
+
+  const FAMILY_LABEL = {
+    base: "Projeto e base",
+    ficção: "Ficção literária",
+    roteiro: "Roteiro",
+    jornalismo: "Jornalismo",
+    poesia: "Poesia",
+    ensaio: "Ensaio e crônica",
+    pausado: "Pausados",
+  };
 
   const META_TEMPLATES = {
     projeto: {
@@ -202,6 +252,27 @@
         { key: "ação", label: "Linha de ação", hint: "Resumo do que acontece", type: "string" },
         { key: "personagens", label: "Personagens", hint: "IDs dos presentes", type: "array" },
         { key: "objetivo", label: "Objetivo dramático", hint: "O que a cena resolve", type: "string" },
+        { key: "nota-produção", label: "Nota de produção", hint: "Efeito especial, figurino ou locação específica", type: "string" },
+      ],
+    },
+    ato: {
+      description: "Divisão estrutural do roteiro.",
+      fields: [
+        { key: "número", label: "Número", hint: "Posição na estrutura", type: "number" },
+        { key: "função", label: "Função dramática", hint: "O que este ato precisa realizar", type: "string" },
+        { key: "virada", label: "Virada de ato", hint: "O evento que fecha ou abre este ato", type: "string" },
+        { key: "cenas", label: "Cenas do ato", hint: "IDs de cenas-roteiro que compõem", type: "array" },
+      ],
+    },
+    "personagem-roteiro": {
+      description: "Personagem adaptado ao formato audiovisual.",
+      fields: [
+        { key: "nome", label: "Nome", hint: "Como aparece nos diálogos", type: "string" },
+        { key: "função", label: "Função", hint: "Protagonista, deuteragonista, antagonista...", type: "string" },
+        { key: "desejo", label: "O que quer", hint: "Motor da ação na história", type: "string" },
+        { key: "conflito", label: "O que impede", hint: "Obstáculo central", type: "string" },
+        { key: "descrição-física", label: "Descrição física", hint: "Como aparece na primeira apresentação no roteiro", type: "string" },
+        { key: "voz", label: "Voz e maneirismo", hint: "Como fala - registros, tiques, ritmo", type: "string" },
       ],
     },
     pauta: {
@@ -215,7 +286,7 @@
         { key: "status", label: "Status", hint: "Ideia, aprovada, em apuração, entregue", type: "string" },
       ],
     },
-    "fonte-jorn": {
+    fonte: {
       description: "Pessoa real ouvida na apuração.",
       fields: [
         { key: "nome", label: "Nome", hint: "Nome completo", type: "string" },
@@ -242,8 +313,10 @@
       fields: [
         { key: "enunciado", label: "Enunciado", hint: "O fato em uma frase objetiva", type: "string" },
         { key: "quando", label: "Quando", hint: "Data ou período", type: "string" },
+        { key: "onde", label: "Onde", hint: "Local, se aplicável", type: "string" },
         { key: "fonte-primária", label: "Fonte primária", hint: "Documento ou pessoa que confirma", type: "string" },
         { key: "status", label: "Status", hint: "Não verificado, confirmado, contestado, falso", type: "string" },
+        { key: "pauta", label: "Pauta relacionada", hint: "ID da pauta onde este fato é usado", type: "ref" },
       ],
     },
     poema: {
@@ -367,9 +440,10 @@
   }
 
   function normalizeMeta(type, value) {
-    const defaults = defaultMeta(type);
+    const normalizedType = normalizeType(type);
+    const defaults = defaultMeta(normalizedType);
     const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
-    const migratedSource = migrateMeta(type, source);
+    const migratedSource = migrateMeta(normalizedType, source);
 
     return Object.keys(defaults).reduce((meta, key) => {
       const defaultValue = defaults[key];
@@ -431,7 +505,8 @@
   }
 
   function normalizeType(value) {
-    return DOCUMENT_TYPES.includes(value) ? value : DEFAULT_METADATA.type;
+    const aliasedValue = TYPE_ALIASES[value] || value;
+    return DOCUMENT_TYPES.includes(aliasedValue) ? aliasedValue : DEFAULT_METADATA.type;
   }
 
   function normalizeTags(value) {
@@ -448,15 +523,117 @@
     return value.length > limit ? `${value.slice(0, limit - 3)}...` : value;
   }
 
+  function createDocument({ id, title, type, text = "", ...metadata }) {
+    const documentId = id || createId(type);
+
+    return createManuscript({
+      ...metadata,
+      id: documentId,
+      title,
+      type,
+      text,
+    });
+  }
+
+  function createId(type) {
+    const prefix = normalizeType(type);
+
+    if (global.crypto && typeof global.crypto.randomUUID === "function") {
+      return `${prefix}-${global.crypto.randomUUID()}`;
+    }
+
+    return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+  }
+
+  function docSummary(doc) {
+    const meta = doc.meta || {};
+
+    switch (normalizeType(doc.type)) {
+      case "projeto":
+        return joinSummary(meta.gênero, meta.estágio);
+      case "personagem":
+        return joinSummary(meta.papel, meta.desejo && `quer ${meta.desejo}`);
+      case "personagem-roteiro":
+        return joinSummary(meta.função, meta.desejo && `quer ${meta.desejo}`);
+      case "cena":
+        return joinSummary(meta.pov && `POV: ${meta.pov}`, meta.objetivo);
+      case "cena-roteiro":
+        return joinSummary(meta.slug, meta.objetivo);
+      case "mundo":
+        return joinSummary(meta.nome, meta.tensão);
+      case "lugar":
+        return joinSummary(meta.tipo, truncateValue(meta.atmosfera, 50));
+      case "instituição":
+        return joinSummary(meta.tipo, truncateValue(meta.objetivo, 60));
+      case "objeto":
+        return truncateValue(meta.significado, 70);
+      case "cronologia":
+        return joinSummaryWith(" — ", meta.data, meta.evento);
+      case "capítulo":
+        return joinSummary(meta.número && `Cap. ${meta.número}`, meta.arco);
+      case "tema":
+        return truncateValue(meta.enunciado, 80);
+      case "glossário":
+        return truncateValue(meta.definição, 70);
+      case "pesquisa":
+        return joinSummary(meta.autor, meta.ano, meta.tema);
+      case "submissão":
+        return joinSummary(meta.editora, meta.status);
+      case "revisão":
+        return joinSummary(meta.tipo, meta.status);
+      case "escaleta":
+        return joinSummary(meta.formato, meta["total-cenas"] && `${meta["total-cenas"]} cenas`);
+      case "ato":
+        return joinSummary(meta.número && `Ato ${meta.número}`, meta.função);
+      case "pauta":
+        return joinSummary(meta.veículo, meta.status);
+      case "fonte":
+        return joinSummaryWith(" — ", meta.nome, meta.cargo);
+      case "entrevista":
+        return joinSummary(meta.data, meta.meio);
+      case "fato":
+        return joinSummary(meta.status, truncateValue(meta.enunciado, 60));
+      case "poema":
+        return joinSummary(meta.forma, meta.metro);
+      case "série-poética":
+        return truncateValue(meta.fio, 70);
+      case "argumento":
+        return truncateValue(meta.tese, 80);
+      case "crônica":
+        return joinSummary(meta.tom, meta.veículo);
+      default:
+        return "";
+    }
+  }
+
+  function joinSummary(...values) {
+    return joinSummaryWith(" · ", ...values);
+  }
+
+  function joinSummaryWith(separator, ...values) {
+    return values.filter(Boolean).join(separator);
+  }
+
+  function truncateValue(value = "", limit = 70) {
+    return value.length > limit ? `${value.slice(0, limit - 3)}...` : value;
+  }
+
   global.VeredaArchive = {
+    ALL_TYPES: Object.keys(TYPE_FAMILY),
+    ARCHIVE_ORDER,
     createManuscript,
+    createDocument,
     DOCUMENT_TYPES,
     defaultMeta,
+    docSummary,
+    FAMILY_LABEL,
     getMetaTemplate,
     META_TEMPLATES,
     normalizeManuscript,
     normalizeManuscripts,
     normalizeMeta,
+    TYPE_ALIASES,
+    TYPE_FAMILY,
     updateMetadata,
   };
 })(window);

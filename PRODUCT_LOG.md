@@ -1272,3 +1272,11 @@ Dissolvemos `/home/rafamass/Downloads/vereda_types_final.html` no schema ativo d
 O `DOCUMENT_TYPES` agora cobre os tipos ativos do mapa final: projeto, manuscrito, pesquisa, glossário, submissão, revisão, personagem, cena, mundo, lugar, instituição, objeto, cronologia, capítulo, tema, escaleta, cena de roteiro, pauta, fonte jornalística, entrevista, fato, poema, série poética, argumento e crônica. `livro` e `direitos` seguem conscientemente pausados.
 
 Também atualizamos `pesquisa` para absorver bibliografia, separamos `mundo` de `lugar` e `instituição`, e preservamos chaves antigas/desconhecidas em `meta` para evitar perda silenciosa durante migração. O cache offline subiu para `vereda-offline-v53` com assets em `?v=20260430-01`.
+
+## 2026-04-30 - Resumos e famílias do Arquivo
+
+Dissolvemos as partes úteis de `/home/rafamass/Downloads/archive-engine-meta.js` no padrão IIFE do `archive-engine.js`.
+
+O motor agora expõe `TYPE_FAMILY`, `ARCHIVE_ORDER`, `FAMILY_LABEL`, `ALL_TYPES`, `createDocument()` e `docSummary(doc)`. Também alinhamos os tipos de roteiro que faltavam (`ato` e `personagem-roteiro`) e migramos o alias `fonte-jorn` para `fonte`.
+
+Os cards do Arquivo passam a usar `docSummary()` quando há metadados preenchidos, mostrando mini-informações específicas por tipo. O cache offline subiu para `vereda-offline-v54` com assets em `?v=20260430-02`.
