@@ -402,6 +402,119 @@ a {
   gap: 8px;
 }
 
+.topbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-search label {
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--muted);
+  padding: 0;
+  transition: width var(--motion-calm), opacity var(--motion-quick), padding var(--motion-calm);
+}
+
+.topbar-search.is-open label {
+  width: min(300px, 32vw);
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px 11px;
+}
+
+.topbar-search.is-open > .icon-button {
+  display: none;
+}
+
+.topbar-search label .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.topbar-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+}
+
+.global-search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(520px, calc(100vh - 96px));
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 8px;
+}
+
+.global-search-results[hidden] {
+  display: none;
+}
+
+.global-search-results button,
+.global-search-empty {
+  width: 100%;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--soft-ink);
+  padding: 10px;
+  text-align: left;
+}
+
+.global-search-results button {
+  cursor: pointer;
+}
+
+.global-search-results button:hover {
+  background: var(--surface-low);
+}
+
+.global-search-results strong,
+.global-search-results span,
+.global-search-results small {
+  display: block;
+}
+
+.global-search-results strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.global-search-results span {
+  margin-top: 3px;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.global-search-results small,
+.global-search-empty {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .offline-badge,
 .install-button,
 .theme-button {
@@ -3522,6 +3635,23 @@ mark {
     flex: 0 1 auto;
     min-width: 0;
     gap: 6px;
+  }
+
+  .topbar-search.is-open {
+    position: static;
+    flex: 1 0 100%;
+    order: 4;
+  }
+
+  .topbar-search.is-open label {
+    width: 100%;
+    max-width: none;
+  }
+
+  .global-search-results {
+    right: 16px;
+    left: 16px;
+    width: auto;
   }
 
   .theme-button {

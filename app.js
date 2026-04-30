@@ -96,6 +96,9 @@ const decolonialObserverToggle = document.querySelector("[data-decolonial-observ
 const decolonialObserver = document.querySelector("[data-decolonial-observer]");
 const decolonialObserverSummary = document.querySelector("[data-decolonial-observer-summary]");
 const decolonialObserverList = document.querySelector("[data-decolonial-observer-list]");
+const topbarSearch = document.querySelector("[data-topbar-search]");
+const globalSearchInput = document.querySelector("[data-global-search-input]");
+const globalSearchResults = document.querySelector("[data-global-search-results]");
 const themePicker = document.querySelector("[data-theme-picker]");
 const themeButton = document.querySelector("[data-action='toggle-theme-menu']");
 const themeMenu = document.querySelector("[data-theme-menu]");
@@ -899,6 +902,96 @@ function setArchiveSort(value) {
   state.archive.sort = value;
   renderProjectGrid();
   persistState("Ordenação do arquivo aplicada");
+}
+
+function searchAll(query) {
+  const normalizedQuery = normalizeSearch(query);
+
+  if (!normalizedQuery) {
+    return [];
+  }
+
+  return state.manuscripts
+    .map((manuscript) => {
+      const title = manuscript.title || "";
+      const text = manuscript.text || "";
+      const haystack = normalizeSearch([title, text, manuscript.description, manuscript.kind, getArchiveType(manuscript).label].join(" "));
+
+      if (!haystack.includes(normalizedQuery)) {
+        return null;
+      }
+
+      return {
+        id: manuscript.id,
+        title,
+        content: createSearchSnippet(text || manuscript.description || title, normalizedQuery),
+        type: getArchiveType(manuscript).label,
+        updatedAt: manuscript.updatedAt,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
+    .slice(0, 8);
+}
+
+function createSearchSnippet(value, normalizedQuery) {
+  const cleanValue = String(value || "").replace(/\s+/g, " ").trim();
+  const normalizedValue = normalizeSearch(cleanValue);
+  const matchIndex = normalizedValue.indexOf(normalizedQuery);
+  const start = matchIndex > 40 ? Math.max(0, matchIndex - 60) : 0;
+  const snippet = cleanValue.slice(start, start + 200);
+  return `${start > 0 ? "... " : ""}${snippet}${cleanValue.length > start + 200 ? " ..." : ""}`;
+}
+
+function toggleGlobalSearch() {
+  topbarSearch.classList.toggle("is-open");
+
+  if (topbarSearch.classList.contains("is-open")) {
+    globalSearchInput.focus();
+    renderGlobalSearchResults(globalSearchInput.value);
+  } else {
+    closeGlobalSearch();
+  }
+}
+
+function closeGlobalSearch() {
+  topbarSearch.classList.remove("is-open");
+  globalSearchResults.hidden = true;
+}
+
+function renderGlobalSearchResults(query) {
+  const results = searchAll(query);
+
+  if (!topbarSearch.classList.contains("is-open") || !query.trim()) {
+    globalSearchResults.hidden = true;
+    globalSearchResults.innerHTML = "";
+    return;
+  }
+
+  globalSearchResults.hidden = false;
+
+  if (!results.length) {
+    globalSearchResults.innerHTML = `<div class="global-search-empty">Nada encontrado no acervo.</div>`;
+    return;
+  }
+
+  globalSearchResults.innerHTML = results
+    .map(
+      (result) => `
+        <button type="button" data-global-search-result="${result.id}">
+          <strong>${escapeHtml(result.title)}</strong>
+          <span>${escapeHtml(result.type)} · ${escapeHtml(formatUpdatedAt(result.updatedAt))}</span>
+          <small>${escapeHtml(result.content)}</small>
+        </button>
+      `
+    )
+    .join("");
+}
+
+function openSearchResult(manuscriptId) {
+  setActiveManuscript(manuscriptId);
+  closeGlobalSearch();
+  globalSearchInput.value = "";
 }
 
 function togglePinnedManuscript(id) {
@@ -2076,6 +2169,10 @@ document.addEventListener("click", (event) => {
     closeThemeMenu();
   }
 
+  if (!topbarSearch.contains(event.target)) {
+    closeGlobalSearch();
+  }
+
   if (manuscriptTarget) {
     event.preventDefault();
     setActiveManuscript(manuscriptTarget.dataset.manuscriptId);
@@ -2129,6 +2226,7 @@ document.addEventListener("click", (event) => {
   const archiveFilterTarget = event.target.closest("[data-archive-filter]");
   const decolonialCategoryTarget = event.target.closest("[data-decolonial-category]");
   const createNoteTypeTarget = event.target.closest("[data-create-note-type]");
+  const globalSearchResultTarget = event.target.closest("[data-global-search-result]");
 
   if (versionTarget) {
     event.preventDefault();
@@ -2187,6 +2285,12 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (globalSearchResultTarget) {
+    event.preventDefault();
+    openSearchResult(globalSearchResultTarget.dataset.globalSearchResult);
+    return;
+  }
+
   if (decolonialCategoryTarget) {
     event.preventDefault();
     decolonialState.category = decolonialCategoryTarget.dataset.decolonialCategory;
@@ -2237,6 +2341,10 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "toggle-theme-menu") {
     toggleThemeMenu();
+  }
+
+  if (actionTarget.dataset.action === "toggle-global-search") {
+    toggleGlobalSearch();
   }
 
   if (actionTarget.dataset.action === "select-theme") {
@@ -2411,6 +2519,12 @@ metadataForm.addEventListener("focusout", renderMetadataForm);
 archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
 archiveSort.addEventListener("change", () => setArchiveSort(archiveSort.value));
 templateSearch.addEventListener("input", () => setTemplateSearch(templateSearch.value));
+globalSearchInput.addEventListener("input", () => renderGlobalSearchResults(globalSearchInput.value));
+globalSearchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeGlobalSearch();
+  }
+});
 voiceInput.addEventListener("input", updateVoiceCount);
 decolonialSearch.addEventListener("input", () => {
   decolonialState.query = decolonialSearch.value;

@@ -1198,3 +1198,11 @@ O estado fica separado do acervo principal em `vereda.checklists.v1`, no formato
 No Arquivo, manuscritos criados a partir de guia passam a mostrar progresso como `3/7 critérios`, usando o checklist salvo para aquele manuscrito e aquele guia.
 
 Também subimos o cache offline para `vereda-offline-v44` com assets em `?v=20260429-12`.
+
+## 2026-04-29 - Busca global no acervo
+
+Adicionamos uma busca leve na topbar, sem worker e sem indexação externa.
+
+A função `searchAll(query)` percorre os manuscritos já carregados em memória a partir de `vereda.manuscripts.v1` e retorna até 8 resultados com `title`, `content`, `type` e `updatedAt`. O campo de busca expande ao clicar na lupa, mostra um dropdown e abre o documento selecionado no editor.
+
+Também subimos o cache offline para `vereda-offline-v45` com assets em `?v=20260429-13`.
