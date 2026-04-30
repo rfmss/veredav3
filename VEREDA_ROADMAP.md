@@ -134,6 +134,21 @@ Ordem de correção recomendada:
 4. evoluir Arquivo para projeto literário real: grupos, relações e envelope `projeto`;
 5. fortalecer promessa offline: fallback visual e lembrete de backup para navegadores sem File System Access API.
 
+### Monetização e acesso
+
+A frente de acesso pago, trilha acadêmica e trilha criativa fica registrada em `ACESSO_MONETIZACAO.md`.
+
+Ela entra depois das fases de fechamento do produto local:
+
+1. confiança imediata;
+2. `.docx` e submissão editorial;
+3. onboarding e descoberta;
+4. projeto literário real;
+5. offline mais honesto;
+6. acesso, monetização e licença offline.
+
+Recomendação: não dissolver código Next.js/Prisma/backend no PWA atual. Primeiro decidir backend separado, licença assinada para offline, política de privacidade e consentimento da tarefa criativa.
+
 ### 1. Checklists persistentes por projeto
 
 Transformar guias de lançamento e revisão em checklists marcáveis por manuscrito.

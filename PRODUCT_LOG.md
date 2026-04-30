@@ -1304,3 +1304,9 @@ Registramos no roadmap os bots futuros de manutenção: fontes oficiais, revisã
 Registramos `AUDITORIA_EDITORIAL.md` como segunda camada da auditoria de produto: leitura de persona, promessas, identidade real, riscos de reputação e pontos onde o Vereda já supera a promessa.
 
 O documento consolida cinco fases de solução: confiança imediata, último metro editorial, descoberta/primeira visita, projeto literário real e offline mais honesto. O objetivo é manter viva a crítica interna enquanto avançamos em commits pequenos.
+
+## 2026-04-30 - Acesso e monetização planejados
+
+Analisamos os arquivos externos de controle de acesso, aprovação social e Mercado Pago como referência conceitual. A decisão foi não inserir esse código no app ativo agora, porque ele pressupõe backend Next.js/Prisma/JWT, enquanto o Vereda atual é um PWA estático local-first.
+
+Criamos `ACESSO_MONETIZACAO.md` com a proposta de trilhas Pública de Formação, Criativa e Profissional, além das recomendações de arquitetura, segurança, LGPD, Mercado Pago e etapa correta de entrada no roadmap. A frente fica para depois do fechamento do produto local: confiança imediata, `.docx`, onboarding, projeto literário real e offline mais honesto.
