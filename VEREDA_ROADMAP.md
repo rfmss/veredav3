@@ -4,7 +4,7 @@ Este documento é a memória operacional do projeto. Ele existe para manter o Ve
 
 ## Estado atual
 
-Estimativa de maturidade: 72% de um MVP apresentável.
+Estimativa de maturidade: 73% de um MVP apresentável.
 
 O Vereda já tem:
 
@@ -15,7 +15,7 @@ O Vereda já tem:
 - Exportação de manuscrito e acervo.
 - PWA offline-first com marca vetorial oficial.
 - Academia com Guia de Ofícios Literários.
-- 57 guias de escrita, estudo, mercado editorial e objeto livro.
+- 60 guias de escrita, estudo, mercado editorial, objeto livro e direitos do autor.
 - Busca no Guia de Ofícios.
 - Medidores locais de aderência à forma, incluindo ENEM.
 - Painéis laterais recolhíveis.
@@ -110,6 +110,17 @@ Para manter a Vereda útil por anos sem depender de revisão manual de tudo:
 - bot de QA visual: gerar screenshots de Editor, Arquivo, Autoria e Academia em desktop/mobile a cada pull request;
 - bot de cache/PWA: validar manifest, service worker, favicons, rotas de atalhos e assets versionados por release;
 - bot de integridade local: rodar `node --check`, validar JSON, mapear referências quebradas e anexar resumo ao QA.
+
+### Auditoria de produto
+
+Rodar uma auditoria literal do código antes dos próximos pacotes grandes:
+
+- mapa de arquivos ativos e protótipos;
+- referências quebradas, seletores órfãos, botões sem ação e assets ausentes;
+- confronto entre roadmap e implementação real;
+- contagem efetiva de guias;
+- veredicto por área;
+- lista priorizada de correções mínimas.
 
 ### 1. Checklists persistentes por projeto
 
