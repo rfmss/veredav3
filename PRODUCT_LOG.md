@@ -1216,3 +1216,11 @@ O `proof-engine.js` permanece sem alteração. O `version-engine.js` passa a pre
 Quando o documento ativo é pesquisa, personagem, cena, mundo, cronologia ou glossário, a aba Autoria mostra uma mensagem neutra em vez de métricas falsas.
 
 Também subimos o cache offline para `vereda-offline-v46` com assets em `?v=20260429-14`.
+
+## 2026-04-29 - Favicon da aba em PNG
+
+Trocamos a prioridade do favicon da aba para PNG, removendo o SVG da lista de ícones do `<head>`.
+
+Os arquivos `tab-favicon-16x16.png`, `tab-favicon-32x32.png`, `tab-favicon-48x48.png`, `tab-favicon-180x180.png` e `tab-favicon.ico` foram regenerados com o logo claro em fundo verde, recentralizado com respiro para evitar corte visual nas bordas da aba.
+
+O manifesto agora também prioriza PNG para o ícone principal. O cache offline subiu para `vereda-offline-v47` com assets em `?v=20260429-15`.

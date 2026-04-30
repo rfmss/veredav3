@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v46";
-const ASSET_VERSION = "20260429-14";
+const CACHE_NAME = "vereda-offline-v47";
+const ASSET_VERSION = "20260429-15";
 
 const CORE_ASSETS = [
   "./",
@@ -27,6 +27,7 @@ const CORE_ASSETS = [
   `./favicon_io/tab-favicon-16x16.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-32x32.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-48x48.png?v=${ASSET_VERSION}`,
+  `./favicon_io/tab-favicon-180x180.png?v=${ASSET_VERSION}`,
   `./favicon_io/apple-touch-icon.png?v=${ASSET_VERSION}`,
   "./favicon_io/android-chrome-192x192.png",
   "./favicon_io/android-chrome-512x512.png",
