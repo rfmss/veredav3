@@ -122,6 +122,18 @@ Rodar uma auditoria literal do código antes dos próximos pacotes grandes:
 - veredicto por área;
 - lista priorizada de correções mínimas.
 
+### Auditoria editorial e confiança
+
+A segunda camada da auditoria fica registrada em `AUDITORIA_EDITORIAL.md`.
+
+Ordem de correção recomendada:
+
+1. remover sensação de produto quebrado: cards `Personagens`/`Cenários`, botão `Configurações` e estado offline;
+2. entregar o último metro editorial: exportação `.docx` básica;
+3. melhorar descoberta: onboarding local, atalhos para ENEM, Espelho de Voz e Vocabulário Decolonizador;
+4. evoluir Arquivo para projeto literário real: grupos, relações e envelope `projeto`;
+5. fortalecer promessa offline: fallback visual e lembrete de backup para navegadores sem File System Access API.
+
 ### 1. Checklists persistentes por projeto
 
 Transformar guias de lançamento e revisão em checklists marcáveis por manuscrito.

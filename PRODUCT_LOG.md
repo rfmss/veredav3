@@ -1298,3 +1298,9 @@ Criamos `rights-engine.js` com cartões por situação de uso: escrita, submiss�
 Também adicionamos a família "Direitos do autor" ao Guia de Ofícios, com guias acionáveis para primeiro mapa de direitos, submissão e leitura de contrato editorial. A banca de especialistas foi usada como critério editorial interno para incorporar lacunas sem teatralizar autoridade dentro da UI.
 
 Registramos no roadmap os bots futuros de manutenção: fontes oficiais, revisão jurídico-editorial, QA visual, cache/PWA e integridade local. O cache offline subiu para `vereda-offline-v56` com assets em `?v=20260430-04`.
+
+## 2026-04-30 - Auditoria editorial e plano faseado
+
+Registramos `AUDITORIA_EDITORIAL.md` como segunda camada da auditoria de produto: leitura de persona, promessas, identidade real, riscos de reputação e pontos onde o Vereda já supera a promessa.
+
+O documento consolida cinco fases de solução: confiança imediata, último metro editorial, descoberta/primeira visita, projeto literário real e offline mais honesto. O objetivo é manter viva a crítica interna enquanto avançamos em commits pequenos.
