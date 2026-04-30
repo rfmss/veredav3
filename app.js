@@ -1925,6 +1925,40 @@ function useActiveManuscriptForRimaLab() {
   rimalabInput.focus();
 }
 
+function exportRimaLabText() {
+  if (!rimalabInput) {
+    return;
+  }
+
+  const text = rimalabInput.value.trim();
+
+  if (!text) {
+    saveStatus.textContent = "RimaLab ainda está vazio";
+    return;
+  }
+
+  const title = getActiveManuscript().title || "rimalab";
+  downloadFile(text, `${slugify(title)}-rimalab.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = "RimaLab exportado em TXT";
+}
+
+function clearRimaLabText() {
+  if (!rimalabInput) {
+    return;
+  }
+
+  if (rimalabInput.value.trim() && !window.confirm("Limpar o texto do RimaLab? O manuscrito principal não será alterado.")) {
+    return;
+  }
+
+  rimalabInput.value = "";
+  localStorage.removeItem(RIMALAB_STORAGE_KEY);
+  localStorage.removeItem(RIMALAB_SAVED_AT_KEY);
+  rimalabSave.textContent = "salvo localmente";
+  renderRimaLab();
+  rimalabInput.focus();
+}
+
 function renderRimaLab() {
   if (!window.VeredaRimaLab || !rimalabInput || !rimalabMetrics || !rimalabRhymes) {
     return;
@@ -2933,6 +2967,14 @@ document.addEventListener("click", (event) => {
 
   if (actionTarget.dataset.action === "rimalab-use-active") {
     useActiveManuscriptForRimaLab();
+  }
+
+  if (actionTarget.dataset.action === "export-rimalab") {
+    exportRimaLabText();
+  }
+
+  if (actionTarget.dataset.action === "clear-rimalab") {
+    clearRimaLabText();
   }
 
   if (actionTarget.dataset.action === "toggle-rimalab-encyclopedia") {

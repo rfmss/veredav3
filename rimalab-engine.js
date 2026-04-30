@@ -6,6 +6,13 @@
 
   const ENCYCLOPEDIA = [
     {
+      title: "Regra de ouro da métrica",
+      tags: ["escansão", "última tônica", "oficina"],
+      body:
+        "Na contagem poética tradicional, o verso é contado até a última sílaba tônica da última palavra. Sons depois dela não entram na medida clássica.",
+      sample: "O amor é fogo que arde sem se ver",
+    },
+    {
       title: "Soneto",
       tags: ["14 versos", "decassílabo", "ABBA ABBA CDC DCD"],
       body:
