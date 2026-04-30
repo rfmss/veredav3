@@ -1264,3 +1264,11 @@ Dissolvemos os templates de `/home/rafamass/Downloads/vereda_meta_templates.html
 O `archive-engine.js` agora expõe `META_TEMPLATES`, `defaultMeta(type)`, `getMetaTemplate(type)` e `normalizeMeta(type, value)`. Documentos antigos recebem `meta` ao carregar, e documentos novos já nascem com campos estruturados por tipo: personagem, cena, mundo, cronologia, glossário, pesquisa e manuscrito.
 
 Também preservamos `meta` ao duplicar documentos e incluímos valores de `meta` na busca do acervo. O cache offline subiu para `vereda-offline-v52` com assets em `?v=20260429-20`.
+
+## 2026-04-30 - Mapa final de tipos literários
+
+Dissolvemos `/home/rafamass/Downloads/vereda_types_final.html` no schema ativo do Arquivo.
+
+O `DOCUMENT_TYPES` agora cobre os tipos ativos do mapa final: projeto, manuscrito, pesquisa, glossário, submissão, revisão, personagem, cena, mundo, lugar, instituição, objeto, cronologia, capítulo, tema, escaleta, cena de roteiro, pauta, fonte jornalística, entrevista, fato, poema, série poética, argumento e crônica. `livro` e `direitos` seguem conscientemente pausados.
+
+Também atualizamos `pesquisa` para absorver bibliografia, separamos `mundo` de `lugar` e `instituição`, e preservamos chaves antigas/desconhecidas em `meta` para evitar perda silenciosa durante migração. O cache offline subiu para `vereda-offline-v53` com assets em `?v=20260430-01`.

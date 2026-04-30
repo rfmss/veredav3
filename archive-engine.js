@@ -1,44 +1,165 @@
 (function archiveEngine(global) {
-  const DOCUMENT_TYPES = ["manuscrito", "pesquisa", "personagem", "cena", "mundo", "cronologia", "glossário"];
+  const DOCUMENT_TYPES = [
+    "projeto",
+    "manuscrito",
+    "pesquisa",
+    "glossário",
+    "submissão",
+    "revisão",
+    "personagem",
+    "cena",
+    "mundo",
+    "lugar",
+    "instituição",
+    "objeto",
+    "cronologia",
+    "capítulo",
+    "tema",
+    "escaleta",
+    "cena-roteiro",
+    "pauta",
+    "fonte-jorn",
+    "entrevista",
+    "fato",
+    "poema",
+    "série-poética",
+    "argumento",
+    "crônica",
+  ];
 
   const META_TEMPLATES = {
+    projeto: {
+      description: "A obra em si - sinopse, público, estágio e tom geral.",
+      fields: [
+        { key: "título", label: "Título de trabalho", hint: "Pode mudar - é para orientação interna", type: "string" },
+        { key: "gênero", label: "Gênero", hint: "Romance, conto, roteiro, poesia, reportagem...", type: "string" },
+        { key: "sinopse", label: "Sinopse", hint: "Do que se trata - uma ou duas frases", type: "string" },
+        { key: "público", label: "Público-alvo", hint: "Repertório, sensibilidade e onde circula", type: "string" },
+        { key: "tom", label: "Tom geral", hint: "Como o projeto soa - seco, lírico, urgente, irônico...", type: "string" },
+        { key: "estágio", label: "Estágio", hint: "Ideia, rascunho, revisão, finalizado, publicado", type: "string" },
+        { key: "prazo", label: "Prazo", hint: "Data alvo - submissão, publicação, entrega", type: "string" },
+        { key: "promessa", label: "Promessa de leitura", hint: "O que o leitor vai sentir ou saber ao terminar", type: "string" },
+      ],
+    },
+    manuscrito: {
+      description: "Texto principal - corpo livre sem painel de meta.",
+      fields: [],
+    },
+    pesquisa: {
+      description: "Fonte absorvida pelo projeto - também cobre bibliografia.",
+      fields: [
+        { key: "fonte", label: "Fonte", hint: "Livro, artigo, entrevista, link", type: "string" },
+        { key: "autor", label: "Autor", hint: "Para referências formais", type: "string" },
+        { key: "ano", label: "Ano", hint: "Ano de publicação", type: "string" },
+        { key: "editora", label: "Editora / publicação", hint: "Para referências formais", type: "string" },
+        { key: "tema", label: "Tema", hint: "Assunto central", type: "string" },
+        { key: "trecho", label: "Trecho / dado", hint: "O que vale guardar", type: "string" },
+        { key: "confiabilidade", label: "Confiabilidade", hint: "Alta, média, baixa, verificar", type: "string" },
+        { key: "uso", label: "Como usar", hint: "Em que parte do projeto entra", type: "string" },
+      ],
+    },
+    glossário: {
+      description: "Termo do mundo - definição, origem e uso.",
+      fields: [
+        { key: "termo", label: "Termo", hint: "A palavra ou expressão", type: "string" },
+        { key: "definição", label: "Definição", hint: "O que significa neste mundo", type: "string" },
+        { key: "origem", label: "Origem", hint: "De onde vem", type: "string" },
+        { key: "uso", label: "Exemplo de uso", hint: "Trecho em contexto", type: "string" },
+      ],
+    },
+    submissão: {
+      description: "Envio editorial - editora, prazo, status e resposta.",
+      fields: [
+        { key: "editora", label: "Editora / revista", hint: "Para onde vai", type: "string" },
+        { key: "chamada", label: "Chamada pública", hint: "Nome do edital ou chamada", type: "string" },
+        { key: "prazo", label: "Prazo", hint: "Data limite de envio", type: "string" },
+        { key: "formato", label: "Formato exigido", hint: "Extensão, arquivo, normas da editora", type: "string" },
+        { key: "status", label: "Status", hint: "A enviar, enviado, aguardando, aceito, recusado", type: "string" },
+        { key: "resposta", label: "Resposta", hint: "O que a editora disse", type: "string" },
+        { key: "versão", label: "Versão enviada", hint: "ID do manuscrito ou snapshot enviado", type: "ref" },
+        { key: "link", label: "Link", hint: "Edital, formulário, página da chamada", type: "string" },
+      ],
+    },
+    revisão: {
+      description: "Nota de processo - problema recorrente, decisão e status.",
+      fields: [
+        { key: "tipo", label: "Tipo de revisão", hint: "Ortográfica, gramatical, estilística, estrutural, de conteúdo", type: "string" },
+        { key: "problema", label: "Problema recorrente", hint: "O padrão que aparece - não a ocorrência isolada", type: "string" },
+        { key: "trecho", label: "Trecho afetado", hint: "Exemplo ou localização no manuscrito", type: "string" },
+        { key: "decisão", label: "Decisão", hint: "O que foi resolvido e por quê", type: "string" },
+        { key: "status", label: "Status", hint: "Identificado, em revisão, resolvido, adiado", type: "string" },
+      ],
+    },
     personagem: {
-      description: "Ser vivo no projeto - nome, desejo, conflito e arco mínimo.",
+      description: "Ser vivo no projeto - nome, desejo, conflito e arco.",
       fields: [
         { key: "nome", label: "Nome", hint: "Como é chamado no texto", type: "string" },
         { key: "papel", label: "Papel", hint: "Protagonista, antagonista, coadjuvante...", type: "string" },
-        { key: "desejo", label: "O que quer", hint: "Objetivo consciente, motor da ação", type: "string" },
-        { key: "conflito", label: "O que impede", hint: "Obstáculo central, interno ou externo", type: "string" },
+        { key: "desejo", label: "O que quer", hint: "Objetivo consciente", type: "string" },
+        { key: "conflito", label: "O que impede", hint: "Obstáculo central", type: "string" },
         { key: "arco", label: "Como muda", hint: "Transformação ao longo da narrativa", type: "string" },
-        { key: "voz", label: "Voz", hint: "Modo de falar, tom, vocabulário característico", type: "string" },
-        { key: "segredo", label: "Segredo", hint: "O que esconde - do mundo ou de si mesmo", type: "string" },
-        { key: "relações", label: "Relações", hint: "IDs de outros personagens ligados a este", type: "array" },
+        { key: "voz", label: "Voz", hint: "Tom, vocabulário, modo de falar", type: "string" },
+        { key: "segredo", label: "Segredo", hint: "O que esconde", type: "string" },
+        { key: "relações", label: "Relações", hint: "IDs de personagens ligados", type: "array" },
       ],
     },
     cena: {
-      description: "Unidade dramática - onde, quem, o quê e para quê.",
+      description: "Unidade dramática - onde, quem e objetivo dramático.",
       fields: [
         { key: "capítulo", label: "Capítulo", hint: "Título ou número do capítulo pai", type: "string" },
-        { key: "lugar", label: "Lugar", hint: "ID de um documento tipo mundo", type: "ref" },
-        { key: "personagens", label: "Personagens", hint: "IDs dos personagens presentes", type: "array" },
-        { key: "objetivo", label: "Objetivo dramático", hint: "O que a cena precisa resolver ou avançar", type: "string" },
-        { key: "clima", label: "Clima emocional", hint: "Tensão, leveza, medo, esperança...", type: "string" },
+        { key: "lugar", label: "Lugar", hint: "ID de documento tipo lugar", type: "ref" },
+        { key: "personagens", label: "Personagens", hint: "IDs dos presentes", type: "array" },
+        { key: "objetivo", label: "Objetivo dramático", hint: "O que a cena resolve ou avança", type: "string" },
+        { key: "clima", label: "Clima emocional", hint: "Tensão, leveza, medo...", type: "string" },
         { key: "pov", label: "Ponto de vista", hint: "Quem narra ou focaliza", type: "string" },
       ],
     },
     mundo: {
-      description: "Espaço construído - regras, sociedade e tensão central.",
+      description: "Sistema amplo - regras, sociedade e tensão estrutural.",
       fields: [
-        { key: "lugar", label: "Nome do lugar", hint: "Como aparece no texto", type: "string" },
+        { key: "nome", label: "Nome do mundo", hint: "Como é chamado no projeto", type: "string" },
         { key: "regra", label: "Regra fundamental", hint: "O que este mundo permite ou proíbe que o nosso não", type: "string" },
         { key: "sociedade", label: "Sociedade", hint: "Como o poder está organizado", type: "string" },
-        { key: "tecnologia", label: "Tecnologia", hint: "Nível e forma - magia, ficção científica, realismo", type: "string" },
-        { key: "tensão", label: "Tensão central", hint: "O conflito estrutural que permeia o cenário", type: "string" },
-        { key: "geografia", label: "Geografia", hint: "Forma física - ilha, órbita, subsolo, metrópole", type: "string" },
+        { key: "tensão", label: "Tensão central", hint: "Conflito estrutural que permeia o cenário", type: "string" },
+        { key: "lugares", label: "Lugares", hint: "IDs de documentos tipo lugar neste mundo", type: "array" },
+        { key: "instituições", label: "Instituições", hint: "IDs de documentos tipo instituição", type: "array" },
+      ],
+    },
+    lugar: {
+      description: "Espaço específico - casa, cidade, nave, redação, praça.",
+      fields: [
+        { key: "nome", label: "Nome", hint: "Como aparece no texto", type: "string" },
+        { key: "mundo", label: "Mundo pai", hint: "ID do mundo a que pertence, se aplicável", type: "ref" },
+        { key: "tipo", label: "Tipo", hint: "Interior, exterior, urbano, rural, espacial, virtual...", type: "string" },
+        { key: "atmosfera", label: "Atmosfera", hint: "Como se sente estar aqui - cheiro, luz, som, textura", type: "string" },
+        { key: "função", label: "Função narrativa", hint: "O que acontece aqui na história", type: "string" },
+        { key: "personagens", label: "Personagens frequentes", hint: "IDs de quem habita ou frequenta", type: "array" },
+      ],
+    },
+    instituição: {
+      description: "Grupo de poder - governo, facção, corporação, culto.",
+      fields: [
+        { key: "nome", label: "Nome", hint: "Como é chamada no texto", type: "string" },
+        { key: "tipo", label: "Tipo", hint: "Estado, corporação, facção, culto, resistência, guilda...", type: "string" },
+        { key: "objetivo", label: "Objetivo", hint: "O que quer - poder, sobrevivência, crença, lucro", type: "string" },
+        { key: "método", label: "Método", hint: "Como age para alcançar o objetivo", type: "string" },
+        { key: "contradição", label: "Contradição interna", hint: "O que a divide ou enfraquece", type: "string" },
+        { key: "membros", label: "Membros", hint: "IDs de personagens ligados", type: "array" },
+        { key: "mundo", label: "Mundo", hint: "ID do mundo onde opera", type: "ref" },
+      ],
+    },
+    objeto: {
+      description: "Item com peso simbólico ou narrativo.",
+      fields: [
+        { key: "nome", label: "Nome", hint: "Como é chamado no texto", type: "string" },
+        { key: "aparência", label: "Aparência", hint: "Como se vê, cheira, pesa", type: "string" },
+        { key: "história", label: "História", hint: "De onde veio, o que já viveu", type: "string" },
+        { key: "dono", label: "Dono atual", hint: "ID do personagem que o possui", type: "ref" },
+        { key: "significado", label: "Significado", hint: "O que representa no plano simbólico", type: "string" },
       ],
     },
     cronologia: {
-      description: "Evento situado no tempo - antes, depois, consequência.",
+      description: "Evento no tempo - antes, depois, consequência.",
       fields: [
         { key: "data", label: "Data / época", hint: "Pode ser relativa: ano 3 da Queda", type: "string" },
         { key: "evento", label: "Evento", hint: "O que aconteceu - uma frase", type: "string" },
@@ -47,27 +168,121 @@
         { key: "personagens", label: "Envolvidos", hint: "IDs de personagens ligados ao evento", type: "array" },
       ],
     },
-    glossário: {
-      description: "Termo do mundo - definição, origem e uso.",
+    capítulo: {
+      description: "Estrutura intermediária entre cena e manuscrito.",
       fields: [
-        { key: "termo", label: "Termo", hint: "A palavra ou expressão", type: "string" },
-        { key: "definição", label: "Definição", hint: "O que significa neste mundo", type: "string" },
-        { key: "origem", label: "Origem", hint: "De onde vem - língua, cultura, evento", type: "string" },
-        { key: "uso", label: "Exemplo de uso", hint: "Trecho mostrando o termo em contexto", type: "string" },
+        { key: "número", label: "Número", hint: "Posição na sequência", type: "number" },
+        { key: "título", label: "Título provisório", hint: "Para orientação interna", type: "string" },
+        { key: "arco", label: "Arco do capítulo", hint: "O que muda entre a primeira e a última cena", type: "string" },
+        { key: "pov", label: "POV dominante", hint: "Quem focaliza, se houver foco único", type: "string" },
+        { key: "cenas", label: "Cenas filhas", hint: "IDs de cenas que compõem este capítulo", type: "array" },
       ],
     },
-    pesquisa: {
-      description: "Fonte externa absorvida pelo projeto.",
+    tema: {
+      description: "Intenção autoral - o que o projeto quer dizer.",
       fields: [
-        { key: "fonte", label: "Fonte", hint: "Livro, artigo, entrevista, link", type: "string" },
-        { key: "tema", label: "Tema", hint: "Assunto central desta pesquisa", type: "string" },
-        { key: "trecho", label: "Trecho / dado", hint: "O que vale guardar - citação ou resumo", type: "string" },
-        { key: "uso", label: "Como usar", hint: "Em que parte do projeto isto entra", type: "string" },
+        { key: "enunciado", label: "Enunciado", hint: "O tema em uma frase - o que o livro diz sobre a vida", type: "string" },
+        { key: "tensão", label: "Tensão temática", hint: "O que o tema questiona ou recusa", type: "string" },
+        { key: "imagem", label: "Imagem central", hint: "Metáfora ou cena que encarna o tema", type: "string" },
       ],
     },
-    manuscrito: {
-      description: "Texto principal - sem meta estruturado além do type.",
-      fields: [],
+    escaleta: {
+      description: "Sequência de cenas com função dramática.",
+      fields: [
+        { key: "título", label: "Título do projeto", hint: "Nome do roteiro ou episódio", type: "string" },
+        { key: "formato", label: "Formato", hint: "Longa, curta, série, novela, episódio", type: "string" },
+        { key: "total-cenas", label: "Total de cenas", hint: "Estimativa antes de detalhar", type: "number" },
+      ],
+    },
+    "cena-roteiro": {
+      description: "Unidade com slug line, ação e personagens.",
+      fields: [
+        { key: "slug", label: "Slug line", hint: "INT./EXT. LUGAR - DIA/NOITE", type: "string" },
+        { key: "número", label: "Número", hint: "Posição na escaleta", type: "number" },
+        { key: "ação", label: "Linha de ação", hint: "Resumo do que acontece", type: "string" },
+        { key: "personagens", label: "Personagens", hint: "IDs dos presentes", type: "array" },
+        { key: "objetivo", label: "Objetivo dramático", hint: "O que a cena resolve", type: "string" },
+      ],
+    },
+    pauta: {
+      description: "Proposta de reportagem - gancho, angulação e fontes.",
+      fields: [
+        { key: "gancho", label: "Gancho", hint: "Por que esta história agora", type: "string" },
+        { key: "angulação", label: "Angulação", hint: "Qual o recorte - não o tema, o ponto de vista", type: "string" },
+        { key: "veículo", label: "Veículo alvo", hint: "Para quem é pensada esta pauta", type: "string" },
+        { key: "prazo", label: "Prazo", hint: "Data de entrega ou publicação", type: "string" },
+        { key: "fontes-necessárias", label: "Fontes necessárias", hint: "Quem precisa ser ouvido", type: "string" },
+        { key: "status", label: "Status", hint: "Ideia, aprovada, em apuração, entregue", type: "string" },
+      ],
+    },
+    "fonte-jorn": {
+      description: "Pessoa real ouvida na apuração.",
+      fields: [
+        { key: "nome", label: "Nome", hint: "Nome completo", type: "string" },
+        { key: "cargo", label: "Cargo e instituição", hint: "Função e onde trabalha", type: "string" },
+        { key: "contato", label: "Contato", hint: "E-mail, telefone, canal preferido", type: "string" },
+        { key: "credibilidade", label: "Credibilidade", hint: "Por que esta fonte", type: "string" },
+        { key: "o-que-sabe", label: "O que sabe", hint: "Qual informação pode fornecer", type: "string" },
+        { key: "status", label: "Status", hint: "A contatar, contatada, entrevistada, off", type: "string" },
+      ],
+    },
+    entrevista: {
+      description: "Perguntas, respostas brutas e trechos selecionados.",
+      fields: [
+        { key: "fonte", label: "Fonte", hint: "ID do documento tipo fonte", type: "ref" },
+        { key: "data", label: "Data", hint: "Quando foi realizada", type: "string" },
+        { key: "meio", label: "Meio", hint: "Presencial, telefone, e-mail, vídeo", type: "string" },
+        { key: "perguntas", label: "Perguntas planejadas", hint: "O roteiro antes da conversa", type: "string" },
+        { key: "trechos", label: "Trechos selecionados", hint: "O que vai para o texto", type: "string" },
+        { key: "off", label: "Off the record", hint: "Para contexto interno", type: "string" },
+      ],
+    },
+    fato: {
+      description: "Dado verificável - enunciado, fonte primária e status.",
+      fields: [
+        { key: "enunciado", label: "Enunciado", hint: "O fato em uma frase objetiva", type: "string" },
+        { key: "quando", label: "Quando", hint: "Data ou período", type: "string" },
+        { key: "fonte-primária", label: "Fonte primária", hint: "Documento ou pessoa que confirma", type: "string" },
+        { key: "status", label: "Status", hint: "Não verificado, confirmado, contestado, falso", type: "string" },
+      ],
+    },
+    poema: {
+      description: "Composição poética - forma, metro e campo semântico.",
+      fields: [
+        { key: "forma", label: "Forma", hint: "Soneto, haiku, ode, verso livre...", type: "string" },
+        { key: "metro", label: "Metro", hint: "Decassílabo, alexandrino, livre", type: "string" },
+        { key: "rimas", label: "Esquema de rimas", hint: "ABAB, ABBA, sem rimas...", type: "string" },
+        { key: "campo-semântico", label: "Campo semântico central", hint: "O universo de imagens que o poema habita", type: "string" },
+        { key: "série", label: "Série / ciclo", hint: "ID de uma série-poética", type: "ref" },
+        { key: "notas", label: "Notas de revisão", hint: "Versos em dúvida, alternativas", type: "string" },
+      ],
+    },
+    "série-poética": {
+      description: "Conjunto de poemas com fio temático ou formal.",
+      fields: [
+        { key: "título", label: "Título da série", hint: "Nome do ciclo", type: "string" },
+        { key: "fio", label: "Fio condutor", hint: "O que une - tema, forma, voz, personagem", type: "string" },
+        { key: "ordem", label: "Princípio de ordem", hint: "Cronológico, temático, formal, livre", type: "string" },
+        { key: "poemas", label: "Poemas", hint: "IDs dos poemas", type: "array" },
+      ],
+    },
+    argumento: {
+      description: "Tese, evidências e contra-argumento para ensaio.",
+      fields: [
+        { key: "tese", label: "Tese", hint: "A afirmação central", type: "string" },
+        { key: "evidências", label: "Evidências", hint: "O que sustenta a tese", type: "string" },
+        { key: "contra-argumento", label: "Contra-argumento", hint: "A objeção mais forte e como respondê-la", type: "string" },
+        { key: "conclusão", label: "Conclusão", hint: "Para onde o argumento leva", type: "string" },
+      ],
+    },
+    crônica: {
+      description: "Gancho cotidiano, tom e conexão com o universal.",
+      fields: [
+        { key: "gancho", label: "Gancho", hint: "O fato ou momento que dispara a crônica", type: "string" },
+        { key: "tom", label: "Tom", hint: "Lírico, irônico, saudoso, urgente...", type: "string" },
+        { key: "virada", label: "Virada", hint: "Quando o cotidiano toca o universal", type: "string" },
+        { key: "veículo", label: "Veículo alvo", hint: "Coluna, blog, jornal, antologia", type: "string" },
+      ],
     },
   };
 
@@ -154,10 +369,11 @@
   function normalizeMeta(type, value) {
     const defaults = defaultMeta(type);
     const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    const migratedSource = migrateMeta(type, source);
 
     return Object.keys(defaults).reduce((meta, key) => {
       const defaultValue = defaults[key];
-      const nextValue = source[key];
+      const nextValue = migratedSource[key];
 
       if (Array.isArray(defaultValue)) {
         meta[key] = Array.isArray(nextValue) ? [...nextValue] : [];
@@ -166,6 +382,28 @@
 
       meta[key] = typeof nextValue === "string" ? nextValue : defaultValue;
       return meta;
+    }, preserveUnknownMeta(defaults, migratedSource));
+  }
+
+  function migrateMeta(type, source) {
+    if (normalizeType(type) !== "mundo") {
+      return source;
+    }
+
+    return {
+      ...source,
+      nome: source.nome || source.lugar || "",
+    };
+  }
+
+  function preserveUnknownMeta(defaults, source) {
+    return Object.keys(source).reduce((unknown, key) => {
+      if (Object.prototype.hasOwnProperty.call(defaults, key)) {
+        return unknown;
+      }
+
+      unknown[key] = source[key];
+      return unknown;
     }, {});
   }
 

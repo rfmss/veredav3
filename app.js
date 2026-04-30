@@ -172,13 +172,31 @@ const colorThemes = [
 ];
 
 const documentTypes = [
+  { id: "projeto", label: "Projeto", icon: "workspaces", kind: "Projeto", chapter: "Visão geral" },
   { id: "manuscrito", label: "Manuscrito", icon: "description", kind: "Manuscrito em branco", chapter: "Primeira página" },
   { id: "pesquisa", label: "Pesquisa", icon: "travel_explore", kind: "Pesquisa", chapter: "Referências" },
+  { id: "glossário", label: "Glossário", icon: "dictionary", kind: "Glossário", chapter: "Termos" },
+  { id: "submissão", label: "Submissão", icon: "outbox", kind: "Submissão", chapter: "Envio editorial" },
+  { id: "revisão", label: "Revisão", icon: "rate_review", kind: "Revisão", chapter: "Processo editorial" },
   { id: "personagem", label: "Personagem", icon: "person_edit", kind: "Personagem", chapter: "Ficha" },
   { id: "cena", label: "Cena", icon: "movie_edit", kind: "Cena", chapter: "Rascunho de cena" },
   { id: "mundo", label: "Mundo", icon: "public", kind: "Mundo", chapter: "Worldbuilding" },
+  { id: "lugar", label: "Lugar", icon: "location_on", kind: "Lugar", chapter: "Espaço" },
+  { id: "instituição", label: "Instituição", icon: "account_balance", kind: "Instituição", chapter: "Grupo de poder" },
+  { id: "objeto", label: "Objeto", icon: "category", kind: "Objeto", chapter: "Item narrativo" },
   { id: "cronologia", label: "Cronologia", icon: "timeline", kind: "Cronologia", chapter: "Linha do tempo" },
-  { id: "glossário", label: "Glossário", icon: "dictionary", kind: "Glossário", chapter: "Termos" },
+  { id: "capítulo", label: "Capítulo", icon: "view_agenda", kind: "Capítulo", chapter: "Estrutura" },
+  { id: "tema", label: "Tema", icon: "psychology", kind: "Tema", chapter: "Intenção autoral" },
+  { id: "escaleta", label: "Escaleta", icon: "format_list_numbered", kind: "Escaleta", chapter: "Roteiro" },
+  { id: "cena-roteiro", label: "Cena de roteiro", icon: "theaters", kind: "Cena de roteiro", chapter: "Roteiro" },
+  { id: "pauta", label: "Pauta", icon: "newspaper", kind: "Pauta", chapter: "Jornalismo" },
+  { id: "fonte-jorn", label: "Fonte", icon: "contact_mail", kind: "Fonte jornalística", chapter: "Apuração" },
+  { id: "entrevista", label: "Entrevista", icon: "record_voice_over", kind: "Entrevista", chapter: "Apuração" },
+  { id: "fato", label: "Fato", icon: "fact_check", kind: "Fato", chapter: "Verificação" },
+  { id: "poema", label: "Poema", icon: "format_quote", kind: "Poema", chapter: "Poesia" },
+  { id: "série-poética", label: "Série poética", icon: "library_books", kind: "Série poética", chapter: "Poesia" },
+  { id: "argumento", label: "Argumento", icon: "schema", kind: "Argumento", chapter: "Ensaio" },
+  { id: "crônica", label: "Crônica", icon: "stylus_note", kind: "Crônica", chapter: "Crônica" },
 ];
 
 let state = loadState();
@@ -1321,12 +1339,30 @@ function createProjectNoteText(type) {
 
 function createProjectNoteDescription(type) {
   const descriptions = {
+    projeto: "Visão geral da obra: sinopse, público, estágio, prazo e promessa de leitura.",
     pesquisa: "Fontes, hipóteses, referências e perguntas abertas do projeto.",
+    submissão: "Envios editoriais, chamadas, prazos, formatos exigidos e respostas.",
+    revisão: "Notas de processo editorial, problemas recorrentes, decisões e status.",
     personagem: "Ficha de personagem, desejo, contradição, voz e arco.",
     cena: "Rascunho ou planejamento de uma cena específica.",
-    mundo: "Worldbuilding: tecnologia, território, cultura, regras e limites.",
+    mundo: "Sistema amplo: regras, sociedade, tensão estrutural, lugares e instituições.",
+    lugar: "Espaço específico do projeto: casa, cidade, nave, redação ou praça.",
+    instituição: "Grupo de poder, governo, facção, corporação, culto ou resistência.",
+    objeto: "Item com peso simbólico ou narrativo no projeto.",
     cronologia: "Linha do tempo de acontecimentos internos e externos da história.",
+    capítulo: "Estrutura intermediária entre cenas e manuscrito.",
+    tema: "Intenção autoral, tensão temática e imagem central do projeto.",
     glossário: "Termos, nomes, conceitos e vocabulário próprio do projeto.",
+    escaleta: "Sequência de cenas com função dramática.",
+    "cena-roteiro": "Cena de roteiro com slug line, ação e personagens.",
+    pauta: "Proposta jornalística com gancho, angulação, prazo e fontes.",
+    "fonte-jorn": "Pessoa real ouvida na apuração.",
+    entrevista: "Perguntas, respostas brutas e trechos selecionados.",
+    fato: "Dado verificável, fonte primária e status de apuração.",
+    poema: "Composição poética e suas decisões formais.",
+    "série-poética": "Conjunto de poemas com fio temático ou formal.",
+    argumento: "Tese, evidências e contra-argumento para ensaio.",
+    crônica: "Gancho cotidiano, tom e conexão com o universal.",
   };
 
   return descriptions[type.id] || "Nota de projeto vinculada ao acervo.";
