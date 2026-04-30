@@ -97,7 +97,7 @@ Validação mínima:
 Estas frentes ficam anotadas, mas pausadas enquanto o foco está no polimento da barra/aba do navegador:
 
 - exportação `.docx` para submissão editorial brasileira;
-- aviso forte e fluxo de backup contra perda de dados ao limpar cache/localStorage;
+- reforco futuro do fluxo de backup automatico/sugerido, alem do aviso inicial ja entregue;
 - atalhos PWA com destinos distintos, especialmente Academia;
 - estrutura de projeto literário mais completa além do campo `type`.
 

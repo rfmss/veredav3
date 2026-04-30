@@ -1232,3 +1232,11 @@ Removemos o fallback `.ico` do `<head>` para a aba usar apenas PNG transparente.
 Os PNGs da aba agora são derivados diretamente do `android-chrome-512x512.png`, sem recorte e sem recomposição em uma nova caixa. A intenção é preservar o logo redondo como ele é: círculo verde, marca clara e transparência fora do círculo.
 
 Também registramos no `VEREDA_ROADMAP.md` as pendências pausadas: `.docx`, risco de perda por cache/localStorage, atalhos PWA e estrutura literária mais completa. O cache offline subiu para `vereda-offline-v48` com assets em `?v=20260429-16`.
+
+## 2026-04-29 - Aviso de backup local
+
+Adicionamos um aviso forte no Arquivo para explicar que o acervo fica salvo no navegador e pode ser perdido ao limpar cache, trocar de aparelho ou remover dados do site.
+
+O aviso aparece quando ainda não há registro de backup `.vrda` exportado ou quando o último backup tem 7 dias ou mais. O botão "Exportar agora" usa o fluxo existente de `backup-engine.js`, e o `app.js` registra `vereda.backup-meta.v1` com a data da última exportação/importação.
+
+O cache offline subiu para `vereda-offline-v49` com assets em `?v=20260429-17`.

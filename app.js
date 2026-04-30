@@ -1,5 +1,7 @@
 const STORAGE_KEY = "vereda.manuscripts.v1";
 const CHECKLIST_STORAGE_KEY = "vereda.checklists.v1";
+const BACKUP_META_STORAGE_KEY = "vereda.backup-meta.v1";
+const BACKUP_WARNING_DAYS = 7;
 
 const starterManuscripts = [
   {
@@ -60,6 +62,8 @@ const proofCadence = document.querySelector("[data-proof-cadence]");
 const proofSessionName = document.querySelector("[data-proof-session-name]");
 const proofTimeline = document.querySelector("[data-proof-timeline]");
 const backupInput = document.querySelector("[data-backup-input]");
+const backupWarning = document.querySelector("[data-backup-warning]");
+const backupWarningCopy = document.querySelector("[data-backup-warning-copy]");
 const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
@@ -178,6 +182,7 @@ const documentTypes = [
 
 let state = loadState();
 let checklistState = loadChecklistState();
+let backupMeta = loadBackupMeta();
 let saveTimer;
 let deferredInstallPrompt;
 let createNoteType = "manuscrito";
@@ -272,6 +277,16 @@ function loadChecklistState() {
   }
 }
 
+function loadBackupMeta() {
+  try {
+    const saved = localStorage.getItem(BACKUP_META_STORAGE_KEY);
+    const parsed = saved ? JSON.parse(saved) : {};
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
 function getDefaultFocusSettings() {
   return {
     fontSize: 19,
@@ -328,6 +343,10 @@ function persistState(status = "Salvo localmente") {
 function persistChecklistState(status = "Checklist atualizado") {
   localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(checklistState));
   saveStatus.textContent = status;
+}
+
+function persistBackupMeta() {
+  localStorage.setItem(BACKUP_META_STORAGE_KEY, JSON.stringify(backupMeta));
 }
 
 function getActiveManuscript() {
@@ -1882,11 +1901,48 @@ async function exportProof() {
   saveStatus.textContent = "Prova de escrita exportada";
 }
 
+function getBackupWarningState() {
+  const exportedAt = backupMeta.exportedAt ? new Date(backupMeta.exportedAt) : null;
+
+  if (!exportedAt || Number.isNaN(exportedAt.getTime())) {
+    return {
+      visible: true,
+      copy: "Limpar cache, trocar de aparelho ou remover dados do site pode apagar seus textos locais. Exporte um backup .vrda para guardar uma cópia fora do navegador.",
+    };
+  }
+
+  const elapsedDays = Math.floor((Date.now() - exportedAt.getTime()) / (1000 * 60 * 60 * 24));
+
+  if (elapsedDays >= BACKUP_WARNING_DAYS) {
+    return {
+      visible: true,
+      copy: `Seu último backup .vrda foi há ${elapsedDays} dias. Exporte uma cópia nova antes de limpar cache ou trocar de aparelho.`,
+    };
+  }
+
+  return {
+    visible: false,
+    copy: "",
+  };
+}
+
+function renderBackupWarning() {
+  const warning = getBackupWarningState();
+  backupWarning.hidden = !warning.visible;
+  backupWarningCopy.textContent = warning.copy;
+}
+
 function exportBackup() {
   const backup = VeredaBackup.createBackup(state);
   const backupJson = JSON.stringify(backup, null, 2);
   const dateStamp = createDateTimeStamp();
   downloadFile(backupJson, `vereda-acervo-${dateStamp}.vrda`, "application/vnd.vereda+json");
+  backupMeta = {
+    exportedAt: backup.exportedAt,
+    manuscriptCount: state.manuscripts.length,
+  };
+  persistBackupMeta();
+  renderBackupWarning();
   saveStatus.textContent = "Acervo .vrda exportado";
 }
 
@@ -1919,12 +1975,18 @@ async function importBackup(file) {
       ...getDefaultArchiveState(),
       ...state.archive,
     };
+    backupMeta = {
+      exportedAt: backup.exportedAt || new Date().toISOString(),
+      manuscriptCount: state.manuscripts.length,
+    };
+    persistBackupMeta();
     renderActiveManuscript();
     renderManuscriptNavigation();
     renderProjectGrid();
     renderLexicalView();
     renderProofView();
     renderVersionList();
+    renderBackupWarning();
     applyFocusSettings();
     persistState("Backup importado");
     setView("arquivo");
@@ -2611,6 +2673,7 @@ renderMetadataForm();
 renderLexicalView();
 renderProofView();
 renderVersionList();
+renderBackupWarning();
 renderTemplateStudio();
 renderDecolonialTool();
 updateAcademyParallax();
