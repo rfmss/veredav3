@@ -1028,6 +1028,15 @@ a {
   align-items: flex-start;
   gap: 8px;
   color: var(--muted);
+  cursor: pointer;
+}
+
+.precision-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin: 0;
+  accent-color: var(--primary);
 }
 
 .precision-check .material-symbols-outlined {
@@ -1036,6 +1045,10 @@ a {
 }
 
 .precision-check.is-passed .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.precision-check.is-checked strong {
   color: var(--primary);
 }
 

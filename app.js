@@ -1,4 +1,5 @@
 const STORAGE_KEY = "vereda.manuscripts.v1";
+const CHECKLIST_STORAGE_KEY = "vereda.checklists.v1";
 
 const starterManuscripts = [
   {
@@ -173,6 +174,7 @@ const documentTypes = [
 ];
 
 let state = loadState();
+let checklistState = loadChecklistState();
 let saveTimer;
 let deferredInstallPrompt;
 let createNoteType = "manuscrito";
@@ -257,6 +259,16 @@ function loadState() {
   }
 }
 
+function loadChecklistState() {
+  try {
+    const saved = localStorage.getItem(CHECKLIST_STORAGE_KEY);
+    const parsed = saved ? JSON.parse(saved) : {};
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
 function getDefaultFocusSettings() {
   return {
     fontSize: 19,
@@ -308,6 +320,11 @@ function persistState(status = "Salvo localmente") {
   window.setTimeout(() => {
     saveStatus.dataset.motion = "";
   }, 700);
+}
+
+function persistChecklistState(status = "Checklist atualizado") {
+  localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(checklistState));
+  saveStatus.textContent = status;
 }
 
 function getActiveManuscript() {
@@ -643,6 +660,13 @@ function renderProjectGrid() {
       const tags = createTagMarkup(manuscript.tags);
       const pinned = manuscript.pinned ? " is-pinned" : "";
       const pinLabel = manuscript.pinned ? "Desafixar documento" : "Fixar documento";
+      const checklistProgress = getChecklistProgress(manuscript);
+      const progressLabel = checklistProgress
+        ? `${checklistProgress.done}/${checklistProgress.total} critérios`
+        : `${manuscript.progress}%`;
+      const progressValue = checklistProgress
+        ? Math.round((checklistProgress.done / Math.max(1, checklistProgress.total)) * 100)
+        : manuscript.progress;
 
       return `
         <article class="project-card${featured}${selected}${pinned}" data-archive-select="${manuscript.id}" data-document-type="${type.id}" role="button" tabindex="0">
@@ -652,9 +676,9 @@ function renderProjectGrid() {
           <p>${escapeHtml(manuscript.description || createExcerpt(manuscript.text))}</p>
           ${tags}
           <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
-            <i style="--progress: ${manuscript.progress}%"></i>
+            <i style="--progress: ${progressValue}%"></i>
           </div>
-          <small>${escapeHtml(manuscript.chapter)} · ${manuscript.progress}% · ${words} palavras · ${formatUpdatedAt(manuscript.updatedAt)}</small>
+          <small>${escapeHtml(manuscript.chapter)} · ${progressLabel} · ${words} palavras · ${formatUpdatedAt(manuscript.updatedAt)}</small>
           <div class="project-actions" aria-label="Ações de ${escapeHtml(manuscript.title)}">
             <button type="button" data-archive-quick="open" data-archive-document="${manuscript.id}" title="Abrir no editor" aria-label="Abrir ${escapeHtml(manuscript.title)} no editor">
               <span class="material-symbols-outlined">edit_note</span>
@@ -835,6 +859,20 @@ function getArchiveTypeCounts() {
 function getArchiveType(manuscript) {
   const id = manuscript.type || "manuscrito";
   return documentTypes.find((type) => type.id === id) || documentTypes[0];
+}
+
+function getChecklistProgress(manuscript) {
+  if (!manuscript.templateId) {
+    return null;
+  }
+
+  const template = VeredaTemplates.getTemplate(manuscript.templateId);
+  const analysis = VeredaPrecision.analyze(template, manuscript.text || "");
+  const checklist = getChecklistFor(manuscript.id, manuscript.templateId);
+  const total = analysis.checks.length;
+  const done = analysis.checks.filter((check) => Boolean(checklist[check.label])).length;
+
+  return { done, total };
 }
 
 function setArchiveFilter(filter) {
@@ -1775,7 +1813,7 @@ function renderTemplateReference() {
     .join("");
 
   precisionCard.innerHTML = isManuscriptDocument(manuscript)
-    ? createPrecisionMarkup(VeredaPrecision.analyze(template, manuscript.text))
+    ? createPrecisionMarkup(VeredaPrecision.analyze(template, manuscript.text), manuscript, template)
     : createProjectNotePrecisionMarkup(manuscript);
   referenceBody.innerHTML = createReferenceMarkup(template);
 }
@@ -1803,7 +1841,9 @@ function createProjectNotePrecisionMarkup(manuscript) {
   `;
 }
 
-function createPrecisionMarkup(analysis) {
+function createPrecisionMarkup(analysis, manuscript, template) {
+  const checklist = getChecklistFor(manuscript.id, template.id);
+
   return `
     <div class="precision-top">
       <span>Aderência à forma</span>
@@ -1816,19 +1856,42 @@ function createPrecisionMarkup(analysis) {
     <div class="precision-checks">
       ${analysis.checks
         .map(
-          (check) => `
-            <div class="precision-check${check.passed ? " is-passed" : ""}">
-              <span class="material-symbols-outlined">${check.passed ? "check_circle" : "radio_button_unchecked"}</span>
+          (check) => {
+            const checked = Boolean(checklist[check.label]);
+            return `
+            <label class="precision-check${check.passed ? " is-passed" : ""}${checked ? " is-checked" : ""}">
+              <input type="checkbox" data-checklist-criterion="${escapeHtml(check.label)}" ${checked ? "checked" : ""}>
               <div>
                 <strong>${escapeHtml(check.label)} <b>${check.score}%</b></strong>
                 <small>${escapeHtml(check.hint)}</small>
               </div>
-            </div>
-          `
+            </label>
+          `;
+          }
         )
         .join("")}
     </div>
   `;
+}
+
+function getChecklistFor(manuscriptId, templateId) {
+  return checklistState[manuscriptId]?.[templateId] || {};
+}
+
+function setChecklistCriterion(manuscriptId, templateId, criterion, checked) {
+  checklistState = {
+    ...checklistState,
+    [manuscriptId]: {
+      ...(checklistState[manuscriptId] || {}),
+      [templateId]: {
+        ...(checklistState[manuscriptId]?.[templateId] || {}),
+        [criterion]: checked,
+      },
+    },
+  };
+
+  persistChecklistState();
+  renderProjectGrid();
 }
 
 function createReferenceMarkup(template) {
@@ -2356,6 +2419,17 @@ decolonialSearch.addEventListener("input", () => {
 decolonialObserverToggle.addEventListener("change", () => {
   decolonialState.observerEnabled = decolonialObserverToggle.checked;
   renderDecolonialObserver();
+});
+precisionCard.addEventListener("change", (event) => {
+  const checklistTarget = event.target.closest("[data-checklist-criterion]");
+
+  if (!checklistTarget) {
+    return;
+  }
+
+  const manuscript = getActiveManuscript();
+  const template = VeredaTemplates.getTemplate(state.template.selectedId);
+  setChecklistCriterion(manuscript.id, template.id, checklistTarget.dataset.checklistCriterion, checklistTarget.checked);
 });
 
 renderActiveManuscript();

@@ -1188,3 +1188,13 @@ O schema local de manuscrito ganhou o campo `type`, com os tipos `manuscrito`, `
 Notas de projeto continuam abrindo no editor, mas não passam pela aderência à forma do `precision-engine.js`. O Espelho de Voz também não carrega automaticamente notas de projeto como se fossem manuscritos.
 
 Também subimos o cache offline para `vereda-offline-v43` com assets em `?v=20260429-11`.
+
+## 2026-04-29 - Checklists persistentes por guia
+
+Transformamos os critérios do Guia de Escrita em checklist local por manuscrito e por guia.
+
+O estado fica separado do acervo principal em `vereda.checklists.v1`, no formato `manuscriptId -> templateId -> critério`. Cada critério do painel de aderência agora pode ser marcado sem mudar o layout do Guia de Escrita.
+
+No Arquivo, manuscritos criados a partir de guia passam a mostrar progresso como `3/7 critérios`, usando o checklist salvo para aquele manuscrito e aquele guia.
+
+Também subimos o cache offline para `vereda-offline-v44` com assets em `?v=20260429-12`.
