@@ -1,6 +1,8 @@
 const STORAGE_KEY = "vereda.manuscripts.v1";
 const CHECKLIST_STORAGE_KEY = "vereda.checklists.v1";
 const BACKUP_META_STORAGE_KEY = "vereda.backup-meta.v1";
+const RIMALAB_STORAGE_KEY = "vereda.rimalab.v1";
+const RIMALAB_SAVED_AT_KEY = "vereda.rimalab-saved-at.v1";
 const BACKUP_WARNING_DAYS = 7;
 const VIEW_ROUTES = new Set(["editor", "biblioteca", "autoria", "arquivo", "academia"]);
 
@@ -100,6 +102,17 @@ const createNoteTypes = document.querySelector("[data-create-note-types]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
 const voiceResult = document.querySelector("[data-voice-result]");
+const rimalabInput = document.querySelector("[data-rimalab-input]");
+const rimalabCount = document.querySelector("[data-rimalab-count]");
+const rimalabSave = document.querySelector("[data-rimalab-save]");
+const rimalabIsometry = document.querySelector("[data-rimalab-isometry]");
+const rimalabIsometryTitle = document.querySelector("[data-rimalab-isometry-title]");
+const rimalabIsometryCopy = document.querySelector("[data-rimalab-isometry-copy]");
+const rimalabMetrics = document.querySelector("[data-rimalab-metrics]");
+const rimalabRhymes = document.querySelector("[data-rimalab-rhymes]");
+const rimalabScheme = document.querySelector("[data-rimalab-scheme]");
+const rimalabEncyclopedia = document.querySelector("[data-rimalab-encyclopedia]");
+const rimalabNote = document.querySelector("[data-rimalab-note]");
 const decolonialSearch = document.querySelector("[data-decolonial-search]");
 const decolonialFilters = document.querySelector("[data-decolonial-filters]");
 const decolonialCount = document.querySelector("[data-decolonial-count]");
@@ -216,6 +229,7 @@ let state = loadState();
 let checklistState = loadChecklistState();
 let backupMeta = loadBackupMeta();
 let saveTimer;
+let rimalabTimer;
 let filesystemBackupHandle = null;
 let filesystemBackupTimer = null;
 let filesystemBackupIntervalSeconds = 15;
@@ -1874,6 +1888,175 @@ function createVoiceBars(title, items) {
   `;
 }
 
+function loadRimaLabText() {
+  if (!rimalabInput) {
+    return;
+  }
+
+  const savedText = localStorage.getItem(RIMALAB_STORAGE_KEY);
+  const savedAt = localStorage.getItem(RIMALAB_SAVED_AT_KEY);
+  rimalabInput.value = savedText || "";
+
+  if (savedAt && rimalabSave) {
+    rimalabSave.textContent = `salvo ${formatTimeWithSeconds(savedAt)}`;
+  }
+}
+
+function persistRimaLabText() {
+  if (!rimalabInput || !rimalabSave) {
+    return;
+  }
+
+  const now = new Date().toISOString();
+  localStorage.setItem(RIMALAB_STORAGE_KEY, rimalabInput.value);
+  localStorage.setItem(RIMALAB_SAVED_AT_KEY, now);
+  rimalabSave.textContent = `salvo ${formatTimeWithSeconds(now)}`;
+}
+
+function useActiveManuscriptForRimaLab() {
+  if (!rimalabInput) {
+    return;
+  }
+
+  rimalabInput.value = getActiveManuscript().text.trim();
+  renderRimaLab();
+  persistRimaLabText();
+  setView("academia");
+  rimalabInput.focus();
+}
+
+function renderRimaLab() {
+  if (!window.VeredaRimaLab || !rimalabInput || !rimalabMetrics || !rimalabRhymes) {
+    return;
+  }
+
+  const text = rimalabInput.value;
+  const analysis = window.VeredaRimaLab.analyze(text);
+
+  if (rimalabCount) {
+    rimalabCount.textContent = `${analysis.totalVerses} ${analysis.totalVerses === 1 ? "verso" : "versos"}`;
+  }
+
+  if (rimalabNote) {
+    rimalabNote.textContent = analysis.note;
+  }
+
+  renderRimaLabIsometry(analysis);
+  renderRimaLabMetrics(analysis.scans);
+  renderRimaLabRhymes(analysis.rhymes);
+
+  if (rimalabScheme) {
+    rimalabScheme.textContent = analysis.rhymeScheme || "Esquema: escreva ao menos um verso";
+  }
+}
+
+function renderRimaLabIsometry(analysis) {
+  if (!rimalabIsometry || !rimalabIsometryTitle || !rimalabIsometryCopy) {
+    return;
+  }
+
+  rimalabIsometry.classList.toggle("is-isometric", analysis.isIsometric);
+
+  if (!analysis.totalVerses) {
+    rimalabIsometryTitle.textContent = "Sem versos ainda";
+    rimalabIsometryCopy.textContent = "O painel reage quando você escreve versos separados por linha.";
+    return;
+  }
+
+  if (analysis.isIsometric) {
+    rimalabIsometryTitle.textContent = `${analysis.metrics[0]} sílabas em cada verso`;
+    rimalabIsometryCopy.textContent = "Isometria detectada: a medida se repete e o pulso fica mais estável.";
+    return;
+  }
+
+  rimalabIsometryTitle.textContent =
+    analysis.uniqueMetrics.length === 1
+      ? `${analysis.uniqueMetrics[0]} sílabas`
+      : `${analysis.uniqueMetrics.join(", ")} sílabas`;
+  rimalabIsometryCopy.textContent = "A métrica ainda varia. Isso pode ser escolha musical, respiração ou verso livre.";
+}
+
+function renderRimaLabMetrics(scans) {
+  if (!rimalabMetrics) {
+    return;
+  }
+
+  if (!scans.length) {
+    rimalabMetrics.innerHTML = `<p class="rimalab-empty">Escreva versos em linhas separadas para ver escansão, elisões e tonicidade final.</p>`;
+    return;
+  }
+
+  rimalabMetrics.innerHTML = scans
+    .map(
+      (scan, index) => `
+        <article class="rimalab-metric-row">
+          <strong>${index + 1}</strong>
+          <div>
+            <b>${scan.totalSyllables} sílabas poéticas</b>
+            <span>${escapeHtml(scan.finalWord)} · ${escapeHtml(scan.finalTonicity)}${
+        scan.ellisions.length ? ` · elisão: ${scan.ellisions.map(escapeHtml).join(", ")}` : ""
+      }</span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderRimaLabRhymes(rhymes) {
+  if (!rimalabRhymes) {
+    return;
+  }
+
+  if (!rhymes.length) {
+    rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas entre versos consecutivos aparecem aqui.</p>`;
+    return;
+  }
+
+  rimalabRhymes.innerHTML = rhymes
+    .map(
+      (rhyme) => `
+        <article class="rimalab-rhyme-row ${rhyme.rhymes ? "has-rhyme" : ""}">
+          <span class="rimalab-rhyme-badge is-${escapeHtml(rhyme.classification)}">${escapeHtml(rhyme.classification)}</span>
+          <div>
+            <b>${escapeHtml(rhyme.wordA)} / ${escapeHtml(rhyme.wordB)}</b>
+            <small>/${escapeHtml(rhyme.soundA)}/ · /${escapeHtml(rhyme.soundB)}/${
+        rhyme.classA && rhyme.classB ? ` · ${escapeHtml(rhyme.classA)} + ${escapeHtml(rhyme.classB)}` : ""
+      }</small>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderRimaLabEncyclopedia() {
+  if (!window.VeredaRimaLab || !rimalabEncyclopedia) {
+    return;
+  }
+
+  rimalabEncyclopedia.innerHTML = window.VeredaRimaLab.encyclopedia
+    .map(
+      (entry) => `
+        <article>
+          <h3>${escapeHtml(entry.title)}</h3>
+          <div>${entry.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+          <p>${escapeHtml(entry.body)}</p>
+          <blockquote>${escapeHtml(entry.sample)}</blockquote>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function toggleRimaLabEncyclopedia() {
+  if (!rimalabEncyclopedia) {
+    return;
+  }
+
+  rimalabEncyclopedia.hidden = !rimalabEncyclopedia.hidden;
+}
+
 function renderDecolonialTool() {
   if (!window.VeredaDecolonial || !decolonialFilters || !decolonialList) {
     return;
@@ -2748,6 +2931,14 @@ document.addEventListener("click", (event) => {
     renderVoiceMirror();
   }
 
+  if (actionTarget.dataset.action === "rimalab-use-active") {
+    useActiveManuscriptForRimaLab();
+  }
+
+  if (actionTarget.dataset.action === "toggle-rimalab-encyclopedia") {
+    toggleRimaLabEncyclopedia();
+  }
+
   if (actionTarget.dataset.action === "open-create-note") {
     openCreateNote();
   }
@@ -2930,6 +3121,12 @@ globalSearchInput.addEventListener("keydown", (event) => {
   }
 });
 voiceInput.addEventListener("input", updateVoiceCount);
+rimalabInput.addEventListener("input", () => {
+  renderRimaLab();
+  rimalabSave.textContent = "salvando...";
+  window.clearTimeout(rimalabTimer);
+  rimalabTimer = window.setTimeout(persistRimaLabText, 350);
+});
 decolonialSearch.addEventListener("input", () => {
   decolonialState.query = decolonialSearch.value;
   renderDecolonialTool();
@@ -2963,6 +3160,9 @@ renderProofView();
 renderVersionList();
 renderBackupWarning();
 renderTemplateStudio();
+loadRimaLabText();
+renderRimaLab();
+renderRimaLabEncyclopedia();
 renderDecolonialTool();
 renderRightsLab();
 updateAcademyParallax();

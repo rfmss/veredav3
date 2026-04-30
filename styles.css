@@ -2626,6 +2626,273 @@ mark {
   line-height: 1.5;
 }
 
+.rimalab-tool {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.38fr);
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.rimalab-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rimalab-copy h2 {
+  max-width: 430px;
+  margin: 0;
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 30px;
+  line-height: 1.12;
+}
+
+.rimalab-copy p:not(.eyebrow) {
+  margin: 0;
+  color: var(--soft-ink);
+  line-height: 1.6;
+}
+
+.rimalab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.rimalab-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.8fr);
+  gap: 14px;
+}
+
+.rimalab-editor {
+  display: grid;
+  gap: 10px;
+}
+
+.rimalab-editor textarea {
+  width: 100%;
+  min-height: 360px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: 0;
+  resize: vertical;
+  background: var(--surface-low);
+  color: var(--ink);
+  padding: 16px;
+  font: 15px/1.8 "Noto Serif", Georgia, serif;
+}
+
+.rimalab-editor textarea:focus {
+  border-color: var(--primary);
+  background: var(--card);
+}
+
+.rimalab-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rimalab-dashboard {
+  display: grid;
+  gap: 10px;
+}
+
+.rimalab-isometry,
+.rimalab-panel,
+.rimalab-encyclopedia {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card) 84%, transparent);
+  padding: 13px;
+}
+
+.rimalab-isometry {
+  background: color-mix(in srgb, var(--surface-low) 74%, var(--card));
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.rimalab-isometry.is-isometric {
+  border-color: color-mix(in srgb, var(--primary) 46%, var(--line));
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+  transform: translateY(-1px);
+}
+
+.rimalab-isometry strong {
+  display: block;
+  color: var(--primary);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.rimalab-isometry span,
+.rimalab-empty,
+.rimalab-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.rimalab-panel h3 {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rimalab-list {
+  display: grid;
+  gap: 8px;
+}
+
+.rimalab-metric-row,
+.rimalab-rhyme-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+
+.rimalab-metric-row:first-child,
+.rimalab-rhyme-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.rimalab-metric-row > strong {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-mid);
+  color: var(--primary);
+  font-size: 12px;
+}
+
+.rimalab-metric-row b,
+.rimalab-rhyme-row b {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.rimalab-metric-row span,
+.rimalab-rhyme-row small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.rimalab-rhyme-row {
+  grid-template-columns: 78px minmax(0, 1fr);
+}
+
+.rimalab-rhyme-badge {
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--surface-mid);
+  color: var(--muted);
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rimalab-rhyme-badge.is-rica,
+.rimalab-rhyme-badge.is-preciosa {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.rimalab-rhyme-badge.is-pobre {
+  background: color-mix(in srgb, var(--ochre) 42%, var(--card));
+  color: var(--ink);
+}
+
+.rimalab-scheme {
+  color: var(--primary);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.rimalab-encyclopedia {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rimalab-encyclopedia[hidden] {
+  display: none;
+}
+
+.rimalab-encyclopedia article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+  padding: 12px;
+}
+
+.rimalab-encyclopedia h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 20px;
+}
+
+.rimalab-encyclopedia div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rimalab-encyclopedia span {
+  border-radius: 999px;
+  background: var(--surface-mid);
+  color: var(--primary);
+  padding: 4px 7px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.rimalab-encyclopedia p {
+  color: var(--soft-ink);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.rimalab-encyclopedia blockquote {
+  margin: 0;
+  border-left: 3px solid var(--primary);
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  padding-left: 10px;
+}
+
 .decolonial-tool {
   display: grid;
   grid-template-columns: minmax(240px, 0.6fr) minmax(0, 1.4fr);
@@ -4170,6 +4437,9 @@ mark {
   .academy-book-anatomy,
   .voice-mirror,
   .voice-columns,
+  .rimalab-tool,
+  .rimalab-workbench,
+  .rimalab-encyclopedia,
   .decolonial-tool,
   .rights-lab,
   .rights-cards,

@@ -14,6 +14,32 @@ Cada nova entrada relevante deve registrar:
 
 Essa regra existe para manter continuidade entre sessões, reduzir decisões soltas e evitar que o projeto perca o fio do próprio raciocínio.
 
+## 2026-04-30 - RimaLab para poetas e músicos
+
+Decidimos dissolver o protótipo externo de RimaLab dentro da Academia como ferramenta local, sem biblioteca externa e sem serviço remoto.
+
+O novo `rimalab-engine.js` concentra a lógica de escansão, elisão, tonicidade final, normalização fonética de rimas e classificação pedagógica entre rima pobre, rica e preciosa. O `app.js` apenas orquestra a interface, persiste o rascunho próprio do laboratório em `localStorage` e permite puxar o manuscrito ativo quando o autor quiser testar ritmo e som.
+
+Essa decisão abre uma porta importante para músicos, poetas, cordelistas e autores de letras. O Vereda já cuidava de voz, guia, prova de autoria e vocabulário; agora passa a oferecer uma ferramenta de ouvido formal, capaz de ensinar técnica enquanto a pessoa escreve.
+
+Benefícios esperados:
+
+- A Academia ganha uma ferramenta prática para poesia e música.
+- O motor continua auditável, offline e separado do `app.js`.
+- A interface ensina métrica, rima e forma sem virar aulinha.
+- O Vereda se aproxima de tradições brasileiras de oralidade, canção, cordel e verso medido.
+
+Formulação curta para comunicação:
+
+> O RimaLab transforma a página em ouvido: mede versos, aproxima rimas e ajuda o autor a sentir quando a forma encontrou pulso.
+
+Próximas etapas sugeridas:
+
+- Validar exemplos reais de soneto, redondilha, sextilha, repente e letra de música.
+- Expandir o léxico gramatical usado na classificação pobre/rica.
+- Permitir aplicar um trecho selecionado do editor diretamente no RimaLab.
+- Criar testes de regressão para casos como `paz/atrás`, `mão/razão` e versos com sinalefa.
+
 ## 2026-04-27 - App leve, modular e offline
 
 Decidimos manter o `app.js` como um orquestrador da interface e do estado geral da aplicação, evitando que ele acumule regras de domínio.

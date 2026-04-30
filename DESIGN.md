@@ -40,6 +40,10 @@ Evitar:
 - texto explicando funcionalidades obvias;
 - excesso de sombras, arredondamentos ou badges.
 
+Nota de direcao visual:
+
+- O Vereda pode receber ferramentas com personalidade propria, como RimaLab, Espelho de Voz e Vocabulário Decolonizador, mas cada uma deve continuar parecendo instrumento de trabalho. A inspiracao do `frontend-design/SKILL.md` entra como principio editorial: evitar interface generica de IA, dar ponto de vista ao layout e escolher detalhes visuais que revelem o oficio da ferramenta sem roubar a escrita.
+
 ## 3. Layout
 
 Estrutura principal:
@@ -256,6 +260,7 @@ Prioridades:
 
 - Guia de Oficios Literarios;
 - Espelho de Voz;
+- RimaLab para escansao, rima e formas poeticas;
 - materiais de revisao, publicacao e estudo;
 - checklists persistentes quando implementados.
 
@@ -312,4 +317,3 @@ Checklist rapido:
 - Nao ha card dentro de card.
 - Nao ha cor estrutural fora das variaveis sem motivo.
 - A escrita continua sendo o ponto mais importante da tela.
-

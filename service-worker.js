@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v56";
-const ASSET_VERSION = "20260430-04";
+const CACHE_NAME = "vereda-offline-v57";
+const ASSET_VERSION = "20260430-05";
 
 const CORE_ASSETS = [
   "./",
@@ -17,6 +17,7 @@ const CORE_ASSETS = [
   `./template-engine.js?v=${ASSET_VERSION}`,
   `./precision-engine.js?v=${ASSET_VERSION}`,
   `./voice-engine.js?v=${ASSET_VERSION}`,
+  `./rimalab-engine.js?v=${ASSET_VERSION}`,
   `./decolonial-engine.js?v=${ASSET_VERSION}`,
   `./rights-engine.js?v=${ASSET_VERSION}`,
   `./manifest.webmanifest?v=${ASSET_VERSION}`,

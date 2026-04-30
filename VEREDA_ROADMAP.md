@@ -20,6 +20,7 @@ O Vereda já tem:
 - Medidores locais de aderência à forma, incluindo ENEM.
 - Painéis laterais recolhíveis.
 - Espelho de Voz local em primeiro corte.
+- RimaLab local para escansão, rima e formas poéticas.
 - Vocabulário Decolonizador consultivo na Academia.
 
 ## Princípios de responsabilidade
@@ -89,6 +90,37 @@ Validação mínima:
 - `node --check voice-engine.js`
 - `node --check service-worker.js`
 - teste local com corpus curto, médio e vazio.
+
+## Pacote entregue: RimaLab
+
+Objetivo: incluir uma ferramenta de oficina poética para quem escreve poema, letra de música, cordel, rap, canção ou verso medido.
+
+Lugar no produto:
+
+- Aba Academia, como ferramenta irmã do Espelho de Voz.
+- Uso independente com autosave próprio ou a partir do manuscrito ativo.
+
+Escopo do primeiro corte:
+
+- Escansão aproximada com elisões entre palavras.
+- Ajuste de contagem pela última sílaba tônica do verso.
+- Normalização fonética de rimas, incluindo compatibilidade como `paz`/`atrás`.
+- Classificação pedagógica de rima pobre, rica e preciosa.
+- Painel de isometria, métricas por verso, esquema de rimas e enciclopédia recolhida.
+
+O que não prometer:
+
+- análise fonológica perfeita para toda variação regional;
+- substituição de leitura humana, canto, declamação ou revisão métrica especializada;
+- classificação gramatical definitiva de qualquer palavra fora do léxico local.
+
+Validação mínima:
+
+- `node --check rimalab-engine.js`
+- `node --check app.js`
+- teste local de `paz`/`atrás`;
+- teste local de verso com elisão;
+- checagem de cache no service worker.
 
 ## Pacotes seguintes
 
