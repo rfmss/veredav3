@@ -1240,3 +1240,11 @@ Adicionamos um aviso forte no Arquivo para explicar que o acervo fica salvo no n
 O aviso aparece quando ainda não há registro de backup `.vrda` exportado ou quando o último backup tem 7 dias ou mais. O botão "Exportar agora" usa o fluxo existente de `backup-engine.js`, e o `app.js` registra `vereda.backup-meta.v1` com a data da última exportação/importação.
 
 O cache offline subiu para `vereda-offline-v49` com assets em `?v=20260429-17`.
+
+## 2026-04-29 - Favicon redondo a partir do pacote novo
+
+Substituímos os favicons da aba pelo pacote novo em `/home/rafamass/Downloads/0bf8739534198ded2abeac46e5bfc43e.ico`.
+
+Os PNGs originais tinham canto branco opaco. Removemos esse fundo branco na geração local para preservar transparência real fora do círculo, mantendo o desenho redondo do novo logo. Também atualizamos os ícones PWA `android-chrome-192x192.png` e `android-chrome-512x512.png`.
+
+O cache offline subiu para `vereda-offline-v50` com assets em `?v=20260429-18`.
