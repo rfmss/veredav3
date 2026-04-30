@@ -1826,6 +1826,82 @@ mark {
   line-height: 1.45;
 }
 
+.filesystem-backup {
+  display: grid;
+  grid-template-columns: auto minmax(220px, 1fr) minmax(180px, 240px) auto;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--soft-ink);
+  margin: -10px 0 24px;
+  padding: 14px;
+}
+
+.filesystem-dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+  background: var(--surface-mid);
+}
+
+.filesystem-backup[data-state="ready"] .filesystem-dot {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.filesystem-backup[data-state="saving"] .filesystem-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.filesystem-backup[data-state="error"] .filesystem-dot {
+  border-color: var(--sienna);
+  background: var(--sienna);
+}
+
+.filesystem-backup strong {
+  display: block;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.filesystem-backup p {
+  margin: 4px 0 0;
+  color: var(--soft-ink);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.filesystem-backup label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.filesystem-backup input {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.filesystem-backup b {
+  color: var(--primary);
+}
+
+.filesystem-backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .archive-controls {
   display: grid;
   grid-template-columns: minmax(260px, 340px) minmax(0, 1fr) 180px;
@@ -3812,6 +3888,20 @@ mark {
 
   .backup-warning .secondary-button {
     grid-column: 1 / -1;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .filesystem-backup {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .filesystem-backup label,
+  .filesystem-backup-actions {
+    grid-column: 1 / -1;
+  }
+
+  .filesystem-backup-actions .secondary-button {
     justify-content: center;
     width: 100%;
   }

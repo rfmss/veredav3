@@ -1280,3 +1280,11 @@ Dissolvemos as partes úteis de `/home/rafamass/Downloads/archive-engine-meta.js
 O motor agora expõe `TYPE_FAMILY`, `ARCHIVE_ORDER`, `FAMILY_LABEL`, `ALL_TYPES`, `createDocument()` e `docSummary(doc)`. Também alinhamos os tipos de roteiro que faltavam (`ato` e `personagem-roteiro`) e migramos o alias `fonte-jorn` para `fonte`.
 
 Os cards do Arquivo passam a usar `docSummary()` quando há metadados preenchidos, mostrando mini-informações específicas por tipo. O cache offline subiu para `vereda-offline-v54` com assets em `?v=20260430-02`.
+
+## 2026-04-30 - Autosave externo do acervo
+
+Dissolvemos `/home/rafamass/Downloads/autosave_filesystem_demo.html` como uma camada opcional de backup externo, adaptada para salvar o acervo inteiro em `.vrda`.
+
+Adicionamos `filesystem-backup-engine.js` usando File System Access API + IndexedDB para lembrar o `FileSystemFileHandle` quando o navegador permite. No Arquivo, o escritor pode escolher um arquivo destino uma vez, salvar manualmente e manter autosave em intervalo configurável. A escrita local em `localStorage` continua sendo a primeira linha de defesa; o arquivo externo é a cópia contra falta de luz, bateria e limpeza de cache.
+
+Firefox e Safari recebem mensagem de indisponibilidade, sem quebrar o fluxo normal de exportação `.vrda`. O cache offline subiu para `vereda-offline-v55` com assets em `?v=20260430-03`.

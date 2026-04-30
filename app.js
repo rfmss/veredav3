@@ -65,6 +65,13 @@ const proofTimeline = document.querySelector("[data-proof-timeline]");
 const backupInput = document.querySelector("[data-backup-input]");
 const backupWarning = document.querySelector("[data-backup-warning]");
 const backupWarningCopy = document.querySelector("[data-backup-warning-copy]");
+const filesystemBackup = document.querySelector("[data-filesystem-backup]");
+const filesystemBackupStatus = document.querySelector("[data-filesystem-backup-status]");
+const filesystemBackupDetail = document.querySelector("[data-filesystem-backup-detail]");
+const filesystemBackupInterval = document.querySelector("[data-filesystem-backup-interval]");
+const filesystemBackupIntervalLabel = document.querySelector("[data-filesystem-backup-interval-label]");
+const filesystemBackupSaveButton = document.querySelector('[data-action="save-filesystem-backup"]');
+const filesystemBackupStopButton = document.querySelector('[data-action="stop-filesystem-backup"]');
 const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
@@ -205,6 +212,10 @@ let state = loadState();
 let checklistState = loadChecklistState();
 let backupMeta = loadBackupMeta();
 let saveTimer;
+let filesystemBackupHandle = null;
+let filesystemBackupTimer = null;
+let filesystemBackupIntervalSeconds = 15;
+let filesystemBackupCount = 0;
 let deferredInstallPrompt;
 let createNoteType = "manuscrito";
 let decolonialState = {
@@ -2011,6 +2022,111 @@ function renderBackupWarning() {
   backupWarningCopy.textContent = warning.copy;
 }
 
+function setFilesystemBackupState(stateName, status, detail) {
+  filesystemBackup.dataset.state = stateName;
+  filesystemBackupStatus.textContent = status;
+  filesystemBackupDetail.textContent = detail;
+}
+
+async function initializeFilesystemBackup() {
+  if (!VeredaFileSystemBackup.isSupported()) {
+    setFilesystemBackupState(
+      "idle",
+      "Autosave externo indisponível neste navegador",
+      "Chrome, Edge e Opera permitem escolher um arquivo .vrda para autosave. Firefox e Safari ainda bloqueiam esse acesso."
+    );
+    filesystemBackup.querySelector('[data-action="choose-filesystem-backup"]').disabled = true;
+    filesystemBackupInterval.disabled = true;
+    return;
+  }
+
+  filesystemBackupHandle = await VeredaFileSystemBackup.getStoredHandle();
+
+  if (!filesystemBackupHandle) {
+    setFilesystemBackupState(
+      "idle",
+      "Autosave externo desativado",
+      "Escolha um arquivo .vrda para a Vereda manter uma cópia completa do acervo fora do navegador."
+    );
+    return;
+  }
+
+  filesystemBackupSaveButton.disabled = false;
+  filesystemBackupStopButton.disabled = false;
+  setFilesystemBackupState("ready", "Arquivo externo lembrado", `${filesystemBackupHandle.name} · autosave ativo`);
+  startFilesystemBackup();
+}
+
+async function chooseFilesystemBackup() {
+  try {
+    const dateStamp = createDateTimeStamp();
+    filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`vereda-acervo-${dateStamp}.vrda`);
+    filesystemBackupSaveButton.disabled = false;
+    filesystemBackupStopButton.disabled = false;
+    filesystemBackupCount = 0;
+    setFilesystemBackupState("ready", "Arquivo externo configurado", `${filesystemBackupHandle.name} · autosave ativo`);
+    startFilesystemBackup();
+    await saveFilesystemBackup(true);
+  } catch (error) {
+    if (error.name === "AbortError") {
+      return;
+    }
+
+    setFilesystemBackupState("error", "Não foi possível configurar o autosave externo", error.message);
+  }
+}
+
+async function saveFilesystemBackup(manual = false) {
+  if (!filesystemBackupHandle) {
+    return;
+  }
+
+  try {
+    setFilesystemBackupState("saving", "Salvando cópia externa...", filesystemBackupHandle.name);
+    const backup = VeredaBackup.createBackup(state);
+    await VeredaFileSystemBackup.writeBackup(filesystemBackupHandle, backup);
+    filesystemBackupCount += 1;
+    backupMeta = {
+      exportedAt: backup.exportedAt,
+      manuscriptCount: state.manuscripts.length,
+      filesystem: true,
+      filename: filesystemBackupHandle.name,
+    };
+    persistBackupMeta();
+    renderBackupWarning();
+    const label = manual ? "Backup externo salvo agora" : `Autosave externo #${filesystemBackupCount}`;
+    setFilesystemBackupState("ready", label, `${filesystemBackupHandle.name} · ${formatUpdatedAt(backup.exportedAt)}`);
+  } catch (error) {
+    stopFilesystemBackup();
+    setFilesystemBackupState("error", "Autosave externo pausado", error.message);
+  }
+}
+
+function startFilesystemBackup() {
+  stopFilesystemBackup(false);
+  filesystemBackupTimer = window.setInterval(() => saveFilesystemBackup(false), filesystemBackupIntervalSeconds * 1000);
+}
+
+function stopFilesystemBackup(updateUi = true) {
+  if (filesystemBackupTimer) {
+    window.clearInterval(filesystemBackupTimer);
+    filesystemBackupTimer = null;
+  }
+
+  if (updateUi && filesystemBackupHandle) {
+    setFilesystemBackupState("idle", "Autosave externo pausado", `${filesystemBackupHandle.name} continua configurado`);
+  }
+}
+
+function updateFilesystemBackupInterval(value) {
+  filesystemBackupIntervalSeconds = Number(value);
+  filesystemBackupIntervalLabel.textContent = `${filesystemBackupIntervalSeconds}s`;
+
+  if (filesystemBackupTimer) {
+    startFilesystemBackup();
+  }
+}
+
 function exportBackup() {
   const backup = VeredaBackup.createBackup(state);
   const backupJson = JSON.stringify(backup, null, 2);
@@ -2606,6 +2722,18 @@ document.addEventListener("click", (event) => {
     requestBackupImport();
   }
 
+  if (actionTarget.dataset.action === "choose-filesystem-backup") {
+    chooseFilesystemBackup();
+  }
+
+  if (actionTarget.dataset.action === "save-filesystem-backup") {
+    saveFilesystemBackup(true);
+  }
+
+  if (actionTarget.dataset.action === "stop-filesystem-backup") {
+    stopFilesystemBackup();
+  }
+
   if (actionTarget.dataset.action === "open-active-manuscript") {
     setView("editor");
     writingArea.focus();
@@ -2715,6 +2843,7 @@ writingArea.addEventListener("keydown", recordWritingProof);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
 backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
+filesystemBackupInterval.addEventListener("input", () => updateFilesystemBackupInterval(filesystemBackupInterval.value));
 metadataForm.addEventListener("input", updateCurrentMetadata);
 metadataForm.addEventListener("focusout", renderMetadataForm);
 archiveSearch.addEventListener("input", () => setArchiveSearch(archiveSearch.value));
@@ -2764,4 +2893,5 @@ applyColorTheme();
 applyFocusSettings();
 setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" });
 registerOfflineApp();
+initializeFilesystemBackup();
 persistState("Pronto para escrever");

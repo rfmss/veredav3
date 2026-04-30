@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2e4d43">
     <title>.vrda - editor</title>
-    <link rel="manifest" href="manifest.webmanifest?v=20260430-02">
-    <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260430-02" type="image/png" sizes="48x48">
-    <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260430-02" type="image/png" sizes="32x32">
-    <link rel="icon" href="favicon_io/tab-favicon-16x16.png?v=20260430-02" type="image/png" sizes="16x16">
-    <link rel="apple-touch-icon" href="favicon_io/tab-favicon-180x180.png?v=20260430-02">
+    <link rel="manifest" href="manifest.webmanifest?v=20260430-03">
+    <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260430-03" type="image/png" sizes="48x48">
+    <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260430-03" type="image/png" sizes="32x32">
+    <link rel="icon" href="favicon_io/tab-favicon-16x16.png?v=20260430-03" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="favicon_io/tab-favicon-180x180.png?v=20260430-03">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260430-02">
+    <link rel="stylesheet" href="styles.css?v=20260430-03">
   </head>
   <body>
     <div class="app-shell" data-view="editor">
@@ -294,6 +294,33 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   <span class="material-symbols-outlined">file_save</span>
                   Exportar agora
                 </button>
+              </div>
+
+              <div class="filesystem-backup" data-filesystem-backup>
+                <span class="filesystem-dot" data-filesystem-backup-dot></span>
+                <div>
+                  <strong data-filesystem-backup-status>Autosave externo desativado</strong>
+                  <p data-filesystem-backup-detail>Escolha um arquivo .vrda no seu computador para a Vereda sobrescrever automaticamente com uma cópia completa do acervo.</p>
+                </div>
+                <label>
+                  <span>Salvar a cada</span>
+                  <input type="range" min="5" max="60" step="5" value="15" data-filesystem-backup-interval aria-label="Intervalo do autosave externo">
+                  <b data-filesystem-backup-interval-label>15s</b>
+                </label>
+                <div class="filesystem-backup-actions">
+                  <button class="secondary-button" data-action="choose-filesystem-backup">
+                    <span class="material-symbols-outlined">folder_open</span>
+                    Escolher arquivo
+                  </button>
+                  <button class="secondary-button" data-action="save-filesystem-backup" disabled>
+                    <span class="material-symbols-outlined">save</span>
+                    Salvar agora
+                  </button>
+                  <button class="secondary-button" data-action="stop-filesystem-backup" disabled>
+                    <span class="material-symbols-outlined">pause</span>
+                    Pausar
+                  </button>
+                </div>
               </div>
 
               <div class="archive-controls">
@@ -663,17 +690,18 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
       </footer>
     </div>
 
-    <script src="lexical-engine.js?v=20260430-02"></script>
-    <script src="proof-engine.js?v=20260430-02"></script>
-    <script src="vrda-engine.js?v=20260430-02"></script>
-    <script src="backup-engine.js?v=20260430-02"></script>
-    <script src="archive-engine.js?v=20260430-02"></script>
-    <script src="version-engine.js?v=20260430-02"></script>
-    <script src="export-engine.js?v=20260430-02"></script>
-    <script src="template-engine.js?v=20260430-02"></script>
-    <script src="precision-engine.js?v=20260430-02"></script>
-    <script src="voice-engine.js?v=20260430-02"></script>
-    <script src="decolonial-engine.js?v=20260430-02"></script>
-    <script src="app.js?v=20260430-02"></script>
+    <script src="lexical-engine.js?v=20260430-03"></script>
+    <script src="proof-engine.js?v=20260430-03"></script>
+    <script src="vrda-engine.js?v=20260430-03"></script>
+    <script src="backup-engine.js?v=20260430-03"></script>
+    <script src="filesystem-backup-engine.js?v=20260430-03"></script>
+    <script src="archive-engine.js?v=20260430-03"></script>
+    <script src="version-engine.js?v=20260430-03"></script>
+    <script src="export-engine.js?v=20260430-03"></script>
+    <script src="template-engine.js?v=20260430-03"></script>
+    <script src="precision-engine.js?v=20260430-03"></script>
+    <script src="voice-engine.js?v=20260430-03"></script>
+    <script src="decolonial-engine.js?v=20260430-03"></script>
+    <script src="app.js?v=20260430-03"></script>
   </body>
 </html>

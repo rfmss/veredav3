@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v54";
-const ASSET_VERSION = "20260430-02";
+const CACHE_NAME = "vereda-offline-v55";
+const ASSET_VERSION = "20260430-03";
 
 const CORE_ASSETS = [
   "./",
@@ -10,6 +10,7 @@ const CORE_ASSETS = [
   `./proof-engine.js?v=${ASSET_VERSION}`,
   `./vrda-engine.js?v=${ASSET_VERSION}`,
   `./backup-engine.js?v=${ASSET_VERSION}`,
+  `./filesystem-backup-engine.js?v=${ASSET_VERSION}`,
   `./archive-engine.js?v=${ASSET_VERSION}`,
   `./version-engine.js?v=${ASSET_VERSION}`,
   `./export-engine.js?v=${ASSET_VERSION}`,
