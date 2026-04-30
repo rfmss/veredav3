@@ -1111,6 +1111,8 @@ function duplicateManuscript(id) {
     progress: manuscript.progress,
     description: manuscript.description,
     tags: manuscript.tags,
+    type: manuscript.type,
+    meta: manuscript.meta,
     templateId: manuscript.templateId,
   });
 
@@ -1126,8 +1128,13 @@ function duplicateManuscript(id) {
 
 function createSearchText(manuscript) {
   const type = getArchiveType(manuscript);
+  const metaText = Object.values(manuscript.meta || {})
+    .flat()
+    .filter(Boolean)
+    .join(" ");
+
   return normalizeSearch(
-    [manuscript.title, manuscript.kind, manuscript.status, manuscript.chapter, manuscript.description, manuscript.text, type.label, ...(manuscript.tags || [])]
+    [manuscript.title, manuscript.kind, manuscript.status, manuscript.chapter, manuscript.description, manuscript.text, metaText, type.label, ...(manuscript.tags || [])]
       .filter(Boolean)
       .join(" ")
   );

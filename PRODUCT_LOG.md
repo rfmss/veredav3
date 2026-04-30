@@ -1256,3 +1256,11 @@ Corrigimos os atalhos do PWA para que "Manuscrito" e "Academia" não apontem mai
 O `manifest.webmanifest` agora usa `./#editor` no `start_url` e no atalho Manuscrito, e `./#academia` no atalho Academia. O `app.js` passa a ler `location.hash` na inicialização e em `hashchange`, mantendo a navegação interna sincronizada com hashes simples: `#editor`, `#biblioteca`, `#autoria`, `#arquivo` e `#academia`.
 
 O cache offline subiu para `vereda-offline-v51` com assets em `?v=20260429-19`.
+
+## 2026-04-29 - Meta literário por tipo de documento
+
+Dissolvemos os templates de `/home/rafamass/Downloads/vereda_meta_templates.html` no motor de arquivo, sem criar página solta.
+
+O `archive-engine.js` agora expõe `META_TEMPLATES`, `defaultMeta(type)`, `getMetaTemplate(type)` e `normalizeMeta(type, value)`. Documentos antigos recebem `meta` ao carregar, e documentos novos já nascem com campos estruturados por tipo: personagem, cena, mundo, cronologia, glossário, pesquisa e manuscrito.
+
+Também preservamos `meta` ao duplicar documentos e incluímos valores de `meta` na busca do acervo. O cache offline subiu para `vereda-offline-v52` com assets em `?v=20260429-20`.
