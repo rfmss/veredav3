@@ -1,6 +1,6 @@
 # Acesso e Monetização do Vereda
 
-Data: 2026-04-30  
+Data: 2026-04-30
 Status: planejado, não implementado no app ativo.
 
 ## Decisão
@@ -29,16 +29,26 @@ Proposta de rito:
 
 - frase ou parágrafo sobre por que escrever importa no Brasil de hoje;
 - vídeo curto lendo texto próprio ou referência autorizada;
-- post/link público marcando o projeto;
+- post público marcando o projeto com hashtag ou menção;
+- envio por e-mail apenas com o link do vídeo/post, sem upload para o site;
 - consentimento explícito para análise manual;
 - consentimento separado se houver galeria pública.
 
 Recomendação LGPD/produto:
 
-- começar com links públicos, não upload de arquivos;
+- começar com links públicos e e-mail, nunca upload de arquivos no site;
 - deixar claro que vídeo/foto são dados pessoais;
 - criar limite semanal de aprovações;
+- considerar "Apenas 10 acessos criativos liberados por semana" se o volume crescer;
+- liberar trial Pro de 3 dias assim que a tarefa for enviada, para não frustrar quem quer usar na hora;
 - não aceitar material de menores sem regra específica.
+
+Microcopy-base:
+
+> ✍️ Trilha do Criador
+> Custo: sua arte.
+> Poste um vídeo de até 1 minuto lendo um texto seu e uma foto de um parágrafo escrito à mão, marcando o Vereda. Depois envie o link por e-mail. Queremos saber quem está por trás das palavras.
+> Para quem vive de rascunhos e sonhos.
 
 ### Trilha Profissional
 
@@ -47,8 +57,24 @@ Pagamento único de R$ 29,90 para acesso vitalício à Vereda v3 local.
 Recomendação de promessa:
 
 - "Acesso vitalício à Vereda v3 e suas atualizações locais";
+- reforçar que a pessoa compra o que vê no momento, mais as atualizações da versão 3;
 - não prometer serviços futuros com custo variável, como IA, nuvem ou processamento remoto;
 - se existir Vereda IA/Cloud no futuro, ela deve ser plano separado.
+
+Diretriz de preço:
+
+- usar badge visível de "Preço Regionalizado";
+- tratar R$ 29,90 como preço justo brasileiro, não como desconto temporário;
+- explicar que preço baixo é estratégia contra pirataria e a favor de atualização/suporte;
+- evitar linguagem agressiva de escassez no plano pago.
+
+Microcopy-base:
+
+> O Vereda é feito por brasileiros para brasileiros. Escolhemos R$ 29,90, pagamento único, para manter o projeto evoluindo, cobrir custos essenciais e continuar acessível sem assinatura abusiva em dólar.
+
+Nota estratégica:
+
+Preço justo é uma defesa melhor contra pirataria do que bloqueio hostil. Se for fácil pagar, barato o suficiente e houver atualizações confiáveis, muita gente prefere apoiar o projeto a usar uma versão quebrada ou desatualizada.
 
 ## Arquitetura recomendada
 
@@ -133,6 +159,15 @@ Só iniciar implementação quando:
 - onboarding mínimo existir;
 - decisão de backend estiver tomada;
 - política de privacidade e consentimento da tarefa criativa estiverem escritos.
+
+## Lembretes de promessa pública
+
+- Badge recomendado: "Preço Regionalizado".
+- Frase de salvaguarda: "Acesso vitalício às funções atuais da Vereda v3 + atualizações da versão 3".
+- Não prometer IA, nuvem, servidor permanente ou processamento remoto dentro do vitalício de R$ 29,90.
+- Na Trilha Criativa, não receber arquivos pelo site: apenas menção/hashtag pública e envio do link por e-mail.
+- Enquanto analisa manualmente, liberar 3 dias de trial Pro.
+- Se a demanda crescer, limitar aprovações criativas por semana.
 
 ## Código externo analisado
 
