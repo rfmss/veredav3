@@ -1461,3 +1461,151 @@ Ambas estavam sem meta description, sem og:*, sem canonical, sem linkagem entre 
 - Subpasta rafa.pro.br/veredav3/ limita autoridade de domínio. Domínio próprio é decisão de médio prazo.
 - Próximo commit deve incluir: index.html, vereda-titulo-do-livro.html, vereda-primeiras-linhas.html, sitemap.xml, robots.txt.
 
+
+### 2026-05-03 (continuação) — Fase 2: linkagem e estrutura de conteúdo
+
+Commit: 6f30044
+
+**O que foi feito:**
+
+- `vereda-titulo-do-livro.html`: adicionado rodapé de navegação com CTA vermelho "Abrir o Vereda →" (link para index.html) e card secundário "Continue lendo → primeiras linhas" (link cruzado)
+- `vereda-primeiras-linhas.html`: mesmo padrão com paleta dark/lima da página, CTA verde-lima "Abrir o Vereda →" e card para titulo-do-livro
+- `index.html`: adicionada seção "Leitura editorial" dentro da Academia (aba mais educacional do produto), com dois cards linkando para as páginas de conteúdo. Statusbar atualizado com texto de marca consistente.
+
+**Resultado da estrutura de linkagem:**
+```
+index.html (Academia) ←→ vereda-titulo-do-livro.html ←→ vereda-primeiras-linhas.html
+                     ↑_________________________________↑
+                            links bidirecionais
+```
+
+**Próximo item de maior impacto:** Onboarding de primeira entrada (Fase 0, item [P9]).
+Usuário novo entra, vê texto de exemplo que não é dele, não sabe o que fazer. Solução: detectar via `localStorage('vrda-firstVisit')`, exibir overlay com 3 opções. Arquivos: `app.js` (lógica de init) + `index.html` (overlay HTML já estruturado como padrão do produto, similar ao `.create-note-overlay` existente).
+
+**Ação manual pendente do Rafael — Fase 3:**
+1. Abrir https://search.google.com/search-console
+2. Verificar propriedade para rafa.pro.br
+3. Submeter sitemap: https://rafa.pro.br/veredav3/sitemap.xml
+
+
+### 2026-05-03 (continuação) — Fase 0: onboarding de primeira entrada
+
+Commit: 4d6aefc
+
+**Decisão:** Implementar onboarding mínimo — 3 botões — para resolver o maior problema de retenção: usuário novo entra, vê um editor com texto de exemplo que não é dele e sai sem entender o produto.
+
+**Como funciona:**
+- Chave `vrda-first-visit` no localStorage marca se o usuário já passou pelo onboarding
+- Na inicialização, `checkFirstVisit()` verifica: sem dados salvos E sem a chave → é novo usuário
+- Overlay aparece 350ms após o app estar totalmente renderizado (evita flash)
+- 3 opções: "Escrever agora" → abre nova nota | "Explorar as ferramentas" → vai para Academia | "Ver o que o Vereda faz" → vai para Autoria
+- Qualquer clique grava a chave e fecha o overlay — nunca aparece duas vezes
+
+**Arquivos alterados:**
+- `index.html`: HTML do overlay (reutiliza `.create-note-overlay` e `.create-note-card` do design system existente, sem CSS novo)
+- `app.js`: constante `FIRST_VISIT_KEY`, ref `welcomeOverlay`, funções `checkFirstVisit()`, `closeWelcome()`, `handleWelcomeWrite/Explore/Tour()`, handlers no click delegate e chamada `checkFirstVisit()` no bloco de init
+
+**Estado do plano após esta sessão:**
+- Fase 0 [P1 P2 P3 P9]: CONCLUÍDAS
+- Fase 1 (SEO técnico): CONCLUÍDA
+- Fase 2 (linkagem de conteúdo): CONCLUÍDA
+- Fase 3 (Search Console): aguardando ação manual do Rafael
+- Fase 0 pendentes: [P4] nomenclatura, [P5] tooltip swap, [P6] "manuscrito ativo", [P11] CTA Academia
+
+
+### 2026-05-03 (continuação) — Fase 0 concluída: P4, P5, P6, P11
+
+Commit: 8707959
+
+**P4 — Nomenclatura unificada entre topbar e sidebar**
+- Aba do topo: `"Autoria"` → `"Prova de autoria"`
+- Agora bate exatamente com o item da sidebar: `"Prova de autoria"`
+- Motivo: usuário clicava em "Autoria" no topo e via "Prova de autoria" na sidebar, sem entender que eram a mesma tela
+
+**P5 — Tooltip do botão swap_horiz**
+- `title="Trocar lado"` → `title="Trocar o guia de lado: esquerda ↔ direita"`
+- `aria-label` atualizado para acessibilidade
+
+**P6 — Humanizar jargão técnico**
+- `"manuscrito ativo"` → `"texto em edição"` no Espelho de Voz e no RimaLab
+- Dois botões alterados: na seção de análise e na seção de rima
+
+**P11 — CTA contextual da Academia após pausa na escrita**
+- Toast flutuante (bottom-right, z-index 90) aparece 90s após parar de digitar
+- Some automaticamente em 12s (HINT_AUTO_HIDE_MS)
+- Clique em "Academia" navega para a aba e dispensa para o resto da sessão
+- Clique em × dispensa para o resto da sessão (hintDismissed = true)
+- Só aparece na aba editor, não em outras abas
+- Reutiliza variáveis CSS do design system (--card, --line, --primary, --muted)
+- Sem CSS novo em styles.css — inline no elemento, para manter isolamento
+
+**FASE 0 COMPLETA — todos os itens da auditoria de persona endereçados:**
+- [x] P1: Configurações desativado visualmente
+- [x] P2: Dados falsos de Personagens/Cenários removidos
+- [x] P3: Prova de Autoria com linguagem humana
+- [x] P4: Nomenclatura unificada topbar/sidebar
+- [x] P5: Tooltip swap_horiz descritivo
+- [x] P6: "manuscrito ativo" → "texto em edição"
+- [x] P9: Onboarding de primeira entrada
+- [x] P11: CTA Academia após pausa
+
+**Estado geral do plano (03/05):**
+- Fase 0 (produto): ✓ CONCLUÍDA
+- Fase 1 (SEO técnico): ✓ CONCLUÍDA
+- Fase 2 (linkagem de conteúdo): ✓ CONCLUÍDA
+- Fase 3 (distribuição): aguardando ação manual do Rafael no Google Search Console
+
+**Para retomar numa próxima sessão:**
+O produto está em estado mais digno de ranking. A próxima frente estratégica mais impactante é a Fase 3: registrar o domínio no Google Search Console e submeter o sitemap. Além disso, criar mais páginas de conteúdo editorial (guias temáticos sobre escrita) aumentaria a superfície de indexação e atrairia tráfego orgânico de cauda longa.
+
+
+## BACKLOG FUTURO — Páginas de conteúdo editorial
+
+Registrado em 03/05 para retomar quando oportuno.
+
+**Ideia:** Criar mais páginas HTML estáticas de conteúdo editorial, no mesmo padrão de `vereda-titulo-do-livro.html` e `vereda-primeiras-linhas.html`.
+
+Cada página é uma porta de entrada via SEO de cauda longa que atrai escritores buscando ajuda específica no Google, e converte esse tráfego para o editor com um CTA claro no rodapé.
+
+**Temas sugeridos para próximas páginas:**
+- Como estruturar um romance (atos, arcos, capítulos)
+- Como escrever diálogos que parecem reais
+- Como revisar um manuscrito sem perder o fio
+- Como criar personagens que o leitor não esquece
+- Como vencer o bloqueio criativo na escrita
+
+**Padrão a seguir:**
+- HTML estático, mesmo estilo visual das páginas existentes
+- Meta tags + og:* + canonical + title completo
+- Rodapé de navegação com CTA para o editor e link cruzado
+- Adicionar ao sitemap.xml após criar
+
+**Lembrete:** Trazer esse item à tona quando o usuário perguntar sobre SEO, ranking ou crescimento do Vereda.
+
+
+### 2026-05-03 (continuação) — Exportação DOCX + nova página editorial
+
+Commits: 3577970 (docx), 3c00616 (estrutura-romance)
+
+**Exportação .docx (sem biblioteca externa)**
+- `export-engine.js` reescrito com ZIP builder mínimo (CRC-32 real, OOXML puro)
+- Gera arquivo válido: Word, LibreOffice e Google Docs
+- Times New Roman 12pt, espaçamento duplo, recuo de parágrafo, título em negrito 16pt
+- Botão DOCX adicionado nas ações rápidas do Arquivo do Escritor
+
+**Nova página editorial: vereda-estrutura-romance.html**
+- Conteúdo: três atos, segundo ato expandido, ritmo de capítulos, arcos de personagem, 3 exercícios práticos
+- Paleta editorial papel/ouro/vermelho com Cormorant Garamond + Josefin Sans
+- Sitemap atualizado (4 URLs)
+- Academia expandida para 3 cards editoriais
+- Links cruzados bidirecionais com as outras duas páginas
+
+**Estado do ecossistema de conteúdo:**
+index (Academia) ←→ titulo ←→ primeiras-linhas ←→ estrutura-romance
+
+**Próximas páginas em fila:**
+- Como escrever diálogos que parecem reais
+- Como criar personagens que o leitor não esquece
+- Como revisar um manuscrito
+- Como vencer o bloqueio criativo
+

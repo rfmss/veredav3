@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Escrever Diálogos que Parecem Reais — Guia para Escritores | Vereda</title>
+<meta name="description" content="Guia prático para escritores brasileiros sobre como escrever diálogos que soam naturais, revelam personagem e fazem a narrativa avançar. Técnicas, erros comuns e exercícios.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como Escrever Diálogos que Parecem Reais">
+<meta property="og:description" content="Diálogo não é conversa transcrita — é conversa destilada. Aprenda as técnicas que fazem personagens soarem vivos na página.">
+<meta property="og:url" content="https://rafa.pro.br/veredav3/vereda-dialogos.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Vereda — Editor de Escrita para Escritores Brasileiros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Como Escrever Diálogos que Parecem Reais | Vereda">
+<meta name="twitter:description" content="Técnicas, erros comuns e exercícios para escrever diálogos que revelam personagem e fazem a história avançar.">
+<link rel="canonical" href="https://rafa.pro.br/veredav3/vereda-dialogos.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f1a1a;
+  --paper: #f4f0e8;
+  --aged: #e6dfc8;
+  --verde: #1a4a3a;
+  --verde-claro: #2e7a5a;
+  --acento: #c45b3a;
+  --margem: #6b7a72;
+  --fio: rgba(26,74,58,0.12);
+  --ff-title: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Crimson Pro', Georgia, serif;
+  --ff-label: 'Josefin Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ff-body); font-size: 19px; line-height: 1.75; }
+
+h1 { font-family: var(--ff-title); font-weight: 300; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.1; }
+h2 { font-family: var(--ff-title); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; margin: 3rem 0 1rem; }
+h3 { font-family: var(--ff-label); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--verde-claro); margin: 2.5rem 0 0.8rem; }
+p { margin-bottom: 1.4rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+.container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+
+/* HERO — paleta verde escuro */
+.hero { background: var(--verde); color: var(--paper); padding: 5rem 2rem 4rem; }
+.hero .eyebrow { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(196,91,58,0.9); margin-bottom: 1.5rem; display: block; }
+.hero h1 { color: var(--paper); margin-bottom: 1.5rem; }
+.hero .lead { font-size: 1.12rem; color: rgba(244,240,232,0.75); max-width: 600px; line-height: 1.6; }
+.hero-meta { display: flex; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+.hero-meta span { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(244,240,232,0.45); }
+
+.article { padding: 4rem 2rem; }
+
+/* DIÁLOGO DE EXEMPLO — parece uma página de livro */
+.dialogo-exemplo { background: #fff; border-left: 3px solid var(--acento); padding: 2rem 2.5rem; margin: 2.5rem 0; font-family: var(--ff-title); font-size: 1.1rem; line-height: 1.9; font-style: italic; color: var(--ink); position: relative; }
+.dialogo-exemplo .label { font-family: var(--ff-label); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acento); margin-bottom: 1rem; display: block; font-style: normal; }
+.dialogo-exemplo p { margin-bottom: 0.6rem; }
+
+/* COMPARAÇÃO ANTES/DEPOIS */
+.comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 2.5rem 0; }
+.comparacao-bloco { padding: 1.8rem; }
+.comparacao-bloco.ruim { background: rgba(196,91,58,0.07); border-top: 2px solid var(--acento); }
+.comparacao-bloco.bom { background: rgba(26,74,58,0.07); border-top: 2px solid var(--verde-claro); }
+.comparacao-bloco .rotulo { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.comparacao-bloco.ruim .rotulo { color: var(--acento); }
+.comparacao-bloco.bom .rotulo { color: var(--verde-claro); }
+.comparacao-bloco p { font-family: var(--ff-title); font-size: 1rem; font-style: italic; line-height: 1.7; color: var(--ink); margin: 0; }
+
+/* REGRAS NUMERADAS */
+.regras { counter-reset: regras; list-style: none; margin: 1.5rem 0 2rem; }
+.regras li { counter-increment: regras; padding: 1.2rem 0 1.2rem 4rem; border-bottom: 1px solid var(--fio); position: relative; }
+.regras li::before { content: counter(regras, decimal-leading-zero); position: absolute; left: 0; top: 1.2rem; font-family: var(--ff-title); font-size: 1.8rem; font-weight: 300; color: var(--verde-claro); line-height: 1; }
+.regras li strong { display: block; font-size: 1rem; margin-bottom: 0.4rem; }
+.regras li span { font-size: 0.95rem; color: var(--margem); }
+
+/* PULL QUOTE */
+.pullquote { border-left: 3px solid var(--verde-claro); padding: 1.2rem 1.8rem; margin: 2.5rem 0; background: rgba(26,74,58,0.05); font-family: var(--ff-title); font-size: 1.25rem; font-style: italic; line-height: 1.5; color: var(--ink); }
+
+/* EXERCÍCIOS */
+.exercicio { border: 1px solid var(--fio); padding: 2rem; margin: 2rem 0; }
+.exercicio .titulo-ex { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--verde-claro); margin-bottom: 1rem; display: block; }
+.exercicio h4 { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; }
+.exercicio p { font-size: 0.95rem; color: var(--margem); }
+.exercicio textarea { width: 100%; min-height: 130px; background: var(--aged); border: 1px solid rgba(26,74,58,0.2); padding: 1rem; font-family: var(--ff-body); font-size: 0.95rem; color: var(--ink); resize: vertical; margin-top: 1rem; line-height: 1.6; }
+.exercicio textarea:focus { outline: 1px solid var(--verde-claro); }
+
+.sep { border: none; border-top: 1px solid var(--fio); margin: 3rem 0; }
+
+/* RODAPÉ */
+footer { background: var(--verde); color: var(--paper); padding: 4rem 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
+.footer-cta { background: var(--acento); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.footer-link { background: rgba(255,255,255,0.04); border: 1px solid rgba(244,240,232,0.1); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.footer-eyebrow { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.footer-cta .footer-eyebrow { color: rgba(244,240,232,0.7); }
+.footer-link .footer-eyebrow { color: rgba(196,91,58,0.8); }
+.footer-cta strong, .footer-link strong { font-family: var(--ff-title); font-size: 1.6rem; font-weight: 400; color: var(--paper); line-height: 1.25; display: block; }
+.footer-cta p, .footer-link p { font-size: 0.88rem; line-height: 1.6; color: rgba(244,240,232,0.65); margin-top: 0.6rem; }
+.btn-cta { display: inline-block; background: var(--paper); color: var(--ink); font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; }
+.btn-sec { display: inline-block; border: 1px solid rgba(244,240,232,0.25); color: rgba(244,240,232,0.8); font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; }
+.footer-bottom { border-top: 1px solid rgba(244,240,232,0.08); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-bottom span, .footer-bottom a { font-family: var(--ff-label); font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(244,240,232,0.35); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .comparacao { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Guia de escrita · Vereda</span>
+    <h1>Como escrever diálogos<br>que parecem reais</h1>
+    <p class="lead">Diálogo não é conversa transcrita — é conversa destilada. Cada linha precisa revelar quem fala, avançar a história ou criar tensão. De preferência, as três coisas ao mesmo tempo.</p>
+    <div class="hero-meta">
+      <span>Leitura: 10 minutos</span>
+      <span>Exercícios práticos</span>
+      <span>Para ficção e roteiro</span>
+    </div>
+  </div>
+</header>
+
+<article class="article">
+  <div class="container">
+
+    <h3>O problema do diálogo</h3>
+    <h2>Por que diálogos ficam artificiais</h2>
+    <p>Quando lemos um diálogo ruim, sentimos imediatamente — mas raramente sabemos explicar o porquê. A resposta quase sempre é a mesma: <strong>as personagens falam como narradores</strong>. Elas dizem o que precisam dizer para a história avançar, em vez de falar como seres humanos que têm história, ferida, desejo e subtexto.</p>
+    <p>O segundo problema mais comum é o oposto: o escritor transcreve conversa real demais — cheia de "hum", "sabe", "tipo assim" — e o resultado é lento, sem propósito, tedioso. Diálogo literário não é gravação. É a ilusão de conversa, construída com precisão.</p>
+
+    <div class="pullquote">
+      "O que uma personagem diz raramente é o que ela quer dizer. O diálogo vivo existe no espaço entre as palavras ditas e as não ditas."
+    </div>
+
+    <hr class="sep">
+
+    <h3>A regra fundamental</h3>
+    <h2>Todo diálogo deve fazer pelo menos duas coisas</h2>
+    <p>Esta é a regra mais simples e mais violada da ficção: cada troca de fala deve cumprir pelo menos dois objetivos em simultâneo. Se só avança o enredo mas não revela personagem — reescreva. Se só revela personagem mas não cria tensão ou movimento — corte.</p>
+
+    <ol class="regras">
+      <li>
+        <strong>Revelar quem fala</strong>
+        <span>Cada personagem tem um jeito de falar — vocabulário, ritmo, o que evita dizer, como trata os outros. Duas personagens intercambiáveis são, na prática, a mesma personagem.</span>
+      </li>
+      <li>
+        <strong>Avançar o enredo ou criar tensão</strong>
+        <span>A conversa deve mudar alguma coisa: uma informação revelada, uma relação alterada, um conflito instalado. Se retirar o diálogo e a cena continuar igual, o diálogo é decorativo.</span>
+      </li>
+      <li>
+        <strong>Ter subtexto</strong>
+        <span>O que está por baixo do que está sendo dito? Raiva disfarçada de polidez. Amor disfarçado de indiferença. O subtexto é o que dá textura ao diálogo e o torna memorável.</span>
+      </li>
+      <li>
+        <strong>Soar como fala, não como escrita</strong>
+        <span>Leia em voz alta. Se travar na língua, reescreva. Se soar como redação dissertativa, reescreva. Fala tem contrações, interrupções, frases incompletas.</span>
+      </li>
+    </ol>
+
+    <hr class="sep">
+
+    <h3>Antes e depois</h3>
+    <h2>Veja a diferença na prática</h2>
+    <p>O mesmo momento narrativo, duas versões. A primeira expõe informação. A segunda revela personagem e cria tensão.</p>
+
+    <div class="comparacao">
+      <div class="comparacao-bloco ruim">
+        <span class="rotulo">❌ Diálogo expositivo</span>
+        <p>— Você sabe que meu pai morreu há três anos — disse Maria.<br><br>
+        — Sim, eu sei. Você sofreu muito com isso — respondeu João.<br><br>
+        — Foi muito difícil. Mas agora estou melhor.</p>
+      </div>
+      <div class="comparacao-bloco bom">
+        <span class="rotulo">✓ Diálogo com subtexto</span>
+        <p>— Ele sempre quis te conhecer — disse Maria, sem olhar.<br><br>
+        — Eu sei.<br><br>
+        — Não, não sabe. — Ela abriu a gaveta, fechou. — Você não sabe nada.</p>
+      </div>
+    </div>
+
+    <p>Na segunda versão, não sabemos quem morreu ou quando — mas sentimos o peso. A personagem evita o nome. Age com as mãos. A última fala encerra, acusa, e não permite réplica fácil.</p>
+
+    <hr class="sep">
+
+    <h3>Erros mais comuns</h3>
+    <h2>O que cortar na revisão</h2>
+
+    <div class="dialogo-exemplo">
+      <span class="label">Erro 1 — Sobre-explicação de emoção</span>
+      <p>— Estou com raiva de você! — gritou ela, furiosa.</p>
+    </div>
+    <p>A palavra "furiosa" após o grito é redundante. O diálogo já mostrou. O narrador não precisa confirmar. Confie no leitor.</p>
+
+    <div class="dialogo-exemplo">
+      <span class="label">Erro 2 — Verbos de fala exóticos</span>
+      <p>— Não posso acreditar nisso — sussurrou ela melancolicamente.<br>
+      — Você vai ter que acreditar — esbravejou ele, irritado.</p>
+    </div>
+    <p>Use "disse" e "perguntou" na maior parte do tempo. São invisíveis — o leitor não os processa conscientemente. Verbos como "esbravejou" chamam atenção para si mesmos e quebram o fluxo.</p>
+
+    <div class="dialogo-exemplo">
+      <span class="label">Erro 3 — Diálogo que explica o que já foi mostrado</span>
+      <p>— Você chegou atrasado uma hora. É a terceira vez essa semana. Você claramente não se importa com o compromisso que assumimos.<br><br>
+      — Tem razão, estou sendo irresponsável com nossos horários combinados.</p>
+    </div>
+    <p>Personagens reais não resumem a situação como se estivessem escrevendo um relatório. Conflito real é oblíquo, interrompido, cheio de desvios.</p>
+
+    <hr class="sep">
+
+    <h3>Técnicas avançadas</h3>
+    <h2>Recursos que os bons escritores usam</h2>
+
+    <ul class="regras">
+      <li>
+        <strong>A fala que desvia</strong>
+        <span>Quando alguém pergunta algo difícil, a resposta natural é mudar de assunto, responder com outra pergunta, ou falar de algo aparentemente não relacionado. Isso é mais verdadeiro do que responder diretamente.</span>
+      </li>
+      <li>
+        <strong>O silêncio como fala</strong>
+        <span>Pausa, hesitação, ação física no lugar de resposta verbal — tudo isso é diálogo. "Ele ficou olhando para a xícara" pode dizer mais do que três linhas de fala.</span>
+      </li>
+      <li>
+        <strong>Interrupção e sobreposição</strong>
+        <span>Personagens se interrompem, completam as frases um do outro, ou falam ao mesmo tempo. Isso cria ritmo e diz muito sobre o poder na relação.</span>
+      </li>
+      <li>
+        <strong>Voz diferenciada</strong>
+        <span>Cada personagem tem um idioleto — conjunto de escolhas de linguagem únicas. Um personagem usa gíria, outro fala formal, outro usa frases curtas. Esconda o marcador de fala e o leitor ainda sabe quem está falando.</span>
+      </li>
+    </ul>
+
+    <hr class="sep">
+
+    <h3>Exercícios práticos</h3>
+    <h2>Treine o ouvido para o diálogo</h2>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 1 — O subtexto</span>
+      <h4>Escreva uma conversa onde ninguém diz o que realmente quer</h4>
+      <p>Dois personagens precisam discutir o fim de um relacionamento — mas nenhum usa as palavras "terminar", "separar" ou "acabar". Eles falam de qualquer outra coisa. O leitor deve sentir o peso do não-dito.</p>
+      <textarea placeholder="Escreva o diálogo aqui (10 a 15 trocas de fala)..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 2 — A voz única</span>
+      <h4>Crie dois personagens que ninguém confundiria</h4>
+      <p>Escreva um curto diálogo entre dois personagens com origens, idades ou visões de mundo muito diferentes. Em seguida, remova todos os marcadores de fala ("disse fulano"). O leitor ainda deve saber quem é quem?</p>
+      <textarea placeholder="Escreva o diálogo sem marcadores de fala..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 3 — A fala que faz três coisas</span>
+      <h4>Reescreva um diálogo seu usando a regra das três funções</h4>
+      <p>Pegue um diálogo que você já escreveu e analise cada fala. Ela revela personagem? Avança o enredo? Tem subtexto? Reescreva as que só fazem uma coisa.</p>
+      <textarea placeholder="Cole aqui o diálogo original e, abaixo, a versão reescrita..."></textarea>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-cta">
+        <div>
+          <p class="footer-eyebrow">Escreva agora</p>
+          <strong>O editor que deixa você escrever</strong>
+          <p>Offline, sem IA, sem distrações. O Vereda é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html" class="btn-cta">Abrir o Vereda →</a>
+      </div>
+      <div class="footer-link">
+        <div>
+          <p class="footer-eyebrow">Continue lendo</p>
+          <strong>Como estruturar um romance</strong>
+          <p>Dos três atos ao ritmo dos capítulos — a espinha dorsal que sustenta qualquer história longa.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start;">
+          <a href="./vereda-estrutura-romance.html" class="btn-sec">Ler o guia →</a>
+          <a href="./vereda-primeiras-linhas.html" style="color: rgba(244,240,232,0.35); font-family: var(--ff-label); font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;">Ou: como escrever as primeiras linhas →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Vereda — para escritores brasileiros</span>
+      <a href="./index.html">rafa.pro.br/veredav3</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
