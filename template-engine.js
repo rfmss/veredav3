@@ -595,7 +595,7 @@ Periodicidade: [semanal, quinzenal, mensal]
     return expandedGuideData().map(createGuide);
   }
 
-  function createGuide({ id, oficio, label, icon, chapter, description, meta, sections, reminders, text, model }) {
+  function createGuide({ id, oficio, label, icon, chapter, description, meta, sections, reminders, text, model, steps: customSteps }) {
     return {
       id,
       oficio,
@@ -606,7 +606,7 @@ Periodicidade: [semanal, quinzenal, mensal]
       chapter,
       description,
       guidance: { meta, sections, reminders },
-      steps: [
+      steps: customSteps || [
         {
           eyebrow: "Ofício",
           title: `${label} tem uma lógica própria.`,
@@ -686,7 +686,104 @@ Periodicidade: [semanal, quinzenal, mensal]
         text: "## Universo\n\n[Canon, AU ou recorte alternativo.]\n\n## Cena desejada\n\n[Que encontro, conflito ou reparação move o texto?]\n\n## Voz\n\n[Como manter o personagem reconhecível?]",
         model: { exemplar: "Comunidades brasileiras de Wattpad, Spirit e AO3, pela prática intensa de diálogo e serialização.", why: "Fanfic ensina a escrever com leitor real do outro lado.", references: ["Babi Dewet", "Wattpad Brasil", "Spirit Fanfics", "AO3 em português"], placeholder: "Ela conhecia aquela fala de todos os episódios. O problema é que, naquela noite, ele disse a frase olhando para outra pessoa." },
       },
+      {
+        id: "policial-noir",
+        oficio: "ficcao",
+        label: "Policial e noir",
+        icon: "search",
+        chapter: "Crime e investigação",
+        description: "Guia para ficção policial, noir e suspense com crime, investigador, pistas e revelação.",
+        meta: ["Policial", "Noir", "Crime", "Suspense"],
+        sections: [
+          ["Crime central", "O que aconteceu? Que pergunta a investigação precisa responder?"],
+          ["Investigador", "Quem investiga e que ferida ou obsessão traz para o caso?"],
+          ["Suspeitos e pistas", "Que evidências guiam — e quais foram plantadas para enganar?"],
+          ["Atmosfera", "O ambiente é personagem no noir: cidade, luz, cheiro, som."],
+          ["Revelação", "Quem fez? Por quê? A resposta precisa ser surpreendente e inevitável ao mesmo tempo."],
+        ],
+        reminders: [
+          "Plante a solução cedo — o leitor precisa ter tido chance de resolver.",
+          "O investigador interessante tem problema pessoal que o caso vai tocar.",
+          "Pistas falsas precisam ter lógica própria — não podem parecer arbitrárias depois.",
+        ],
+        text: "## O crime\n\n[O que aconteceu? Quando? Onde? Quem está morto, desaparecido ou ameaçado?]\n\n## O investigador\n\n[Quem investiga e que bagagem traz?]\n\n## Primeiras pistas\n\n[O que a cena do crime revela e o que esconde?]\n\n## Suspeitos\n\n- [Suspeito 1 — motivo, oportunidade, álibi]\n- [Suspeito 2 — motivo, oportunidade, álibi]\n- [Suspeito 3 — motivo, oportunidade, álibi]\n\n## Pista falsa\n\n[O que aponta para o lugar errado — e por quê faz sentido?]\n\n## Atmosfera\n\n[Que cidade, hora e luz moldam o tom da história?]\n\n## Revelação\n\n[Quem fez. Por quê. Como o investigador chegou lá.]",
+        model: {
+          exemplar: "Rubem Fonseca, Luiz Alfredo Garcia-Roza e Patricia Melo, pelo policial com alma e violência brasileira.",
+          why: "O policial brasileiro mais forte usa o crime para revelar a cidade, a classe e a moral — não só o mistério.",
+          references: ["Rubem Fonseca", "Luiz Alfredo Garcia-Roza", "Patricia Melo", "Tony Bellotto", "Marçal Aquino"],
+          placeholder: "O corpo foi encontrado na terça-feira. A delegada chegou na quinta. Em dois dias, alguém tinha apagado tudo que importava.",
+        },
+        steps: [
+          {
+            eyebrow: "Ficção policial",
+            title: "Policial não é só mistério — é moral.",
+            body: "O crime é o pretexto. O que o romance policial investiga de verdade é a sociedade, a justiça e o preço de saber a verdade. O melhor noir brasileiro usa o crime para revelar a cidade.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura da investigação",
+            title: "Crime, investigador, revelação.",
+            body: "Plant e payoff são a base do gênero: tudo que importa na revelação final precisa ter sido plantado antes. O leitor deve poder reler e encontrar as pistas que ignorou.",
+            items: [
+              ["Crime com pergunta", "O que aconteceu cria uma tensão que só a revelação dissolve.", "done"],
+              ["Investigador com ferida", "O caso toca algo pessoal — isso é o que diferencia thriller de exercício.", "done"],
+              ["Revelação inevitável e surpreendente", "O leitor não previu, mas reconhece: 'claro, era isso'.", "done"],
+            ],
+            primary: "Criar policial",
+          },
+        ],
+      },
+      {
+        id: "romance-sentimental",
+        oficio: "ficcao",
+        label: "Romance sentimental",
+        icon: "favorite",
+        chapter: "Obstáculo e entrega",
+        description: "Guia para romance com arco de relacionamento, HEA ou HFN, tensão emocional e personagens com química.",
+        meta: ["Romance", "HEA / HFN", "Tensão emocional", "Química"],
+        sections: [
+          ["Protagonistas", "Quem são os dois — e o que cada um quer além do relacionamento?"],
+          ["Atração inicial", "O que os aproxima no começo — e o que já planta o obstáculo?"],
+          ["Obstáculo central", "O que os impede de ficarem juntos? Precisa ser crível e doloroso o suficiente para sustentar o livro."],
+          ["Ponto de ruptura", "O momento em que parece que não vai funcionar — o leitor precisa acreditar."],
+          ["Resolução", "Como o obstáculo é superado de dentro para fora? A resolução precisa ser ganha, não dada."],
+        ],
+        reminders: [
+          "O obstáculo precisa ser interno tanto quanto externo — desentendimento puro não sustenta um romance.",
+          "Química se constrói em cena, não em descrição: o que eles fazem juntos que só eles fariam?",
+          "HEA (felizes para sempre) ou HFN (felizes por agora) — defina antes de escrever: o tom do livro muda.",
+        ],
+        text: "## Protagonista A\n\n[Quem é? O que quer, além do relacionamento?]\n\n## Protagonista B\n\n[Quem é? O que quer, além do relacionamento?]\n\n## Primeiro encontro\n\n[Como se conhecem? O que a cena já planta de tensão ou atração?]\n\n## Obstáculo central\n\n[O que os impede? Seja específico — obstáculos vagos não criam tensão real.]\n\n## Construção da tensão\n\n[Cenas que aproximam e afastam. O vaivém que segura o leitor.]\n\n## Ponto de ruptura\n\n[O momento em que parece impossível. O leitor precisa acreditar.]\n\n## Resolução\n\n[Como superam — de dentro para fora. A decisão precisa ser deles.]",
+        model: {
+          exemplar: "Thalita Rebouças, Babi Dewet e a tradição do romance de banca, pela leitura que prende sem pedir desculpa.",
+          why: "O romance sentimental brasileiro forte tem personagens que o leitor quer ver felizes — e obstáculos que fazem o leitor duvidar que isso vai acontecer.",
+          references: ["Thalita Rebouças", "Babi Dewet", "Ana Lua", "Nicholas Sparks adaptado", "Colleen Hoover em tradução"],
+          placeholder: "Ele era exatamente o tipo de pessoa que ela havia prometido a si mesma que nunca mais ia amar.",
+        },
+        steps: [
+          {
+            eyebrow: "Ficção romântica",
+            title: "Romance sentimental tem uma promessa implícita.",
+            body: "O leitor chega sabendo que vai haver final feliz — ou pelo menos esperançoso. A tensão não está no 'se' mas no 'como'. O seu trabalho é tornar o obstáculo tão real que o leitor duvide da promessa.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura do romance sentimental",
+            title: "Atração, obstáculo, entrega.",
+            body: "A química se constrói em cena — o que esses dois fazem juntos que mais ninguém faria? O obstáculo precisa doer. A resolução precisa ser conquistada.",
+            items: [
+              ["Química em cena", "Mostre, não descreva: o que eles fazem juntos que cria tensão.", "done"],
+              ["Obstáculo crível", "Externo e interno — desentendimento puro não segura o livro.", "done"],
+              ["Resolução ganha", "A decisão vem de dentro deles — não de acidente ou terceiros.", "done"],
+            ],
+            primary: "Criar romance",
+          },
+        ],
+      },
       ...roteiroGuides(),
+
       ...poesiaGuides(),
       ...naoFiccaoGuides(),
       ...jornalismoGuides(),
@@ -700,7 +797,54 @@ Periodicidade: [semanal, quinzenal, mensal]
 
   function roteiroGuides() {
     return [
-      guide("roteiro-filme", "roteiro", "Roteiro de filme", "theaters", "Arco fechado", "Guia para curta ou longa com conflito visual, viradas e cena final forte.", ["Cinema", "Três atos", "Imagem", "Arco fechado"], "EXT. RODOVIÁRIA - FIM DE TARDE\n\nEla desce do ônibus com uma sacola e um endereço antigo. Ninguém veio buscar."),
+      createGuide({
+        id: "roteiro-filme",
+        oficio: "roteiro",
+        label: "Roteiro de filme",
+        icon: "theaters",
+        chapter: "Premissa visual",
+        description: "Guia para curta ou longa com conflito visual, viradas de ato e cena final forte.",
+        meta: ["Cinema", "Três atos", "Imagem", "Arco fechado"],
+        sections: [
+          ["Premissa visual", "Em uma frase: personagem + desejo + obstáculo — tudo que a câmera pode acompanhar."],
+          ["Personagem e desejo", "Quem quer o quê com urgência suficiente para uma hora e meia?"],
+          ["Virada do segundo ato", "Que acontecimento força a mudança de rota e eleva as apostas?"],
+          ["Clímax visual", "A cena que entrega o conflito — o que a câmera vê no pico da tensão?"],
+          ["Desfecho", "O que mudou para sempre no mundo ou no personagem?"],
+        ],
+        reminders: [
+          "Escreva o que a câmera vê — nunca emoção abstrata.",
+          "Uma página tende a equivaler a um minuto de tela.",
+          "Todo personagem entra em cena querendo algo concreto.",
+        ],
+        text: "## Premissa\n\nEM UMA FRASE: [personagem] quer [objetivo] mas enfrenta [obstáculo].\n\n## Ato 1\n\nINT./EXT. [LOCAL] - [DIA/NOITE]\n\n[Apresente o mundo e o personagem. Plante a virada.]\n\n## Virada do Ato 1\n\n[O evento que joga o personagem na jornada.]\n\n## Ato 2 — Escalada\n\n[O obstáculo cresce. Cada tentativa falha ou custa algo.]\n\n## Ponto sem retorno\n\n[O momento em que voltar atrás não é mais possível.]\n\n## Clímax\n\n[A cena que resolve — visualmente.]\n\n## Desfecho\n\n[O que mudou para sempre?]",
+        model: {
+          exemplar: "Kleber Mendonça Filho, Anna Muylaert e Petra Costa, pela imagem que carrega argumento.",
+          why: "O cinema brasileiro forte nasce quando a cena visual é inseparável do ponto de vista.",
+          references: ["Kleber Mendonça Filho", "Anna Muylaert", "Petra Costa", "Laís Bodanzky", "Karim Aïnouz"],
+          placeholder: "EXT. RODOVIÁRIA - FIM DE TARDE\n\nEla desce do ônibus com uma sacola e um endereço antigo. Ninguém veio buscar.",
+        },
+        steps: [
+          {
+            eyebrow: "Roteiro de cinema",
+            title: "Um roteiro de filme é um guia de imagens.",
+            body: 'Você não escreve "ela estava com saudade". Você escreve o que a câmera vê: "Ela dobra a carta. Não envia." O sentimento mora na cena — não na descrição.',
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura dos três atos",
+            title: "Cada ato tem uma função diferente.",
+            body: "O primeiro ato planta. O segundo ato pressiona. O terceiro ato entrega. O erro mais comum é chegar cedo demais ao clímax.",
+            items: [
+              ["Ato 1 — até 25%", "Apresenta mundo, personagem e virada que inicia a jornada.", "done"],
+              ["Ato 2 — de 25% a 75%", "A pressão cresce. Cada tentativa falha ou custa.", "done"],
+              ["Ato 3 — últimos 25%", "Clímax visual e desfecho.", "done"],
+            ],
+            primary: "Criar roteiro",
+          },
+        ],
+      }),
       guide("documentario", "roteiro", "Documentário", "videocam", "Pergunta e escuta", "Guia para tratamento documental com pergunta, personagem real e abertura ao inesperado.", ["Não ficção audiovisual", "Tratamento", "Personagem real", "Escuta"], "A câmera espera. A mulher dobra uma camisa, desfaz a dobra e pergunta se pode começar de novo."),
       guide("dramaturgia", "roteiro", "Dramaturgia", "comedy_mask", "Palavra em cena", "Guia para teatro, rubrica, conflito ao vivo e tensão pela palavra.", ["Teatro", "Cena", "Rubrica", "Conflito ao vivo"], "ELA: Você guardou a cadeira dele.\n\nELE: Ninguém senta ali.\n\nELA: Ele morreu há sete anos."),
       guide("roteiro-games", "roteiro", "Roteiro de games", "sports_esports", "Escolha e consequência", "Guia para narrativa interativa com escolhas, missões, diálogos e sistema.", ["Interatividade", "Escolha", "Consequência", "Mundo jogável"], "OPÇÃO A: Entregar a água ao vilarejo.\nOPÇÃO B: Guardar a água para atravessar o sertão.\n\nA escolha altera quem abre a próxima porta."),
@@ -710,9 +854,103 @@ Periodicidade: [semanal, quinzenal, mensal]
 
   function poesiaGuides() {
     return [
-      guide("slam", "poesia", "Slam e palavra falada", "mic", "Voz e corpo", "Guia para poema performático com ritmo, presença e urgência pública.", ["Performance", "3 minutos", "Voz", "Corpo"], "minha rua não cabe no mapa\nmas cabe inteira\nquando minha mãe chama meu nome"),
+      createGuide({
+        id: "slam",
+        oficio: "poesia",
+        label: "Slam e palavra falada",
+        icon: "mic",
+        chapter: "Voz e urgência",
+        description: "Guia para poema performático com ritmo, presença e urgência pública. Você tem 3 minutos.",
+        meta: ["Performance", "3 minutos", "Voz", "Corpo"],
+        sections: [
+          ["Tese em voz alta", "O que você defende com o corpo, não só com a cabeça?"],
+          ["Imagem de abertura", "A cena ou detalhe concreto que ancora o poema."],
+          ["Escalada", "Como a urgência cresce verso a verso — sem chegar ao ápice cedo demais?"],
+          ["Virada", "O momento em que o poema muda de temperatura."],
+          ["Eco final", "A frase que a plateia leva embora."],
+        ],
+        reminders: [
+          "Slam tem 3 minutos: cada palavra precisa de combustão.",
+          "Leia em voz alta em cada estágio — o ouvido encontra o que o olho ignora.",
+          "O corpo é parte do texto: como esse poema quer ser dito?",
+        ],
+        text: "## Tese\n\n[O que você defende — em voz alta, com o corpo?]\n\n## Imagem de abertura\n\n[A cena ou detalhe concreto que ancora o poema.]\n\n## Escalada\n\n[Como a urgência cresce? Suba devagar — não queime tudo na primeira estrofe.]\n\n## Virada\n\n[O poema muda de temperatura aqui.]\n\n## Eco final\n\n[A última linha. Ela fica depois que você parar de falar.]",
+        model: {
+          exemplar: "Bará, Luz Ribeiro e Ryane Leão, pela urgência que transforma escuta em ação.",
+          why: "O slam brasileiro carrega território, identidade e política — não como tema, mas como voz.",
+          references: ["Bará", "Luz Ribeiro", "Ryane Leão", "Sérgio Vaz", "Emicida"],
+          placeholder: "minha rua não cabe no mapa\nmas cabe inteira\nquando minha mãe chama meu nome",
+        },
+        steps: [
+          {
+            eyebrow: "Poesia performática",
+            title: "Slam é poesia que precisa ser dita.",
+            body: "Diferente do poema de página, o slam existe no tempo real. Você tem até 3 minutos. A plateia responde com o corpo — antes de aplaudir, ela já sentiu.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura do slam",
+            title: "Escalada, virada, eco.",
+            body: "Um slam forte sobe de temperatura. Não começa no ápice — chega até ele. A última frase precisa ecoar depois que você para de falar.",
+            items: [
+              ["Abertura ancorada", "Começa com imagem concreta, não com a tese já declarada.", "done"],
+              ["Escalada progressiva", "A urgência cresce a cada estrofe.", "done"],
+              ["Eco final", "A última linha que a plateia leva para casa.", "done"],
+            ],
+            primary: "Criar slam",
+          },
+        ],
+      }),
       guide("poesia-digital", "poesia", "Poesia digital", "phone_iphone", "Tela e impacto", "Guia para poema curto pensado para tela, circulação e leitura rápida.", ["Tela", "Imagem final", "Brevidade", "Compartilhamento"], "guardei teu silêncio\nnuma pasta chamada\ncoisas que ainda respondem"),
-      guide("letra-musica", "poesia", "Letra de música", "music_note", "Melodia e repetição", "Guia para letra em função de melodia, refrão, imagem e canto.", ["Canção", "Refrão", "Métrica", "Voz cantada"], "se a cidade dorme cedo\neu aprendo a te esquecer\nno intervalo do semáforo"),
+      createGuide({
+        id: "letra-musica",
+        oficio: "poesia",
+        label: "Letra de música",
+        icon: "music_note",
+        chapter: "Refrão e imagem",
+        description: "Guia para letra em função de melodia: refrão que gruda, imagem que canta e verso que respira.",
+        meta: ["Canção", "Refrão", "Métrica", "Voz cantada"],
+        sections: [
+          ["Imagem central", "Que objeto, gesto ou cena ancora a canção inteira?"],
+          ["Estrofe", "Conta a história ou situação. Prepara o refrão."],
+          ["Refrão", "A parte que repete e intensifica. Precisa valer a repêtição."],
+          ["Ponte", "A seção que quebra o padrão e renova a escuta antes da última entrada do refrão."],
+          ["Métrica e respiração", "O verso cabe na melodia? Leia em voz alta no ritmo da música."],
+        ],
+        reminders: [
+          "Letra de música existe na voz — leia em voz alta no ritmo antes de qualquer versão final.",
+          "O refrão precisa funcionar isolado — é o que as pessoas vão cantarolar.",
+          "Sílabas demais travam a melodia: prefira versões mais curtas ao reescrever.",
+        ],
+        text: "## Imagem central\n\n[O objeto, gesto ou cena que ancora a canção.]\n\n## Estrofe 1\n\n[Situa a história. Prepara o refrão sem entregá-lo.]\n\n## Refrão\n\n[A parte que repete, intensifica e precisa valer cada vez que volta.]\n\n## Estrofe 2\n\n[Aprofunda ou desloca a situação. Mesma melodia, nova informação.]\n\n## Ponte\n\n[Quebra o padrão. Renova a escuta antes da última entrada do refrão.]\n\n## Refrão final\n\n[A mesma letra, ou uma variação que entrega o ponto alto.]",
+        model: {
+          exemplar: "Renato Russo, Caetano Veloso e Elza Soares, por letras em que imagem e melodia são insepáráveis.",
+          why: "A letra brasileira forte tem imagem que sobrevive sem a música — mas ganha dimensão nova quando cantada.",
+          references: ["Renato Russo", "Caetano Veloso", "Elza Soares", "Criolo", "Liniker"],
+          placeholder: "se a cidade dorme cedo\neu aprendo a te esquecer\nno intervalo do semáforo",
+        },
+        steps: [
+          {
+            eyebrow: "Letra é poesia que canta",
+            title: "Letra de música tem regras que o poema não tem.",
+            body: "Sílabas precisam caber na melodia. O refrão precisa valer cada vez que volta. A estrofe prepara — o refrão entrega. A ponte renova antes do pico final.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura da canção",
+            title: "Estrofe, refrão, ponte.",
+            body: "Não é fórmula — é função. Cada seção tem um papel específico na experiência de quem ouve.",
+            items: [
+              ["Estrofe", "Conta. Situa. Prepara o refrão sem antecipar.", "done"],
+              ["Refrão", "Intensifica. Repete. Precisa valer a repetição.", "done"],
+              ["Ponte", "Quebra e renova. Torna a última entrada do refrão mais forte.", "done"],
+            ],
+            primary: "Criar letra",
+          },
+        ],
+      }),
     ];
   }
 
@@ -726,13 +964,107 @@ Periodicidade: [semanal, quinzenal, mensal]
   function jornalismoGuides() {
     return [
       guide("critica-cultural", "jornalismo", "Crítica cultural", "reviews", "Tese sobre obra", "Guia para análise de obra cultural com argumento, contexto e posição crítica.", ["Crítica", "Tese", "Contexto", "Argumento"], "O problema do filme não está no que ele mostra, mas na pressa com que tenta nos dizer o que sentir."),
-      guide("coluna-opiniao", "jornalismo", "Coluna de opinião", "edit_square", "Tese e provocação", "Guia para texto opinativo com tese, voz reconhecível e conclusão provocadora.", ["Opinião", "Tese", "Voz", "Recorrência"], "O país chama de polêmica aquilo que ainda não teve coragem de chamar pelo nome."),
+      createGuide({
+        id: "coluna-opiniao",
+        oficio: "jornalismo",
+        label: "Coluna de opinião",
+        icon: "edit_square",
+        chapter: "Tese e provocação",
+        description: "Guia para texto opinativo com tese ousada, voz reconhecível e conclusão que provoca posição.",
+        meta: ["Opinião", "Tese", "Voz", "Recorrência"],
+        sections: [
+          ["Tese ousada", "Uma afirmação que poucos teriam coragem de fazer — e que você consegue sustentar."],
+          ["Gancho de abertura", "O fato, cena ou provocação que justifica escrever hoje sobre isso."],
+          ["Argumento central", "Por que a tese se sustenta? Dado, observação ou lógica que o leitor não pode ignorar."],
+          ["Contraponto honesto", "Reconhecer a objeção principal fortalece — não enfraquece — a coluna."],
+          ["Fecho provocador", "A conclusão que força o leitor a tomar posição."],
+        ],
+        reminders: [
+          "Coluna é voz, não relatório: o leitor precisa sentir quem escreveu.",
+          "A tese precisa ser suficientemente ousada para valer o espaço.",
+          "Evite concluir com 'portanto, é preciso refletir' — o leitor já sabe disso.",
+        ],
+        text: "## Tese\n\n[Uma afirmação que você pode sustentar e que poucos teriam dito assim.]\n\n## Gancho\n\n[O fato ou cena que justifica escrever sobre isso hoje.]\n\n## Argumento\n\n[Por que a tese se sustenta? Desenvolva com dado, observação ou lógica.]\n\n## Contraponto honesto\n\n[Qual é a objeção principal? Como você responde a ela?]\n\n## Fecho\n\n[A última frase que força o leitor a se posicionar.]",
+        model: {
+          exemplar: "Luís Fernando Verrissimo, Eliane Brum e João Paulo Cuenca, por colunas em que voz e argumento são insepáráveis.",
+          why: "A coluna brasileira forte tem uma voz que o leitor reconhece antes de terminar o segundo parágrafo.",
+          references: ["Luís Fernando Verrissimo", "Eliane Brum", "João Paulo Cuenca", "Djamila Ribeiro", "Artur Xexéo"],
+          placeholder: "O país chama de polêmica aquilo que ainda não teve coragem de chamar pelo nome.",
+        },
+        steps: [
+          {
+            eyebrow: "Voz e tese",
+            title: "Coluna de opinião é argumento com voz.",
+            body: "Não é análise neutra nem desabafo. É uma posição defendida com lógica e numa voz que o leitor reconhece — e que espera encontrar de novo na próxima edição.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura da coluna",
+            title: "Tese, argumento, fecho provocador.",
+            body: "A coluna precisa tomar partido. Uma conclusão vaga é mais um artigo genérico do que uma coluna.",
+            items: [
+              ["Tese ousada", "Algo que você pode sustentar e que poucos diriam assim.", "done"],
+              ["Argumento com dado ou observação", "Não opinião sobre opinião — raciocínio.", "done"],
+              ["Fecho que provoca posição", "O leitor termina e precisa decidir se concorda.", "done"],
+            ],
+            primary: "Criar coluna",
+          },
+        ],
+      }),
     ];
   }
 
   function comercialTecnicaGuides() {
     return [
-      guide("copywriting", "comercial-tecnica", "Copywriting", "campaign", "Promessa e conversão", "Guia para escrita persuasiva com promessa clara, prova e chamada para ação.", ["Persuasão", "Promessa", "Prova", "Ação"], "Não é só uma agenda. É o lugar onde sua semana para de mandar em você."),
+      createGuide({
+        id: "copywriting",
+        oficio: "comercial-tecnica",
+        label: "Copywriting",
+        icon: "campaign",
+        chapter: "Promessa e conversão",
+        description: "Guia para escrita persuasiva com promessa clara, prova e chamada para ação.",
+        meta: ["Persuasão", "Promessa", "Prova", "Ação"],
+        sections: [
+          ["Promessa central", "O que o leitor ganha ou resolve? Em uma frase direta, sem floreio."],
+          ["Dor ou desejo", "Que problema, frustração ou aspiração move o leitor neste momento?"],
+          ["Prova", "Por que acreditar? Dado, depoimento, resultado concreto ou demonstração."],
+          ["Objeção principal", "Qual resistência o leitor tem antes de agir? Responda antes que ele pergunte."],
+          ["CTA — chamada para ação", "O que o leitor faz agora? Um único passo, claro e fácil."],
+        ],
+        reminders: [
+          "Copy fraco promete demais e prova de menos. Inverta: prove primeiro, prometa com razão.",
+          "A melhor copy parece conversa, não anuncio.",
+          "Um único CTA forte é mais eficaz do que três opções.",
+        ],
+        text: "## Promessa central\n\n[O que o leitor ganha ou resolve — em uma frase direta.]\n\n## Dor ou desejo\n\n[Qual problema ou aspiração você está abordando?]\n\n## Prova\n\n[Dado, resultado, depoimento ou demonstração que sustenta a promessa.]\n\n## Objeção principal\n\n[O que o leitor pensa antes de agir? Responda aqui.]\n\n## Chamada para ação\n\n[Um único passo claro. O que ele faz agora?]",
+        model: {
+          exemplar: "Ogilvy, Claude Hopkins e a prática brasileira de copy em nichos de nicho.",
+          why: "Copy eficaz não convence pelo volume de argumentos, mas pela precísão de um único ponto irrecusável.",
+          references: ["David Ogilvy", "Claude Hopkins", "Gary Halbert", "Copy brasileira de mídia de performance"],
+          placeholder: "Não é só uma agenda. É o lugar onde sua semana para de mandar em você.",
+        },
+        steps: [
+          {
+            eyebrow: "Escrita persuasiva",
+            title: "Copy não é grito — é conversa com alvo.",
+            body: "O erro mais comum é tentar convencer a todos. Copy forte fala com uma pessoa específica, no momento certo, sobre uma única coisa que importa para ela.",
+            primary: "Entendi",
+            secondary: "Me conta mais",
+          },
+          {
+            eyebrow: "A estrutura da persuasão",
+            title: "Promessa, prova, ação.",
+            body: "A fórmula clássica funciona porque respeita a lógica de decisão humana: o leitor precisa entender o que ganha, acreditar que é real, e saber o que fazer.",
+            items: [
+              ["Promessa clara", "O que ele ganha, em linguagem dele — não no seu.", "done"],
+              ["Prova concreta", "Dado, resultado ou demonstração — não apenas afirmação.", "done"],
+              ["Um CTA, só um", "Quanto mais escolhas, menos ação.", "done"],
+            ],
+            primary: "Criar copy",
+          },
+        ],
+      }),
       guide("conteudo-digital", "comercial-tecnica", "Conteúdo digital", "language", "Explicação útil", "Guia para conteúdo informativo, claro e encontrável sem perder voz.", ["Conteúdo", "Clareza", "SEO humano", "Utilidade"], "Você já ouviu esse termo. Mas o que ele muda na sua vida prática ainda costuma ficar fora da explicação."),
       guide("ux-writing", "comercial-tecnica", "UX writing", "touch_app", "Microtexto útil", "Guia para botões, mensagens, erros e fluxos com clareza humana.", ["Interface", "Microcopy", "Clareza", "Ação"], "Não conseguimos salvar agora. Seu texto continua aqui. Tente novamente em alguns segundos."),
       guide("roteiro-youtube", "comercial-tecnica", "Roteiro para vídeo", "smart_display", "Gancho e retenção", "Guia para YouTube, Reels ou vídeo explicativo com gancho, ritmo e entrega.", ["Vídeo", "Gancho", "Retenção", "Fala"], "Esse dado parece pequeno. Mas ele explica por que sua cidade esquenta mais do que a previsão diz."),
