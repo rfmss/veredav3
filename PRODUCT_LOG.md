@@ -1626,3 +1626,44 @@ Conteúdo:
 - Sitemap: 6 URLs
 - Academia: 5 cards editoriais
 
+
+### 2026-05-03 — PLANO CONCLUÍDO: últimas 2 páginas editoriais
+
+Commits: (este)
+
+**vereda-revisao-manuscrito.html**
+- 5 camadas de revisão (estrutural, personagem, ritmo, linguagem, técnica)
+- Técnicas de distância do texto
+- Checklist cena por cena (7 perguntas)
+- 3 exercícios: resumo cruel, cena sem justificativa, palavra vício
+
+**vereda-bloqueio-criativo.html**
+- Diagnóstico em 4 tipos de bloqueio
+- Técnicas imediatas (6) + prevenção (4)
+- 3 exercícios: diagnóstico, rascunho deliberadamente ruim, próximo parágrafo
+
+**Estado final do ecossistema de conteúdo — 03/05:**
+- 8 URLs no sitemap (index + 7 páginas editoriais)
+- Academia com 7 cards de leitura editorial
+- Linkagem cruzada bidirecional em todas as páginas
+
+**Mapa completo de páginas:**
+1. vereda-titulo-do-livro.html
+2. vereda-primeiras-linhas.html
+3. vereda-estrutura-romance.html
+4. vereda-dialogos.html
+5. vereda-personagens.html
+6. vereda-revisao-manuscrito.html
+7. vereda-bloqueio-criativo.html
+
+**PLANO DE RANKING — FASE COMPLETA:**
+- Fase 0 (produto): CONCLUÍDA
+- Fase 1 (SEO técnico): CONCLUÍDA
+- Fase 2 (linkagem + conteúdo): CONCLUÍDA
+- Fase 3 (Search Console): aguardando ação manual do Rafael
+
+Próxima ação necessária de Rafael:
+→ Acessar search.google.com/search-console
+→ Verificar rafa.pro.br
+→ Submeter: https://rafa.pro.br/veredav3/sitemap.xml
+
