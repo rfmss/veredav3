@@ -799,8 +799,11 @@ function renderProjectGrid() {
             <button type="button" data-archive-quick="export" data-archive-format="txt" data-archive-document="${manuscript.id}" title="Exportar TXT" aria-label="Exportar ${escapeHtml(manuscript.title)} em TXT">
               TXT
             </button>
-            <button type="button" data-archive-quick="export" data-archive-format="md" data-archive-document="${manuscript.id}" title="Exportar MD" aria-label="Exportar ${escapeHtml(manuscript.title)} em Markdown">
+            <button type="button" data-archive-quick="export" data-archive-format="md" data-archive-document="${manuscript.id}" title="Exportar Markdown" aria-label="Exportar ${escapeHtml(manuscript.title)} em Markdown">
               MD
+            </button>
+            <button type="button" data-archive-quick="export" data-archive-format="docx" data-archive-document="${manuscript.id}" title="Exportar DOCX (Word / LibreOffice)" aria-label="Exportar ${escapeHtml(manuscript.title)} em DOCX">
+              DOCX
             </button>
             <button type="button" data-archive-quick="duplicate" data-archive-document="${manuscript.id}" title="Duplicar" aria-label="Duplicar ${escapeHtml(manuscript.title)}">
               <span class="material-symbols-outlined">content_copy</span>
