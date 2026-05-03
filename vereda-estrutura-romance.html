@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Estruturar um Romance — Do Primeiro Ato ao Fim | Vereda</title>
+<meta name="description" content="Guia completo para escritores brasileiros sobre como estruturar um romance. Atos, arcos narrativos, capítulos e ritmo — aprenda a construir sua história com solidez.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como Estruturar um Romance — Do Primeiro Ato ao Fim">
+<meta property="og:description" content="Estrutura não é fórmula — é o esqueleto que sustenta a carne da história. Guia prático com técnicas, exemplos e exercícios para escritores brasileiros.">
+<meta property="og:url" content="https://rafa.pro.br/veredav3/vereda-estrutura-romance.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Vereda — Editor de Escrita para Escritores Brasileiros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Como Estruturar um Romance | Vereda">
+<meta name="twitter:description" content="Do primeiro ato ao fim: como construir a estrutura de um romance com solidez, ritmo e intenção.">
+<link rel="canonical" href="https://rafa.pro.br/veredav3/vereda-estrutura-romance.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1008;
+  --paper: #f7f2e8;
+  --aged: #e8dfc8;
+  --vermelho: #8b1a1a;
+  --ouro: #c9922a;
+  --ouro-claro: #e8b84b;
+  --margem: #7a6e5e;
+  --ff-title: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Crimson Pro', Georgia, serif;
+  --ff-label: 'Josefin Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ff-body); font-size: 19px; line-height: 1.75; }
+
+/* ── TIPOGRAFIA ── */
+h1 { font-family: var(--ff-title); font-weight: 300; font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.1; letter-spacing: -0.01em; }
+h2 { font-family: var(--ff-title); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; margin: 3rem 0 1rem; }
+h3 { font-family: var(--ff-label); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ouro); margin: 2.5rem 0 0.8rem; }
+p { margin-bottom: 1.4rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* ── LAYOUT ── */
+.container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── HERO ── */
+.hero { background: var(--ink); color: var(--paper); padding: 5rem 2rem 4rem; }
+.hero .eyebrow { font-family: var(--ff-label); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ouro); margin-bottom: 1.5rem; display: block; }
+.hero h1 { color: var(--paper); margin-bottom: 1.5rem; }
+.hero .lead { font-size: 1.15rem; color: rgba(247,242,232,0.75); max-width: 600px; line-height: 1.6; }
+.hero-meta { display: flex; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+.hero-meta span { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--margem); }
+
+/* ── ARTIGO ── */
+.article { padding: 4rem 2rem; }
+.article > .container > * + * { margin-top: 0; }
+
+/* ── DESTAQUE / PULL QUOTE ── */
+.pullquote { border-left: 3px solid var(--ouro); padding: 1.2rem 1.8rem; margin: 2.5rem 0; background: rgba(201,146,42,0.06); font-family: var(--ff-title); font-size: 1.25rem; font-style: italic; line-height: 1.5; color: var(--ink); }
+
+/* ── BLOCO DE EXEMPLO ── */
+.exemplo { background: var(--aged); border-left: 2px solid var(--ouro); padding: 1.5rem 2rem; margin: 2.5rem 0; border-radius: 0 4px 4px 0; }
+.exemplo .label { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 0.8rem; display: block; }
+.exemplo p { font-size: 0.95rem; color: var(--margem); margin-bottom: 0; }
+
+/* ── CARDS DE ESTRUTURA ── */
+.estrutura-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin: 2rem 0; }
+.estrutura-card { background: var(--ink); color: var(--paper); padding: 2rem 1.5rem; }
+.estrutura-card .num { font-family: var(--ff-title); font-size: 3rem; font-weight: 300; color: var(--ouro); line-height: 1; margin-bottom: 0.8rem; display: block; }
+.estrutura-card strong { font-family: var(--ff-label); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); display: block; margin-bottom: 0.8rem; }
+.estrutura-card p { font-size: 0.9rem; color: rgba(247,242,232,0.7); line-height: 1.5; margin: 0; }
+
+/* ── EXERCÍCIOS ── */
+.exercicio { border: 1px solid rgba(201,146,42,0.25); padding: 2rem; margin: 2rem 0; }
+.exercicio .titulo-ex { font-family: var(--ff-label); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 1rem; display: block; }
+.exercicio h4 { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; }
+.exercicio p { font-size: 0.95rem; color: var(--margem); }
+.exercicio textarea { width: 100%; min-height: 120px; background: var(--aged); border: 1px solid rgba(201,146,42,0.3); padding: 1rem; font-family: var(--ff-body); font-size: 0.95rem; color: var(--ink); resize: vertical; margin-top: 1rem; line-height: 1.6; }
+.exercicio textarea:focus { outline: 1px solid var(--ouro); }
+
+/* ── LISTA EDITORIAL ── */
+.lista-editorial { list-style: none; margin: 1.5rem 0 2rem; }
+.lista-editorial li { padding: 0.7rem 0; border-bottom: 1px solid rgba(201,146,42,0.1); padding-left: 1.5rem; position: relative; font-size: 0.97rem; }
+.lista-editorial li::before { content: '—'; position: absolute; left: 0; color: var(--ouro); }
+
+/* ── SEPARADOR ── */
+.sep { border: none; border-top: 1px solid rgba(201,146,42,0.15); margin: 3rem 0; }
+
+/* ── RODAPÉ ── */
+footer { background: var(--ink); color: var(--aged); padding: 4rem 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
+.footer-cta { background: var(--vermelho); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
+.footer-link { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,146,42,0.15); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
+.footer-eyebrow { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.8rem; }
+.footer-cta .footer-eyebrow { color: rgba(247,242,232,0.7); }
+.footer-link .footer-eyebrow { color: var(--ouro); }
+.footer-cta strong { font-family: var(--ff-title); font-size: 1.7rem; font-weight: 400; color: var(--paper); line-height: 1.2; display: block; }
+.footer-link strong { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 400; color: var(--paper); line-height: 1.3; display: block; }
+.footer-cta p, .footer-link p { font-size: 0.88rem; line-height: 1.6; }
+.footer-cta p { color: rgba(247,242,232,0.7); margin-top: 0.8rem; }
+.footer-link p { color: var(--margem); margin-top: 0.8rem; }
+.btn-cta { display: inline-block; background: var(--paper); color: var(--ink); font-family: var(--ff-label); font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; align-self: flex-start; }
+.btn-sec { display: inline-block; border: 1px solid rgba(201,146,42,0.4); color: var(--ouro); font-family: var(--ff-label); font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; align-self: flex-start; }
+.footer-bottom { border-top: 1px solid rgba(201,146,42,0.12); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-bottom span, .footer-bottom a { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--margem); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .estrutura-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Guia de escrita · Vereda</span>
+    <h1>Como estruturar<br>um romance</h1>
+    <p class="lead">Estrutura não é uma gaiola — é o que impede a história de desmoronar sob o peso das suas próprias ideias. Um guia prático para escritores brasileiros.</p>
+    <div class="hero-meta">
+      <span>Leitura: 12 minutos</span>
+      <span>Exercícios práticos</span>
+      <span>Para ficção longa</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTIGO -->
+<article class="article">
+  <div class="container">
+
+    <h3>O problema da estrutura</h3>
+    <h2>Por que romances morrem no meio</h2>
+    <p>A maioria dos romances inacabados não para por falta de talento. Para por falta de mapa. O escritor sabe onde começa e tem uma ideia do fim — mas o meio vira um pântano onde a história afunda lentamente, capítulo por capítulo, até o silêncio.</p>
+    <p>Estrutura é o antídoto. Não uma fórmula mágica, mas um conjunto de perguntas que a história precisa responder em certos momentos: <em>O que está em jogo? Quem muda? Por quê esse momento importa?</em></p>
+
+    <div class="pullquote">
+      "Todo romance de sucesso é um conjunto de promessas feitas ao leitor e cumpridas — cada uma delas no momento certo."
+    </div>
+
+    <hr class="sep">
+
+    <h3>A espinha dorsal</h3>
+    <h2>Os três atos: uma estrutura universal</h2>
+    <p>Três atos não é uma regra hollywoodiana — é a forma como seres humanos entendem transformação. Apresentação, complicação, resolução. Encontramos isso em tragédias gregas, em contos africanos, em cordel nordestino.</p>
+
+    <div class="estrutura-grid">
+      <div class="estrutura-card">
+        <span class="num">01</span>
+        <strong>Primeiro Ato</strong>
+        <p>Apresenta o mundo normal, o protagonista e a ferida que carrega. Termina com o <em>ponto de virada</em> — o evento que torna o status quo impossível.</p>
+      </div>
+      <div class="estrutura-card">
+        <span class="num">02</span>
+        <strong>Segundo Ato</strong>
+        <p>O maior e mais traiçoeiro. O protagonista enfrenta obstáculos crescentes, perde apoios, chega ao <em>ponto mais sombrio</em>. Aqui a maioria dos romances morre.</p>
+      </div>
+      <div class="estrutura-card">
+        <span class="num">03</span>
+        <strong>Terceiro Ato</strong>
+        <p>A luta final e a transformação. O protagonista usa o que aprendeu no segundo ato para enfrentar o conflito central. A resolução não precisa ser feliz — precisa ser <em>honesta</em>.</p>
+      </div>
+    </div>
+
+    <div class="exemplo">
+      <span class="label">Exemplo na literatura brasileira</span>
+      <p>Em <strong>A Hora da Estrela</strong>, de Clarice Lispector: Macabéa existe no mundo de Rodrigo (Ato 1) → sua vida se deteriora enquanto o narrador a observa impotente (Ato 2) → o encontro com a cartomante e o desfecho irrevogável (Ato 3). A estrutura está lá, disfarçada de fragmento.</p>
+    </div>
+
+    <hr class="sep">
+
+    <h3>O problema do meio</h3>
+    <h2>Como sobreviver ao segundo ato</h2>
+    <p>O segundo ato representa metade do romance. É onde a maioria dos escritores perde o rumo porque começa a inventar cenas sem saber para onde estão indo.</p>
+    <p>A solução é <strong>dividir o segundo ato em dois quartos</strong>:</p>
+
+    <ul class="lista-editorial">
+      <li><strong>Segundo ato, primeira metade:</strong> o protagonista tenta resolver o problema com as ferramentas antigas — e falha repetidamente. Ele ainda acredita que vai vencer.</li>
+      <li><strong>Ponto médio:</strong> um evento que muda a natureza do conflito. Não é o clímax — é o momento em que o protagonista percebe que estava errado sobre algo fundamental.</li>
+      <li><strong>Segundo ato, segunda metade:</strong> tudo piora. O protagonista perde o que mais protege — relacionamento, crença, aliado. Chega ao ponto mais sombrio, sem saída aparente.</li>
+    </ul>
+
+    <div class="pullquote">
+      "O ponto mais sombrio não é o vilão vencendo. É o protagonista descobrindo que a versão de si mesmo que trouxe até aqui não é suficiente para o que vem a seguir."
+    </div>
+
+    <hr class="sep">
+
+    <h3>Ritmo e respiração</h3>
+    <h2>Como controlar o ritmo dos capítulos</h2>
+    <p>Capítulos não têm tamanho certo — têm <em>função</em>. Um capítulo pode ter duas páginas ou quarenta. O que importa é que ele termine de um jeito que justifique a virada de página.</p>
+
+    <ul class="lista-editorial">
+      <li><strong>Capítulos de ação:</strong> curtos, frases cortadas, sem ornamento. O leitor precisa sentir o ritmo acelerado no próprio corpo.</li>
+      <li><strong>Capítulos de desenvolvimento:</strong> mais longos, permitem diálogo, introspecção, descrição de lugar. São a respiração entre as corridas.</li>
+      <li><strong>Capítulos de revelação:</strong> terminam com uma informação que muda o que o leitor entende sobre tudo que veio antes.</li>
+      <li><strong>Capítulos de transição:</strong> os mais difíceis. Resistam à tentação de pular — mostrem o custo emocional de chegar ao próximo ponto.</li>
+    </ul>
+
+    <div class="exemplo">
+      <span class="label">Princípio prático</span>
+      <p>Tente alternar: um capítulo de ação, um de desenvolvimento. Um capítulo que avança o enredo, um que aprofunda o personagem. A alternância cria ritmo sem monotonia.</p>
+    </div>
+
+    <hr class="sep">
+
+    <h3>Arcos de personagem</h3>
+    <h2>A estrutura interna do protagonista</h2>
+    <p>Todo romance tem dois enredos paralelos: o externo (o que acontece) e o interno (quem o protagonista se torna). A estrutura só funciona quando os dois estão sincronizados.</p>
+    <p>O arco de personagem segue uma lógica simples: no início, o protagonista tem uma <strong>crença falsa</strong> sobre si mesmo ou sobre o mundo. Os eventos do romance desafiam essa crença. No fim, ele a abandona — ou não, e sofre as consequências.</p>
+
+    <ul class="lista-editorial">
+      <li><strong>Arco positivo:</strong> personagem muda para melhor. A crença falsa é substituída por uma verdade mais difícil e mais rica.</li>
+      <li><strong>Arco negativo:</strong> personagem não muda — ou muda para pior. Comum em tragédias. Requer que o leitor veja o que o protagonista não consegue ver.</li>
+      <li><strong>Arco plano:</strong> o protagonista não muda — mas muda todos ao redor. Comum em histórias de mentor ou herói arquetípico.</li>
+    </ul>
+
+    <hr class="sep">
+
+    <h3>Exercícios práticos</h3>
+    <h2>Coloque sua estrutura no papel</h2>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 1 — O mapa de três atos</span>
+      <h4>Escreva a espinha do seu romance em três frases</h4>
+      <p>Uma frase para cada ato. Não se preocupe com estilo — seja claro. "No Ato 1, X acontece e muda tudo. No Ato 2, o protagonista tenta Y mas descobre Z. No Ato 3, a luta final revela W."</p>
+      <textarea placeholder="Escreva aqui o mapa de três atos do seu romance..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 2 — A crença falsa</span>
+      <h4>Qual é a mentira que o seu protagonista acredita no início?</h4>
+      <p>Não é uma mentira que ele conta para os outros — é algo que ele acredita sobre si mesmo ou sobre o mundo. Essa crença precisa ser desafiada pelos eventos do romance.</p>
+      <textarea placeholder="Meu protagonista acredita que..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 3 — O ponto mais sombrio</span>
+      <h4>O que seu protagonista perde antes do clímax?</h4>
+      <p>Identifique o momento mais difícil do segundo ato. O que ele perde que parece irrecuperável? Amor, confiança, propósito? Quanto mais alto o custo, mais peso terá a recuperação.</p>
+      <textarea placeholder="No ponto mais sombrio, meu protagonista perde..."></textarea>
+    </div>
+
+  </div>
+</article>
+
+<!-- RODAPÉ DE NAVEGAÇÃO -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-cta">
+        <div>
+          <p class="footer-eyebrow">Escreva agora</p>
+          <strong>O editor que deixa você escrever</strong>
+          <p>Offline, sem IA, sem distrações. O Vereda é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html" class="btn-cta">Abrir o Vereda →</a>
+      </div>
+      <div class="footer-link">
+        <div>
+          <p class="footer-eyebrow">Continue lendo</p>
+          <strong>Como escrever as primeiras linhas do livro</strong>
+          <p>Técnicas de abertura, análise de primeiras linhas famosas e exercícios para vencer o bloqueio inicial.</p>
+        </div>
+        <a href="./vereda-primeiras-linhas.html" class="btn-sec">Ler o guia →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Vereda — para escritores brasileiros</span>
+      <a href="./index.html">rafa.pro.br/veredav3</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
