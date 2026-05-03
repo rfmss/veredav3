@@ -1666,5 +1666,103 @@ function mostrarFeedback(id) {
   document.getElementById(id).classList.add('visivel');
 }
 </script>
+
+<!-- ── RODAPÉ DE NAVEGAÇÃO ──────────────────────────── -->
+<footer style="
+  background: var(--profundo);
+  border-top: 1px solid var(--fio);
+  padding: 4rem 2rem;
+">
+  <div style="max-width: 900px; margin: 0 auto;">
+
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin-bottom: 3rem;
+    ">
+      <!-- CTA principal: abrir o editor -->
+      <div style="
+        background: var(--lima-apagado);
+        border: 1px solid rgba(184,242,49,0.25);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lima); margin-bottom: 0.8rem;">Escreva agora</p>
+          <strong style="font-family: var(--ff-display); font-size: 1.7rem; font-weight: 700; color: var(--branco); line-height: 1.2; display: block;">O editor que deixa você escrever</strong>
+          <p style="font-size: 0.88rem; color: var(--cinza-claro); margin-top: 0.8rem; line-height: 1.6; font-style: italic;">Offline, sem IA, sem distrações. O Vereda é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html" style="
+          display: inline-block;
+          background: var(--lima);
+          color: var(--void);
+          font-family: var(--ff-mono);
+          font-size: 0.62rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+          font-weight: 500;
+        ">
+          Abrir o Vereda →
+        </a>
+      </div>
+
+      <!-- Link para a outra página de conteúdo -->
+      <div style="
+        background: var(--ardosia);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cinza); margin-bottom: 0.8rem;">Continue lendo</p>
+          <strong style="font-family: var(--ff-display); font-size: 1.4rem; font-weight: 700; color: var(--branco); line-height: 1.3; display: block;">Como escolher o título certo para o seu livro</strong>
+          <p style="font-size: 0.88rem; color: var(--cinza-claro); margin-top: 0.8rem; line-height: 1.6; font-style: italic;">Técnicas, exemplos reais e exercícios práticos para encontrar o nome que representa a obra.</p>
+        </div>
+        <a href="./vereda-titulo-do-livro.html" style="
+          display: inline-block;
+          border: 1px solid var(--fio-forte);
+          color: var(--cinza-claro);
+          font-family: var(--ff-mono);
+          font-size: 0.62rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+        ">
+          Ler o guia →
+        </a>
+      </div>
+    </div>
+
+    <div style="
+      border-top: 1px solid var(--fio);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    ">
+      <span style="font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cinza);">
+        Vereda — para escritores brasileiros
+      </span>
+      <a href="./index.html" style="font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cinza); text-decoration: none;">
+        rafa.pro.br/veredav3
+      </a>
+    </div>
+
+  </div>
+</footer>
+
 </body>
 </html>

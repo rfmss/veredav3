@@ -1732,5 +1732,105 @@ function calcularPlacar() {
   placar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 </script>
+
+<!-- ── RODAPÉ DE NAVEGAÇÃO ──────────────────────────── -->
+<footer style="
+  background: var(--ink);
+  color: var(--aged);
+  padding: 4rem 2rem;
+  margin-top: 0;
+">
+  <div style="max-width: 820px; margin: 0 auto;">
+
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 3rem;
+    ">
+      <!-- CTA principal: abrir o editor -->
+      <div style="
+        background: var(--vermelho);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(247,242,232,0.7); margin-bottom: 0.8rem;">Escreva agora</p>
+          <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.8rem; font-weight: 400; color: var(--paper); line-height: 1.2; display: block;">O editor que deixa você escrever</strong>
+          <p style="font-size: 0.9rem; color: rgba(247,242,232,0.75); margin-top: 0.8rem; line-height: 1.6;">Offline, sem IA, sem distrações. O Vereda é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html" style="
+          display: inline-block;
+          background: var(--paper);
+          color: var(--ink);
+          font-family: 'Josefin Sans', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+          transition: background 0.3s;
+        " onmouseover="this.style.background='var(--ouro-claro)'" onmouseout="this.style.background='var(--paper)'">
+          Abrir o Vereda →
+        </a>
+      </div>
+
+      <!-- Link para a outra página de conteúdo -->
+      <div style="
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(201,146,42,0.15);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ouro); margin-bottom: 0.8rem;">Continue lendo</p>
+          <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 400; color: var(--paper); line-height: 1.3; display: block;">Como escrever as primeiras linhas do livro</strong>
+          <p style="font-size: 0.88rem; color: var(--margem); margin-top: 0.8rem; line-height: 1.6;">Técnicas de abertura, análise de primeiras linhas famosas e exercícios para vencer o bloqueio inicial.</p>
+        </div>
+        <a href="./vereda-primeiras-linhas.html" style="
+          display: inline-block;
+          border: 1px solid rgba(201,146,42,0.4);
+          color: var(--ouro);
+          font-family: 'Josefin Sans', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+          transition: border-color 0.3s, color 0.3s;
+        " onmouseover="this.style.borderColor='var(--ouro)';this.style.color='var(--ouro-claro)'" onmouseout="this.style.borderColor='rgba(201,146,42,0.4)';this.style.color='var(--ouro)'">
+          Ler o guia →
+        </a>
+      </div>
+    </div>
+
+    <div style="
+      border-top: 1px solid rgba(201,146,42,0.12);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    ">
+      <span style="font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--margem);">
+        Vereda — para escritores brasileiros
+      </span>
+      <a href="./index.html" style="font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--margem); text-decoration: none;">
+        rafa.pro.br/veredav3
+      </a>
+    </div>
+
+  </div>
+</footer>
+
 </body>
 </html>
