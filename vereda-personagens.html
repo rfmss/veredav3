@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Criar Personagens que o Leitor Não Esquece | Vereda</title>
+<meta name="description" content="Guia para escritores brasileiros sobre como construir personagens memoráveis. Ferida, desejo, contradição e voz própria — os elementos que fazem um personagem viver além da página.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como Criar Personagens que o Leitor Não Esquece">
+<meta property="og:description" content="Personagens memoráveis não são perfeitos — são verdadeiros. Aprenda a construir figuras que vivem além da página com técnicas práticas para escritores brasileiros.">
+<meta property="og:url" content="https://rafa.pro.br/veredav3/vereda-personagens.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Vereda — Editor de Escrita para Escritores Brasileiros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Como Criar Personagens Memoráveis | Vereda">
+<meta name="twitter:description" content="A ferida, o desejo, a contradição e a voz própria — os quatro pilares de um personagem que o leitor não esquece.">
+<link rel="canonical" href="https://rafa.pro.br/veredav3/vereda-personagens.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a0f0a;
+  --paper: #f5efe4;
+  --aged: #ebe0cc;
+  --terra: #7a3a1a;
+  --terra-claro: #c4622a;
+  --ouro: #c9922a;
+  --margem: #7a6458;
+  --fio: rgba(122,58,26,0.1);
+  --ff-title: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Crimson Pro', Georgia, serif;
+  --ff-label: 'Josefin Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ff-body); font-size: 19px; line-height: 1.75; }
+
+h1 { font-family: var(--ff-title); font-weight: 300; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.1; }
+h2 { font-family: var(--ff-title); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; margin: 3rem 0 1rem; }
+h3 { font-family: var(--ff-label); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra-claro); margin: 2.5rem 0 0.8rem; }
+p { margin-bottom: 1.4rem; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+.container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+
+/* HERO */
+.hero { background: var(--terra); color: var(--paper); padding: 5rem 2rem 4rem; }
+.hero .eyebrow { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,146,42,0.85); margin-bottom: 1.5rem; display: block; }
+.hero h1 { color: var(--paper); margin-bottom: 1.5rem; }
+.hero .lead { font-size: 1.12rem; color: rgba(245,239,228,0.75); max-width: 600px; line-height: 1.6; }
+.hero-meta { display: flex; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+.hero-meta span { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,228,0.4); }
+
+.article { padding: 4rem 2rem; }
+
+/* OS QUATRO PILARES */
+.pilares { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 2rem 0; }
+.pilar { padding: 2rem 1.8rem; }
+.pilar:nth-child(odd) { background: var(--terra); color: var(--paper); }
+.pilar:nth-child(even) { background: var(--aged); color: var(--ink); }
+.pilar .num { font-family: var(--ff-title); font-size: 3rem; font-weight: 300; line-height: 1; margin-bottom: 0.8rem; display: block; }
+.pilar:nth-child(odd) .num { color: var(--ouro); }
+.pilar:nth-child(even) .num { color: var(--terra-claro); }
+.pilar strong { font-family: var(--ff-label); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.8rem; }
+.pilar:nth-child(odd) strong { color: rgba(245,239,228,0.9); }
+.pilar:nth-child(even) strong { color: var(--terra); }
+.pilar p { font-size: 0.9rem; line-height: 1.55; margin: 0; }
+.pilar:nth-child(odd) p { color: rgba(245,239,228,0.7); }
+.pilar:nth-child(even) p { color: var(--margem); }
+
+/* PULL QUOTE */
+.pullquote { border-left: 3px solid var(--terra-claro); padding: 1.2rem 1.8rem; margin: 2.5rem 0; background: rgba(122,58,26,0.05); font-family: var(--ff-title); font-size: 1.25rem; font-style: italic; line-height: 1.5; }
+
+/* FICHA DE PERSONAGEM */
+.ficha { background: #fff; border: 1px solid var(--fio); padding: 2rem 2.5rem; margin: 2.5rem 0; }
+.ficha .label { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra-claro); margin-bottom: 1.2rem; display: block; }
+.ficha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.ficha-item label { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--margem); display: block; margin-bottom: 0.4rem; }
+.ficha-item p { font-size: 0.95rem; font-style: italic; color: var(--ink); border-bottom: 1px solid var(--fio); padding-bottom: 0.6rem; margin: 0; }
+
+/* LISTA */
+.lista-editorial { list-style: none; margin: 1.5rem 0 2rem; }
+.lista-editorial li { padding: 0.8rem 0 0.8rem 1.8rem; border-bottom: 1px solid var(--fio); position: relative; font-size: 0.97rem; }
+.lista-editorial li::before { content: '—'; position: absolute; left: 0; color: var(--terra-claro); }
+
+/* SEPARADOR */
+.sep { border: none; border-top: 1px solid var(--fio); margin: 3rem 0; }
+
+/* EXERCÍCIOS */
+.exercicio { border: 1px solid var(--fio); padding: 2rem; margin: 2rem 0; }
+.exercicio .titulo-ex { font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra-claro); margin-bottom: 1rem; display: block; }
+.exercicio h4 { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; }
+.exercicio p { font-size: 0.95rem; color: var(--margem); }
+.exercicio textarea { width: 100%; min-height: 130px; background: var(--aged); border: 1px solid var(--fio); padding: 1rem; font-family: var(--ff-body); font-size: 0.95rem; color: var(--ink); resize: vertical; margin-top: 1rem; line-height: 1.6; }
+.exercicio textarea:focus { outline: 1px solid var(--terra-claro); }
+
+/* RODAPÉ */
+footer { background: var(--terra); color: var(--paper); padding: 4rem 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
+.footer-cta { background: rgba(0,0,0,0.25); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; border: 1px solid rgba(201,146,42,0.3); }
+.footer-link { background: rgba(0,0,0,0.15); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.footer-eyebrow { font-family: var(--ff-label); font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ouro); margin-bottom: 0.5rem; }
+.footer-cta strong, .footer-link strong { font-family: var(--ff-title); font-size: 1.6rem; font-weight: 400; color: var(--paper); line-height: 1.25; display: block; }
+.footer-cta p, .footer-link p { font-size: 0.88rem; line-height: 1.6; color: rgba(245,239,228,0.6); margin-top: 0.6rem; }
+.btn-cta { display: inline-block; background: var(--ouro); color: var(--ink); font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; font-weight: 600; }
+.btn-sec { display: inline-block; border: 1px solid rgba(245,239,228,0.25); color: rgba(245,239,228,0.8); font-family: var(--ff-label); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 1.8rem; text-decoration: none; }
+.footer-bottom { border-top: 1px solid rgba(245,239,228,0.08); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-bottom span, .footer-bottom a { font-family: var(--ff-label); font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,228,0.3); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .pilares { grid-template-columns: 1fr; }
+  .ficha-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Guia de escrita · Vereda</span>
+    <h1>Como criar personagens<br>que o leitor não esquece</h1>
+    <p class="lead">Personagens memoráveis não são perfeitos, nem completamente explicados, nem sempre simpáticos. São verdadeiros. E verdade em ficção tem uma estrutura que pode ser aprendida.</p>
+    <div class="hero-meta">
+      <span>Leitura: 11 minutos</span>
+      <span>Exercícios práticos</span>
+      <span>Para ficção e roteiro</span>
+    </div>
+  </div>
+</header>
+
+<article class="article">
+  <div class="container">
+
+    <h3>O problema central</h3>
+    <h2>Por que personagens ficam vazios</h2>
+    <p>O escritor sabe tudo sobre o personagem — cor dos olhos, infância, time de futebol — mas o leitor não sente nada. O problema raramente é falta de detalhe. É falta de <strong>pressão interna</strong>.</p>
+    <p>Um personagem vive quando carrega algo que o mundo da história vai pressionar. Sem essa tensão entre o que ele quer e o que o mundo exige, ele é apenas um vetor de enredo: faz coisas, vai a lugares, fala palavras — mas não é.</p>
+
+    <div class="pullquote">
+      "O leitor não se apega a personagens que admira. Se apega a personagens que reconhece — mesmo nos aspectos que preferia não reconhecer."
+    </div>
+
+    <hr class="sep">
+
+    <h3>Os quatro pilares</h3>
+    <h2>O que faz um personagem viver</h2>
+
+    <div class="pilares">
+      <div class="pilar">
+        <span class="num">01</span>
+        <strong>A ferida</strong>
+        <p>O que aconteceu no passado que ainda sangra no presente? A ferida não precisa ser dramática — pode ser pequena e persistente. Mas ela molda como o personagem enxerga tudo.</p>
+      </div>
+      <div class="pilar">
+        <span class="num">02</span>
+        <strong>O desejo</strong>
+        <p>O que ele quer — consciente ou não? Pode ser concreto (vingar o pai) ou abstrato (ser amado sem precisar merecer). O desejo cria o movimento da história.</p>
+      </div>
+      <div class="pilar">
+        <span class="num">03</span>
+        <strong>A contradição</strong>
+        <p>Ele quer uma coisa e faz outra? Acredita em algo e age de forma oposta? Contradição não é fraqueza de escrita — é o que torna as pessoas reais.</p>
+      </div>
+      <div class="pilar">
+        <span class="num">04</span>
+        <strong>A voz própria</strong>
+        <p>Como ele narra o mundo para si mesmo? Otimista? Irônico? Com culpa? A voz interna do personagem filtra tudo o que ele percebe e fala.</p>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <h3>Construção prática</h3>
+    <h2>A ficha que importa</h2>
+    <p>Esqueça as fichas com cor dos olhos e signo. Estas são as perguntas que revelam um personagem:</p>
+
+    <div class="ficha">
+      <span class="label">Ficha interior — Personagem em construção</span>
+      <div class="ficha-grid">
+        <div class="ficha-item">
+          <label>O que ele quer, conscientemente?</label>
+          <p><em>O objetivo declarado, o que ele diria em voz alta.</em></p>
+        </div>
+        <div class="ficha-item">
+          <label>O que ele realmente quer?</label>
+          <p><em>O desejo profundo que ele talvez nem conheça.</em></p>
+        </div>
+        <div class="ficha-item">
+          <label>Qual é a sua ferida?</label>
+          <p><em>O evento ou padrão do passado que ainda governa o presente.</em></p>
+        </div>
+        <div class="ficha-item">
+          <label>Qual a crença falsa que carrega?</label>
+          <p><em>O que ele acredita sobre si mesmo que não é verdade — ou não é toda a verdade.</em></p>
+        </div>
+        <div class="ficha-item">
+          <label>O que ele faz quando tem medo?</label>
+          <p><em>Ataca, foge, congela, brinca, controla? Comportamento sob pressão revela caráter.</em></p>
+        </div>
+        <div class="ficha-item">
+          <label>O que ele nunca diria sobre si mesmo?</label>
+          <p><em>O ponto cego. O leitor pode ver; o personagem, não.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <h3>Erros que esvaziam personagens</h3>
+    <h2>O que evitar</h2>
+
+    <ul class="lista-editorial">
+      <li><strong>Personagem sem falha real.</strong> Falhas decorativas ("ela é muito perfeccionista") não criam tensão. A falha precisa custar algo — na relação, no enredo, na moral.</li>
+      <li><strong>Backstory como desculpa.</strong> Explicar demais o trauma do personagem reduz o mistério e a responsabilidade. O passado informa; não justifica tudo.</li>
+      <li><strong>Personagem que só reage.</strong> Se o personagem nunca age por vontade própria — só responde ao que acontece — ele é passivo. Passividade entedia o leitor.</li>
+      <li><strong>Consistência sem contradição.</strong> Pessoas reais são inconsistentes. Um personagem que sempre age de acordo com seus valores é uma ideia, não um ser humano.</li>
+      <li><strong>Voz idêntica ao narrador.</strong> Se o personagem pensa e fala exatamente como o narrador, o leitor perde a sensação de encontrar alguém.</li>
+    </ul>
+
+    <div class="pullquote">
+      "O leitor perdoa quase tudo de um personagem — crueldade, covardia, erro moral — desde que sinta que o personagem é verdadeiro. O que ele não perdoa é a inconsistência não motivada."
+    </div>
+
+    <hr class="sep">
+
+    <h3>Técnicas que funcionam</h3>
+    <h2>Como aprofundar sem explicar</h2>
+
+    <ul class="lista-editorial">
+      <li><strong>Mostre o comportamento sob pressão.</strong> O que o personagem faz quando as coisas saem do controle revela mais do que páginas de introspecção.</li>
+      <li><strong>Dê a ele uma obsessão pequena.</strong> Uma coisa específica que só ele percebe, coleciona, evita ou repete. Detalhes particulares criam a ilusão de profundidade.</li>
+      <li><strong>Deixe-o errar sem aprender imediatamente.</strong> A mudança demora. Personagens que aprendem rápido demais parecem instrumentos do enredo, não pessoas.</li>
+      <li><strong>Crie uma tensão entre o que ele diz e o que ele faz.</strong> A diferença entre declaração e ação é onde o leitor encontra o personagem real.</li>
+      <li><strong>Dê a ele um relacionamento que o define.</strong> Como ele trata quem tem menos poder do que ele? Como age com quem ama quando ninguém está olhando?</li>
+    </ul>
+
+    <hr class="sep">
+
+    <h3>Exercícios práticos</h3>
+    <h2>Construa o personagem de dentro para fora</h2>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 1 — A ferida e o desejo</span>
+      <h4>Escreva a equação central do personagem</h4>
+      <p>Complete: "Por causa de [ferida], meu personagem acredita que [crença falsa], e por isso busca [desejo consciente] — quando o que realmente precisa é [desejo profundo]."</p>
+      <textarea placeholder="Por causa de... meu personagem acredita que... e por isso busca... quando o que realmente precisa é..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 2 — A contradição em ação</span>
+      <h4>Escreva uma cena onde o personagem age contra seus próprios valores</h4>
+      <p>Seu personagem acredita em lealdade — mas trai alguém. Acredita em honestidade — mas mente para se proteger. Escreva a cena e os pensamentos que ele usa para se justificar.</p>
+      <textarea placeholder="Escreva a cena aqui..."></textarea>
+    </div>
+
+    <div class="exercicio">
+      <span class="titulo-ex">Exercício 3 — O comportamento sob pressão</span>
+      <h4>O que ele faz quando perde o controle?</h4>
+      <p>Coloque seu personagem numa situação de estresse extremo — algo que ameaça o que ele mais protege. Escreva sua reação instintiva, antes que ele pense. É nesse momento que o caráter se revela.</p>
+      <textarea placeholder="A situação e a reação instintiva do personagem..."></textarea>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-cta">
+        <div>
+          <p class="footer-eyebrow">Escreva agora</p>
+          <strong>O editor que deixa você escrever</strong>
+          <p>Offline, sem IA, sem distrações. O Vereda é feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html" class="btn-cta">Abrir o Vereda →</a>
+      </div>
+      <div class="footer-link">
+        <div>
+          <p class="footer-eyebrow">Continue lendo</p>
+          <strong>Como escrever diálogos que parecem reais</strong>
+          <p>Subtexto, voz diferenciada e os erros mais comuns na fala dos personagens.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start;">
+          <a href="./vereda-dialogos.html" class="btn-sec">Ler o guia →</a>
+          <a href="./vereda-estrutura-romance.html" style="color: rgba(245,239,228,0.3); font-family: var(--ff-label); font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;">Ou: como estruturar um romance →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Vereda — para escritores brasileiros</span>
+      <a href="./index.html">rafa.pro.br/veredav3</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

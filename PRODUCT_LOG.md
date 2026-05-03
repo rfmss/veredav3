@@ -1609,3 +1609,20 @@ index (Academia) ←→ titulo ←→ primeiras-linhas ←→ estrutura-romance
 - Como revisar um manuscrito
 - Como vencer o bloqueio criativo
 
+
+### 2026-05-03 — Nova página: Como criar personagens memoráveis
+
+Arquivo: vereda-personagens.html
+Commit: (próximo)
+
+Conteúdo:
+- Problema central: falta de pressão interna
+- Os 4 pilares: ferida, desejo, contradição, voz própria
+- Ficha interior (6 perguntas que importam de verdade)
+- 5 erros que esvaziam personagens
+- 5 técnicas para aprofundar sem explicar
+- 3 exercícios: equação central, cena de contradição, comportamento sob pressão
+- Paleta terra/ouro com Cormorant Garamond
+- Sitemap: 6 URLs
+- Academia: 5 cards editoriais
+
