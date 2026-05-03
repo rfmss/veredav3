@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Páginas de conteúdo editorial
+Allow: /veredav3/vereda-titulo-do-livro.html
+Allow: /veredav3/vereda-primeiras-linhas.html
+
+# Sitemap
+Sitemap: https://rafa.pro.br/veredav3/sitemap.xml

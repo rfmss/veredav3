@@ -4,7 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#2e4d43">
-    <title>.vrda - editor</title>
+    <title>Vereda — Editor de Escrita para Escritores Brasileiros</title>
+    <meta name="description" content="Vereda é um editor de escrita offline-first para escritores brasileiros. Escreva, organize seus manuscritos e prove sua autoria sem depender da internet ou de inteligência artificial.">
+    <meta name="keywords" content="editor de escrita, escritores brasileiros, editor offline, manuscrito, literatura brasileira, ferramenta de escrita">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vereda — Editor de Escrita para Escritores Brasileiros">
+    <meta property="og:description" content="Escreva, organize manuscritos e prove sua autoria sem depender da internet. Editor offline-first feito para a literatura brasileira.">
+    <meta property="og:url" content="https://rafa.pro.br/veredav3/">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vereda — Editor de Escrita para Escritores Brasileiros">
+    <meta name="twitter:description" content="Editor de escrita offline-first para escritores brasileiros. Sem IA, sem nuvem, sem vigilância.">
+    <link rel="canonical" href="https://rafa.pro.br/veredav3/">
     <link rel="manifest" href="manifest.webmanifest?v=20260430-05">
     <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260430-05" type="image/png" sizes="48x48">
     <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260430-05" type="image/png" sizes="32x32">
@@ -70,7 +81,7 @@
           <button class="icon-button" data-action="toggle-focus" aria-label="Alternar modo foco" title="Modo foco">
             <span class="material-symbols-outlined">visibility</span>
           </button>
-          <button class="icon-button" aria-label="Configurações" title="Configurações">
+          <button class="icon-button" aria-label="Configurações" title="Configurações — Em breve" style="opacity: 0.35; cursor: not-allowed; pointer-events: none;" disabled>
             <span class="material-symbols-outlined">settings</span>
           </button>
         </div>
@@ -195,21 +206,22 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               <h1>Certificados & Integridade</h1>
               <p class="muted">Registro local de cadência, eventos confiáveis e hash do processo criativo.</p>
 
+              <p class="muted" style="margin-bottom: 1.5rem; font-style: italic;">Enquanto você escreve, o Vereda registra o ritmo das suas teclas — não o que digitou, só o tempo entre cada letra. Isso cria uma prova de que você escreveu este texto.</p>
               <div class="certificate-grid">
                 <div class="metric-block">
-                  <span>Integridade</span>
-                  <strong data-proof-integrity>0%</strong>
-                  <small data-proof-status>Aguardando escrita orgânica</small>
+                  <span>Registro de autoria</span>
+                  <strong data-proof-integrity>Aguardando sua escrita</strong>
+                  <small data-proof-status>Escreva no editor para iniciar</small>
                 </div>
                 <div class="metric-block">
-                  <span>Eventos orgânicos</span>
+                  <span>Toques registrados</span>
                   <strong data-proof-organic>0</strong>
-                  <small data-proof-rejected>0 descartados</small>
+                  <small data-proof-rejected>0 ignorados</small>
                 </div>
                 <div class="metric-block">
                   <span>Cadência média</span>
-                  <strong data-proof-cadence>0 WPM</strong>
-                  <small>Intervalos entre 30ms e 2000ms</small>
+                  <strong data-proof-cadence>—</strong>
+                  <small>Calculada conforme você escreve</small>
                 </div>
               </div>
 
@@ -387,15 +399,15 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                 </aside>
               </div>
               <div class="resource-grid">
-                <a class="project-card utility" href="#">
+                <a class="project-card utility" href="#" style="opacity: 0.55; cursor: default; pointer-events: none;" title="Em breve">
                   <span class="material-symbols-outlined">groups</span>
                   <h2>Personagens</h2>
-                  <p>42 perfis detalhados.</p>
+                  <p>Em breve — perfis e fichas de personagem.</p>
                 </a>
-                <a class="project-card utility" href="#">
+                <a class="project-card utility" href="#" style="opacity: 0.55; cursor: default; pointer-events: none;" title="Em breve">
                   <span class="material-symbols-outlined">map</span>
                   <h2>Cenários</h2>
-                  <p>18 lugares catalogados.</p>
+                  <p>Em breve — lugares e ambientações catalogadas.</p>
                 </a>
               </div>
             </article>
@@ -786,20 +798,20 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
       </footer>
     </div>
 
-    <script src="lexical-engine.js?v=20260430-05"></script>
-    <script src="proof-engine.js?v=20260430-05"></script>
-    <script src="vrda-engine.js?v=20260430-05"></script>
-    <script src="backup-engine.js?v=20260430-05"></script>
-    <script src="filesystem-backup-engine.js?v=20260430-05"></script>
-    <script src="archive-engine.js?v=20260430-05"></script>
-    <script src="version-engine.js?v=20260430-05"></script>
-    <script src="export-engine.js?v=20260430-05"></script>
-    <script src="template-engine.js?v=20260430-05"></script>
-    <script src="precision-engine.js?v=20260430-05"></script>
-    <script src="voice-engine.js?v=20260430-05"></script>
-    <script src="rimalab-engine.js?v=20260430-05"></script>
-    <script src="decolonial-engine.js?v=20260430-05"></script>
-    <script src="rights-engine.js?v=20260430-05"></script>
-    <script src="app.js?v=20260430-05"></script>
+    <script src="lexical-engine.js?v=20260430-05" defer></script>
+    <script src="proof-engine.js?v=20260430-05" defer></script>
+    <script src="vrda-engine.js?v=20260430-05" defer></script>
+    <script src="backup-engine.js?v=20260430-05" defer></script>
+    <script src="filesystem-backup-engine.js?v=20260430-05" defer></script>
+    <script src="archive-engine.js?v=20260430-05" defer></script>
+    <script src="version-engine.js?v=20260430-05" defer></script>
+    <script src="export-engine.js?v=20260430-05" defer></script>
+    <script src="template-engine.js?v=20260430-05" defer></script>
+    <script src="precision-engine.js?v=20260430-05" defer></script>
+    <script src="voice-engine.js?v=20260430-05" defer></script>
+    <script src="rimalab-engine.js?v=20260430-05" defer></script>
+    <script src="decolonial-engine.js?v=20260430-05" defer></script>
+    <script src="rights-engine.js?v=20260430-05" defer></script>
+    <script src="app.js?v=20260430-05" defer></script>
   </body>
 </html>

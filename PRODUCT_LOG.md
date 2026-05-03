@@ -1338,3 +1338,126 @@ Analisamos os arquivos externos de controle de acesso, aprovação social e Merc
 Criamos `ACESSO_MONETIZACAO.md` com a proposta de trilhas Pública de Formação, Criativa e Profissional, além das recomendações de arquitetura, segurança, LGPD, Mercado Pago e etapa correta de entrada no roadmap. A frente fica para depois do fechamento do produto local: confiança imediata, `.docx`, onboarding, projeto literário real e offline mais honesto.
 
 Complementamos o documento com diretrizes de preço regionalizado, promessa vitalícia limitada à Vereda v3, tarefa criativa por menção/link externo, trial Pro de 3 dias durante análise manual e limite semanal futuro para aprovações criativas.
+
+## 2026-05-03 — Diagnóstico de ranking e primeiro ciclo de correções
+
+### Contexto desta sessão
+
+Esta sessão partiu de uma pergunta direta: por que o ranking do site está baixo? O ponto de partida foi a análise dos arquivos criados em 02/05, que revelaram auditorias de persona já realizadas e duas páginas de conteúdo editorial, nunca linkadas nem otimizadas para SEO.
+
+**ATENÇÃO PARA QUEM RETOMAR:** Este é um projeto desenvolvido entre sessões de IA. Leia esta entrada completa antes de alterar qualquer arquivo.
+
+---
+
+### Diagnóstico: três camadas do problema
+
+**Camada 1 — Produto quebra confiança antes do SEO ter efeito**
+
+Os arquivos `AUDITORIA_UX_MARINA.md` e `AuditoriaClaude4PErsonas.md` (criados em 02/05) registram auditoria por persona completa. Resultado: 4 personas avaliaram o produto, média **5.1/10**. Todas concordaram nos mesmos pontos críticos:
+
+- Botão Configurações clicável mas sem função → ensina o usuário a não confiar
+- Cards Personagens (42 perfis) e Cenários (18 lugares) com dados falsos → quebra confiança imediata
+- Prova de Autoria mostrando "0%" no estado inicial → parece erro grave
+- Nenhum onboarding na primeira entrada → usuário sai sem entender o produto
+- Academia invisível a partir do editor → o maior valor do produto não é descoberto
+
+Impacto no ranking: usuário entra, se decepciona em menos de 30 segundos, sai. O Google lê esse comportamento como sinal negativo. SEO sem produto que retém não funciona.
+
+**Camada 2 — Falhas técnicas de SEO no index.html**
+
+Situação antes desta sessão:
+- `<title>` era `.vrda - editor` — fraco, sem palavra-chave
+- Nenhuma `<meta name="description">` — campo em branco para o Google
+- Nenhuma tag `og:*` — sem preview em redes sociais
+- Scripts JS sem `defer` — bloqueio de renderização, penalidade de Core Web Vitals
+- Sem canonical, sem sitemap.xml, sem robots.txt
+
+**Camada 3 — Conteúdo rico existe mas está desconectado**
+
+Duas páginas HTML criadas em 02/05 com conteúdo editorial denso:
+- `vereda-titulo-do-livro.html` (72KB) — guia sobre como criar título de livro
+- `vereda-primeiras-linhas.html` (79KB) — guia sobre as primeiras linhas
+
+Ambas estavam sem meta description, sem og:*, sem canonical, sem linkagem entre si e sem linkagem para o produto. São o maior ativo de SEO do projeto e estavam invisíveis para o Google.
+
+---
+
+### O que foi feito nesta sessão
+
+**index.html — correções de produto e SEO**
+1. Title: `.vrda - editor` → `Vereda — Editor de Escrita para Escritores Brasileiros`
+2. Adicionada meta description, og:type, og:title, og:description, og:url, og:locale
+3. Adicionadas twitter:card, twitter:title, twitter:description
+4. Adicionada link canonical
+5. Botão Configurações desativado: opacity 0.35, cursor not-allowed, pointer-events none, disabled, tooltip "Em breve"
+6. Cards Personagens/Cenários: números falsos removidos, texto "Em breve" honesto, opacity reduzida
+7. Prova de Autoria: "0%" → "Aguardando sua escrita", linguagem técnica humanizada, parágrafo explicativo adicionado
+8. Todos os scripts JS convertidos para defer (melhoria de Core Web Vitals)
+9. Scripts duplicados acidentalmente gerados foram removidos
+
+**vereda-titulo-do-livro.html**
+- Title: `O Título do Livro — Como Escolher e Criar o Título Certo | Vereda`
+- Meta description + og:* + twitter:* + canonical
+
+**vereda-primeiras-linhas.html**
+- Title: `Como Começar a Escrever — As Primeiras Linhas do Livro | Vereda`
+- Meta description + og:* + twitter:* + canonical
+
+**Arquivos novos criados**
+- `sitemap.xml` — lista as 3 páginas indexáveis
+- `robots.txt` — permite indexação e aponta para o sitemap
+
+---
+
+### Plano de ação — estado de cada fase
+
+**Fase 0 — Produto (confiança imediata)**
+```
+[x] Remover dados falsos de Personagens/Cenários
+[x] Desativar botão Configurações visualmente
+[x] Reescrever estado vazio da Prova de Autoria com linguagem humana
+[ ] Onboarding de primeira entrada: detectar via localStorage, overlay com 3 botões
+    "Escrever agora" / "Explorar as ferramentas" / "Ver o que o Vereda faz"
+    Arquivos: app.js (lógica) + index.html (overlay)
+[ ] [P4] Unificar nomenclatura menu topo vs painel esquerdo
+[ ] [P5] Tooltip "Trocar guia" no botão swap_horiz
+[ ] [P6] "manuscrito ativo" → "o texto que estou escrevendo agora"
+[ ] [P11] Chamada contextual para a Academia após pausa na escrita
+```
+
+**Fase 1 — SEO técnico**
+```
+[x] Meta description + og:* + canonical + twitter:* no index.html
+[x] Title melhorado no index.html
+[x] Scripts com defer no index.html
+[x] SEO completo em vereda-titulo-do-livro.html
+[x] SEO completo em vereda-primeiras-linhas.html
+[x] sitemap.xml criado
+[x] robots.txt criado
+```
+
+**Fase 2 — Estrutura de conteúdo (próxima sessão)**
+```
+[ ] Criar navegação/rodapé entre as páginas de conteúdo (links internos)
+[ ] CTA nas páginas de conteúdo → index.html ("Abrir o editor Vereda")
+[ ] Seção no index.html com links para as páginas de conteúdo
+```
+
+**Fase 3 — Autoridade e distribuição (ação manual do Rafael)**
+```
+[ ] Registrar no Google Search Console: https://search.google.com/search-console
+[ ] Submeter sitemap: https://rafa.pro.br/veredav3/sitemap.xml
+[ ] Avaliar domínio próprio vereda.com.br (subpasta limita autoridade)
+[ ] Compartilhar páginas em comunidades de escritores brasileiros
+```
+
+---
+
+### Decisões importantes registradas
+
+- O Vereda tem dois tipos de ativo de SEO distintos: o editor (SPA, não indexável) e as páginas de conteúdo (HTML rico, indexável). Estratégia: páginas de conteúdo como porta de entrada SEO que converte para o editor.
+- Os PDFs "Destroy My Startup" na raiz são referência pessoal de estudo, não fazem parte do produto.
+- Onboarding não precisa ser tutorial. Três botões na primeira entrada resolvem.
+- Subpasta rafa.pro.br/veredav3/ limita autoridade de domínio. Domínio próprio é decisão de médio prazo.
+- Próximo commit deve incluir: index.html, vereda-titulo-do-livro.html, vereda-primeiras-linhas.html, sitemap.xml, robots.txt.
+
