@@ -3058,6 +3058,17 @@ document.addEventListener("click", (event) => {
     createFromReferenceTemplate();
   }
 
+  if (actionTarget.dataset.action === "hint-goto-academia") {
+    hideAcademiaHint();
+    hintDismissed = true;
+    setView("academia", { updateRoute: true });
+  }
+
+  if (actionTarget.dataset.action === "hint-dismiss") {
+    hideAcademiaHint();
+    hintDismissed = true;
+  }
+
   if (actionTarget.dataset.action === "install-app") {
     installApp();
   }
@@ -3202,6 +3213,44 @@ writingArea.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("keydown", recordWritingProof);
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
 writingArea.addEventListener("keyup", () => captureSelectedWord(false));
+
+// ── DICA CONTEXTUAL DA ACADEMIA APÓS PAUSA (P11) ──────
+const academiaHintToast = document.getElementById("academia-hint-toast");
+const HINT_IDLE_MS = 90_000; // 90s de pausa dispara o toast
+const HINT_AUTO_HIDE_MS = 12_000; // some sozinho após 12s
+let hintIdleTimer = null;
+let hintAutoHideTimer = null;
+let hintDismissed = false;
+
+function showAcademiaHint() {
+  // Só mostra se estiver na aba editor e nunca foi dispensado nesta sessão
+  if (!academiaHintToast || hintDismissed || shell.dataset.view !== "editor") return;
+  academiaHintToast.style.opacity = "1";
+  academiaHintToast.style.transform = "translateY(0)";
+  academiaHintToast.style.pointerEvents = "auto";
+  clearTimeout(hintAutoHideTimer);
+  hintAutoHideTimer = setTimeout(hideAcademiaHint, HINT_AUTO_HIDE_MS);
+}
+
+function hideAcademiaHint() {
+  if (!academiaHintToast) return;
+  academiaHintToast.style.opacity = "0";
+  academiaHintToast.style.transform = "translateY(8px)";
+  academiaHintToast.style.pointerEvents = "none";
+}
+
+function resetHintTimer() {
+  hideAcademiaHint();
+  clearTimeout(hintIdleTimer);
+  clearTimeout(hintAutoHideTimer);
+  if (!hintDismissed) {
+    hintIdleTimer = setTimeout(showAcademiaHint, HINT_IDLE_MS);
+  }
+}
+
+writingArea.addEventListener("input", resetHintTimer);
+writingArea.addEventListener("keydown", resetHintTimer);
+
 backupInput.addEventListener("change", () => importBackup(backupInput.files[0]));
 filesystemBackupInterval.addEventListener("input", () => updateFilesystemBackupInterval(filesystemBackupInterval.value));
 metadataForm.addEventListener("input", updateCurrentMetadata);

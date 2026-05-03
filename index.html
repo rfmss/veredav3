@@ -43,7 +43,7 @@
         <nav class="module-tabs" aria-label="Módulos do Vereda">
           <button class="tab is-active" data-view-target="editor">Manuscrito</button>
           <button class="tab" data-view-target="biblioteca">Biblioteca</button>
-          <button class="tab" data-view-target="autoria">Autoria</button>
+          <button class="tab" data-view-target="autoria">Prova de autoria</button>
           <button class="tab" data-view-target="arquivo">Arquivo</button>
           <button class="tab" data-view-target="academia">Academia</button>
         </nav>
@@ -150,7 +150,7 @@
                     <p class="eyebrow">Guia de escrita</p>
                     <strong data-reference-title>Ficção-relâmpago</strong>
                   </div>
-                  <button class="icon-button" data-action="toggle-template-side" aria-label="Trocar lado do guia" title="Trocar lado">
+                  <button class="icon-button" data-action="toggle-template-side" aria-label="Trocar o guia de lado" title="Trocar o guia de lado: esquerda ↔ direita">
                     <span class="material-symbols-outlined">swap_horiz</span>
                   </button>
                   <button class="icon-button" data-action="toggle-template-panel" data-template-panel-toggle aria-label="Ocultar guia de escrita" title="Ocultar guia">
@@ -516,11 +516,11 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                 <div class="voice-mirror-copy">
                   <p class="eyebrow">Espelho de Voz</p>
                   <h2>Uma radiografia local da sua escrita</h2>
-                  <p>Cole um corpus ou use o manuscrito ativo. O Vereda calcula métricas reais e devolve uma leitura crítica assumida como hipótese de trabalho, não como sentença sobre sua literatura.</p>
+                  <p>Cole um corpus ou use o texto em edição. O Vereda calcula métricas reais e devolve uma leitura crítica assumida como hipótese de trabalho, não como sentença sobre sua literatura.</p>
                   <div class="voice-actions">
                     <button class="secondary-button" data-action="voice-use-active">
                       <span class="material-symbols-outlined">edit_note</span>
-                      Usar manuscrito ativo
+                      Usar o texto em edição
                     </button>
                     <button class="primary-button" data-action="voice-analyze">
                       <span class="material-symbols-outlined">psychology</span>
@@ -548,7 +548,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   <div class="rimalab-actions">
                     <button class="secondary-button" data-action="rimalab-use-active">
                       <span class="material-symbols-outlined">edit_note</span>
-                      Usar manuscrito ativo
+                      Usar o texto em edição
                     </button>
                     <button class="secondary-button" data-action="export-rimalab">
                       <span class="material-symbols-outlined">download</span>
@@ -877,5 +877,46 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     <script src="decolonial-engine.js?v=20260430-05" defer></script>
     <script src="rights-engine.js?v=20260430-05" defer></script>
     <script src="app.js?v=20260430-05" defer></script>
+
+    <!-- Toast de dica contextual da Academia (P11) -->
+    <div id="academia-hint-toast" role="status" aria-live="polite" style="
+      position: fixed;
+      bottom: 40px;
+      right: 24px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card, #fff);
+      border: 1px solid var(--line, #e0e0e0);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(26,26,26,0.13);
+      padding: 14px 16px;
+      max-width: 320px;
+      font-size: 13px;
+      color: var(--soft-ink, #555);
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    ">
+      <span class="material-symbols-outlined" style="color: var(--primary, #2e4d43); font-size: 22px; flex-shrink: 0;">school</span>
+      <span>
+        Pausa ativa. A <button data-action="hint-goto-academia" style="background:none;border:none;padding:0;color:var(--primary,#2e4d43);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;">Academia</button> tem guias de ofício e ferramentas prontas para ajudar.
+      </span>
+      <button data-action="hint-dismiss" aria-label="Fechar dica" style="
+        background: none;
+        border: none;
+        padding: 2px;
+        color: var(--muted, #999);
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-left: auto;
+      ">&times;</button>
+    </div>
+
   </body>
 </html>
