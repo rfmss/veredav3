@@ -790,6 +790,39 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
       <div class="focus-counter" data-focus-count>0 palavras</div>
       <div class="focus-ruler" aria-hidden="true"></div>
 
+      <!-- ONBOARDING — primeira entrada -->
+      <div class="create-note-overlay" id="welcome-overlay" data-welcome-overlay hidden>
+        <section class="create-note-panel" role="dialog" aria-modal="true" aria-labelledby="welcome-title" style="max-width: 680px;">
+          <div style="text-align: center; padding: 12px 0 24px;">
+            <p class="eyebrow" style="margin-bottom: 12px;">Bem-vinda ao Vereda</p>
+            <h2 id="welcome-title" style="font-family: 'Noto Serif', Georgia, serif; font-size: 2rem; line-height: 1.2; color: var(--ink); margin-bottom: 12px;">Por onde quer começar?</h2>
+            <p style="color: var(--muted); font-size: 13px; line-height: 1.55; max-width: 460px; margin: 0 auto;">O Vereda é um editor de escrita offline para escritores brasileiros. Sem IA, sem nuvem — seu texto fica aqui, com você.</p>
+          </div>
+
+          <div class="create-note-options" style="grid-template-columns: repeat(3, 1fr);">
+            <button class="create-note-card" id="welcome-write" data-action="welcome-write">
+              <span class="material-symbols-outlined">edit_note</span>
+              <strong>Escrever agora</strong>
+              <small>Abre o editor direto, com uma folha em branco esperando por você.</small>
+            </button>
+            <button class="create-note-card" id="welcome-explore" data-action="welcome-explore">
+              <span class="material-symbols-outlined">explore</span>
+              <strong>Explorar as ferramentas</strong>
+              <small>Veja o RimaLab, Espelho de Voz, Biblioteca Gramatical e a Academia.</small>
+            </button>
+            <button class="create-note-card" id="welcome-tour" data-action="welcome-tour">
+              <span class="material-symbols-outlined">school</span>
+              <strong>Ver o que o Vereda faz</strong>
+              <small>Descubra os guias de escrita, Prova de Autoria e o Vocabulário Decolonizador.</small>
+            </button>
+          </div>
+
+          <p style="text-align: center; margin-top: 20px; font-size: 11px; color: var(--muted);">
+            Este editor salva tudo localmente no seu navegador. Nada é enviado para servidores.
+          </p>
+        </section>
+      </div>
+
       <div class="create-note-overlay" data-create-note-overlay hidden>
         <section class="create-note-panel" role="dialog" aria-modal="true" aria-labelledby="create-note-title">
           <div class="create-note-heading">

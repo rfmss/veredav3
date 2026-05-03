@@ -3,6 +3,7 @@ const CHECKLIST_STORAGE_KEY = "vereda.checklists.v1";
 const BACKUP_META_STORAGE_KEY = "vereda.backup-meta.v1";
 const RIMALAB_STORAGE_KEY = "vereda.rimalab.v1";
 const RIMALAB_SAVED_AT_KEY = "vereda.rimalab-saved-at.v1";
+const FIRST_VISIT_KEY = "vrda-first-visit";
 const BACKUP_WARNING_DAYS = 7;
 const VIEW_ROUTES = new Set(["editor", "biblioteca", "autoria", "arquivo", "academia"]);
 
@@ -98,6 +99,7 @@ const precisionCard = document.querySelector("[data-precision-card]");
 const templateResizer = document.querySelector("[data-template-resizer]");
 const templatePanelToggles = document.querySelectorAll("[data-template-panel-toggle]");
 const createNoteOverlay = document.querySelector("[data-create-note-overlay]");
+const welcomeOverlay = document.querySelector("[data-welcome-overlay]");
 const createNoteTypes = document.querySelector("[data-create-note-types]");
 const voiceInput = document.querySelector("[data-voice-input]");
 const voiceCount = document.querySelector("[data-voice-count]");
@@ -1275,6 +1277,45 @@ function openCreateNote() {
 
 function closeCreateNote() {
   createNoteOverlay.hidden = true;
+}
+
+// ── ONBOARDING DE PRIMEIRA ENTRADA ───────────────────
+function checkFirstVisit() {
+  const seen = localStorage.getItem(FIRST_VISIT_KEY);
+  const isNewUser = !localStorage.getItem(STORAGE_KEY);
+
+  if (!seen && isNewUser && welcomeOverlay) {
+    // Pequeno delay para o app terminar de renderizar antes de mostrar
+    setTimeout(() => {
+      welcomeOverlay.hidden = false;
+      welcomeOverlay.querySelector("button")?.focus();
+    }, 350);
+  }
+}
+
+function closeWelcome() {
+  if (welcomeOverlay) {
+    welcomeOverlay.hidden = true;
+  }
+  localStorage.setItem(FIRST_VISIT_KEY, "1");
+}
+
+function handleWelcomeWrite() {
+  closeWelcome();
+  // Abre o diálogo de nova nota para o usuário começar do zero
+  openCreateNote();
+}
+
+function handleWelcomeExplore() {
+  closeWelcome();
+  // Leva para a Academia — onde ficam todas as ferramentas
+  setView("academia", { updateRoute: true });
+}
+
+function handleWelcomeTour() {
+  closeWelcome();
+  // Leva para a Autoria — explica a Prova de Escrita e o diferencial offline
+  setView("autoria", { updateRoute: true });
 }
 
 function renderCreateNoteTypes() {
@@ -2989,6 +3030,18 @@ document.addEventListener("click", (event) => {
     closeCreateNote();
   }
 
+  if (actionTarget.dataset.action === "welcome-write") {
+    handleWelcomeWrite();
+  }
+
+  if (actionTarget.dataset.action === "welcome-explore") {
+    handleWelcomeExplore();
+  }
+
+  if (actionTarget.dataset.action === "welcome-tour") {
+    handleWelcomeTour();
+  }
+
   if (actionTarget.dataset.action === "toggle-nav") {
     nav.classList.toggle("is-open");
   }
@@ -3216,3 +3269,4 @@ setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" });
 registerOfflineApp();
 initializeFilesystemBackup();
 persistState("Pronto para escrever");
+checkFirstVisit();
