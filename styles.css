@@ -372,6 +372,7 @@ a {
   padding: 7px 12px;
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .tab.is-active {
@@ -836,6 +837,8 @@ a {
   box-shadow: 0 28px 80px rgba(26, 26, 26, 0.18);
   padding: 22px;
   animation: surface-in var(--motion-calm);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .create-note-heading {
